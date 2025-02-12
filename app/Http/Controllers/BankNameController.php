@@ -4,63 +4,109 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBankNameRequest;
 use App\Http\Requests\UpdateBankNameRequest;
-use App\Models\BankName;
+use App\Services\BankService;
+use Illuminate\Http\RedirectResponse;
 
 class BankNameController extends Controller
 {
+    protected BankService $bankService;
+
     /**
-     * Display a listing of the resource.
+     * BankNameController constructor.
      */
+    public function __construct(BankService $bankService)
+    {
+        $this->bankService = $bankService;
+    }
+
+
     public function index()
     {
-        //
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        // return view('bank-names.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreBankNameRequest $request)
+
+    public function store(StoreBankNameRequest $request): RedirectResponse
     {
-        //
+        $validatedData = $request->validated();
+
+
+        $validatedData['user_id'] = auth()->id();
+
+        $bank = $this->bankService->createBank($validatedData);
+
+        return redirect()
+            ->route('bank-names.index')
+            ->with('success', 'Bank created successfully!');
     }
 
     /**
      * Display the specified resource.
+     * GET /bank-names/{id}
      */
-    public function show(BankName $bankName)
+    public function show($id)
     {
-        //
+        // If needed:
+        // $bank = $this->bankService->getBankById($id);
+        // if (!$bank) {
+        //     abort(404);
+        // }
+        // return view('bank-names.show', compact('bank'));
     }
 
     /**
      * Show the form for editing the specified resource.
+     * GET /bank-names/{id}/edit
      */
-    public function edit(BankName $bankName)
+    public function edit($id)
     {
-        //
+        // $bank = $this->bankService->getBankById($id);
+        // if (!$bank) {
+        //     abort(404);
+        // }
+        // return view('bank-names.edit', compact('bank'));
     }
 
     /**
      * Update the specified resource in storage.
+     * PUT/PATCH /bank-names/{id}
      */
-    public function update(UpdateBankNameRequest $request, BankName $bankName)
+    public function update(UpdateBankNameRequest $request, $id): RedirectResponse
     {
-        //
+        $bank = $this->bankService->getBankById($id);
+        if (!$bank) {
+            abort(404);
+        }
+
+        $validatedData = $request->validated();
+        $this->bankService->updateBank($bank, $validatedData);
+
+        return redirect()
+            ->route('bank-names.index')
+            ->with('success', 'Bank updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
+     * DELETE /bank-names/{id}
      */
-    public function destroy(BankName $bankName)
+    public function destroy($id): RedirectResponse
     {
-        //
+        $bank = $this->bankService->getBankById($id);
+        if (!$bank) {
+            abort(404);
+        }
+
+        $bank->delete();
+
+        return redirect()
+            ->route('bank-names.index')
+            ->with('success', 'Bank deleted successfully!');
     }
 }

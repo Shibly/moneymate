@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\BankRepositoryInterface;
+use App\Repositories\Contracts\BankRepositoryInterface;
 use App\Repositories\Eloquent\BankRepository;
 use Illuminate\Support\ServiceProvider;
 
