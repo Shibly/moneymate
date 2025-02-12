@@ -18,4 +18,6 @@ interface BankAccountRepositoryInterface
     public function findByUserId(int $userId): Collection;
 
     public function findByBankNameId(int $bankNameId): Collection;
+
+    public function lockForUpdate(int $accountId): BankAccount;
 }

@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAccountTransferRequest;
-use App\Http\Requests\UpdateAccountTransferRequest;
 use App\Models\AccountTransfer;
+use App\Services\AccountTransferService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 
 class AccountTransferController extends Controller
 {
+
+    private AccountTransferService $accountTransferService;
+
+    public function __construct(AccountTransferService $accountTransferService)
+    {
+        $this->accountTransferService = $accountTransferService;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -16,21 +27,34 @@ class AccountTransferController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     * @param StoreAccountTransferRequest $request
+     * @return JsonResponse
      */
-    public function store(StoreAccountTransferRequest $request)
+    public function transferAmount(StoreAccountTransferRequest $request): JsonResponse
     {
-        //
+        $validatedData = $request->validated();
+        try {
+            $transfer = $this->accountTransferService->transferAmount(
+                $validatedData['from_account_id'],
+                $validatedData['to_account_id'],
+                $validatedData['amount'],
+                $validatedData['transfer_date'],
+                $validatedData['note'] ?? null
+            );
+
+            return response()->json([
+                'message' => 'Amount transferred successfully.',
+                'data' => $transfer,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -40,21 +64,6 @@ class AccountTransferController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AccountTransfer $accountTransfer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAccountTransferRequest $request, AccountTransfer $accountTransfer)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

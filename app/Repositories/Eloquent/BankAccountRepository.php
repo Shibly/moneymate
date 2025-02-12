@@ -40,4 +40,8 @@ class BankAccountRepository implements BankAccountRepositoryInterface
         return BankAccount::where('bank_name_id', $bankNameId)->get();
     }
 
+    public function lockForUpdate(int $accountId): BankAccount
+    {
+        return BankAccount::where('id', $accountId)->lockForUpdate()->first();
+    }
 }
