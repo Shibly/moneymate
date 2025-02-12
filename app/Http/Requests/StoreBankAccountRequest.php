@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBankAccountRequest extends FormRequest
@@ -11,18 +12,23 @@ class StoreBankAccountRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|exists:users,id',
+            'bank_name_id' => 'required|exists:bank_names,id',
+            'account_name' => 'required|string|max:255',
+            'account_number' => 'required|string|max:255',
+            'balance' => 'required|numeric',
+            'usd_balance' => 'required|numeric',
         ];
     }
 }

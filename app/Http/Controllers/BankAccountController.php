@@ -5,15 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBankAccountRequest;
 use App\Http\Requests\UpdateBankAccountRequest;
 use App\Models\BankAccount;
+use App\Services\BankAccountService;
 
 class BankAccountController extends Controller
 {
+
+
+    private BankAccountService $bankAccountService;
+
+    public function __construct(bankAccountService $bankAccountService)
+    {
+        $this->bankAccountService = $bankAccountService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $bankAccounts = $this->bankAccountService->getByUserId(auth()->user()->id);
+        return response()->json($bankAccounts);
     }
 
     /**
@@ -29,7 +40,8 @@ class BankAccountController extends Controller
      */
     public function store(StoreBankAccountRequest $request)
     {
-        //
+        $bankAccount = $this->bankAccountService->store($request);
+        return response()->json($bankAccount, 201);
     }
 
     /**
@@ -53,7 +65,8 @@ class BankAccountController extends Controller
      */
     public function update(UpdateBankAccountRequest $request, BankAccount $bankAccount)
     {
-        //
+        $bankAccount = $this->bankAccountService->update($bankAccount, $request);
+        return response()->json($bankAccount);
     }
 
     /**
@@ -61,6 +74,7 @@ class BankAccountController extends Controller
      */
     public function destroy(BankAccount $bankAccount)
     {
-        //
+        $this->bankAccountService->delete($bankAccount);
+        return response()->json(null, 204);
     }
 }

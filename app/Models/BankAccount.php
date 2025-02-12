@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\BankAccountFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -19,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\TFactory|null $use_factory
- * @method static \Database\Factories\BankAccountFactory factory($count = null, $state = [])
+ * @method static BankAccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BankAccount newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BankAccount newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BankAccount query()
@@ -37,6 +39,33 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BankAccount extends Model
 {
-    /** @use HasFactory<\Database\Factories\BankAccountFactory> */
+    /** @use HasFactory<BankAccountFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'bank_name_id',
+        'currency_id',
+        'account_name',
+        'account_number',
+        'balance',
+        'usd_balance'];
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function bankName(): BelongsTo
+    {
+        return $this->belongsTo(BankName::class);
+    }
+
 }
