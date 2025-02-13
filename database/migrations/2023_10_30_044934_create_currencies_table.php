@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 120);
             $table->decimal('exchange_rate', 10, 2)->default(0);
             $table->string('is_default', 10)->default('no')->comment('yes, no');
-            $table->string('is_based', 10)->default('no')->comment('yes, no');
+            $table->string('is_base', 10)->default('no')->comment('yes, no');
             $table->timestamps();
         });
     }

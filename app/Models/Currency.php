@@ -2,21 +2,24 @@
 
 namespace App\Models;
 
+use Database\Factories\CurrencyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
  * @property string $exchange_rate
  * @property string $is_default yes, no
  * @property string $is_based yes, no
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\TFactory|null $use_factory
- * @method static \Database\Factories\CurrencyFactory factory($count = null, $state = [])
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read TFactory|null $use_factory
+ * @method static CurrencyFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Currency newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Currency newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Currency query()
@@ -31,6 +34,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Currency extends Model
 {
-    /** @use HasFactory<\Database\Factories\CurrencyFactory> */
+    /** @use HasFactory<CurrencyFactory> */
     use HasFactory;
+
+
+    use HasFactory;
+
+    protected $table = 'currencies';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+
+    protected $with = [
+        'bankAccounts'
+    ];
+
+    public function bankAccounts(): HasMany
+    {
+        return $this->hasMany(BankAccount::class, 'currency_id');
+    }
 }

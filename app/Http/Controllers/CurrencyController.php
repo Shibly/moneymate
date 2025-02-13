@@ -5,62 +5,47 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCurrencyRequest;
 use App\Http\Requests\UpdateCurrencyRequest;
 use App\Models\Currency;
+use App\Services\CurrencyService;
+use Illuminate\Http\JsonResponse;
 
 class CurrencyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected CurrencyService $currencyService;
+
+    public function __construct(CurrencyService $currencyService)
     {
-        //
+        $this->currencyService = $currencyService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): JsonResponse
     {
-        //
+        $currencies = Currency::with('bankAccounts')->select('id', 'name', 'exchange_rate', 'is_base', 'is_default')->get();
+        $basedCurrencyName = Currency::where('is_base', 'yes')->first()->name;
+        return response()->json([
+            'data' => CurrencyResource::collection($currencies),
+            'based_currency_name' => $basedCurrencyName
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCurrencyRequest $request)
+    public function store(StoreCurrencyRequest $request): JsonResponse
     {
-        //
+        $currency = $this->currencyService->create($request);
+        return response()->json([
+            'currency' => $currency
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Currency $currency)
+    public function update(UpdateCurrencyRequest $request, Currency $currency): JsonResponse
     {
-        //
+        $updatedCurrency = $this->currencyService->update($request, $currency);
+        return response()->json([
+            'currency' => $updatedCurrency
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Currency $currency)
+    public function destroy(Currency $currency): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCurrencyRequest $request, Currency $currency)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Currency $currency)
-    {
-        //
+        $this->currencyService->delete($currency);
+        return response()->json(['message' => 'Currency deleted']);
     }
 }
