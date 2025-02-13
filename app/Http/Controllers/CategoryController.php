@@ -4,63 +4,64 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Models\Category;
+use App\Services\CategoryService;
+use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected CategoryService $categoryService;
+
+    public function __construct(CategoryService $categoryService)
     {
-        //
+        $this->categoryService = $categoryService;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create a new category.
+     *
+     * @param StoreCategoryRequest $request
+     * @return JsonResponse
      */
-    public function create()
+    public function store(StoreCategoryRequest $request): JsonResponse
     {
-        //
+        $category = $this->categoryService->create($request);
+        return response()->json($category, 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update an existing category.
+     *
+     * @param UpdateCategoryRequest $request
+     * @param int $categoryId
+     * @return JsonResponse
      */
-    public function store(StoreCategoryRequest $request)
+    public function update(UpdateCategoryRequest $request, int $categoryId): JsonResponse
     {
-        //
+        $category = $this->categoryService->update($request, $categoryId);
+        return response()->json($category, 200);
     }
 
     /**
-     * Display the specified resource.
+     * Delete a category.
+     *
+     * @param int $categoryId
+     * @return JsonResponse
      */
-    public function show(Category $category)
+    public function destroy(int $categoryId): JsonResponse
     {
-        //
+        $this->categoryService->delete($categoryId);
+        return response()->json(null, 204);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Find a category by ID.
+     *
+     * @param int $categoryId
+     * @return JsonResponse
      */
-    public function edit(Category $category)
+    public function show(int $categoryId): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-        //
+        $category = $this->categoryService->findById($categoryId);
+        return response()->json($category, 200);
     }
 }
