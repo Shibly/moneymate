@@ -6,6 +6,6 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        echo "You landed to dashboard";
+        return view('admin.dashboard');
     }
 }
