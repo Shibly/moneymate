@@ -1,66 +1,65 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Models\Income;
+use App\Services\IncomeService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class IncomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected IncomeService $incomeService;
+
+    public function __construct(IncomeService $incomeService)
     {
-        //
+        $this->incomeService = $incomeService;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @param StoreIncomeRequest $request
+     * @return JsonResponse
+     * @throws \Exception
      */
-    public function create()
+    public function store(StoreIncomeRequest $request): JsonResponse
     {
-        //
+        $income = $this->incomeService->create($request);
+        return response()->json(['income' => $income], 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param UpdateIncomeRequest $request
+     * @param Income $income
+     * @return JsonResponse
+     * @throws \Exception
      */
-    public function store(StoreIncomeRequest $request)
+    public function update(UpdateIncomeRequest $request, Income $income): JsonResponse
     {
-        //
+        $updatedIncome = $this->incomeService->update($request, $income);
+        return response()->json(['income' => $updatedIncome]);
+    }
+
+
+    /**
+     * @param Income $income
+     * @return Response
+     * @throws \Exception
+     */
+    public function destroy(Income $income): Response
+    {
+        $this->incomeService->delete($income);
+        return response()->noContent();
     }
 
     /**
-     * Display the specified resource.
+     * @param Income $income
+     * @return JsonResponse
      */
-    public function show(Income $income)
+    public function show(Income $income): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Income $income)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateIncomeRequest $request, Income $income)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Income $income)
-    {
-        //
+        return response()->json(['income' => $income]);
     }
 }

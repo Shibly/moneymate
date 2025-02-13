@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\IncomeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -21,10 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $exchange_amount
  * @property string $usd_amount
  * @property string|null $description
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\TFactory|null $use_factory
- * @method static \Database\Factories\IncomeFactory factory($count = null, $state = [])
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read TFactory|null $use_factory
+ * @method static IncomeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Income newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Income newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Income query()
@@ -47,6 +50,42 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Income extends Model
 {
-    /** @use HasFactory<\Database\Factories\IncomeFactory> */
+    /** @use HasFactory<IncomeFactory> */
     use HasFactory;
+
+    protected $table = 'incomes';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+
+
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function bankAccount (): BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class, 'account_id', 'id');
+    }
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id', 'id');
+    }
 }
