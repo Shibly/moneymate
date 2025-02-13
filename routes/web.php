@@ -19,7 +19,13 @@ Route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name(
 Route::middleware(['auth'])->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+        Route::post('/store-category', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('/edit/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::post('/update/{category}', [CategoryController::class, 'update'])->name('categories.update');
+
     });
 });

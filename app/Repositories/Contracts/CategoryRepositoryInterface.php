@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Repositories\Contracts;
+
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
 
 interface CategoryRepositoryInterface
 {
@@ -37,4 +39,6 @@ interface CategoryRepositoryInterface
      * @return Category
      */
     public function findById(int $categoryId): Category;
+
+    public function all(): Collection;
 }

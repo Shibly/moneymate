@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -16,8 +17,10 @@ class CategoryRepository implements CategoryRepositoryInterface
      */
     public function create(array $data): Category
     {
+        $data['user_id'] = auth()->id();
         return Category::create($data);
     }
+
 
     /**
      * Update an existing category.
@@ -54,5 +57,13 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function findById(int $categoryId): Category
     {
         return Category::findOrFail($categoryId);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function all(): Collection
+    {
+        return Category::all();
     }
 }

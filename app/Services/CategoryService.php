@@ -7,14 +7,25 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class CategoryService
 {
-    protected $categoryRepository;
+    protected CategoryRepositoryInterface $categoryRepository;
 
     public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
+    }
+
+
+    /**
+     * @return Collection
+     */
+
+    public function all(): Collection
+    {
+        return $this->categoryRepository->all();
     }
 
     /**

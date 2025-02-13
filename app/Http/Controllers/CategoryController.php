@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
@@ -26,32 +28,45 @@ class CategoryController extends Controller
 
     public function index(): Factory|Application|View
     {
-        return view('admin.categories.index');
+
+        $categories = $this->categoryService->all();
+        return view('admin.categories.index', compact('categories'));
     }
 
+
     /**
-     * Create a new category.
-     *
      * @param StoreCategoryRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StoreCategoryRequest $request): RedirectResponse
+    {
+        $this->categoryService->create($request);
+        notyf()->success('New Category has been created.');
+        return redirect()->route('categories.index');
+    }
+
+
+    /**
+     * @param Category $category
      * @return JsonResponse
      */
-    public function store(StoreCategoryRequest $request): JsonResponse
+    public function edit(Category $category): JsonResponse
     {
-        $category = $this->categoryService->create($request);
-        return response()->json($category, 201);
+        return response()->json($category);
     }
 
+
     /**
-     * Update an existing category.
-     *
      * @param UpdateCategoryRequest $request
      * @param int $categoryId
-     * @return JsonResponse
+     * @return RedirectResponse
      */
-    public function update(UpdateCategoryRequest $request, int $categoryId): JsonResponse
+
+    public function update(UpdateCategoryRequest $request, int $categoryId): RedirectResponse
     {
-        $category = $this->categoryService->update($request, $categoryId);
-        return response()->json($category, 200);
+        $this->categoryService->update($request, $categoryId);
+        notyf()->info('Category has been updated.');
+        return redirect()->route('categories.index');
     }
 
     /**
