@@ -78,6 +78,7 @@ class CategoryController extends Controller
     public function destroy(int $categoryId): JsonResponse
     {
         $this->categoryService->delete($categoryId);
+        notyf()->info('Category has been removed.');
         return response()->json(null, 204);
     }
 

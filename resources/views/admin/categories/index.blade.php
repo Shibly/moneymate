@@ -1,11 +1,5 @@
 @extends('layout.master')
-
-@section('css')
-
-@endsection
-
 @section('content')
-    <!-- Page header -->
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
@@ -14,12 +8,10 @@
                         Income and Expense Categories
                     </h2>
                 </div>
-                <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#modal-report">
-                            <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="icon icon-2">
@@ -38,9 +30,9 @@
                                             aria-label="Close"></button>
                                 </div>
 
-                                <!-- Form for Category Submission -->
+
                                 <form action="{{ route('categories.store') }}" method="POST">
-                                    @csrf  <!-- Laravel CSRF Protection Token -->
+                                    @csrf
 
                                     <div class="modal-body">
                                         <div class="mb-3">
@@ -116,6 +108,28 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete this category?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger" id="confirm-delete">Yes, Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -128,27 +142,44 @@
                     <table class="table datatable table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>
-                                <button class="table-sort" data-sort="sort-name">Category Name</button>
-                            </th>
-                            <th>
-                                <button class="table-sort" data-sort="sort-city">Category Type</button>
-                            </th>
-
-                            <th>
-                                <button class="table-sort" data-sort="sort-progress">Action</button>
-                            </th>
+                            <th>Category Name</th>
+                            <th>Category Type</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody class="table-tbody">
                         @foreach($categories as $category)
 
-                            <tr>
+                            <tr id="row-{{$category->id}}">
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->type }}</td>
                                 <td class="sort-type">
-                                    <button class="btn btn-info edit-btn" data-id="{{ $category->id }}">Edit</button>
-                                    <button class="btn btn-danger delete-btn" data-id="{{ $category->id }}">Delete
+                                    <button class="btn btn-info edit-btn" data-id="{{ $category->id }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round"
+                                             class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"/>
+                                            <path
+                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/>
+                                            <path d="M16 5l3 3"/>
+                                        </svg>
+                                        Edit
+                                    </button>
+                                    <button class="btn btn-danger delete-btn" data-id="{{ $category->id }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round"
+                                             class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <path d="M4 7l16 0"/>
+                                            <path d="M10 11l0 6"/>
+                                            <path d="M14 11l0 6"/>
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+                                        </svg>
+                                        Delete
                                     </button>
                                 </td>
 
@@ -223,6 +254,32 @@
                 });
             });
 
+        });
+
+        let deleteCategoryId; // Variable to store category ID
+
+
+        $(document).on('click', '.delete-btn', function () {
+            deleteCategoryId = $(this).data('id'); // Get category ID from button
+            $('#modal-delete').modal('show'); // Show confirmation modal
+        });
+
+
+        $('#confirm-delete').click(function () {
+            $.ajax({
+                url: "{{ url('categories/destroy') }}/" + deleteCategoryId, // Laravel route
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}" // Send CSRF token for security
+                },
+                success: function (response) {
+                    $('#modal-delete').modal('hide'); // Hide modal
+                    $('#row-' + deleteCategoryId).remove();
+                },
+                error: function (xhr) {
+                    console.log("Error deleting category:", xhr);
+                }
+            });
         });
 
     </script>
