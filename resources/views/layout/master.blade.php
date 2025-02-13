@@ -8,20 +8,21 @@
     <title>Moneymate - Personal finance manager</title>
     <!-- CSS files -->
 
-    <link href="{{asset('public/css/tabler.min.css')}}" rel="stylesheet">
+    <link href="{{asset('public/css/tabler.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/tabler-flags.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/tabler-socials.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/tabler-payments.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/tabler-vendors.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/tabler-marketing.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/demo.min.css')}}" rel="stylesheet">
-
+    <link href="{{asset('public/libs/datatable/datatable.css')}}" rel="stylesheet">
+    @yield('css')
     <style>
         @import url('https://rsms.me/inter/inter.css');
     </style>
 </head>
 <body class=" layout-fluid">
-<script src="{{asset('public/dist/js/demo-theme.min.js')}}"></script>
+<script src="{{asset('public/js/demo-theme.js')}}"></script>
 
 <div class="page">
     <!-- Sidebar -->
@@ -37,5 +38,8 @@
 <script src="{{asset('public/libs/jsvectormap/dist/maps/world.js')}}"></script>
 <script src="{{asset('public/js/tabler.min.js')}}"></script>
 <script src="{{asset('public/js/demo.min.js')}}"></script>
+<script src="{{ asset('public/libs/datatable/datatable.js') }}"></script>
+<script src="{{ asset('public/js/main.js') }}"></script>
+@yield('js')
 </body>
 </html>

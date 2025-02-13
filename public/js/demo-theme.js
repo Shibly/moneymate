@@ -1,11 +1,3 @@
-/*!
-* Tabler v1.0.0 (https://tabler.io)
-* @version 1.0.0
-* @link https://tabler.io
-* Copyright 2018-2025 The Tabler Authors
-* Copyright 2018-2025 codecalm.net Paweł Kuna
-* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
-*/
 (function (factory) {
 	typeof define === 'function' && define.amd ? define(factory) :
 	factory();

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Services\CategoryService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
@@ -14,6 +17,16 @@ class CategoryController extends Controller
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
+    }
+
+
+    /**
+     * @return Factory|View|Application
+     */
+
+    public function index(): Factory|Application|View
+    {
+        return view('admin.categories.index');
     }
 
     /**
