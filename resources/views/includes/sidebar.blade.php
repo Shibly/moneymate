@@ -205,7 +205,7 @@
         </div>
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
-                <li class="nav-item">
+                <li class="nav-item @if($activeMenu == 'dashboard') active-state @endif">
                     <a class="nav-link" href="{{route('dashboard')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
 	<!-- Download SVG icon from http://tabler.io/icons/icon/home -->
@@ -220,7 +220,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item @if($activeMenu == 'categories') active-state @endif">
                     <a class="nav-link" href="{{route('categories.index')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -377,7 +377,7 @@
                                 <a class="dropdown-item" href="./layout-fluid.html">
                                     Fluid
                                 </a>
-                                <a class="dropdown-item active" href="./layout-fluid-vertical.html">
+                                <a class="dropdown-item" href="./layout-fluid-vertical.html">
                                     Fluid vertical
                                 </a>
                                 <a class="dropdown-item" href="./layout-horizontal.html">

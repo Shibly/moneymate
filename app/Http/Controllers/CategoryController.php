@@ -30,7 +30,8 @@ class CategoryController extends Controller
     {
 
         $categories = $this->categoryService->all();
-        return view('admin.categories.index', compact('categories'));
+        $activeMenu = 'categories';
+        return view('admin.categories.index', compact('categories', 'activeMenu'));
     }
 
 

@@ -6,6 +6,7 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $activeMenu = "dashboard";
+        return view('admin.dashboard', compact('activeMenu'));
     }
 }
