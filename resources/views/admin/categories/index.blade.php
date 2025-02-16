@@ -31,14 +31,14 @@
                                 </div>
 
 
-                                <form action="{{ route('categories.store') }}" method="POST">
+                                <form id="add-category-form" action="{{ route('categories.store') }}" method="POST">
                                     @csrf
-
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label class="form-label">Category Name</label>
                                             <input type="text" class="form-control" name="name"
                                                    placeholder="Category Name" required>
+                                            <!-- Error message will be dynamically injected here -->
                                         </div>
 
                                         <div class="row">
@@ -49,6 +49,7 @@
                                                         <option value="income" selected>Income</option>
                                                         <option value="expense">Expense</option>
                                                     </select>
+                                                    <!-- Error message will be dynamically injected here -->
                                                 </div>
                                             </div>
                                         </div>
@@ -63,8 +64,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24" fill="none"
                                                  stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                 stroke-linejoin="round"
-                                                 class="icon icon-2">
+                                                 stroke-linejoin="round" class="icon icon-2">
                                                 <path d="M12 5l0 14"/>
                                                 <path d="M5 12l14 0"/>
                                             </svg>
@@ -72,6 +72,7 @@
                                         </button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -209,17 +210,31 @@
     <script>
         $(document).ready(function () {
 
-            // ✅ Add Category AJAX
+
             $('#add-category-form').submit(function (e) {
                 e.preventDefault();
+
                 $.ajax({
                     url: "{{ route('categories.store') }}",
                     type: "POST",
                     data: $(this).serialize(),
                     success: function (response) {
-                        location.reload(); // Refresh to see the new category
+
+                        location.reload();
                     },
                     error: function (xhr) {
+
+                        $('.invalid-feedback').remove();
+                        let errors = xhr.responseJSON.errors;
+
+
+                        if (errors.name) {
+                            $('input[name="name"]').after('<div class="alert alert-danger d-block mt-2">' + errors.name[0] + '</div>');
+                        }
+
+                        if (errors.type) {
+                            $('select[name="type"]').after('<div class="alert alert-danger d-block mt-2">' + errors.type[0] + '</div>');
+                        }
                         console.log("Error adding category:", xhr);
                     }
                 });
@@ -267,24 +282,24 @@
 
         });
 
-        let deleteCategoryId; // Variable to store category ID
+        let deleteCategoryId;
 
 
         $(document).on('click', '.delete-btn', function () {
-            deleteCategoryId = $(this).data('id'); // Get category ID from button
-            $('#modal-delete').modal('show'); // Show confirmation modal
+            deleteCategoryId = $(this).data('id');
+            $('#modal-delete').modal('show');
         });
 
 
         $('#confirm-delete').click(function () {
             $.ajax({
-                url: "{{ url('categories/destroy') }}/" + deleteCategoryId, // Laravel route
+                url: "{{ url('categories/destroy') }}/" + deleteCategoryId,
                 type: "POST",
                 data: {
-                    _token: "{{ csrf_token() }}" // Send CSRF token for security
+                    _token: "{{ csrf_token() }}"
                 },
                 success: function (response) {
-                    $('#modal-delete').modal('hide'); // Hide modal
+                    $('#modal-delete').modal('hide');
                     $('#row-' + deleteCategoryId).remove();
                 },
                 error: function (xhr) {
