@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/destroy/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
     });
+
+    Route::group(['prefix' => 'currencies'], function () {
+        Route::get('/', [CurrencyController::class, 'index'])->name('currencies.index');
+        Route::post('store-currency', [CurrencyController::class, 'store'])->name('currencies.store');
+        Route::get('/edit/{currency}', [CurrencyController::class, 'show'])->name('currencies.edit');
+        Route::post('/update/{currency}', [CurrencyController::class, 'update'])->name('currencies.update');
+
+    });
+
 });
