@@ -8,6 +8,12 @@ use App\Repositories\Contracts\CurrencyRepositoryInterface;
 
 class CurrencyRepository implements CurrencyRepositoryInterface
 {
+
+    public function getAll()
+    {
+        return Currency::select('id', 'name')->get();
+    }
+
     public function create(array $data): Currency
     {
         return Currency::create($data);

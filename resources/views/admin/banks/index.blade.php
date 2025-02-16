@@ -39,7 +39,7 @@
                                 </div>
 
 
-                                <form action="{{ route('banks.store') }}" method="POST">
+                                <form id="add-bank-form" action="{{ route('banks.store') }}" method="POST">
                                     @csrf
 
                                     <div class="modal-body">
@@ -87,7 +87,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
 
-                                <form id="edit-category-form">
+                                <form id="edit-bank-name-form">
                                     @csrf
                                     <input type="hidden" name="id" id="edit-category-id">
 
@@ -208,18 +208,32 @@
     <script>
         $(document).ready(function () {
 
-            // ✅ Add Category AJAX
+            // Add Bank - form submission
             $('#add-bank-form').submit(function (e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ route('banks.store') }}", // Now correctly points to categories/store-category
+                    url: "{{ route('banks.store') }}",
                     type: "POST",
                     data: $(this).serialize(),
                     success: function (response) {
-                        location.reload(); // Refresh to see the new category
+                        location.reload(); // Reload the page if the bank is successfully added
                     },
                     error: function (xhr) {
-                        console.log("Error adding category:", xhr);
+                        if (xhr.status === 422) { // Validation error
+                            let errors = xhr.responseJSON.errors;
+                            let errorHtml = '';
+
+                            // Display each error for bank_name
+                            if (errors.bank_name) {
+                                errorHtml += '<div class="alert alert-danger">' + errors.bank_name[0] + '</div>';
+                            }
+
+                            // Show errors in the modal
+                            $('#modal-report .modal-body').prepend(errorHtml);
+                        } else {
+                            console.log("Error adding bank:", xhr);
+                            toastr.error("Something went wrong. Please try again.");
+                        }
                     }
                 });
             });
@@ -243,7 +257,7 @@
             });
 
 
-            $('#edit-category-form').submit(function (e) {
+            $('#edit-bank-name-form').submit(function (e) {
                 e.preventDefault();
                 let categoryId = $('#edit-category-id').val();
 

@@ -63,9 +63,10 @@ class BankAccount extends Model
     /**
      * @return BelongsTo
      */
-    public function bankName(): BelongsTo
+    public function bank(): BelongsTo
     {
-        return $this->belongsTo(BankName::class);
+        return $this->belongsTo(BankName::class, 'bank_name_id', 'id');
     }
+
 
 }

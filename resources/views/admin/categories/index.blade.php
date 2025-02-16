@@ -213,7 +213,7 @@
             $('#add-category-form').submit(function (e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ route('categories.store') }}", // Now correctly points to categories/store-category
+                    url: "{{ route('categories.store') }}",
                     type: "POST",
                     data: $(this).serialize(),
                     success: function (response) {

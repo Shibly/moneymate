@@ -18,6 +18,12 @@ class BankAccountService
         $this->bankAccountRepository = $bankAccountRepository;
     }
 
+
+    public function getAll()
+    {
+        return $this->bankAccountRepository->getAll();
+    }
+
     public function store(StoreBankAccountRequest $request): BankAccount
     {
         $data = $request->validated();
@@ -31,9 +37,9 @@ class BankAccountService
     }
 
 
-    public function delete(BankAccount $bankAccount): void
+    public function delete($bankAccountId): void
     {
-        $this->bankAccountRepository->delete($bankAccount);
+        $this->bankAccountRepository->delete($bankAccountId);
     }
 
 
@@ -54,6 +60,12 @@ class BankAccountService
     public function getByBankNameId(int $bankNameId): Collection
     {
         return $this->bankAccountRepository->findByBankNameId($bankNameId);
+    }
+
+
+    public function getById(int $id): ?BankAccount
+    {
+        return $this->bankAccountRepository->findById($id);
     }
 
 

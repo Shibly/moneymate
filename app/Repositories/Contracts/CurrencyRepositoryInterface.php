@@ -6,6 +6,8 @@ use App\Models\Currency;
 
 interface CurrencyRepositoryInterface
 {
+
+    public function getAll();
     public function create(array $data): Currency;
 
     public function update(Currency $currency, array $data): bool;

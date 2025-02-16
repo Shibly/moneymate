@@ -9,19 +9,29 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BankAccountRepository implements BankAccountRepositoryInterface
 {
+
+    public function getAll()
+    {
+        return BankAccount::select('id', 'account_name', 'account_number', 'balance')->get();
+    }
+
     public function create(array $data): BankAccount
     {
+        $data['usd_balance'] = convert_to_usd_amount($data['currency_id'], $data['balance']);
+        $data['user_id'] = auth()->user()->id;
         return BankAccount::create($data);
     }
 
+
     public function update(BankAccount $bankAccount, array $data): BankAccount
     {
-        $bankAccount->update($data);
-        return $bankAccount;
+        return $bankAccount->update($data);
+
     }
 
-    public function delete(BankAccount $bankAccount): void
+    public function delete($bankAccountId): void
     {
+        $bankAccount = BankAccount::find($bankAccountId);
         $bankAccount->delete();
     }
 
@@ -32,8 +42,13 @@ class BankAccountRepository implements BankAccountRepositoryInterface
 
     public function findByUserId(int $userId): Collection
     {
-        return BankAccount::where('user_id', $userId)->get();
+        return BankAccount::with('bank')
+            ->where('user_id', $userId)
+            ->get();
+
+
     }
+
 
     public function findByBankNameId(int $bankNameId): Collection
     {

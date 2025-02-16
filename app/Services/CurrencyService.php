@@ -10,11 +10,16 @@ use App\Repositories\Contracts\CurrencyRepositoryInterface;
 
 class CurrencyService
 {
-    protected $currencyRepository;
+    protected CurrencyRepositoryInterface $currencyRepository;
 
     public function __construct(CurrencyRepositoryInterface $currencyRepository)
     {
         $this->currencyRepository = $currencyRepository;
+    }
+
+
+    public function getAll(){
+        return $this->currencyRepository->getAll();
     }
 
     public function create(StoreCurrencyRequest $request): Currency

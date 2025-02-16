@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface BankAccountRepositoryInterface
 {
+
+    public function getAll();
     public function create(array $data): BankAccount;
 
     public function update(BankAccount $bankAccount, array $data): BankAccount;

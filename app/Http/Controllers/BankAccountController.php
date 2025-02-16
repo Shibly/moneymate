@@ -6,16 +6,22 @@ use App\Http\Requests\StoreBankAccountRequest;
 use App\Http\Requests\UpdateBankAccountRequest;
 use App\Models\BankAccount;
 use App\Services\BankAccountService;
+use App\Services\BankService;
+use App\Services\CurrencyService;
 
 class BankAccountController extends Controller
 {
 
 
     private BankAccountService $bankAccountService;
+    private CurrencyService $currencyService;
+    private BankService $bankService;
 
-    public function __construct(bankAccountService $bankAccountService)
+    public function __construct(bankAccountService $bankAccountService, CurrencyService $currencyService, BankService $bankService)
     {
         $this->bankAccountService = $bankAccountService;
+        $this->currencyService = $currencyService;
+        $this->bankService = $bankService;
     }
 
     /**
@@ -24,41 +30,46 @@ class BankAccountController extends Controller
     public function index()
     {
         $bankAccounts = $this->bankAccountService->getByUserId(auth()->user()->id);
-        return response()->json($bankAccounts);
+        $activeMenu = 'bank-accounts';
+        $currencies = $this->currencyService->getAll();
+        $banks = $this->bankService->getAll();
+
+        return view('admin.bank-accounts.index', compact('bankAccounts', 'activeMenu', 'currencies', 'banks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreBankAccountRequest $request)
     {
-        $bankAccount = $this->bankAccountService->store($request);
-        return response()->json($bankAccount, 201);
+        $this->bankAccountService->store($request);
+        notyf()->success('Bank Account has been created');
+        return redirect()->route('accounts.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BankAccount $bankAccount)
+    public function show($id)
     {
-        //
+
+        $bankAccount = $this->bankAccountService->getById($id);
+
+        if ($bankAccount) {
+            return response()->json([
+                'success' => true,
+                'data' => $bankAccount
+            ]);
+        } else {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Bank account not found'
+            ], 404);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(BankAccount $bankAccount)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -72,9 +83,9 @@ class BankAccountController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BankAccount $bankAccount)
+    public function destroy($bankAccountId)
     {
-        $this->bankAccountService->delete($bankAccount);
+        $this->bankAccountService->delete($bankAccountId);
         return response()->json(null, 204);
     }
 }

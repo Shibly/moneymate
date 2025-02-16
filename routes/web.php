@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BankNameController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
@@ -47,6 +48,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{bank}', [BankNameController::class, 'show'])->name('banks.edit');
         Route::post('/update/{bank}', [BankNameController::class, 'update'])->name('banks.update');
         Route::post('/destroy/{bank}', [BankNameController::class, 'destroy'])->name('banks.destroy');
+    });
+
+    Route::group(['prefix' => 'accounts'], function () {
+        Route::get('/', [BankAccountController::class, 'index'])->name('accounts.index');
+        Route::post('/store-account', [BankAccountController::class, 'store'])->name('accounts.store');
+        Route::get('/edit/{account}', [BankAccountController::class, 'show'])->name('accounts.edit');
+        Route::post('/update/{account}', [BankAccountController::class, 'update'])->name('accounts.update');
+        Route::post('/destroy/{account}', [BankAccountController::class, 'destroy'])->name('accounts.destroy');
     });
 
 });
