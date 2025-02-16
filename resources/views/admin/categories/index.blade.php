@@ -210,7 +210,6 @@
     <script>
         $(document).ready(function () {
 
-
             $('#add-category-form').submit(function (e) {
                 e.preventDefault();
 
@@ -223,10 +222,10 @@
                         location.reload();
                     },
                     error: function (xhr) {
-
                         $('.invalid-feedback').remove();
-                        let errors = xhr.responseJSON.errors;
+                        $('.alert.alert-danger').remove();
 
+                        let errors = xhr.responseJSON.errors;
 
                         if (errors.name) {
                             $('input[name="name"]').after('<div class="alert alert-danger d-block mt-2">' + errors.name[0] + '</div>');
@@ -235,6 +234,8 @@
                         if (errors.type) {
                             $('select[name="type"]').after('<div class="alert alert-danger d-block mt-2">' + errors.type[0] + '</div>');
                         }
+
+
                         console.log("Error adding category:", xhr);
                     }
                 });
@@ -265,7 +266,9 @@
 
             $('#edit-category-form').submit(function (e) {
                 e.preventDefault();
+
                 let categoryId = $('#edit-category-id').val();
+                $('.invalid-feedback').remove();
 
                 $.ajax({
                     url: "{{ url('categories/update') }}/" + categoryId,
@@ -275,10 +278,22 @@
                         location.reload();
                     },
                     error: function (xhr) {
+                        let errors = xhr.responseJSON.errors;
+
+                        // Handle validation errors
+                        if (errors.name) {
+                            $('input[name="name"]').after('<div class="alert alert-danger invalid-feedback d-block mt-2">' + errors.name[0] + '</div>');
+                        }
+
+                        if (errors.type) {
+                            $('select[name="type"]').after('<div class="alert alert-danger invalid-feedback d-block mt-2">' + errors.type[0] + '</div>');
+                        }
+
                         console.log("Error updating category:", xhr);
                     }
                 });
             });
+
 
         });
 
