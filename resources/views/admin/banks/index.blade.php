@@ -80,33 +80,30 @@
                         </div>
                     </div>
                     <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Edit Category</h5>
+                                    <h5 class="modal-title">Edit Bank Name</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
+
                                 <form id="edit-category-form">
                                     @csrf
                                     <input type="hidden" name="id" id="edit-category-id">
+
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Category Name</label>
-                                            <input type="text" class="form-control" name="name" id="edit-category-name"
+                                            <label class="form-label">Bank Name</label>
+                                            <input type="text" class="form-control" name="bank_name" id="edit-bank-name"
                                                    required>
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Category Type</label>
-                                            <select name="type" class="form-select" id="edit-category-type" required>
-                                                <option value="income">Income</option>
-                                                <option value="expense">Expense</option>
-                                            </select>
-                                        </div>
+                                        <div id="edit-form-errors" class="d-none"></div>
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Update Category</button>
+                                        <button type="submit" class="btn btn-primary">Update Bank</button>
                                     </div>
                                 </form>
                             </div>
@@ -131,7 +128,7 @@
                                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this category ?</h3>
+                                    <h3>Are you sure to delete this bank ?</h3>
                                     <div class="text-secondary"> This action can not be undone.
                                     </div>
                                 </div>
@@ -165,8 +162,7 @@
                         @foreach($banks as $bank)
 
                             <tr id="row-{{$bank->id}}">
-                                <td class="text-center">{{ $bank->name }}</td>
-                                <td class="text-center">{{ $bank->type }}</td>
+                                <td class="text-center">{{ $bank->bank_name }}</td>
                                 <td class="text-center">
                                     <button class="btn btn-info edit-btn" data-id="{{ $bank->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -230,18 +226,14 @@
 
 
             $(document).on('click', '.edit-btn', function () {
-                let categoryId = $(this).data('id'); // Get category ID from button
+                let categoryId = $(this).data('id');
 
                 $.ajax({
-                    url: "{{ url('banks/edit') }}/" + categoryId, // Corrected route URL
+                    url: "{{ url('banks/edit') }}/" + categoryId,
                     type: "GET",
                     success: function (data) {
-                        // Populate modal fields with received data
                         $('#edit-category-id').val(data.id);
-                        $('#edit-category-name').val(data.name);
-                        $('#edit-category-type').val(data.type);
-
-
+                        $('#edit-bank-name').val(data.bank_name);
                         $('#modal-edit').modal('show');
                     },
                     error: function (xhr) {
@@ -263,32 +255,47 @@
                         location.reload();
                     },
                     error: function (xhr) {
-                        console.log("Error updating banks:", xhr);
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            let errorHtml = '<span class="badge bg-red-lt">';
+
+                            $.each(errors, function (key, value) {
+                                errorHtml += value[0]; // Display each error
+                            });
+
+                            errorHtml += '</span>';
+
+                            $('#edit-form-errors').html(errorHtml).removeClass('d-none'); // Show errors
+                        } else {
+                            console.log("Error updating bank:", xhr);
+                            toastr.error("Something went wrong. Please try again.");
+                        }
                     }
                 });
             });
 
+
         });
 
-        let deleteCategoryId; // Variable to store category ID
+        let deleteBankId;
 
 
         $(document).on('click', '.delete-btn', function () {
-            deleteCategoryId = $(this).data('id'); // Get category ID from button
+            deleteBankId = $(this).data('id'); // Get category ID from button
             $('#modal-delete').modal('show'); // Show confirmation modal
         });
 
 
-        $('#confirm-delete').click(function () {
+        $('#confirm-delete').on('click', function () {
             $.ajax({
-                url: "{{ url('categories/destroy') }}/" + deleteCategoryId, // Laravel route
+                url: "{{ url('banks/destroy') }}/" + deleteBankId, // Laravel route
                 type: "POST",
                 data: {
                     _token: "{{ csrf_token() }}" // Send CSRF token for security
                 },
                 success: function (response) {
                     $('#modal-delete').modal('hide'); // Hide modal
-                    $('#row-' + deleteCategoryId).remove();
+                    $('#row-' + deleteBankId).remove();
                 },
                 error: function (xhr) {
                     console.log("Error deleting category:", xhr);

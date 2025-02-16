@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\BankName;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -23,17 +24,19 @@ class UpdateBankNameRequest extends FormRequest
      */
     public function rules(): array
     {
+
+
+        $bankId = $this->route('bank'); // This is just the ID, not the model
+        $bank = BankName::find($bankId); // Retrieve the model instance
+
         return [
             'bank_name' => [
                 'required',
-                'string',
-                'max:255',
                 Rule::unique('bank_names')
-                    ->ignore($this->route('id'))     // ignore the current BankName ID
-                    ->where(function ($query) {
-                        return $query->where('user_id', auth()->id());
-                    }),
-            ],
+                    ->where(fn($query) => $query->where('user_id', auth()->user()->id))
+                    ->ignore($bank?->id), // Ignore the current bank's ID
+            ]
         ];
+
     }
 }

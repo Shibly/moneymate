@@ -52,60 +52,49 @@ class BankNameController extends Controller
         $this->bankService->createBank($validatedData);
         notyf()->info('Bank created successfully.');
         return redirect()
-            ->route('bank-names.index');
+            ->route('banks.index');
     }
 
+
     /**
-     * Display the specified resource.
-     * GET /bank-names/{id}
+     * @param $bankNameId
+     * @return mixed
      */
-    public function show($id)
+    public function show($bankNameId): mixed
     {
-        // If needed:
-        // $bank = $this->bankService->getBankById($id);
-        // if (!$bank) {
-        //     abort(404);
-        // }
-        // return view('bank-names.show', compact('bank'));
+        return response()->json($this->bankService->getBankById($bankNameId));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * GET /bank-names/{id}/edit
-     */
-    public function edit($id)
-    {
-        // $bank = $this->bankService->getBankById($id);
-        // if (!$bank) {
-        //     abort(404);
-        // }
-        // return view('bank-names.edit', compact('bank'));
-    }
 
     /**
-     * Update the specified resource in storage.
-     * PUT/PATCH /bank-names/{id}
+     * @param UpdateBankNameRequest $request
+     * @param int $id
+     * @return mixed
      */
-    public function update(UpdateBankNameRequest $request, $id): RedirectResponse
+    public function update(UpdateBankNameRequest $request, int $id): mixed
     {
         $bank = $this->bankService->getBankById($id);
+
         if (!$bank) {
             abort(404);
         }
 
+        // Validate using the request
         $validatedData = $request->validated();
-        $this->bankService->updateBank($bank, $validatedData);
 
+        // Update bank record
+        $this->bankService->updateBank($bank, $validatedData);
+        notyf()->info('Bank name updated successfully');
         return redirect()
-            ->route('bank-names.index')
-            ->with('success', 'Bank updated successfully!');
+            ->route('banks.index');
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     * DELETE /bank-names/{id}
+     * @param $id
+     * @return mixed
      */
-    public function destroy($id): RedirectResponse
+    public function destroy($id): mixed
     {
         $bank = $this->bankService->getBankById($id);
         if (!$bank) {
@@ -114,8 +103,7 @@ class BankNameController extends Controller
 
         $bank->delete();
 
-        return redirect()
-            ->route('bank-names.index')
-            ->with('success', 'Bank deleted successfully!');
+        return redirect()->route('banks.index');
+
     }
 }
