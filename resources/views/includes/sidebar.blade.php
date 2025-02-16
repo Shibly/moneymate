@@ -253,6 +253,193 @@
 				</span>
                     </a>
                 </li>
+                <li class="nav-item @if($activeMenu == 'banks') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-building-bank"><path stroke="none"
+                                                                                                       d="M0 0h24v24H0z"
+                                                                                                       fill="none"/><path
+                            d="M3 21l18 0"/><path d="M3 10l18 0"/><path d="M5 6l7 -3l7 3"/><path d="M4 10l0 11"/><path
+                            d="M20 10l0 11"/><path d="M8 14l0 3"/><path d="M12 14l0 3"/><path d="M16 14l0 3"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Banks
+				</span>
+                    </a>
+                </li>
+                <li class="nav-item @if($activeMenu == 'bank-accounts') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-lock-dollar"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"/><path
+                            d="M13 21h-6a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2h10"/><path
+                            d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"/><path d="M8 11v-4a4 4 0 1 1 8 0v4"/><path
+                            d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5"/><path
+                            d="M19 21v1m0 -8v1"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Bank Accounts
+				</span>
+                    </a>
+                </li>
+
+                <li class="nav-item @if($activeMenu == 'balance-transfer') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-transfer"><path stroke="none"
+                                                                                                  d="M0 0h24v24H0z"
+                                                                                                  fill="none"/><path
+                            d="M20 10h-16l5.5 -6"/><path d="M4 14h16l-5.5 6"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Balance Transfer
+				</span>
+                    </a>
+                </li>
+
+                <li class="nav-item @if($activeMenu == 'debts-loans') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-list-details"><path stroke="none"
+                                                                                                      d="M0 0h24v24H0z"
+                                                                                                      fill="none"/><path
+                            d="M13 5h8"/><path d="M13 9h5"/><path d="M13 15h8"/><path d="M13 19h5"/><path
+                            d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path
+                            d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Debts/Loans
+				</span>
+                    </a>
+                </li>
+
+                <li class="nav-item @if($activeMenu == 'incomes') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-octagon-plus"><path stroke="none"
+                                                                                                      d="M0 0h24v24H0z"
+                                                                                                      fill="none"/><path
+                            d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0z"/><path
+                            d="M9 12h6"/><path d="M12 9v6"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Incomes
+				</span>
+                    </a>
+                </li>
+                <li class="nav-item @if($activeMenu == 'expenses') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-dollar"><path stroke="none"
+                                                                                                        d="M0 0h24v24H0z"
+                                                                                                        fill="none"/><path
+                            d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2"/><path
+                            d="M14.8 8a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1"/><path
+                            d="M12 6v10"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Expenses
+				</span>
+                    </a>
+                </li>
+
+                <li class="nav-item @if($activeMenu == 'budgets') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-dollar"><path stroke="none"
+                                                                                                         d="M0 0h24v24H0z"
+                                                                                                         fill="none"/><path
+                            d="M13 21h-7a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v3"/><path d="M16 3v4"/><path
+                            d="M8 3v4"/><path d="M4 11h12.5"/><path
+                            d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5"/><path
+                            d="M19 21v1m0 -8v1"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Budgets
+				</span>
+                    </a>
+                </li>
+                <li class="nav-item @if($activeMenu == 'income-report') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-report"><path stroke="none"
+                                                                                                d="M0 0h24v24H0z"
+                                                                                                fill="none"/><path
+                            d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"/><path d="M18 14v4h4"/><path
+                            d="M18 11v-4a2 2 0 0 0 -2 -2h-2"/><path
+                            d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"/><path
+                            d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M8 11h4"/><path d="M8 15h3"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Income Report
+				</span>
+                    </a>
+                </li>
+                <li class="nav-item @if($activeMenu == 'expense-report') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-chart-infographic"><path stroke="none"
+                                                                                                           d="M0 0h24v24H0z"
+                                                                                                           fill="none"/><path
+                            d="M7 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M7 3v4h4"/><path d="M9 17l0 4"/><path
+                            d="M17 14l0 7"/><path d="M13 13l0 8"/><path d="M21 12l0 9"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Expense Report
+				</span>
+                    </a>
+                </li>
+
+                <li class="nav-item @if($activeMenu == 'calendar') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                         fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-calendar"><path
+                            stroke="none" d="M0 0h24v24H0z" fill="none"/><path
+                            d="M16 2a1 1 0 0 1 .993 .883l.007 .117v1h1a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-12a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h1v-1a1 1 0 0 1 1.993 -.117l.007 .117v1h6v-1a1 1 0 0 1 1 -1zm3 7h-14v9.625c0 .705 .386 1.286 .883 1.366l.117 .009h12c.513 0 .936 -.53 .993 -1.215l.007 -.16v-9.625z"/><path
+                            d="M12 12a1 1 0 0 1 .993 .883l.007 .117v3a1 1 0 0 1 -1.993 .117l-.007 -.117v-2a1 1 0 0 1 -.117 -1.993l.117 -.007h1z"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Calendar
+				</span>
+                    </a>
+                </li>
+
+                <li class="nav-item @if($activeMenu == 'application-settings') active-state @endif">
+                    <a class="nav-link" href="{{route('currencies.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-settings"><path stroke="none"
+                                                                                                  d="M0 0h24v24H0z"
+                                                                                                  fill="none"/><path
+                            d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/><path
+                            d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></svg>
+                </span>
+                        <span class="nav-link-title">
+					Application Settings
+				</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
