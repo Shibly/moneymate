@@ -117,8 +117,6 @@
                                 <form id="edit-bank-account-form" action="{{ route('accounts.update', ':id') }}"
                                       method="POST">
                                     @csrf
-                                    @method('PUT')
-
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label class="form-label">Account Holders Name</label>
@@ -317,28 +315,31 @@
             $(document).on('click', '.edit-account-btn', function () {
                 const accountId = $(this).data('account-id');
 
-                // Make an AJAX request to get the account details
                 $.ajax({
-                    url: `/accounts/edit/${accountId}`, // Fetch account details
+                    url: `/accounts/edit/${accountId}`, // Correct route to fetch account details
                     type: 'GET',
                     success: function (response) {
+                        // Check if the response contains the account data
+                        if (response.data) {
+                            // Populate form fields with the account details
+                            $('#edit-account-name').val(response.data.account_name);
+                            $('#edit-account-number').val(response.data.account_number);
+                            $('#edit-bank-name').val(response.data.bank_name_id);
+                            $('#edit-currency-id').val(response.data.currency_id);
+                            $('#edit-balance').val(response.data.balance);
 
-                        console.log(response);
-                        // Populate form fields with the account details
-                        $('#edit-account-name').val(response.data.account_name);
-                        $('#edit-account-number').val(response.data.account_number);
-                        $('#edit-bank-name').val(response.data.bank_name_id);
-                        $('#edit-currency-id').val(response.data.currency_id);
-                        $('#edit-balance').val(response.data.balance);
+                            // Update the form action URL to include the account ID for update
+                            $('#edit-bank-account-form').attr('action', `/accounts/update/${accountId}`);
 
-                        // Update the form action URL to include the account ID
-                        $('#edit-bank-account-form').attr('action', `/accounts/${accountId}`);
-
-                        // Open the modal
-                        $('#modal-edit-account').modal('show');
+                            // Open the modal for editing
+                            $('#modal-edit-account').modal('show');
+                        } else {
+                            alert("Error fetching account details.");
+                        }
                     },
                     error: function (xhr) {
                         console.log("Error fetching account details:", xhr);
+                        alert("Error fetching account details.");
                     }
                 });
             });
@@ -354,17 +355,27 @@
                     type: "POST",
                     data: form.serialize(),
                     success: function (response) {
-                        location.reload(); // Refresh to see the updated account
+                        location.reload();
                     },
                     error: function (xhr) {
                         let errors = xhr.responseJSON.errors;
                         form.find('.invalid-feedback').hide();
 
+                        // Display errors if there are any
+                        if (errors.account_name) {
+                            $('input[name="account_name"]').next('.invalid-feedback').text(errors.account_name[0]).show();
+                        }
+                        if (errors.account_number) {
+                            $('input[name="account_number"]').next('.invalid-feedback').text(errors.account_number[0]).show();
+                        }
                         if (errors.bank_name_id) {
                             $('select[name="bank_name_id"]').next('.invalid-feedback').text(errors.bank_name_id[0]).show();
                         }
                         if (errors.currency_id) {
                             $('select[name="currency_id"]').next('.invalid-feedback').text(errors.currency_id[0]).show();
+                        }
+                        if (errors.balance) {
+                            $('input[name="balance"]').next('.invalid-feedback').text(errors.balance[0]).show();
                         }
                         console.log("Error updating account:", xhr);
                     }

@@ -23,11 +23,20 @@ class BankAccountRepository implements BankAccountRepositoryInterface
     }
 
 
-    public function update(BankAccount $bankAccount, array $data): BankAccount
+    public function update($bankAccountId, array $data): BankAccount
     {
-        return $bankAccount->update($data);
 
+        $bankAccount = BankAccount::find($bankAccountId);
+        if (isset($data['currency_id']) && isset($data['balance'])) {
+            $data['usd_balance'] = convert_to_usd_amount($data['currency_id'], $data['balance']);
+        }
+
+        $data['user_id'] = $bankAccount->user_id ?? auth()->user()->id;
+        $bankAccount->update($data);
+
+        return $bankAccount;
     }
+
 
     public function delete($bankAccountId): void
     {

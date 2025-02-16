@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBankAccountRequest;
 use App\Http\Requests\UpdateBankAccountRequest;
-use App\Models\BankAccount;
 use App\Services\BankAccountService;
 use App\Services\BankService;
 use App\Services\CurrencyService;
@@ -74,10 +73,12 @@ class BankAccountController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBankAccountRequest $request, BankAccount $bankAccount)
+    public function update(UpdateBankAccountRequest $request, $bankAccountId)
     {
-        $bankAccount = $this->bankAccountService->update($bankAccount, $request);
-        return response()->json($bankAccount);
+        $this->bankAccountService->update($bankAccountId, $request);
+        notyf()->success('Bank Account has benn updated');
+        return redirect()->route('accounts.index');
+
     }
 
     /**

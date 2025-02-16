@@ -30,10 +30,10 @@ class BankAccountService
         return $this->bankAccountRepository->create($data);
     }
 
-    public function update(BankAccount $bankAccount, UpdateBankAccountRequest $request): BankAccount
+    public function update($bankAccountId, UpdateBankAccountRequest $request): BankAccount
     {
         $data = $request->validated();
-        return $this->bankAccountRepository->update($bankAccount, $data);
+        return $this->bankAccountRepository->update($bankAccountId, $data);
     }
 
 

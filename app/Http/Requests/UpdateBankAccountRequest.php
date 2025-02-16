@@ -23,10 +23,11 @@ class UpdateBankAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'account_name' => 'nullable|string|max:255',
-            'account_number' => 'nullable|string|max:255',
-            'balance' => 'nullable|numeric',
-            'usd_balance' => 'nullable|numeric',
+            'currency_id' => 'required',
+            'bank_name_id' => 'required',
+            'account_name' => 'required|string|max:255',
+            'account_number' => 'required|string|max:255',
+            'balance' => 'required|numeric',
         ];
     }
 }

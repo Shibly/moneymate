@@ -9,9 +9,10 @@ interface BankAccountRepositoryInterface
 {
 
     public function getAll();
+
     public function create(array $data): BankAccount;
 
-    public function update(BankAccount $bankAccount, array $data): BankAccount;
+    public function update($bankAccountId, array $data): BankAccount;
 
     public function delete(BankAccount $bankAccount): void;
 
