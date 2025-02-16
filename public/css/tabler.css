@@ -28759,3 +28759,102 @@ Antialiasing
 .active-state {
     background: var(--tblr-navbar-active-bg) !important;
 }
+
+
+/* General Table Styling */
+.dataTables_wrapper {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Table Headers */
+table.dataTable thead {
+    background: #f1f3f5;
+    color: #333;
+    border-bottom: 2px solid #dee2e6;
+}
+
+table.dataTable thead th {
+    padding: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+/* Table Rows */
+table.dataTable tbody tr {
+    background: #fff;
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.2s ease-in-out;
+}
+
+table.dataTable tbody tr:hover {
+    background: #f1f3f5;
+}
+
+/* Table Cells */
+table.dataTable tbody td {
+    padding: 12px;
+    color: #495057;
+}
+
+/* Buttons */
+table.dataTable tbody td .btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.btn-edit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+/* Search and Pagination */
+.dataTables_filter input {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+}
+
+.dataTables_paginate .paginate_button {
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin: 0 2px;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    background: white;
+    transition: 0.3s ease;
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}

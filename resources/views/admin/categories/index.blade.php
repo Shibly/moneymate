@@ -110,7 +110,7 @@
                     </div>
 
 
-                    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog">
+                    <div class="modal fade modal-blur" id="modal-delete" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -153,18 +153,18 @@
                     <table class="table datatable table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Category Name</th>
-                            <th>Category Type</th>
-                            <th>Action</th>
+                            <th class="text-center">Category Name</th>
+                            <th class="text-center">Category Type</th>
+                            <th class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody class="table-tbody">
                         @foreach($categories as $category)
 
                             <tr id="row-{{$category->id}}">
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->type }}</td>
-                                <td class="sort-type">
+                                <td class="text-center">{{ $category->name }}</td>
+                                <td class="text-center">{{ $category->type }}</td>
+                                <td class="text-center">
                                     <button class="btn btn-info edit-btn" data-id="{{ $category->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
