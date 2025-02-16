@@ -129,8 +129,20 @@
                                     <h5 class="modal-title">Confirm Deletion</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <p>Are you sure you want to delete this currency?</p>
+                                <div class="modal-body text-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
+                                        <path d="M12 9v4"></path>
+                                        <path
+                                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+                                        <path d="M12 16h.01"></path>
+                                    </svg>
+                                    <h3>Are you sure to delete this currency ?</h3>
+                                    <div class="text-secondary">Do you really want to delete the currency ? This action
+                                        can not be undone.
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
@@ -211,33 +223,36 @@
 @section('js')
 
     <script>
-        $(document).on('click', '.edit-btn', function () {
-            let currencyId = $(this).data('id'); // Get currency ID from button
+        $(document).ready(function () {
+            // Handle edit button click
+            $(document).on('click', '.edit-btn', function () {
+                let currencyId = $(this).data('id'); // Get currency ID from button
 
-            $.ajax({
-                url: "{{ url('currencies/edit') }}/" + currencyId, // Corrected route URL
-                type: "GET",
-                success: function (data) {
-                    $('#edit-currency-id').val(data.id);
-                    $('#edit-currency-name').val(data.name);
-                    $('#edit-currency-exchange-rate').val(data.exchange_rate);
-                    $('#edit-currency-is-base').val(data.is_base); // Ensure correct value is selected
+                $.ajax({
+                    url: "{{ url('currencies/edit') }}/" + currencyId, // Corrected route URL
+                    type: "GET",
+                    success: function (data) {
+                        $('#edit-currency-id').val(data.id);
+                        $('#edit-currency-name').val(data.name);
+                        $('#edit-currency-exchange-rate').val(data.exchange_rate);
+                        $('#edit-currency-is-base').val(data.is_base); // Ensure correct value is selected
 
-                    $('#modal-edit').modal('show');
-                },
-                error: function (xhr) {
-                    console.log("Error fetching currency data:", xhr);
-                }
+                        $('#modal-edit').modal('show');
+                    },
+                    error: function (xhr) {
+                        console.log("Error fetching currency data:", xhr);
+                    }
+                });
             });
 
-
+            // Handle edit form submission
             $('#edit-currency-form').on('submit', function (e) {
                 e.preventDefault();
                 let currencyId = $('#edit-currency-id').val();
 
                 $.ajax({
                     url: "{{ url('currencies/update') }}/" + currencyId,
-                    type: "POST",
+                    type: "PUT", // Use PUT method for updates
                     data: $(this).serialize(),
                     success: function (response) {
                         $('#modal-edit').modal('hide');
@@ -250,6 +265,38 @@
             });
 
 
+            let deleteCurrencyId;
+
+
+            $(document).on('click', '.delete-btn', function () {
+                deleteCurrencyId = $(this).data('id'); // Get currency ID from button
+                console.log("Delete button clicked. Currency ID:", deleteCurrencyId); // Debugging
+
+                if (!deleteCurrencyId) {
+                    console.error("No currency ID found!");
+                    return;
+                }
+
+                $('#modal-delete').modal('show'); // Show confirmation modal
+            });
+
+
+            $('#confirm-delete').on('click', function () {
+                $.ajax({
+                    url: "{{ url('currencies/destroy') }}/" + deleteCurrencyId,
+                    type: "DELETE",
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        $('#modal-delete').modal('hide');
+                        $('#row-' + deleteCurrencyId).remove();
+                    },
+                    error: function (xhr) {
+                        console.log("Error deleting currency:", xhr);
+                    }
+                });
+            });
         });
 
     </script>

@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store-currency', [CurrencyController::class, 'store'])->name('currencies.store');
         Route::get('/edit/{currency}', [CurrencyController::class, 'show'])->name('currencies.edit');
         Route::post('/update/{currency}', [CurrencyController::class, 'update'])->name('currencies.update');
+        Route::delete('/destroy/{currency}', [CurrencyController::class, 'destroy'])->name('currencies.destroy');
 
     });
 
