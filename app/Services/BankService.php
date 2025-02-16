@@ -17,6 +17,12 @@ class BankService
         $this->bankRepository = $bankRepository;
     }
 
+
+    public function getAll(){
+        return $this->bankRepository->all();
+    }
+
+
     /**
      * Create a new bank record.
      */

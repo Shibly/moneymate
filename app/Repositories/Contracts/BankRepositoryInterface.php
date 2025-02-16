@@ -6,6 +6,12 @@ use App\Models\BankName;
 
 interface BankRepositoryInterface
 {
+
+    /**
+     * @return mixed
+     */
+    public function all(): mixed;
+
     /**
      * Create a new bank record.
      *

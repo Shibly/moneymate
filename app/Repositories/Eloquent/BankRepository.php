@@ -30,4 +30,13 @@ class BankRepository implements BankRepositoryInterface
     {
         return BankName::find($id);
     }
+
+    /**
+     * @return mixed
+     */
+    public function all(): mixed
+    {
+        return BankName::select('id', 'user_id', 'bank_name')->get();
+
+    }
 }

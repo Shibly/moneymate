@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BankNameController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
@@ -38,6 +39,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/{currency}', [CurrencyController::class, 'update'])->name('currencies.update');
         Route::delete('/destroy/{currency}', [CurrencyController::class, 'destroy'])->name('currencies.destroy');
 
+    });
+
+    Route::group(['prefix' => 'banks'], function () {
+        Route::get('/', [BankNameController::class, 'index'])->name('banks.index');
+        Route::post('/store-bank', [BankNameController::class, 'store'])->name('banks.store');
     });
 
 });

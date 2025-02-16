@@ -23,6 +23,11 @@ class BankNameController extends Controller
     public function index()
     {
 
+
+        $activeMenu = 'banks';
+        $banks = $this->bankService->getAll();
+        return view('admin.banks.index', compact('activeMenu', 'banks'));
+
     }
 
 
@@ -32,18 +37,22 @@ class BankNameController extends Controller
     }
 
 
-    public function store(StoreBankNameRequest $request): RedirectResponse
+    /**
+     * @param StoreBankNameRequest $request
+     * @return mixed
+     */
+
+    public function store(StoreBankNameRequest $request): mixed
     {
         $validatedData = $request->validated();
 
 
         $validatedData['user_id'] = auth()->id();
 
-        $bank = $this->bankService->createBank($validatedData);
-
+        $this->bankService->createBank($validatedData);
+        notyf()->info('Bank created successfully.');
         return redirect()
-            ->route('bank-names.index')
-            ->with('success', 'Bank created successfully!');
+            ->route('bank-names.index');
     }
 
     /**
