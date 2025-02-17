@@ -28,6 +28,19 @@
     <!-- Sidebar -->
     @include('includes.sidebar')
     <div class="page-wrapper">
+
+{{--        Display global form validation error during the development time--}}
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @yield('content')
         @include('includes.footer')
     </div>

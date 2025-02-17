@@ -47,7 +47,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
         Currency::where('is_default', 'yes')->update([
             'is_default' => 'no',
-            'exchange_rate' => 0,
+            //'exchange_rate' => 0,
         ]);
     }
 

@@ -35,7 +35,9 @@
                                             aria-label="Close"></button>
                                 </div>
 
-                                <form id="add-income-form" action="{{ route('incomes.store') }}" method="POST">
+                                <form id="add-income-form" action="{{ route('incomes.store') }}" method="POST"
+                                      enctype="multipart/form-data">
+
                                     @csrf
 
                                     <div class="modal-body">
@@ -43,7 +45,7 @@
                                             <!-- Income Category (First Column) -->
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Income Category</label>
-                                                <select class="form-control" name="income_category" required>
+                                                <select class="form-control" name="category_id" required>
                                                     @foreach($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                                     @endforeach
@@ -53,9 +55,12 @@
                                             <!-- Select Bank Account (First Column) -->
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Select Bank Account</label>
-                                                <select class="form-control" name="bank_account" required>
-                                                    @foreach($banks as $bank)
-                                                        <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
+                                                <select class="form-control" name="account_id" required>
+                                                    @foreach($bankAccounts as $account)
+                                                        <option value="{{$account->id}}">
+                                                            {{$account->account_number}}
+                                                            - Balance ({{$account->balance}})
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -63,7 +68,7 @@
                                             <!-- Currency (Second Column) -->
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Currency</label>
-                                                <select class="form-control" name="currency" required>
+                                                <select class="form-control" name="currency_id" required>
                                                     @foreach($currencies as $currency)
                                                         <option value="{{$currency->id}}">{{$currency->name}}</option>
                                                     @endforeach
@@ -81,14 +86,14 @@
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Reference</label>
                                                 <input type="text" class="form-control" name="reference"
-                                                       placeholder="Income Reference" required>
+                                                       placeholder="Income Reference">
                                             </div>
 
                                             <!-- Description (Second Column) -->
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Description</label>
                                                 <textarea class="form-control" name="description" rows="3"
-                                                          placeholder="Description" required></textarea>
+                                                          placeholder="Description"></textarea>
                                             </div>
 
                                             <!-- Note (First Column) -->
@@ -107,7 +112,7 @@
                                             <!-- Date (Second Column) -->
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Date</label>
-                                                <input type="date" class="form-control" name="date" required>
+                                                <input type="date" class="form-control" name="income_date" required>
                                             </div>
                                         </div>
                                     </div>

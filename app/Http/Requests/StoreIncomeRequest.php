@@ -16,8 +16,8 @@ class StoreIncomeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Add authorization logic here if needed
-        return true; // Allow everyone to make this request for now
+
+        return true;
     }
 
     /**
@@ -28,10 +28,10 @@ class StoreIncomeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'account_id' => 'required|exists:bank_accounts,id',
-            'currency_id' => 'required|exists:currencies,id',
-            'amount' => 'required|numeric|min:0.01',
-            'category_id' => 'required|exists:categories,id',
+            'account_id' => 'required',
+            'category_id' => 'required',
+            'currency_id' => 'required',
+            'amount' => 'required|numeric',
             'income_date' => 'required|date',
             'description' => 'nullable|string|max:255',
             'note' => 'nullable|string|max:500',

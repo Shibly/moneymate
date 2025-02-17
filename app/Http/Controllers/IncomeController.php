@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Models\Income;
-use App\Services\BankService;
+use App\Services\BankAccountService;
 use App\Services\CategoryService;
 use App\Services\CurrencyService;
 use App\Services\IncomeService;
@@ -19,18 +19,18 @@ class IncomeController extends Controller
     protected CurrencyService $currencyService;
     protected IncomeService $incomeService;
 
-    protected BankService $bankService;
+    protected BankAccountService $bankAccountService;
 
-    public function __construct(IncomeService   $incomeService,
-                                CategoryService $categoryService,
-                                CurrencyService $currencyService,
-                                BankService     $bankService,
+    public function __construct(IncomeService      $incomeService,
+                                CategoryService    $categoryService,
+                                CurrencyService    $currencyService,
+                                BankAccountService $bankAccountService,
     )
     {
         $this->incomeService = $incomeService;
         $this->categoryService = $categoryService;
         $this->currencyService = $currencyService;
-        $this->bankService = $bankService;
+        $this->bankAccountService = $bankAccountService;
     }
 
 
@@ -40,20 +40,18 @@ class IncomeController extends Controller
         $incomes = $this->incomeService->allIncomes();
         $categories = $this->categoryService->allIncomes();
         $currencies = $this->currencyService->getAll();
-        $banks = $this->bankService->getAll();
+        $bankAccounts = $this->bankAccountService->getAll();
 
-        return view('admin.incomes.index', compact('activeMenu', 'incomes', 'categories', 'currencies', 'banks'));
+
+
+        return view('admin.incomes.index', compact('activeMenu', 'incomes', 'categories', 'currencies', 'bankAccounts'));
     }
 
-    /**
-     * @param StoreIncomeRequest $request
-     * @return JsonResponse
-     * @throws \Exception
-     */
-    public function store(StoreIncomeRequest $request): JsonResponse
+
+    public function store(StoreIncomeRequest $request)
     {
-        $income = $this->incomeService->create($request);
-        return response()->json(['income' => $income], 201);
+        $this->incomeService->create($request);
+        return redirect()->route('incomes.index');
     }
 
     /**

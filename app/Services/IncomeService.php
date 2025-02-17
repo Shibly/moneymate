@@ -4,7 +4,6 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Models\BankAccount;
 use App\Models\Income;
@@ -12,7 +11,7 @@ use App\Repositories\Contracts\IncomeRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Storage;
+use App\Models\Category;
 
 class IncomeService
 {
@@ -28,74 +27,65 @@ class IncomeService
     /**
      * Handle file upload for attachments.
      */
-    private function handleAttachmentUpload($request, Income $income = null): ?string
+    public function create($request)
     {
-        if ($request->hasFile('attachment')) {
-            // Delete the old attachment if updating
-            if ($income) {
-                Storage::delete($income->attachment);
-            }
+        $incomeData = $request->validated();
+        $category = Category::findOrFail($request->category_id);
 
-            $attachmentFile = $request->file('attachment');
-            $filename = time() . '.' . $attachmentFile->getClientOriginalExtension();
-            $attachmentFile->storeAs('files', $filename);
+        // Handle file upload
+        $incomeData['attachment'] = $this->handleAttachmentUpload($request);
 
-            return $filename;
-        }
+        // Convert amount to USD
+        $usdAmount = convert_to_usd_amount($request->currency_id, $request->amount);
 
-        return $income?->attachment;
+        // Find the bank account
+        $toBankAccount = BankAccount::find($request->account_id);
+        $exchangeAmount = convert_to_exchange_amount($toBankAccount->currency_id, $usdAmount);
+
+        // Format the income date
+        $incomeDate = Carbon::parse($incomeData['income_date'])->format('Y-m-d');
+
+        // Create the income record
+        $income = Income::create([
+            'user_id' => Auth::user()->id,
+            'account_id' => $incomeData['account_id'],
+            'currency_id' => $incomeData['currency_id'],
+            'amount' => $incomeData['amount'],
+            'exchange_amount' => $exchangeAmount,
+            'usd_amount' => $usdAmount,
+            'category_id' => $incomeData['category_id'],
+            'description' => $incomeData['description'],
+            'note' => $incomeData['note'],
+            'reference' => $incomeData['reference'],
+            'income_date' => $incomeDate,
+            'attachment' => $incomeData['attachment']
+        ]);
+
+        // Update the bank account balance
+        $toBankAccount->balance += $exchangeAmount;
+        $toBankAccount->usd_balance += $usdAmount;
+        $toBankAccount->save();
+
+        return $income;
     }
 
     /**
-     * Create a new income record with transaction.
+     * Handle the attachment file upload.
+     *
+     * @param $request
+     * @return string|null
      */
-    public function create(StoreIncomeRequest $request): Income
+    private function handleAttachmentUpload($request)
     {
-        DB::beginTransaction(); // Start transaction
-
-        try {
-            $data = $request->validated();
-
-            // Handle attachment file upload
-            $attachment = $this->handleAttachmentUpload($request);
-
-            // Convert the amounts
-            $usdAmount = $this->currencyConversionService->convertToUsdAmount($request->currency_id, $request->amount);
-            $bankAccount = BankAccount::find($request->account_id);
-            $exchangeAmount = $this->currencyConversionService->convertToExchangeAmount($bankAccount->currency_id, $usdAmount);
-
-            $incomeDate = Carbon::parse($data['income_date'])->format('Y-m-d');
-
-            // Create income record
-            $income = $this->incomeRepository->create([
-                'user_id' => Auth::user()->id,
-                'account_id' => $data['account_id'],
-                'currency_id' => $data['currency_id'],
-                'amount' => $data['amount'],
-                'exchange_amount' => $exchangeAmount,
-                'usd_amount' => $usdAmount,
-                'category_id' => $data['category_id'],
-                'description' => $data['description'],
-                'note' => $data['note'],
-                'reference' => $data['reference'],
-                'income_date' => $incomeDate,
-                'attachment' => $attachment
-            ]);
-
-            // Update the bank account balance
-            $bankAccount->balance += $exchangeAmount;
-            $bankAccount->usd_balance += $usdAmount;
-            $bankAccount->save();
-
-            DB::commit(); // Commit transaction if everything is successful
-
-            return $income;
-
-        } catch (\Exception $e) {
-            DB::rollBack(); // Rollback transaction if an error occurs
-            throw $e; // Re-throw the exception
+        if ($request->hasFile('attachment')) {
+            $attachment = $request->file('attachment');
+            $filename = time() . '.' . $attachment->getClientOriginalExtension();
+            $attachment->storeAs('files', $filename); // Store file in the 'files' folder
+            return $filename;
         }
+        return null; // Return null if no file is uploaded
     }
+
 
     /**
      * Update an existing income record with transaction.
@@ -174,7 +164,8 @@ class IncomeService
     }
 
 
-    public function allIncomes(){
+    public function allIncomes()
+    {
         return $this->incomeRepository->allIncomes();
     }
 
