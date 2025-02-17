@@ -47,7 +47,7 @@ class CurrencyController extends Controller
      */
     public function update(UpdateCurrencyRequest $request, Currency $currency): mixed
     {
-        $updatedCurrency = $this->currencyService->update($request, $currency);
+        $this->currencyService->update($request, $currency);
         notyf()->success('Currency has been updated successfully.');
         return redirect()->route('currencies.index');
     }

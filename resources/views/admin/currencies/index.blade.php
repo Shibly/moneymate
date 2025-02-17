@@ -49,7 +49,7 @@
 
                                         <div class="mb-3">
                                             <label class="form-label">Is Default</label>
-                                            <select name="is_base" class="form-select" required>
+                                            <select name="is_default" class="form-select" required>
                                                 <option value="yes">Yes</option>
                                                 <option value="no" selected>No</option>
                                             </select>
@@ -104,7 +104,7 @@
 
                                         <div class="mb-3">
                                             <label class="form-label">Is Default</label>
-                                            <select name="is_base" class="form-select" id="edit-currency-is-base"
+                                            <select name="is_default" class="form-select" id="edit-currency-is-base"
                                                     required>
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
@@ -252,7 +252,7 @@
 
                 $.ajax({
                     url: "{{ url('currencies/update') }}/" + currencyId,
-                    type: "PUT", // Use PUT method for updates
+                    type: "POST", // Use PUT method for updates
                     data: $(this).serialize(),
                     success: function (response) {
                         $('#modal-edit').modal('hide');
