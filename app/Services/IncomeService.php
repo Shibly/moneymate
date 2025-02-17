@@ -172,4 +172,10 @@ class IncomeService
             throw $e; // Re-throw the exception
         }
     }
+
+
+    public function allIncomes(){
+        return $this->incomeRepository->allIncomes();
+    }
+
 }

@@ -1,0 +1,279 @@
+@extends('layout.master')
+@section('content')
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <h2 class="page-title">
+                        Income Histories
+                    </h2>
+                </div>
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
+                           data-bs-target="#add-new-income">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="icon icon-tabler icons-tabler-outline icon-tabler-octagon-plus">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path
+                                    d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0z"/>
+                                <path d="M9 12h6"/>
+                                <path d="M12 9v6"/>
+                            </svg>
+                            Add New
+                        </a>
+                    </div>
+                    <div class="modal modal-blur fade" id="add-new-income" tabindex="-1" role="dialog"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add New Income</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+
+                                <form id="add-income-form" action="{{ route('incomes.store') }}" method="POST">
+                                    @csrf
+
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <!-- Income Category (First Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Income Category</label>
+                                                <select class="form-control" name="income_category" required>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <!-- Select Bank Account (First Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Select Bank Account</label>
+                                                <select class="form-control" name="bank_account" required>
+                                                    @foreach($banks as $bank)
+                                                        <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <!-- Currency (Second Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Currency</label>
+                                                <select class="form-control" name="currency" required>
+                                                    @foreach($currencies as $currency)
+                                                        <option value="{{$currency->id}}">{{$currency->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <!-- Amount (Second Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Amount</label>
+                                                <input type="number" class="form-control" name="amount"
+                                                       placeholder="Amount" required>
+                                            </div>
+
+                                            <!-- Reference (First Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Reference</label>
+                                                <input type="text" class="form-control" name="reference"
+                                                       placeholder="Income Reference" required>
+                                            </div>
+
+                                            <!-- Description (Second Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Description</label>
+                                                <textarea class="form-control" name="description" rows="3"
+                                                          placeholder="Description" required></textarea>
+                                            </div>
+
+                                            <!-- Note (First Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Note</label>
+                                                <textarea class="form-control" name="note" rows="3"
+                                                          placeholder="Additional Note"></textarea>
+                                            </div>
+
+                                            <!-- Attachment (Second Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Add Attachment</label>
+                                                <input type="file" class="form-control" name="attachment">
+                                            </div>
+
+                                            <!-- Date (Second Column) -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Date</label>
+                                                <input type="date" class="form-control" name="date" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round"
+                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-octagon-plus">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path
+                                                    d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0z"/>
+                                                <path d="M9 12h6"/>
+                                                <path d="M12 9v6"/>
+                                            </svg>
+                                            Add New Income
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit Bank Name</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <form id="edit-bank-name-form">
+                                    @csrf
+                                    <input type="hidden" name="id" id="edit-category-id">
+
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Bank Name</label>
+                                            <input type="text" class="form-control" name="bank_name" id="edit-bank-name"
+                                                   required>
+                                        </div>
+                                        <div id="edit-form-errors" class="d-none"></div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Update Bank</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade modal-blur" id="modal-delete" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body text-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
+                                        <path d="M12 9v4"></path>
+                                        <path
+                                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+                                        <path d="M12 16h.01"></path>
+                                    </svg>
+                                    <h3>Are you sure to delete this bank ?</h3>
+                                    <div class="text-secondary"> This action can not be undone.
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger" id="confirm-delete">Yes, Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="card-body p-0">
+                <div id="table-default" class="table-responsive">
+                    <table class="table datatable table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Receiving Account Number</th>
+                            <th class="text-center">Category</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Attachment</th>
+                            <th class="text-center">Income Date</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-tbody">
+                        @foreach($incomes as $income)
+
+                            <tr id="row-{{$income->id}}">
+                                <td class="text-center">{{ $income->amount }}</td>
+                                <td class="text-center">{{ $income->bankAccount->account_number }}</td>
+                                <td class="text-center">{{ $income->category->name }}</td>
+                                <td class="text-center">{{ $income->description }}</td>
+                                <td class="text-center">Attachment</td>
+                                <td class="text-center">{{$income->income_date}}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-info edit-btn" data-id="{{ $income->id }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round"
+                                             class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"/>
+                                            <path
+                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/>
+                                            <path d="M16 5l3 3"/>
+                                        </svg>
+                                        Edit
+                                    </button>
+                                    <button class="btn btn-danger delete-btn" data-id="{{ $income->id }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round"
+                                             class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <path d="M4 7l16 0"/>
+                                            <path d="M10 11l0 6"/>
+                                            <path d="M14 11l0 6"/>
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </td>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+
+
+@endsection

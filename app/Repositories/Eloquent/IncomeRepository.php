@@ -4,9 +4,16 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Income;
 use App\Repositories\Contracts\IncomeRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class IncomeRepository implements IncomeRepositoryInterface
 {
+
+    public function allIncomes(): Collection
+    {
+        return Income::all();
+    }
+
     public function create(array $data): Income
     {
         return Income::create($data);

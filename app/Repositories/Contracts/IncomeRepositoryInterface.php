@@ -8,6 +8,8 @@ use App\Models\Income;
 
 interface IncomeRepositoryInterface
 {
+
+    public function allIncomes();
     public function create(array $data): Income;
 
     public function update(Income $income, array $data): Income;

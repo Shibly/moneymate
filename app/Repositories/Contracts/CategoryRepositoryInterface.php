@@ -41,4 +41,9 @@ interface CategoryRepositoryInterface
     public function findById(int $categoryId): Category;
 
     public function all(): Collection;
+
+    public function allIncomeCategories(): Collection;
+
+    public function allExpenseCategories(): Collection;
+
 }

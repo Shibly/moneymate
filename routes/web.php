@@ -6,6 +6,7 @@ use App\Http\Controllers\BankNameController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IncomeController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect default route ("/") to login page
@@ -56,6 +57,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{account}', [BankAccountController::class, 'show'])->name('accounts.edit');
         Route::post('/update/{account}', [BankAccountController::class, 'update'])->name('accounts.update');
         Route::post('/destroy/{account}', [BankAccountController::class, 'destroy'])->name('accounts.destroy');
+    });
+
+
+    Route::group(['prefix' => 'incomes'], function () {
+        Route::get('/', [IncomeController::class, 'index'])->name('incomes.index');
+        Route::post('/store-income', [IncomeController::class, 'store'])->name('incomes.store');
     });
 
 });

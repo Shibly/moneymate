@@ -66,4 +66,14 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return Category::all();
     }
+
+    public function allIncomeCategories(): Collection
+    {
+        return Category::where('type', 'income')->get();
+    }
+
+    public function allExpenseCategories(): Collection
+    {
+        return Category::where('type', 'expense')->get();
+    }
 }

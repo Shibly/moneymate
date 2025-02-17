@@ -6,17 +6,43 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Models\Income;
+use App\Services\BankService;
+use App\Services\CategoryService;
+use App\Services\CurrencyService;
 use App\Services\IncomeService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class IncomeController extends Controller
 {
+    protected CategoryService $categoryService;
+    protected CurrencyService $currencyService;
     protected IncomeService $incomeService;
 
-    public function __construct(IncomeService $incomeService)
+    protected BankService $bankService;
+
+    public function __construct(IncomeService   $incomeService,
+                                CategoryService $categoryService,
+                                CurrencyService $currencyService,
+                                BankService     $bankService,
+    )
     {
         $this->incomeService = $incomeService;
+        $this->categoryService = $categoryService;
+        $this->currencyService = $currencyService;
+        $this->bankService = $bankService;
+    }
+
+
+    public function index()
+    {
+        $activeMenu = 'incomes';
+        $incomes = $this->incomeService->allIncomes();
+        $categories = $this->categoryService->allIncomes();
+        $currencies = $this->currencyService->getAll();
+        $banks = $this->bankService->getAll();
+
+        return view('admin.incomes.index', compact('activeMenu', 'incomes', 'categories', 'currencies', 'banks'));
     }
 
     /**

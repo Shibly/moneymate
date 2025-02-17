@@ -74,4 +74,16 @@ class CategoryService
     {
         return $this->categoryRepository->findById($categoryId);
     }
+
+    public function allIncomes(): Collection
+    {
+        return $this->categoryRepository->allIncomeCategories();
+    }
+
+
+    public function allExpenses(): Collection
+    {
+        return $this->categoryRepository->allExpenseCategories();
+    }
+
 }
