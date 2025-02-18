@@ -14,9 +14,10 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
-            <div class="card-body p-0">
-                <div class="container-xl">
-                    <div class="card">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="container-xl">
+
                         <div class="col-12 d-flex flex-column">
 
                             <form action="{{route('settings.update')}}" method="post">
