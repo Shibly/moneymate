@@ -5,6 +5,7 @@ $(document).ready(function () {
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true
+        "info": true,
+        "pageLength": num_data_per_page
     });
 });

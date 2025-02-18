@@ -22,12 +22,21 @@
     </style>
 </head>
 <body class=" layout-fluid">
+
+<script>
+    let num_data_per_page = '{{get_option('num_data_per_page')}}';
+
+</script>
 <script src="{{asset('public/js/demo-theme.js')}}"></script>
 
 <div class="page">
     <!-- Sidebar -->
     @include('includes.sidebar')
+
     <div class="page-wrapper">
+
+
+        @include('includes.topbar')
 
         {{--        Display global form validation error during the development time--}}
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect default route ("/") to login page
@@ -67,6 +68,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [IncomeController::class, 'index'])->name('incomes.index');
         Route::post('/store-income', [IncomeController::class, 'store'])->name('incomes.store');
         Route::post('/destroy/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
+    });
+
+
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/', [SettingController::class, 'index'])->name('settings.index');
+        Route::post('/update', [SettingController::class, 'update'])->name('settings.update');
     });
 
 });
