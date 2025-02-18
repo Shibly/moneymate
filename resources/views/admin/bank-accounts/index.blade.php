@@ -96,7 +96,7 @@
                                                 <path d="M12 14l0 3"/>
                                                 <path d="M16 14l0 3"/>
                                             </svg>
-                                            Add New Bank
+                                            Add New Bank Account
                                         </button>
                                     </div>
                                 </form>
@@ -173,7 +173,7 @@
                                                 <path d="M12 14l0 3"/>
                                                 <path d="M16 14l0 3"/>
                                             </svg>
-                                            Update Account
+                                            Update Bank Account
                                         </button>
                                     </div>
                                 </form>

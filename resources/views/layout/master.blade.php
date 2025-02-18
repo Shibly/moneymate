@@ -29,7 +29,7 @@
     @include('includes.sidebar')
     <div class="page-wrapper">
 
-{{--        Display global form validation error during the development time--}}
+        {{--        Display global form validation error during the development time--}}
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -52,6 +52,7 @@
 <script src="{{asset('public/js/tabler.min.js')}}"></script>
 <script src="{{asset('public/js/demo.min.js')}}"></script>
 <script src="{{ asset('public/libs/datatable/datatable.js') }}"></script>
+<script src="{{ asset('public/libs/sweetalert/sweetalert2.js') }}"></script>
 <script src="{{ asset('public/js/main.js') }}"></script>
 @yield('js')
 </body>

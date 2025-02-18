@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'incomes'], function () {
         Route::get('/', [IncomeController::class, 'index'])->name('incomes.index');
         Route::post('/store-income', [IncomeController::class, 'store'])->name('incomes.store');
+        Route::post('/destroy/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
     });
 
 });

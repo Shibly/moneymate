@@ -316,6 +316,12 @@
                 success: function (response) {
                     $('#modal-delete').modal('hide');
                     $('#row-' + deleteCategoryId).remove();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Category has been deleted",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    });
                 },
                 error: function (xhr) {
                     console.log("Error deleting category:", xhr);

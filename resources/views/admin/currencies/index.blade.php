@@ -288,6 +288,12 @@
                     success: function (response) {
                         $('#modal-delete').modal('hide');
                         $('#row-' + deleteCurrencyId).remove();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Currency has been deleted",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        });
                     },
                     error: function (xhr) {
                         console.log("Error deleting currency:", xhr);

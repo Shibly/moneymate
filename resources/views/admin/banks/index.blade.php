@@ -295,21 +295,27 @@
 
 
         $(document).on('click', '.delete-btn', function () {
-            deleteBankId = $(this).data('id'); // Get category ID from button
-            $('#modal-delete').modal('show'); // Show confirmation modal
+            deleteBankId = $(this).data('id');
+            $('#modal-delete').modal('show');
         });
 
 
         $('#confirm-delete').on('click', function () {
             $.ajax({
-                url: "{{ url('banks/destroy') }}/" + deleteBankId, // Laravel route
+                url: "{{ url('banks/destroy') }}/" + deleteBankId,
                 type: "POST",
                 data: {
-                    _token: "{{ csrf_token() }}" // Send CSRF token for security
+                    _token: "{{ csrf_token() }}"
                 },
                 success: function (response) {
                     $('#modal-delete').modal('hide'); // Hide modal
                     $('#row-' + deleteBankId).remove();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Bank has been deleted.",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    });
                 },
                 error: function (xhr) {
                     console.log("Error deleting category:", xhr);

@@ -192,7 +192,7 @@
                                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this bank ?</h3>
+                                    <h3>Are you sure to delete this income ?</h3>
                                     <div class="text-secondary"> This action can not be undone.
                                     </div>
                                 </div>
@@ -298,6 +298,45 @@
 @endsection
 
 @section('js')
+    <script>
 
+        let deleteIncomeId;
+
+
+        $(document).on('click', '.delete-btn', function () {
+            deleteIncomeId = $(this).data('id');
+            $('#modal-delete').modal('show');
+        });
+
+        $('#confirm-delete').on('click', function () {
+            $.ajax({
+                url: "{{ url('incomes/destroy') }}/" + deleteIncomeId,
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (response) {
+                    $('#modal-delete').modal('hide');
+                    $('#row-' + deleteIncomeId).remove();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "The income record has been successfully deleted.",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    });
+                },
+                error: function (xhr) {
+                    console.log("Error deleting category:", xhr);
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Something went wrong. Please try again.",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
+                }
+            });
+        });
+
+    </script>
 
 @endsection
