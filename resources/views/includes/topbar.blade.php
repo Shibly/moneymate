@@ -33,8 +33,8 @@
                     <span class="avatar avatar-sm"
                           style="background-image: url(./static/avatars/000m.jpg)"></span>
                     <div class="d-none d-xl-block ps-2">
-                        <div>Paweł Kuna</div>
-                        <div class="mt-1 small text-secondary">UI Designer</div>
+                        <div>{{auth()->user()->name}}</div>
+                        <div class="mt-1 small text-secondary">System Admin</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -42,7 +42,7 @@
                     <a href="{{route('profile.change-password')}}" class="dropdown-item">Change Password</a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">View Activity Log</a>
-                    <a href="#" class="dropdown-item">Logout</a>
+                    <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
                 </div>
             </div>
         </div>
