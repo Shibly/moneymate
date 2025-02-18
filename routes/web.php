@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BankNameController;
@@ -22,8 +23,10 @@ Route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name(
 // Protected Routes - Only Authenticated Users Can Access
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/download/attachment/{filename}', [AttachmentController::class, 'download'])
+        ->name('download.attachment');
 
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');

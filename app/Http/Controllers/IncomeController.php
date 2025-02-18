@@ -43,7 +43,6 @@ class IncomeController extends Controller
         $bankAccounts = $this->bankAccountService->getAll();
 
 
-
         return view('admin.incomes.index', compact('activeMenu', 'incomes', 'categories', 'currencies', 'bankAccounts'));
     }
 
@@ -51,6 +50,7 @@ class IncomeController extends Controller
     public function store(StoreIncomeRequest $request)
     {
         $this->incomeService->create($request);
+        notyf()->success('New income information has been added');
         return redirect()->route('incomes.index');
     }
 

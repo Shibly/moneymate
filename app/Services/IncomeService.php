@@ -6,12 +6,12 @@ namespace App\Services;
 
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Models\BankAccount;
+use App\Models\Category;
 use App\Models\Income;
 use App\Repositories\Contracts\IncomeRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\Category;
 
 class IncomeService
 {
@@ -75,16 +75,18 @@ class IncomeService
      * @param $request
      * @return string|null
      */
-    private function handleAttachmentUpload($request)
+    private function handleAttachmentUpload($request): ?string
     {
         if ($request->hasFile('attachment')) {
             $attachment = $request->file('attachment');
             $filename = time() . '.' . $attachment->getClientOriginalExtension();
-            $attachment->storeAs('files', $filename); // Store file in the 'files' folder
+            $attachment->storeAs('private/files', $filename);
+
             return $filename;
         }
-        return null; // Return null if no file is uploaded
+        return null;
     }
+
 
 
     /**
