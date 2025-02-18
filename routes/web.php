@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/update', [SettingController::class, 'update'])->name('settings.update');
+        Route::get('/change-password', [ProfileController::class, 'index'])->name('profile.change-password');
+        Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
     });
 
 });

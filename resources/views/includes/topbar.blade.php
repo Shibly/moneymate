@@ -39,7 +39,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="#" class="dropdown-item">Manage Profile</a>
-                    <a href="#" class="dropdown-item">Change Password</a>
+                    <a href="{{route('profile.change-password')}}" class="dropdown-item">Change Password</a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">View Activity Log</a>
                     <a href="#" class="dropdown-item">Logout</a>
