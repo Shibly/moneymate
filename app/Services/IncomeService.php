@@ -80,13 +80,11 @@ class IncomeService
         if ($request->hasFile('attachment')) {
             $attachment = $request->file('attachment');
             $filename = time() . '.' . $attachment->getClientOriginalExtension();
-            $attachment->storeAs('private/files', $filename);
-
+            $attachment->storeAs('', $filename, 'local'); // Using 'local' disk and no directory specified
             return $filename;
         }
         return null;
     }
-
 
 
     /**

@@ -30,6 +30,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/download/attachment/{filename}', [AttachmentController::class, 'download'])
         ->name('download.attachment');
 
+    Route::get('private-files/{filename}', [AttachmentController::class, 'servePrivateFile'])
+        ->name('private.files');
+
+
+
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
         Route::post('/store-category', [CategoryController::class, 'store'])->name('categories.store');
@@ -77,6 +82,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update', [SettingController::class, 'update'])->name('settings.update');
         Route::get('/change-password', [ProfileController::class, 'index'])->name('profile.change-password');
         Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+        Route::get('/manage-profile', [ProfileController::class, 'manageProfile'])->name('profile.manage-profile');
+        Route::post('/update-profile', [ProfileController::class, 'updateProfile'])->name('profile.update-profile');
     });
 
 });

@@ -44,4 +44,40 @@ class ProfileController extends Controller
     }
 
 
+    public function manageProfile(Request $request)
+    {
+
+        $activeMenu = "manage-profile";
+        return view('admin.profile.manage-profile', compact('activeMenu'));
+    }
+
+
+    public function updateProfile(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]);
+
+
+        $user = auth()->user();
+
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('', $filename, 'local');
+            $user->profile_picture = $filename;
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        notyf()->success('Profile updated successfully.');
+        return redirect()->route('profile.manage-profile');
+    }
+
+
 }
