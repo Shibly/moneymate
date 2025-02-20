@@ -237,6 +237,16 @@
                     </a>
                 </li>
 
+
+                <li class="nav-item @if($activeMenu == 'languages') active-state @endif">
+                    <a class="nav-link" href="{{route('languages.index')}}">
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+                    {{ svg('clarity-language-solid') }}
+                </span><span class="nav-link-title">Languages</span>
+                    </a>
+                </li>
+
+
                 <li class="nav-item @if($activeMenu == 'application-settings') active-state @endif">
                     <a class="nav-link" href="{{route('settings.index')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">

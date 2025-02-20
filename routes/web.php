@@ -8,8 +8,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TranslationController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect default route ("/") to login page
@@ -26,13 +28,23 @@ Route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name(
 Route::middleware(['auth'])->group(function () {
 
 
+    /**
+     * Language Resourceful routes
+     */
+
+
+    Route::resource('languages', LanguageController::class);
+    Route::get('language/translate/{code}', [TranslationController::class, 'edit'])->name('translations.edit');
+    Route::put('language/translate/{code}', [TranslationController::class, 'update'])->name('translations.update');
+
+
+
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/download/attachment/{filename}', [AttachmentController::class, 'download'])
         ->name('download.attachment');
 
     Route::get('private-files/{filename}', [AttachmentController::class, 'servePrivateFile'])
         ->name('private.files');
-
 
 
     Route::group(['prefix' => 'categories'], function () {

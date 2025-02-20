@@ -10,8 +10,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "andreiio/blade-remix-icon": "^3.6",
+        "blade-ui-kit/blade-icons": "^1.8",
+        "codeat3/blade-clarity-icons": "^1.9",
+        "codeat3/blade-fontisto-icons": "^1.4",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "owenvoke/blade-fontawesome": "^2.9",
         "php-flasher/flasher-laravel": "^2.1",
         "php-flasher/flasher-notyf-laravel": "^2.1",
         "spatie/laravel-activitylog": "^4.10"

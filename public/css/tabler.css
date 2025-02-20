@@ -28858,3 +28858,17 @@ table.dataTable tbody td .btn {
     color: white;
     border-color: #007bff;
 }
+
+
+/* Fix Select2 dropdown width in the modal */
+.select2-container {
+    width: 100% !important; /* Make the Select2 dropdown take up the full width */
+}
+
+.select2-container .select2-selection--single {
+    height: 36px; /* Adjust the height to make it look better */
+}
+/* Optional: Adjust Select2 dropdown z-index */
+.select2-container--default .select2-dropdown {
+    z-index: 9999 !important; /* Ensure dropdown stays above modal */
+}
