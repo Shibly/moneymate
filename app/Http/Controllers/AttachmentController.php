@@ -23,9 +23,6 @@ class AttachmentController extends Controller
     {
         $path = storage_path('app/private/' . $filename);
 
-        // Debugging: Check if path is correct.
-        dd($path);
-
         if (file_exists($path)) {
             return response()->file($path, [
                 'Content-Type' => mime_content_type($path),
@@ -35,6 +32,7 @@ class AttachmentController extends Controller
 
         abort(404);
     }
+
 
 
 }
