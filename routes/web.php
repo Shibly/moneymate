@@ -11,6 +11,7 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransitionController;
 
 // Redirect default route ("/") to login page
 Route::get('/', function () {
@@ -52,6 +53,12 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{currency}', [CurrencyController::class, 'destroy'])->name('currencies.destroy');
 
     });
+
+    Route::group(['prefix' => 'transition'], function () {
+        Route::get('balance-transfer', [TransitionController::class, 'balanceTransfer'])->name('transition.balanceTransfer');
+
+    });
+
 
     Route::group(['prefix' => 'banks'], function () {
         Route::get('/', [BankNameController::class, 'index'])->name('banks.index');
