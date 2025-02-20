@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TranslationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountTransferController;
 
 // Redirect default route ("/") to login page
 Route::get('/', function () {
@@ -64,6 +65,13 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{currency}', [CurrencyController::class, 'destroy'])->name('currencies.destroy');
 
     });
+
+    Route::group(['prefix' => 'transfer'], function () {
+        Route::get('balance', [AccountTransferController::class, 'balanceTransfer'])->name('transfer.balance');
+        Route::post('store-balance-transfer', [AccountTransferController::class, 'storeBalanceTransfer'])->name('transfer.storeBalanceTransfer');
+
+    });
+
 
     Route::group(['prefix' => 'banks'], function () {
         Route::get('/', [BankNameController::class, 'index'])->name('banks.index');

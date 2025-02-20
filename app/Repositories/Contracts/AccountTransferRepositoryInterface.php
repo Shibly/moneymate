@@ -5,4 +5,7 @@ use App\Models\AccountTransfer;
 interface AccountTransferRepositoryInterface
 {
     public function create(array $data): AccountTransfer;
+
+    public function getAll();
+
 }

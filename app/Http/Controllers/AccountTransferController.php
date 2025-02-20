@@ -5,17 +5,35 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountTransferRequest;
 use App\Models\AccountTransfer;
 use App\Services\AccountTransferService;
+use App\Services\BankAccountService;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 
 class AccountTransferController extends Controller
 {
 
     private AccountTransferService $accountTransferService;
 
-    public function __construct(AccountTransferService $accountTransferService)
+    private BankAccountService $bankAccountService;
+
+    public function __construct(AccountTransferService $accountTransferService, BankAccountService $bankAccountService)
     {
         $this->accountTransferService = $accountTransferService;
+        $this->bankAccountService = $bankAccountService;
+    }
+
+
+    /**
+     * @return View
+     */
+
+    public function balanceTransfer(): View
+    {
+        $data['activeMenu'] = 'balance-transfer';
+        $data['bankAccounts'] = $this->bankAccountService->getByUserId(auth()->user()->id);
+        $data['accountTransfers'] = $this->accountTransferService->getAll();
+        return view('admin.transition.balance-transfer', $data);
     }
 
 
@@ -32,7 +50,7 @@ class AccountTransferController extends Controller
      * @param StoreAccountTransferRequest $request
      * @return JsonResponse
      */
-    public function transferAmount(StoreAccountTransferRequest $request): JsonResponse
+    public function storeBalanceTransfer(StoreAccountTransferRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
         try {
