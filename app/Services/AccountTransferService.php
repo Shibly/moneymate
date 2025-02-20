@@ -4,6 +4,8 @@
 namespace App\Services;
 
 use App\Models\AccountTransfer;
+use App\Models\BankAccount;
+use App\Models\Currency;
 use App\Repositories\Contracts\AccountTransferRepositoryInterface;
 use App\Repositories\Contracts\BankAccountRepositoryInterface;
 use Exception;
@@ -24,6 +26,10 @@ class AccountTransferService
         $this->accountTransferRepository = $accountTransferRepository;
     }
 
+    public function getAll(){
+        return $this->accountTransferRepository->getAll();
+    }
+
     public function transferAmount($fromAccountId, $toAccountId, $amount, $transferDate, $note): AccountTransfer
     {
         // Ensure the transfer isn't between the same account
@@ -37,18 +43,19 @@ class AccountTransferService
             $fromAccount = $this->bankAccountRepository->lockForUpdate($fromAccountId);
             $toAccount = $this->bankAccountRepository->lockForUpdate($toAccountId);
 
+
             // Validate sufficient balance
             if ($fromAccount->balance < $amount) {
-                throw new ValidationException('Insufficient balance in the from account.');
+                throw new Exception('Insufficient balance in the from account.');
             }
+
 
             $usdAmount = $this->convertToUsdAmount($fromAccount->currency_id, $amount);
 
             // Update balances
             $this->updateBalances($fromAccount, $toAccount, $amount, $usdAmount);
-
             // Create a transfer record
-            $transfer = $this->createTransferRecord($fromAccountId, $toAccountId, $amount, $usdAmount, $transferDate, $note);
+            $transfer = $this->createTransferRecord($fromAccount->id, $toAccount->id, $amount, $usdAmount, $transferDate, $note);
 
             DB::commit();
 
@@ -61,8 +68,19 @@ class AccountTransferService
 
     private function convertToUsdAmount($currencyId, $amount)
     {
-        // Logic to convert amount to USD (could be a service or helper function)
-        return $amount; // Placeholder for conversion logic
+        $currency = Currency::find($currencyId);
+        if ($currency->is_based == 'yes')
+        {
+            return $amount;
+        } else {
+            if ($currency->exchange_rate > 0)
+            {
+                return $amount / $currency->exchange_rate;
+            } else {
+                return $amount;
+            }
+
+        }
     }
 
     private function updateBalances($fromAccount, $toAccount, $amount, $usdAmount)
@@ -78,12 +96,19 @@ class AccountTransferService
 
     private function convertToExchangeAmount($currencyId, $usdAmount)
     {
-        // Convert USD to the target currency
-        return $usdAmount; // Placeholder for conversion logic
+        $currency = Currency::find($currencyId);
+        if ($currency->is_based == 'yes')
+        {
+            return $usdAmount;
+        } else {
+            return $usdAmount * $currency->exchange_rate;
+        }
     }
 
     private function createTransferRecord($fromAccountId, $toAccountId, $amount, $usdAmount, $transferDate, $note)
     {
+        $toAccount = BankAccount::find($toAccountId);
+
         $transfer = new AccountTransfer();
         $transfer->user_id = auth()->user()->id;
         $transfer->from_account_id = $fromAccountId;

@@ -11,7 +11,7 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TransitionController;
+use App\Http\Controllers\AccountTransferController;
 
 // Redirect default route ("/") to login page
 Route::get('/', function () {
@@ -54,8 +54,9 @@ Route::middleware(['auth'])->group(function () {
 
     });
 
-    Route::group(['prefix' => 'transition'], function () {
-        Route::get('balance-transfer', [TransitionController::class, 'balanceTransfer'])->name('transition.balanceTransfer');
+    Route::group(['prefix' => 'transfer'], function () {
+        Route::get('balance', [AccountTransferController::class, 'balanceTransfer'])->name('transfer.balance');
+        Route::post('store-balance-transfer', [AccountTransferController::class, 'storeBalanceTransfer'])->name('transfer.storeBalanceTransfer');
 
     });
 

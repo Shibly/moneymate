@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -41,4 +42,31 @@ class AccountTransfer extends Model
 {
     /** @use HasFactory<\Database\Factories\AccountTransferFactory> */
     use HasFactory;
+
+    protected $primaryKey = 'id';
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function toAccount(): BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class, 'to_account_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function fromAccount(): BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class, 'from_account_id', 'id');
+    }
+
 }
