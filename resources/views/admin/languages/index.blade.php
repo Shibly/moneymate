@@ -12,22 +12,12 @@
                     <div class="btn-list">
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#modal-report">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 class="icon icon-tabler icons-tabler-outline icon-tabler-language">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <path d="M4 5h7"/>
-                                <path d="M9 3v2c0 4.418 -2.239 8 -5 8"/>
-                                <path d="M5 9c0 2.144 2.952 3.908 6.7 4"/>
-                                <path d="M12 20l4 -9l4 9"/>
-                                <path d="M19.1 18h-6.2"/>
-                            </svg>
+                            <x-tabler-language/>
                             Add New Language
                         </a>
                     </div>
                     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">Add New Language</h5>
@@ -57,17 +47,7 @@
                                             Cancel
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-language">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path d="M4 5h7"/>
-                                                <path d="M9 3v2c0 4.418 -2.239 8 -5 8"/>
-                                                <path d="M5 9c0 2.144 2.952 3.908 6.7 4"/>
-                                                <path d="M12 20l4 -9l4 9"/>
-                                                <path d="M19.1 18h-6.2"/>
-                                            </svg>
+                                            <x-tabler-language/>
                                             Add New Language
                                         </button>
                                     </div>
@@ -90,10 +70,10 @@
                                          stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
                                         <path d="M12 9v4"></path>
                                         <path
-                                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+                                                d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this bank ?</h3>
+                                    <h3>Are you sure to delete this language ?</h3>
                                     <div class="text-secondary"> This action can not be undone.
                                     </div>
                                 </div>
@@ -136,7 +116,8 @@
                                         <div class="d-flex justify-content-center">
                                             <a class="btn btn-primary me-2"
                                                href="{{ route('translations.edit', $language->code) }}">
-                                                @svg('fas-language') Edit
+                                                <x-tabler-edit/>
+                                                Edit
                                             </a>
 
                                             @if($language->id != 1)
@@ -144,7 +125,10 @@
                                                       method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                    <button class="btn btn-danger" type="submit">
+                                                        <x-tabler-trash/>
+                                                        Delete
+                                                    </button>
                                                 </form>
                                             @endif
                                         </div>

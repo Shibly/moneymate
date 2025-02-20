@@ -12,16 +12,7 @@
                     <div class="btn-list">
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#add-new-income">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 class="icon icon-tabler icons-tabler-outline icon-tabler-octagon-plus">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <path
-                                    d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0z"/>
-                                <path d="M9 12h6"/>
-                                <path d="M12 9v6"/>
-                            </svg>
+                            <x-tabler-octagon-plus/>
                             Add New
                         </a>
                     </div>
@@ -122,18 +113,7 @@
                                             Cancel
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24"
-                                                 fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round"
-                                                 stroke-linejoin="round"
-                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-octagon-plus">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path
-                                                    d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0z"/>
-                                                <path d="M9 12h6"/>
-                                                <path d="M12 9v6"/>
-                                            </svg>
+                                            <x-tabler-octagon-plus/>
                                             Add New Income
                                         </button>
                                     </div>
@@ -238,56 +218,21 @@
                                     <td class="text-center">{{ $income->description }}</td>
                                     <td class="text-center">
                                         @if($income->attachment)
-                                            <a href="{{ route('download.attachment', ['filename' => $income->attachment]) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                     stroke-width="2"
-                                                     stroke-linecap="round" stroke-linejoin="round"
-                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-download">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/>
-                                                    <path d="M7 11l5 5l5 -5"/>
-                                                    <path d="M12 4l0 12"/>
-                                                </svg>
-                                                Download Attachment
-                                            </a>
+                                            <x-tabler-download/>
                                         @else
                                             No Attachment
                                         @endif
                                     </td>
-
-
                                     <td class="text-center">{{$income->income_date}}</td>
                                     <td class="text-center">
                                         <button class="btn btn-info edit-btn" data-id="{{ $income->id }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"/>
-                                                <path
-                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/>
-                                                <path d="M16 5l3 3"/>
-                                            </svg>
+                                            <x-tabler-edit/>
                                             Edit
                                         </button>
                                         <button class="btn btn-danger delete-btn" data-id="{{ $income->id }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path d="M4 7l16 0"/>
-                                                <path d="M10 11l0 6"/>
-                                                <path d="M14 11l0 6"/>
-                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
-                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
-                                            </svg>
+                                            <x-tabler-trash/>
                                             Delete
                                         </button>
-                                    </td>
-
                                     </td>
                                 </tr>
                             @endforeach

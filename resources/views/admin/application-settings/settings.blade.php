@@ -76,8 +76,9 @@
 
                                 <div class="card-footer bg-transparent mt-auto">
                                     <div class="btn-list justify-content-end">
-                                        <button type="submit" value="Save Settings" class="btn btn-primary">Save
-                                            Settings
+                                        <button type="submit" value="Save Settings" class="btn btn-primary">
+                                            <x-tabler-adjustments-check/>
+                                            Save Settings
                                         </button>
                                     </div>
                                 </div>
