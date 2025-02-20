@@ -7,7 +7,6 @@ use App\Models\AccountTransfer;
 use App\Services\AccountTransferService;
 use App\Services\BankAccountService;
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 class AccountTransferController extends Controller
@@ -33,7 +32,7 @@ class AccountTransferController extends Controller
         $data['activeMenu'] = 'balance-transfer';
         $data['bankAccounts'] = $this->bankAccountService->getByUserId(auth()->user()->id);
         $data['accountTransfers'] = $this->accountTransferService->getAll();
-        return view('admin.transition.balance-transfer', $data);
+        return view('admin.transfer.balance-transfer', $data);
     }
 
 
@@ -46,26 +45,19 @@ class AccountTransferController extends Controller
     }
 
 
-    /**
-     * @param StoreAccountTransferRequest $request
-     * @return JsonResponse
-     */
-    public function storeBalanceTransfer(StoreAccountTransferRequest $request): JsonResponse
+    public function storeBalanceTransfer(StoreAccountTransferRequest $request)
     {
         $validatedData = $request->validated();
         try {
-            $transfer = $this->accountTransferService->transferAmount(
+            $this->accountTransferService->transferAmount(
                 $validatedData['from_account_id'],
                 $validatedData['to_account_id'],
                 $validatedData['amount'],
                 $validatedData['transfer_date'],
                 $validatedData['note'] ?? null
             );
-
-            return response()->json([
-                'message' => 'Amount transferred successfully.',
-                'data' => $transfer,
-            ]);
+            notyf()->success('Balance transferred successfully!');
+            return redirect()->route('transfer.balance');
         } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
@@ -83,11 +75,4 @@ class AccountTransferController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AccountTransfer $accountTransfer)
-    {
-        //
-    }
 }
