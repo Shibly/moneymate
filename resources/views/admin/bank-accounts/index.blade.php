@@ -287,6 +287,7 @@
 
 @section('js')
     <script>
+        "use strict";
         $(document).ready(function () {
 
 

@@ -302,7 +302,7 @@
 
 @section('js')
     <script>
-
+        "use strict";
         let deleteIncomeId;
 
 

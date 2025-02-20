@@ -210,6 +210,7 @@
 
 @section('js')
     <script>
+        "use strict";
         $(document).ready(function () {
 
             $('#add-category-form').submit(function (e) {

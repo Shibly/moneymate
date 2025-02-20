@@ -224,6 +224,7 @@
 @section('js')
 
     <script>
+        "use strict";
         $(document).ready(function () {
             // Handle edit button click
             $(document).on('click', '.edit-btn', function () {
