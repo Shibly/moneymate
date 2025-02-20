@@ -28,7 +28,7 @@ Route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name(
 // Protected Routes - Only Authenticated Users Can Access
 Route::middleware(['auth'])->group(function () {
 
-    
+
     Route::resource('languages', LanguageController::class);
     Route::get('language/translate/{code}', [TranslationController::class, 'edit'])->name('translations.edit');
     Route::put('language/translate/{code}', [TranslationController::class, 'update'])->name('translations.update');
