@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Moneymate - Personal finance manager</title>
+    <title>{{get_option('application_name')}}</title>
     <!-- CSS files -->
     <link href="{{asset('public/libs/select2/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/tabler.css')}}" rel="stylesheet">
@@ -21,6 +21,11 @@
     <style>
         @import url('https://rsms.me/inter/inter.css');
     </style>
+
+
+    @if(get_option('favicon'))
+        <link rel="icon" type="image/x-icon" href="{{ route('private.files', ['filename' => get_option('favicon')]) }}">
+    @endif
 </head>
 <body class=" layout-fluid">
 

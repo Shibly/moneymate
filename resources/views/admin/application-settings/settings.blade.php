@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    <!-- Page body -->
+
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
@@ -20,10 +20,17 @@
 
                         <div class="col-12 d-flex flex-column">
 
-                            <form action="{{route('settings.update')}}" method="post">
+                            <form action="{{route('settings.update')}}" method="post" enctype="multipart/form-data">
                                 <div class="card-body">
                                     @csrf
                                     <div class="row g-3">
+
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold">Application Name</label>
+                                            <input type="text" value="{{get_option('application_name')}}"
+                                                   name="application_name" class="form-control"
+                                                   placeholder="Application Name">
+                                        </div>
 
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Company Name</label>
@@ -32,29 +39,23 @@
                                                    placeholder="Company Name">
                                         </div>
 
-
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Company Phone</label>
                                             <input type="text" value="{{get_option('phone')}}" name="phone"
                                                    class="form-control" placeholder="Phone">
                                         </div>
 
-
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Website</label>
                                             <input type="text" value="{{get_option('web_site')}}" name="web_site"
-                                                   class="form-control"
-                                                   placeholder="Web Site">
+                                                   class="form-control" placeholder="Web Site">
                                         </div>
-
 
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Company Address</label>
                                             <input type="text" value="{{get_option('address')}}" name="address"
-                                                   class="form-control"
-                                                   placeholder="Address">
+                                                   class="form-control" placeholder="Address">
                                         </div>
-
 
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Registration Type</label>
@@ -64,12 +65,39 @@
                                             </select>
                                         </div>
 
-
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Number of Data per Page</label>
                                             <input value="{{get_option('num_data_per_page')}}" name="num_data_per_page"
                                                    type="number" class="form-control"
                                                    placeholder="Number of data per page">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold">Application Logo</label>
+                                            <input type="file" name="app_logo" class="form-control">
+                                            @if(get_option('app_logo'))
+                                                <div class="mt-3">
+                                                    <img
+                                                        src="{{ route('private.files', ['filename' => get_option('app_logo')]) }}"
+                                                        alt="App Logo"
+                                                        class="img-fluid border rounded shadow-sm"
+                                                        style="max-height: 100px; max-width: 100px; object-fit: contain;">
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold">Favicon</label>
+                                            <input type="file" name="favicon" class="form-control">
+                                            @if(get_option('favicon'))
+                                                <div class="mt-3">
+                                                    <img
+                                                        src="{{ route('private.files', ['filename' => get_option('favicon')]) }}"
+                                                        alt="Favicon"
+                                                        class="img-fluid border rounded shadow-sm"
+                                                        style="max-height: 64px; max-width: 64px; object-fit: contain;">
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -90,9 +118,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('js')
-
-
 @endsection
