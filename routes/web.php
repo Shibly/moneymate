@@ -15,25 +15,26 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TranslationController;
 use Illuminate\Support\Facades\Route;
 
-// Redirect default route ("/") to login page
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Authentication Routes (Public)
+
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot-password');
-// Protected Routes - Only Authenticated Users Can Access
+
 Route::middleware(['auth'])->group(function () {
 
 
     Route::resource('languages', LanguageController::class);
     Route::get('language/translate/{code}', [TranslationController::class, 'edit'])->name('translations.edit');
-//    Route::put('language/translate/{code}', [TranslationController::class, 'update'])->name('translations.update');
     Route::post('/translations/ajax-update', [TranslationController::class, 'ajaxUpdate'])
         ->name('translations.ajaxUpdate');
+
+    Route::get('languages/set-default/{code}', [LanguageController::class, 'setDefaultLanguage'])->name('language.setDefault');
 
 
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

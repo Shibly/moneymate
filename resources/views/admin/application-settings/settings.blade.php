@@ -23,7 +23,7 @@
                                     @csrf
                                     <!-- Fields Group 1 -->
                                     <div class="row g-3">
-                                        
+
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Application Name</label>
                                             <input type="text" value="{{ get_option('application_name') }}"

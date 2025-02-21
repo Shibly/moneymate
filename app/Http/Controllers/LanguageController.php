@@ -51,31 +51,6 @@ class LanguageController extends Controller
         return redirect()->route('languages.index');
     }
 
-
-    public function edit($id)
-    {
-        $language = Language::findOrFail($id);
-        return view('languages.edit', compact('language'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $language = Language::findOrFail($id);
-
-        $request->validate([
-            'name' => 'required|string',
-            'code' => 'required|string|unique:languages,code,' . $language->id,
-            'is_default' => 'required|boolean',
-            'status' => 'required|boolean',
-        ]);
-
-        $language->update($request->all());
-
-        // Handle flag upload update logic
-
-        return redirect()->route('languages.index');
-    }
-
     public function destroy($id)
     {
         $language = Language::findOrFail($id);
@@ -83,4 +58,16 @@ class LanguageController extends Controller
 
         return redirect()->route('languages.index');
     }
+
+
+    public function setDefaultLanguage($code)
+    {
+        Language::query()->update(['is_default' => '0']);
+        $language = Language::where('code', $code)->firstOrFail();
+        $language->update(['is_default' => '1']);
+        notyf()->success('Default language updated successfully.');
+        return redirect()->back();
+    }
+
+
 }

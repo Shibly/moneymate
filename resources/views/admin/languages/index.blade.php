@@ -118,10 +118,16 @@
                                     <td class="text-center">{{ $language->code }}</td>
                                     <td class="text-center">{{ $language->status ? 'Active' : 'Inactive' }}</td>
                                     <td class="text-center">
+
                                         <div class="d-flex justify-content-center">
+                                            <a href="{{route('language.setDefault',$language->code)}}"
+                                               class="btn btn-success me-2 {{ $language->is_default ? 'disabled' : '' }}">
+                                                <x-tabler-zoom-reset/>
+                                                Set Default
+                                            </a>
                                             <a class="btn btn-primary me-2"
                                                href="{{ route('translations.edit', $language->code) }}">
-                                                <x-tabler-edit/>
+                                                <x-tabler-language/>
                                                 Edit
                                             </a>
                                             @if($language->id != 1)
@@ -136,6 +142,7 @@
                                                 </form>
                                             @endif
                                         </div>
+
                                     </td>
                                 </tr>
                             @endforeach
