@@ -10,9 +10,8 @@
                 </div>
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{route('accounts.store')}}" class="btn btn-primary btn-5 d-none d-sm-inline-block"
-                           data-bs-toggle="modal"
-                           data-bs-target="#modal-report">
+                        <a href="{{ route('accounts.store') }}" class="btn btn-primary btn-5 d-none d-sm-inline-block"
+                           data-bs-toggle="modal" data-bs-target="#modal-report">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round"
@@ -57,7 +56,7 @@
                                             <label class="form-label">Select Bank</label>
                                             <select class="form-control" name="bank_name_id" required>
                                                 @foreach($banks as $bank)
-                                                    <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
+                                                    <option value="{{ $bank->id }}">{{ $bank->bank_name }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="invalid-feedback">Please select a bank.</div>
@@ -66,7 +65,7 @@
                                             <label class="form-label">Select Currency</label>
                                             <select class="form-control" name="currency_id" required>
                                                 @foreach($currencies as $currency)
-                                                    <option value="{{$currency->id}}">{{$currency->name}}</option>
+                                                    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="invalid-feedback">Please select a currency.</div>
@@ -120,7 +119,7 @@
                                             <select class="form-control" name="bank_name_id" id="edit-bank-name"
                                                     required>
                                                 @foreach($banks as $bank)
-                                                    <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
+                                                    <option value="{{ $bank->id }}">{{ $bank->bank_name }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="invalid-feedback">Please select a bank.</div>
@@ -130,7 +129,7 @@
                                             <select class="form-control" name="currency_id" id="edit-currency-id"
                                                     required>
                                                 @foreach($currencies as $currency)
-                                                    <option value="{{$currency->id}}">{{$currency->name}}</option>
+                                                    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="invalid-feedback">Please select a currency.</div>
@@ -155,7 +154,6 @@
                         </div>
                     </div>
 
-
                     <div class="modal fade modal-blur" id="modal-delete" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -164,18 +162,16 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body text-center">
-
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                          stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
                                         <path d="M12 9v4"></path>
                                         <path
-                                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+                                                d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this account ?</h3>
-                                    <div class="text-secondary"> This action can not be undone.
-                                    </div>
+                                    <h3>Are you sure to delete this account?</h3>
+                                    <div class="text-secondary">This action cannot be undone.</div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
@@ -191,9 +187,15 @@
             </div>
         </div>
     </div>
-    <!-- Page body -->
+    <!-- Page body for the table -->
     <div class="page-body">
         <div class="container-xl">
+            <!-- Tip Message -->
+            <div class="alert alert-info">
+                <span class="badge bg-blue-lt">Tip:</span>
+                Before creating a bank account, please ensure your bank details are already set up.
+                <a href="{{route('banks.index')}}" class="alert-link">Click here to add banks</a>.
+            </div>
             <div class="card">
                 <div class="card-body p-0">
                     <div id="table-default" class="table-responsive">
@@ -209,8 +211,7 @@
                             </thead>
                             <tbody class="table-tbody">
                             @foreach($bankAccounts as $account)
-
-                                <tr id="row-{{$account->id}}">
+                                <tr id="row-{{ $account->id }}">
                                     <td class="text-center">{{ $account->account_name }}</td>
                                     <td class="text-center">{{ $account->bank->bank_name }}</td>
                                     <td class="text-center">{{ $account->account_number }}</td>
@@ -226,14 +227,11 @@
                                             Delete
                                         </button>
                                     </td>
-
-                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -244,7 +242,6 @@
     <script>
         "use strict";
         $(document).ready(function () {
-
 
             $('#add-bank-account-form').submit(function (e) {
                 e.preventDefault();
@@ -271,27 +268,20 @@
                 });
             });
 
-
             $(document).on('click', '.edit-account-btn', function () {
                 const accountId = $(this).data('account-id');
 
                 $.ajax({
-                    url: `/accounts/edit/${accountId}`, // Correct route to fetch account details
+                    url: `/accounts/edit/${accountId}`,
                     type: 'GET',
                     success: function (response) {
-                        // Check if the response contains the account data
                         if (response.data) {
-                            // Populate form fields with the account details
                             $('#edit-account-name').val(response.data.account_name);
                             $('#edit-account-number').val(response.data.account_number);
                             $('#edit-bank-name').val(response.data.bank_name_id);
                             $('#edit-currency-id').val(response.data.currency_id);
                             $('#edit-balance').val(response.data.balance);
-
-                            // Update the form action URL to include the account ID for update
                             $('#edit-bank-account-form').attr('action', `/accounts/update/${accountId}`);
-
-                            // Open the modal for editing
                             $('#modal-edit-account').modal('show');
                         } else {
                             alert("Error fetching account details.");
@@ -303,7 +293,6 @@
                     }
                 });
             });
-
 
             $('#edit-bank-account-form').submit(function (e) {
                 e.preventDefault();
@@ -321,7 +310,6 @@
                         let errors = xhr.responseJSON.errors;
                         form.find('.invalid-feedback').hide();
 
-                        // Display errors if there are any
                         if (errors.account_name) {
                             $('input[name="account_name"]').next('.invalid-feedback').text(errors.account_name[0]).show();
                         }
@@ -342,25 +330,19 @@
                 });
             });
 
-
             let deleteAccountId;
-
-
             $(document).on('click', '.delete-btn', function () {
                 deleteAccountId = $(this).data('id');
                 $('#modal-delete').modal('show');
             });
 
-
             $('#confirm-delete').on('click', function () {
                 $.ajax({
-                    url: "{{ url('accounts/destroy') }}/" + deleteAccountId, // Laravel route
+                    url: "{{ url('accounts/destroy') }}/" + deleteAccountId,
                     type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}" // Send CSRF token for security
-                    },
+                    data: {_token: "{{ csrf_token() }}"},
                     success: function (response) {
-                        $('#modal-delete').modal('hide'); // Hide modal
+                        $('#modal-delete').modal('hide');
                         $('#row-' + deleteAccountId).remove();
                     },
                     error: function (xhr) {
@@ -370,8 +352,5 @@
             });
 
         });
-
-
     </script>
-
 @endsection
