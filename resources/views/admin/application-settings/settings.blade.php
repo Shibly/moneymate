@@ -23,7 +23,7 @@
                                     @csrf
                                     <!-- Fields Group 1 -->
                                     <div class="row g-3">
-                                        <!-- Row 1: Application Name & Company Name -->
+                                        
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Application Name</label>
                                             <input type="text" value="{{ get_option('application_name') }}"
@@ -50,7 +50,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- Row 2: Company Phone & Website -->
+
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">Company Phone</label>
                                             <input type="text" value="{{ get_option('phone') }}" name="phone"
@@ -75,9 +75,9 @@
                                             </div>
                                         </div>
 
-                                        <!-- Row 3: Company Address & Registration Type -->
+
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Company Address</label>
+                                            <label class="form-label fw-bold">Address</label>
                                             <input type="text" value="{{ get_option('address') }}" name="address"
                                                    class="form-control" placeholder="Address">
                                             <div class="mt-1">
@@ -89,27 +89,6 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Registration Type</label>
-                                            <select name="registration_type" class="form-select">
-                                                <option value="free"
-                                                        @if(get_option('registration_type') == 'free') selected @endif>
-                                                    Free
-                                                </option>
-                                                <option value="monthly_subscription"
-                                                        @if(get_option('registration_type') == 'monthly_subscription') selected @endif>
-                                                    Monthly Subscription
-                                                </option>
-                                            </select>
-                                            <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
-                                                <small class="text-muted">
-                                                    Choose a plan that suits your business model.
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 4: Number of Data per Page (full width) -->
-                                        <div class="col-md-12">
                                             <label class="form-label fw-bold">Number of Data per Page</label>
                                             <input value="{{ get_option('num_data_per_page') }}"
                                                    name="num_data_per_page"
@@ -124,7 +103,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Fields Group 2: Image Uploads -->
+
                                     <div class="row g-3 mt-3">
                                         <!-- Application Logo -->
                                         <div class="col-md-6">
