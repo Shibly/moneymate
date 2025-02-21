@@ -165,7 +165,6 @@
                             </thead>
                             <tbody class="table-tbody">
                             @foreach($currencies as $currency)
-
                                 <tr id="row-{{$currency->id}}">
                                     <td class="text-center">{{ $currency->name }}</td>
                                     <td class="text-center">{{ $currency->exchange_rate }}</td>
@@ -175,15 +174,16 @@
                                             <x-tabler-edit/>
                                             Edit
                                         </button>
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $currency->id }}">
-                                            <x-tabler-trash/>
-                                            Delete
-                                        </button>
-                                    </td>
-
+                                        @if($currency->id != 3)
+                                            <button class="btn btn-danger delete-btn" data-id="{{ $currency->id }}">
+                                                <x-tabler-trash/>
+                                                Delete
+                                            </button>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
+
                             </tbody>
                         </table>
                     </div>

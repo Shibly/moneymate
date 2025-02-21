@@ -16,6 +16,7 @@
                             Add New
                         </a>
                     </div>
+                    <!-- Add New Category Modal -->
                     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
@@ -24,8 +25,6 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
-
-
                                 <form id="add-category-form" action="{{ route('categories.store') }}" method="POST">
                                     @csrf
                                     <div class="modal-body">
@@ -33,9 +32,7 @@
                                             <label class="form-label">Category Name</label>
                                             <input type="text" class="form-control" name="name"
                                                    placeholder="Category Name" required>
-                                            <!-- Error message will be dynamically injected here -->
                                         </div>
-
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
@@ -44,14 +41,12 @@
                                                         <option value="income" selected>Income</option>
                                                         <option value="expense">Expense</option>
                                                     </select>
-                                                    <!-- Error message will be dynamically injected here -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-link link-secondary"
+                                        <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">
                                             Cancel
                                         </button>
@@ -61,10 +56,10 @@
                                         </button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
+                    <!-- Edit Category Modal -->
                     <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
@@ -98,8 +93,7 @@
                             </div>
                         </div>
                     </div>
-
-
+                    <!-- Delete Confirmation Modal -->
                     <div class="modal fade modal-blur" id="modal-delete" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -108,7 +102,6 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body text-center">
-
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                          stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
@@ -117,9 +110,8 @@
                                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this category ?</h3>
-                                    <div class="text-secondary"> This action can not be undone.
-                                    </div>
+                                    <h3>Are you sure to delete this category?</h3>
+                                    <div class="text-secondary">This action cannot be undone.</div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
@@ -130,16 +122,23 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <!-- Page body -->
+
+    <!-- Categories Table -->
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body">
+                    <!-- Professional Tip Message -->
+                    <div class="alert alert-info">
+                        <span class="badge bg-blue-lt">Tip:</span>
+                        Categories can be classified as either <strong>Income</strong> or <strong>Expense</strong>. When
+                        recording your income or expense transactions,
+                        you can select the appropriate category to ensure accurate financial reporting and analysis.
+                    </div>
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -151,7 +150,6 @@
                             </thead>
                             <tbody class="table-tbody">
                             @foreach($categories as $category)
-
                                 <tr id="row-{{$category->id}}">
                                     <td class="text-center">{{ $category->name }}</td>
                                     <td class="text-center">{{ $category->type }}</td>
@@ -164,8 +162,6 @@
                                             <x-tabler-trash/>
                                             Delete
                                         </button>
-                                    </td>
-
                                     </td>
                                 </tr>
                             @endforeach
@@ -185,49 +181,37 @@
 
             $('#add-category-form').submit(function (e) {
                 e.preventDefault();
-
                 $.ajax({
                     url: "{{ route('categories.store') }}",
                     type: "POST",
                     data: $(this).serialize(),
                     success: function (response) {
-
                         location.reload();
                     },
                     error: function (xhr) {
                         $('.invalid-feedback').remove();
                         $('.alert.alert-danger').remove();
-
                         let errors = xhr.responseJSON.errors;
-
                         if (errors.name) {
                             $('input[name="name"]').after('<div class="alert alert-danger d-block mt-2">' + errors.name[0] + '</div>');
                         }
-
                         if (errors.type) {
                             $('select[name="type"]').after('<div class="alert alert-danger d-block mt-2">' + errors.type[0] + '</div>');
                         }
-
-
                         console.log("Error adding category:", xhr);
                     }
                 });
             });
 
-
             $(document).on('click', '.edit-btn', function () {
-                let categoryId = $(this).data('id'); // Get category ID from button
-
+                let categoryId = $(this).data('id');
                 $.ajax({
-                    url: "{{ url('categories/edit') }}/" + categoryId, // Corrected route URL
+                    url: "{{ url('categories/edit') }}/" + categoryId,
                     type: "GET",
                     success: function (data) {
-                        // Populate modal fields with received data
                         $('#edit-category-id').val(data.id);
                         $('#edit-category-name').val(data.name);
                         $('#edit-category-type').val(data.type);
-
-
                         $('#modal-edit').modal('show');
                     },
                     error: function (xhr) {
@@ -236,13 +220,10 @@
                 });
             });
 
-
             $('#edit-category-form').submit(function (e) {
                 e.preventDefault();
-
                 let categoryId = $('#edit-category-id').val();
                 $('.invalid-feedback').remove();
-
                 $.ajax({
                     url: "{{ url('categories/update') }}/" + categoryId,
                     type: "POST",
@@ -252,56 +233,46 @@
                     },
                     error: function (xhr) {
                         let errors = xhr.responseJSON.errors;
-
-                        // Handle validation errors
                         if (errors.name) {
                             $('input[name="name"]').after('<div class="alert alert-danger invalid-feedback d-block mt-2">' + errors.name[0] + '</div>');
                         }
-
                         if (errors.type) {
                             $('select[name="type"]').after('<div class="alert alert-danger invalid-feedback d-block mt-2">' + errors.type[0] + '</div>');
                         }
-
                         console.log("Error updating category:", xhr);
                     }
                 });
             });
 
-
-        });
-
-        let deleteCategoryId;
-
-
-        $(document).on('click', '.delete-btn', function () {
-            deleteCategoryId = $(this).data('id');
-            $('#modal-delete').modal('show');
-        });
-
-
-        $('#confirm-delete').click(function () {
-            $.ajax({
-                url: "{{ url('categories/destroy') }}/" + deleteCategoryId,
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function (response) {
-                    $('#modal-delete').modal('hide');
-                    $('#row-' + deleteCategoryId).remove();
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Category has been deleted",
-                        icon: "success",
-                        confirmButtonText: "OK"
-                    });
-                },
-                error: function (xhr) {
-                    console.log("Error deleting category:", xhr);
-                }
+            let deleteCategoryId;
+            $(document).on('click', '.delete-btn', function () {
+                deleteCategoryId = $(this).data('id');
+                $('#modal-delete').modal('show');
             });
+
+            $('#confirm-delete').click(function () {
+                $.ajax({
+                    url: "{{ url('categories/destroy') }}/" + deleteCategoryId,
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        $('#modal-delete').modal('hide');
+                        $('#row-' + deleteCategoryId).remove();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Category has been deleted",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        });
+                    },
+                    error: function (xhr) {
+                        console.log("Error deleting category:", xhr);
+                    }
+                });
+            });
+
         });
-
     </script>
-
 @endsection

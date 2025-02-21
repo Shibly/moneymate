@@ -20,6 +20,44 @@ class TranslationController extends Controller
         return view('translations.create', compact('languages'));
     }
 
+
+    public function ajaxUpdate(Request $request)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'code' => 'required|string',
+            'key' => 'required|string',
+            'value' => 'required|string'
+        ]);
+
+        $code = $request->input('code');
+        $key = $request->input('key');
+        $value = $request->input('value');
+
+        // Find an existing translation by code and key
+        $translation = Translation::where('code', $code)
+            ->where('key', $key)
+            ->first();
+
+        // If not found, create a new one
+        if (!$translation) {
+            $translation = new Translation();
+            $translation->code = $code;
+            $translation->key = $key;
+        }
+
+        // Update or set the value
+        $translation->value = $value;
+        $translation->save();
+
+        // Return a JSON response
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Translation saved successfully.'
+        ]);
+    }
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -35,46 +73,24 @@ class TranslationController extends Controller
 
     public function edit($code)
     {
+        $activeMenu = 'edit-translation';
         $languages = Language::all();
         $translations = Translation::where('code', $code)->get();
-        if ($translations->isEmpty()) {
-            $keys = Translation::select('key')->distinct()->get();
-            foreach ($keys as $key) {
-                $translations[] = (object)[
-                    'id' => 'placeholder_' . $key->key,
-                    'key' => $key->key,
+        $allKeys = Translation::select('key')->distinct()->pluck('key')->toArray();
+        $existingTranslations = $translations->keyBy('key');
+        foreach ($allKeys as $key) {
+            if (!$existingTranslations->has($key)) {
+                $translations->push((object)[
+                    'key' => $key,
                     'value' => '',
                     'code' => $code,
-                ];
+                ]);
             }
         }
-
-        return view('admin.translations.edit', compact('translations', 'languages', 'code'));
+        $translations = $translations->sortBy('key');
+        return view('admin.translations.edit', compact('translations', 'languages', 'code', 'activeMenu'));
     }
 
 
-    public function update(Request $request, $code)
-    {
-        $translations = Translation::where('code', $code)->get();
-
-        // Loop through each translation and update it
-        foreach ($translations as $translation) {
-            $key = $translation->key;
-            $value = $request->input($key); // Get the value from the form
-
-            // Update the translation value
-            $translation->update(['value' => $value]);
-        }
-
-        return redirect()->route('translations.index');
-    }
-
-    public function destroy($id)
-    {
-        $translation = Translation::findOrFail($id);
-        $translation->delete();
-
-        return redirect()->route('translations.index');
-    }
 }
 

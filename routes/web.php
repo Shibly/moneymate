@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountTransferController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BankAccountController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TranslationController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountTransferController;
 
 // Redirect default route ("/") to login page
 Route::get('/', function () {
@@ -31,8 +31,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('languages', LanguageController::class);
     Route::get('language/translate/{code}', [TranslationController::class, 'edit'])->name('translations.edit');
-    Route::put('language/translate/{code}', [TranslationController::class, 'update'])->name('translations.update');
-
+//    Route::put('language/translate/{code}', [TranslationController::class, 'update'])->name('translations.update');
+    Route::post('/translations/ajax-update', [TranslationController::class, 'ajaxUpdate'])
+        ->name('translations.ajaxUpdate');
 
 
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

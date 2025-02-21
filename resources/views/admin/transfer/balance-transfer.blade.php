@@ -17,7 +17,6 @@
                             Make a Transfer
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -46,10 +45,14 @@
                                     $to_account_currency = $accountTransfer->toAccount && $accountTransfer->toAccount->currency ? $accountTransfer->toAccount->currency->name : '';
                                 @endphp
                                 <tr>
-                                    <td class="text-center">{{$accountTransfer->fromAccount ? $accountTransfer->fromAccount->account_number : '' }}
-                                        - {{ $accountTransfer->fromAccount && $accountTransfer->fromAccount->bank ? $accountTransfer->fromAccount->bank->bank_name : ''}}</td>
-                                    <td class="text-center">{{$accountTransfer->toAccount ? $accountTransfer->toAccount->account_number : '' }}
-                                        - {{ $accountTransfer->toAccount && $accountTransfer->toAccount->bank ? $accountTransfer->toAccount->bank->bank_name : ''}}</td>
+                                    <td class="text-center">
+                                        {{$accountTransfer->fromAccount ? $accountTransfer->fromAccount->account_number : '' }}
+                                        - {{ $accountTransfer->fromAccount && $accountTransfer->fromAccount->bank ? $accountTransfer->fromAccount->bank->bank_name : ''}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{$accountTransfer->toAccount ? $accountTransfer->toAccount->account_number : '' }}
+                                        - {{ $accountTransfer->toAccount && $accountTransfer->toAccount->bank ? $accountTransfer->toAccount->bank->bank_name : ''}}
+                                    </td>
                                     <td class="text-center">{{$from_account_currency}} {{$accountTransfer->amount}}</td>
                                     <td class="text-center">{{$to_account_currency}} {{$accountTransfer->exchange_amount}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($accountTransfer->transfer_date)->format('d/m/Y')}}</td>
@@ -64,6 +67,7 @@
         </div>
     </div>
 
+    <!-- Balance Transfer Modal -->
     <div class="modal modal-blur fade" id="balanceTransferModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -73,9 +77,17 @@
                             aria-label="Close"></button>
                 </div>
 
-                <form action="{{route('transfer.storeBalanceTransfer')}}" method="POST" id="balanceTransfer">
+                <form action="{{ route('transfer.storeBalanceTransfer') }}" method="POST" id="balanceTransfer">
                     @csrf
                     <div class="modal-body">
+                        <!-- Professional Tip Message -->
+                        <div class="alert alert-info mb-3">
+                            <span class="badge bg-blue-lt">Tip:</span>
+                            You can transfer funds from your source account to your destination account. If the accounts
+                            use different currencies, the system will automatically convert the transferred amount into
+                            the destination account’s currency.
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label">From Account: <span class="text-danger">*</span></label>
                             <select name="from_account_id" class="form-control">
@@ -87,9 +99,8 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <span class="text-danger from_account_id"></span>
+                            <div class="text-danger mt-2 from_account_id"></div>
                         </div>
-
 
                         <div class="mb-3">
                             <label class="form-label">To Account: <span class="text-danger">*</span></label>
@@ -102,34 +113,31 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <span class="text-danger to_account_id"></span>
+                            <div class="text-danger pt-2 to_account_id"></div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Amount: <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" name="amount"
                                    placeholder="Amount">
-                            <span class="text-danger amount"></span>
+                            <div class="text-danger pt-2 amount"></div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Transfer Date: <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" name="transfer_date"
                                    placeholder="Transfer Date">
-                            <span class="text-danger transfer_date"></span>
+                            <div class="text-danger pt-2 transfer_date"></div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Note:</label>
                             <input type="text" class="form-control" name="note"
                                    placeholder="Note">
-                            <span class="text-danger note"></span>
+                            <div class="text-danger pt-2 note"></div>
                         </div>
 
-                        <div class="logical-error d-none  alert alert-danger">
-
-                        </div>
-
+                        <div class="logical-error d-none alert alert-danger"></div>
                     </div>
 
                     <div class="modal-footer">
@@ -166,8 +174,7 @@
                     type: "POST",
                     data: form.serialize(),
                     success: function (response) {
-                        //console.log(response);
-                        location.reload(); // Reload the page if the bank is successfully added
+                        location.reload();
                     },
                     error: function (xhr) {
                         if (xhr.status === 422) {
@@ -175,21 +182,15 @@
                             $.each(err_response.errors, function (key, value) {
                                 $("#balanceTransferModal ." + key).text(value);
                             });
-
                         } else if (xhr.status === 400) {
                             var err_response = JSON.parse(xhr.responseText);
                             $("#balanceTransferModal .logical-error").removeClass('d-none').show().text(err_response.message);
                         } else {
                             alert("Something went wrong. Please try again.");
                         }
-
-
                     }
                 });
             });
         });
-
-
     </script>
-
 @endsection
