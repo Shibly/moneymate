@@ -177,7 +177,6 @@
     <!-- Page body for the table -->
     <div class="page-body">
         <div class="container-xl">
-            <!-- Tip Message -->
             <div class="alert alert-info">
                 <span class="badge bg-blue-lt">Tip:</span>
                 Before creating a bank account, please ensure your bank details are already set up.

@@ -127,12 +127,12 @@
         </div>
     </div>
 
-    <!-- Categories Table -->
+
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
                 <div class="card-body">
-                    <!-- Professional Tip Message -->
+
                     <div class="alert alert-info">
                         <span class="badge bg-blue-lt">Tip:</span>
                         Categories can be classified as either <strong>Income</strong> or <strong>Expense</strong>. When

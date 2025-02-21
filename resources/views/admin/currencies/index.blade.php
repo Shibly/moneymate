@@ -151,6 +151,11 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
+            <div class="alert alert-info">
+                <span class="badge bg-blue-lt">Tip:</span>
+                Please note that USD serves as the base currency. You may add additional currencies as
+                needed, but ensure that you provide the exchange rate relative to USD.
+            </div>
             <div class="card">
                 <div class="card-body p-0">
                     <div id="table-default" class="table-responsive">
