@@ -50,7 +50,7 @@
                         <a href="javascript:void(0);" class="btn btn-primary btn-5 d-none d-sm-inline-block"
                            data-bs-toggle="modal"
                            data-bs-target="#debtRepayModal">
-                             Repay
+                            <x-tabler-minus/>  Repay
                         </a>
                     </div>
 
