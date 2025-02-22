@@ -13,6 +13,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TranslationController;
+use App\Http\Controllers\DebtController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -68,6 +69,15 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store-balance-transfer', [AccountTransferController::class, 'storeBalanceTransfer'])->name('transfer.storeBalanceTransfer');
 
     });
+
+    Route::group(['prefix' => 'debts'], function () {
+        Route::get('/', [DebtController::class, 'index'])->name('debts');
+        Route::post('store', [DebtController::class, 'store'])->name('debts.store');
+        Route::get('show/{id}', [DebtController::class, 'show'])->name('debts.show');
+        Route::post('store-debt-collection/{debt_id}', [DebtController::class, 'storeDebtCollection'])->name('debts.storeDebtCollection');
+        Route::post('destroy/{id}', [DebtController::class, 'destroy']);
+    });
+
 
 
     Route::group(['prefix' => 'banks'], function () {

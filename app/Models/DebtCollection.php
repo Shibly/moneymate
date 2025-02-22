@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $amount
@@ -37,4 +38,23 @@ class DebtCollection extends Model
 {
     /** @use HasFactory<\Database\Factories\DebtCollectionFactory> */
     use HasFactory;
+
+    protected $table = 'debt_collections';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class, 'account_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id', 'id');
+    }
+
 }

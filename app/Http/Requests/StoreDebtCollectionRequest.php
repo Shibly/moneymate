@@ -11,7 +11,7 @@ class StoreDebtCollectionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreDebtCollectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'amount' => 'required|numeric',
+            'account_id' => 'required|exists:bank_accounts,id',
+            'currency_id' => 'required',
+            'date' => 'required|date'
         ];
     }
+
+
 }

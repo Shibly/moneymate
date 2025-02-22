@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>{{get_option('application_name')}}</title>
+    <title>{{get_option('application_name')}} @if(isset($title)) :: {{$title}} @endif </title>
     <!-- CSS files -->
     <link href="{{asset('public/libs/select2/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/tabler.css')}}" rel="stylesheet">

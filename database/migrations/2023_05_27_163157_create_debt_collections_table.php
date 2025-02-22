@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->decimal('amount', 10, 2);
             $table->decimal('exchange_amount', 10, 2)->default(0.00);
+            $table->decimal('usd_amount', 10, 2)->default(0.00);
             $table->date('date')->nullable();
             $table->foreignId('debt_id')->constrained('debts')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('currency_id')->nullable();

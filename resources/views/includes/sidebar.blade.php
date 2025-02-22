@@ -94,8 +94,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item @if($activeMenu == 'debts-loans') active-state @endif">
-                    <a class="nav-link" href="{{route('currencies.index')}}">
+                <li class="nav-item @if($activeMenu == 'debt-loan') active-state @endif">
+                    <a class="nav-link" href="{{route('debts')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
                     <x-tabler-loader-3/>
                 </span>

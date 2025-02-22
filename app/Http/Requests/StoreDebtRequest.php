@@ -11,7 +11,7 @@ class StoreDebtRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class StoreDebtRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'amount' => 'required|numeric',
+            'account_id' => 'required|exists:bank_accounts,id',
+            'currency_id' => 'required',
+            'type' => 'required|in:lend,repayment,borrow,debt-collection',
+            'person' => 'required|string',
+            'date' => 'required|date',
+            'note' => 'nullable|string',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'account_id.required' => 'Please select a bank account',
+            'currency_id.required' => 'Please select currency'
         ];
     }
 }
