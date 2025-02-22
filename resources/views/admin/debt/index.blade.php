@@ -5,7 +5,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                       {{$title}}
+                        {{$title}}
                     </h2>
                 </div>
                 <div class="col-auto ms-auto d-print-none">
@@ -13,7 +13,8 @@
                         <a href="javascript:void(0);" class="btn btn-primary btn-5 d-none d-sm-inline-block"
                            data-bs-toggle="modal"
                            data-bs-target="#addDebtModal">
-                            <x-tabler-plus/>  Add Debt
+                            <x-tabler-plus/>
+                            Add Lend/Borrow
                         </a>
                     </div>
                 </div>
@@ -23,6 +24,13 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
+            <div class="alert alert-info">
+                <span class="badge bg-blue-lt">Tip:</span>
+                From here you can track the money you've <strong>lent</strong> to others or
+                <strong>borrowed</strong> from them. Both lending and
+                borrowing transactions are directly associated with the bank account you select when creating a
+                record.
+            </div>
             <div class="card">
                 <div class="card-body p-0">
                     <div id="table-default" class="table-responsive">
@@ -77,7 +85,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Debt</h5>
+                    <h5 class="modal-title">Add Lend/Borrow</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
@@ -266,7 +274,6 @@
             });
 
         });
-
 
 
     </script>

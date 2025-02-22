@@ -100,7 +100,7 @@
                     <x-tabler-loader-3/>
                 </span>
                         <span class="nav-link-title">
-					Debts/Loans
+					Lend/Borrow
 				</span>
                     </a>
                 </li>

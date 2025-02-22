@@ -10,8 +10,8 @@ use App\Models\Debt;
 use App\Services\BankAccountService;
 use App\Services\CurrencyService;
 use App\Services\DebtLoanService;
-use Illuminate\View\View;
 use Exception;
+use Illuminate\View\View;
 
 class DebtController extends Controller
 {
@@ -21,7 +21,7 @@ class DebtController extends Controller
 
     private CurrencyService $currencyService;
 
-    public function __construct(DebtLoanService $debtLoanService, BankAccountService $bankAccountService, CurrencyService  $currencyService)
+    public function __construct(DebtLoanService $debtLoanService, BankAccountService $bankAccountService, CurrencyService $currencyService)
     {
         $this->debtLoanService = $debtLoanService;
         $this->bankAccountService = $bankAccountService;
@@ -34,7 +34,7 @@ class DebtController extends Controller
      */
     public function index(): View
     {
-        $data['title'] = 'Debts/Loans';
+        $data['title'] = 'Lend/Borrow';
         $data['activeMenu'] = 'debt-loan';
         $data['debts'] = $this->debtLoanService->getAll();
         $data['currencies'] = $this->currencyService->getAll();
@@ -57,7 +57,7 @@ class DebtController extends Controller
     {
         $data = $request->validated();
         try {
-           $this->debtLoanService->store($data);
+            $this->debtLoanService->store($data);
         } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
@@ -78,8 +78,7 @@ class DebtController extends Controller
         $data['currencies'] = $this->currencyService->getAll();
         $data['bankAccounts'] = $this->bankAccountService->getByUserId(auth()->user()->id);
 
-        if ($data['debt']->type == 'lend')
-        {
+        if ($data['debt']->type == 'lend') {
             $data['title'] = 'Manage lend';
             return view('admin.debt.lend', $data);
         } else {
