@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDebtCollectionRequest;
 use App\Http\Requests\StoreDebtRequest;
+use App\Http\Requests\StoreRepaymentRequest;
 use App\Http\Requests\UpdateDebtRequest;
 use App\Models\Debt;
 use App\Services\BankAccountService;
@@ -88,11 +89,30 @@ class DebtController extends Controller
 
     }
 
+    /**
+     * @param StoreDebtCollectionRequest $request
+     * @param $debt_id
+     * @return \Illuminate\Http\JsonResponse|void
+     */
+
     public function storeDebtCollection(StoreDebtCollectionRequest $request, $debt_id)
     {
         $data = $request->validated();
         try {
             $this->debtLoanService->storeDebtCollection($data, $debt_id);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+    }
+
+    public function storeRepay(StoreRepaymentRequest $request, $debt_id)
+    {
+        $data = $request->validated();
+
+        try {
+            $this->debtLoanService->storeRepayment($data, $debt_id);
         } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 class DashboardController extends Controller
 {
-    public function dashboard()
+    public function dashboard(): View
     {
         $activeMenu = "dashboard";
-        return view('admin.dashboard', compact('activeMenu'));
+        $title = 'Dashboard';
+        return view('admin.dashboard', compact('activeMenu', 'title'));
     }
 }

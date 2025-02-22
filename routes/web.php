@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store', [DebtController::class, 'store'])->name('debts.store');
         Route::get('show/{id}', [DebtController::class, 'show'])->name('debts.show');
         Route::post('store-debt-collection/{debt_id}', [DebtController::class, 'storeDebtCollection'])->name('debts.storeDebtCollection');
+        Route::post('store-repay/{debt_id}', [DebtController::class, 'storeRepay'])->name('debts.storeRepay');
         Route::post('destroy/{id}', [DebtController::class, 'destroy']);
     });
 

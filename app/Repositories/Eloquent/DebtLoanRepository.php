@@ -7,6 +7,7 @@ use App\Models\Borrow;
 use App\Models\Debt;
 use App\Models\DebtCollection;
 use App\Models\Lend;
+use App\Models\Repayment;
 use App\Repositories\Contracts\DebtLoanRepositoryInterface;
 use Illuminate\Support\Collection;
 use Exception;
@@ -172,6 +173,55 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
         }
 
     }
+
+    public function storeRepayment(array $data, int $debt_id): mixed
+    {
+        $bankAccount = BankAccount::find($data['account_id']);
+        $debt = Debt::find($debt_id);
+
+        $usd_amount = convert_to_usd_amount($data['currency_id'], $data['amount']);
+        $exchange_amount = convert_to_exchange_amount($bankAccount->currency_id, $usd_amount);
+
+        if ($exchange_amount > $bankAccount->balance) {
+            throw new Exception('Insufficient balance in the selected bank account. Please use another bank account to repay.');
+        }
+
+
+
+        if ($exchange_amount > ($debt->exchange_amount * -1)) {
+            throw new Exception('You have entered invalid amount');
+        }
+
+        $data['exchange_amount'] = $exchange_amount;
+        $data['usd_amount'] = $usd_amount;
+        $data['debt_id'] = $debt_id;
+
+        DB::beginTransaction();
+        try {
+
+            Repayment::create($data);
+            $exchange_amount_for_debt = convert_to_exchange_amount($debt->currency_id, $usd_amount);
+            $debt->exchange_amount += $exchange_amount_for_debt;
+            $debt->usd_amount += $usd_amount;
+            $debt->save();
+
+
+            $bankAccount->balance -= $exchange_amount;
+            $bankAccount->usd_balance -= $usd_amount;
+            $bankAccount->save();
+
+            DB::commit();
+
+            return $debt;
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception( $e->getMessage());
+        }
+
+    }
+
+
 
     /**
      * @param int $id

@@ -45,9 +45,15 @@ class DebtLoanService
         return $this->debtLoanRepositoryInterface->store($data);
     }
 
+
     public function storeDebtCollection(array $data, int $debt_id): mixed
     {
         return $this->debtLoanRepositoryInterface->storeDebtCollection($data, $debt_id);
+    }
+
+    public function storeRepayment(array $data, int $debt_id): mixed
+    {
+        return $this->debtLoanRepositoryInterface->storeRepayment($data, $debt_id);
     }
 
     public function destroy($id): bool

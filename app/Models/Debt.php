@@ -78,6 +78,13 @@ class Debt extends Model
         return $this->hasMany(Borrow::class);
     }
 
+    /**
+     * @return HasMany
+     */
+    public function repayments(): HasMany
+    {
+        return $this->hasMany(Repayment::class);
+    }
 
     /**
      * @return HasMany
