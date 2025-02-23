@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,8 +12,10 @@ return new class extends Migration
     {
         Schema::create('lends', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount',10,2);
-            $table->decimal('exchange_amount',10,2)->default(0.00);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('account_id')->nullable();
+            $table->decimal('amount', 10, 2);
+            $table->decimal('exchange_amount', 10, 2)->default(0.00);
             $table->decimal('usd_amount', 65, 5)->default(0.00);
             $table->date('date')->nullable();
             $table->foreignId('debt_id')->constrained('debts')->onDelete('cascade')->onUpdate('cascade');

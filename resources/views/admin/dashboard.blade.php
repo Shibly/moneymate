@@ -77,7 +77,7 @@
                                                 Total Lend Amount
                                             </div>
                                             <div class="text-secondary">
-                                                21 today
+                                                {{$totalLends}}
                                             </div>
                                         </div>
                                     </div>

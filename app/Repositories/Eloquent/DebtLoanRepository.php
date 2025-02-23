@@ -84,6 +84,7 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
 
             if ($data['type'] === 'lend') {
                 Lend::create([
+                    'user_id' => auth()->user()->id,
                     'amount' => $debt->amount,
                     'exchange_amount' => $exchange_amount,
                     'usd_amount' => $usd_amount,

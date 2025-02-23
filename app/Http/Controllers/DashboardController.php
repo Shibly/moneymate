@@ -16,6 +16,8 @@ class DashboardController extends Controller
         $title = 'Dashboard';
         $totalMonthlyIncome = $this->getMonthlyIncomes();
         $totalAccountBalances = $this->getTotalAccountBalance();
-        return view('admin.dashboard', compact('activeMenu', 'title', 'totalMonthlyIncome', 'totalAccountBalances'));
+        $totalLends = $this->getTotalLends();
+        return view('admin.dashboard', compact('activeMenu', 'title',
+            'totalMonthlyIncome', 'totalAccountBalances', 'totalLends'));
     }
 }
