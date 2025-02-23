@@ -506,56 +506,14 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header border-0">
-                            <div class="card-title">Development activity</div>
+                            <div class="card-title">Earning activity</div>
                         </div>
                         <div class="position-relative">
                             <div class="position-absolute top-0 left-0 px-3 mt-1 w-75">
-                                <div class="row g-2">
-                                    <div class="col-auto">
-                                        <div class="chart-sparkline chart-sparkline-square"
-                                             id="sparkline-activity"></div>
-                                        <script>
-                                            document.addEventListener("DOMContentLoaded", function () {
-                                                window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-activity'), {
-                                                    chart: {
-                                                        type: "radialBar",
-                                                        fontFamily: 'inherit',
-                                                        height: 40,
-                                                        width: 40,
-                                                        animations: {
-                                                            enabled: false
-                                                        },
-                                                        sparkline: {
-                                                            enabled: true
-                                                        },
-                                                    },
-                                                    tooltip: {
-                                                        enabled: false,
-                                                    },
-                                                    plotOptions: {
-                                                        radialBar: {
-                                                            hollow: {
-                                                                margin: 0,
-                                                                size: '75%'
-                                                            },
-                                                            track: {
-                                                                margin: 0
-                                                            },
-                                                            dataLabels: {
-                                                                show: false
-                                                            }
-                                                        }
-                                                    },
-                                                    colors: [tabler.getColor("blue")],
-                                                    series: [35],
-                                                })).render();
-                                            });
-                                        </script>
-                                    </div>
+                                <div class="row">
                                     <div class="col">
-                                        <div>Today's Earning: $4,262.40</div>
+                                        <div>This Month's Earning: {{$totalMonthlyIncome}}</div>
                                         <div class="text-secondary">
-                                            <!-- Download SVG icon from http://tabler.io/icons/icon/trending-up -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
