@@ -23,6 +23,7 @@ class ExpenseController extends Controller
         $this->currencyService = $currencyService;
         $this->categoryService = $categoryService;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -33,7 +34,7 @@ class ExpenseController extends Controller
         $data['bankAccounts'] = $this->bankAccountService->getByUserId(auth()->user()->id);
         $data['currencies'] = $this->currencyService->getAll();
         $data['categories'] = $this->categoryService->getCategoryByType('expense');
-        return view('admin.expense.index', $data);
+        return view('admin.expenses.index', $data);
     }
 
     /**
