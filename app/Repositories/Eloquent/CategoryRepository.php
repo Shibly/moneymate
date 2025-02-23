@@ -6,6 +6,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -65,6 +66,16 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function all(): Collection
     {
         return Category::all();
+    }
+
+    /**
+     * @param string $type
+     * @return Collection
+     */
+
+    public function getCategoryByType(string $type): Collection
+    {
+        return Category::where('type', $type)->where('user_id', Auth::id())->get();
     }
 
     public function allIncomeCategories(): Collection

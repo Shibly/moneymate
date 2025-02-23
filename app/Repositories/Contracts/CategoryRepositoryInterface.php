@@ -42,6 +42,12 @@ interface CategoryRepositoryInterface
 
     public function all(): Collection;
 
+    /**
+     * @param string $type
+     * @return Collection
+     */
+    public function getCategoryByType(string $type): Collection;
+
     public function allIncomeCategories(): Collection;
 
     public function allExpenseCategories(): Collection;

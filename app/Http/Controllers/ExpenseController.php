@@ -5,15 +5,35 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
+use App\Services\BankAccountService;
+use App\Services\CategoryService;
+use App\Services\CurrencyService;
 
 class ExpenseController extends Controller
 {
+    private BankAccountService $bankAccountService;
+
+    private CurrencyService $currencyService;
+
+    protected CategoryService $categoryService;
+
+    public function __construct(BankAccountService $bankAccountService, CurrencyService $currencyService, CategoryService $categoryService)
+    {
+        $this->bankAccountService = $bankAccountService;
+        $this->currencyService = $currencyService;
+        $this->categoryService = $categoryService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data['title'] = 'Expenses';
+        $data['activeMenu'] = 'expenses';
+        $data['bankAccounts'] = $this->bankAccountService->getByUserId(auth()->user()->id);
+        $data['currencies'] = $this->currencyService->getAll();
+        $data['categories'] = $this->categoryService->getCategoryByType('expense');
+        return view('admin.expense.index', $data);
     }
 
     /**

@@ -29,6 +29,15 @@ class CategoryService
     }
 
     /**
+     * @return Collection
+     */
+
+    public function getCategoryByType(string $type): Collection
+    {
+        return $this->categoryRepository->getCategoryByType($type);
+    }
+
+    /**
      * Create a new category.
      *
      * @param StoreCategoryRequest $request
