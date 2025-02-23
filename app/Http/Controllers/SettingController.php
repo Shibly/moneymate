@@ -14,7 +14,8 @@ class SettingController extends Controller
     public function index()
     {
         $activeMenu = "application-settings";
-        return view('admin.application-settings.settings', compact('activeMenu'));
+        $title = "Application Settings";
+        return view('admin.application-settings.settings', compact('activeMenu', 'title'));
     }
 
     /**

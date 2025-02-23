@@ -4,8 +4,8 @@ namespace App\Traits;
 
 use App\Models\BankAccount;
 use App\Models\Currency;
+use App\Models\Debt;
 use App\Models\Income;
-use App\Models\Lend;
 
 trait DashboardWidgets
 {
@@ -95,7 +95,7 @@ trait DashboardWidgets
     {
 
 
-        $lends = Lend::where('user_id', auth()->id())
+        $lends = Debt::where('user_id', auth()->id())->where('type', 'lend')
             ->with('currency')
             ->select('id', 'currency_id', 'usd_amount')->get();
 

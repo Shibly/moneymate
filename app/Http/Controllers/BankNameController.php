@@ -25,8 +25,9 @@ class BankNameController extends Controller
 
 
         $activeMenu = 'banks';
+        $title = 'Banks List';
         $banks = $this->bankService->getAll();
-        return view('admin.banks.index', compact('activeMenu', 'banks'));
+        return view('admin.banks.index', compact('activeMenu', 'banks','title'));
 
     }
 

@@ -50,7 +50,7 @@
                         <a href="javascript:void(0);" class="btn btn-primary btn-5 d-none d-sm-inline-block"
                            data-bs-toggle="modal"
                            data-bs-target="#debtCollectionModal">
-                            <x-tabler-plus/> Debt Collection
+                            <x-tabler-plus/> Lend Collection
                         </a>
                     </div>
 
@@ -96,7 +96,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Debt Collection</h5>
+                    <h5 class="modal-title">Collect Lend</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>

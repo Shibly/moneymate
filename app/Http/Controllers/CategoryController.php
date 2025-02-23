@@ -31,7 +31,8 @@ class CategoryController extends Controller
 
         $categories = $this->categoryService->all();
         $activeMenu = 'categories';
-        return view('admin.categories.index', compact('categories', 'activeMenu'));
+        $title = 'List of income and expense categories';
+        return view('admin.categories.index', compact('categories', 'activeMenu', 'title'));
     }
 
 

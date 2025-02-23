@@ -30,6 +30,7 @@ class AccountTransferController extends Controller
     public function balanceTransfer(): View
     {
         $data['activeMenu'] = 'balance-transfer';
+        $data['title'] = 'Balance Transfer';
         $data['bankAccounts'] = $this->bankAccountService->getByUserId(auth()->user()->id);
         $data['accountTransfers'] = $this->accountTransferService->getAll();
         return view('admin.transfer.balance-transfer', $data);

@@ -22,8 +22,9 @@ class CurrencyController extends Controller
         $currencies = Currency::with('bankAccounts')->select('id', 'name', 'exchange_rate', 'is_base', 'is_default')->get();
         $basedCurrencyName = Currency::where('is_base', 'yes')->first();
         $activeMenu = 'currencies';
+        $title = 'Currencies';
 
-        return view('admin.currencies.index', compact('currencies', 'basedCurrencyName', 'activeMenu'));
+        return view('admin.currencies.index', compact('currencies', 'basedCurrencyName', 'activeMenu', 'title'));
     }
 
 

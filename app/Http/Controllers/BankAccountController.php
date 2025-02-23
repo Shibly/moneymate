@@ -30,10 +30,12 @@ class BankAccountController extends Controller
     {
         $bankAccounts = $this->bankAccountService->getByUserId(auth()->user()->id);
         $activeMenu = 'bank-accounts';
+        $title = 'Bank Accounts';
         $currencies = $this->currencyService->getAll();
         $banks = $this->bankService->getAll();
 
-        return view('admin.bank-accounts.index', compact('bankAccounts', 'activeMenu', 'currencies', 'banks'));
+        return view('admin.bank-accounts.index', compact('bankAccounts', 'activeMenu',
+            'currencies', 'banks', 'title'));
     }
 
 

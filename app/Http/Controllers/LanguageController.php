@@ -14,7 +14,8 @@ class LanguageController extends Controller
         $countriesJson = file_get_contents(resource_path('country_code/countries.json'));
         $countries = json_decode($countriesJson, true);
         $activeMenu = "languages";
-        return view('admin.languages.index', compact('languages', 'activeMenu', 'countries'));
+        $title = "Available Languages";
+        return view('admin.languages.index', compact('languages', 'activeMenu', 'countries', 'title'));
     }
 
 

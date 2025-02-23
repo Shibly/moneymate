@@ -168,7 +168,7 @@
                             Cancel
                         </button>
                         <button type="submit" class="btn btn-primary">
-                            Submit Debt
+                            Submit
                         </button>
                     </div>
                 </form>

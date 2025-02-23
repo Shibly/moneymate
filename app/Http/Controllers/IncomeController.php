@@ -37,13 +37,14 @@ class IncomeController extends Controller
     public function index()
     {
         $activeMenu = 'incomes';
+        $title = 'Income Histories';
         $incomes = $this->incomeService->allIncomes();
         $categories = $this->categoryService->allIncomes();
         $currencies = $this->currencyService->getAll();
         $bankAccounts = $this->bankAccountService->getByUserId(auth()->user()->id);
 
 
-        return view('admin.incomes.index', compact('activeMenu', 'incomes', 'categories', 'currencies', 'bankAccounts'));
+        return view('admin.incomes.index', compact('activeMenu', 'incomes', 'categories', 'currencies', 'bankAccounts', 'title'));
     }
 
 
