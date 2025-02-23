@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
@@ -103,6 +104,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store-income', [IncomeController::class, 'store'])->name('incomes.store');
         Route::post('/destroy/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
     });
+
+    Route::group(['prefix' => 'expense'], function () {
+        Route::get('/', [ExpenseController::class, 'index'])->name('expense.index');
+        Route::post('/store-income', [ExpenseController::class, 'store'])->name('expense.store');
+        Route::post('/destroy/{income}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
+    });
+
 
 
     Route::group(['prefix' => 'settings'], function () {
