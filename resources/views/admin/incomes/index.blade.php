@@ -47,10 +47,13 @@
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Select Bank Account</label>
                                                 <select class="form-control" name="account_id" required>
-                                                    @foreach($bankAccounts as $account)
-                                                        <option value="{{$account->id}}">
-                                                            {{$account->account_number}}
-                                                            - Balance ({{$account->balance}})
+                                                    @foreach($bankAccounts as $bankAccount)
+                                                        <option value="{{$bankAccount->id}}">
+                                                            {{$bankAccount->bank->bank_name}}
+                                                            - {{$bankAccount->account_number}} -
+                                                            Balance
+                                                            ({{$bankAccount->currency->name ?? ''}} {{$bankAccount->balance}}
+                                                            )
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -169,7 +172,7 @@
                                          stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
                                         <path d="M12 9v4"></path>
                                         <path
-                                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+                                                d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
                                     <h3>Are you sure to delete this income ?</h3>

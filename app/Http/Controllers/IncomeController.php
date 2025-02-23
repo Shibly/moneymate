@@ -40,7 +40,7 @@ class IncomeController extends Controller
         $incomes = $this->incomeService->allIncomes();
         $categories = $this->categoryService->allIncomes();
         $currencies = $this->currencyService->getAll();
-        $bankAccounts = $this->bankAccountService->getAll();
+        $bankAccounts = $this->bankAccountService->getByUserId(auth()->user()->id);
 
 
         return view('admin.incomes.index', compact('activeMenu', 'incomes', 'categories', 'currencies', 'bankAccounts'));
