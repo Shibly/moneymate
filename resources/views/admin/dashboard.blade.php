@@ -18,7 +18,7 @@
                                                 Income This Month
                                             </div>
                                             <div class="text-secondary">
-                                                12 waiting payments
+                                                {{$totalMonthlyIncome}}
                                             </div>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                                 Total Account Balance
                                             </div>
                                             <div class="text-secondary">
-                                                16 today
+                                                {{$totalAccountBalances}}
                                             </div>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">Income vs Expense Summary</h3>
+                            <h3 class="card-title">Incomes vs Expense Summary</h3>
                             <div id="chart-mentions" class="chart-lg"></div>
                             <script>
                                 document.addEventListener("DOMContentLoaded", function () {

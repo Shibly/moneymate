@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\DashboardWidgets;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
+
+    use DashboardWidgets;
+
     public function dashboard(): View
     {
         $activeMenu = "dashboard";
         $title = 'Dashboard';
-        return view('admin.dashboard', compact('activeMenu', 'title'));
+        $totalMonthlyIncome = $this->getMonthlyIncomes();
+        $totalAccountBalances = $this->getTotalAccountBalance();
+        return view('admin.dashboard', compact('activeMenu', 'title', 'totalMonthlyIncome', 'totalAccountBalances'));
     }
 }
