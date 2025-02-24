@@ -47,7 +47,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'currency_name_or_symbol', 'value' => 'Currency Name or Symbol', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'are_you_sure_to_delete_this_currency', 'value' => 'Are you sure to delete this currency ?', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'banks', 'value' => 'Banks', 'created_at' => $now, 'updated_at' => $now],
-            ['code' => 'en', 'key' => 'List Of Banks', 'value' => 'List Of Banks', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'list_of_banks', 'value' => 'List Of Banks', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'bank_name', 'value' => 'Bank Name', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'edit_bank_name', 'value' => 'Edit Bank Name', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'edit_bank_name', 'value' => 'Edit Bank Name', 'created_at' => $now, 'updated_at' => $now],

@@ -17,28 +17,25 @@
 
     <div class="page-body">
         <div class="container-xl">
+            <div class="alert alert-info">
+                <span class="badge bg-blue-lt">Tip:</span>
+                <span>The <strong>Key</strong> column displays the original reference text. Please enter the corresponding translation in your preferred language in the <strong>Value</strong> field.</span>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
                         Translation Strings ({{ strtoupper($code) }})
                     </h3>
                 </div>
-                <div class="card-body">
-                    <!-- Professional Tip Message -->
-                    <div class="alert alert-info">
-                        <span class="badge bg-blue-lt">Tip:</span>
-                        <span>
-                            The <strong>Key</strong> column displays the original reference text. Please enter the corresponding translation in your preferred language in the <strong>Value</strong> field.
-                        </span>
-                    </div>
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table card-table table-vcenter table-striped">
+                        <table class="table datatable table-bordered card-table table-vcenter table-striped">
                             <thead>
                             <tr>
                                 <th style="width: 5%">#</th>
                                 <th style="width: 25%">Key</th>
-                                <th style="width: 50%">Value</th>
-                                <th style="width: 20%">Actions</th>
+                                <th style="width: 60%">Value</th>
+                                <th style="width: 10%">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,7 +43,7 @@
                                 <tr>
                                     <td class="text-muted">{{ $loop->iteration }}</td>
                                     <td class="fw-bold">
-                                        {{ $translation->key }}
+                                        {{ implode('_', array_slice(explode('_', $translation->key), 0, 5)) }}...
                                     </td>
                                     <td>
                                         <input type="text"
