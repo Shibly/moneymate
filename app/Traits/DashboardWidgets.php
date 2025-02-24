@@ -138,4 +138,51 @@ trait DashboardWidgets
     }
 
 
+    public function getIncomeVsExpenseFromSixMonths(): array
+    {
+        /**
+         * For last 6 months data only including the current month
+         */
+        $months = collect();
+        for ($i = 5; $i >= 0; $i--) {
+            $months->push(now()->subMonths($i)->format('Y-m'));
+        }
+
+        $incomes = [];
+        $expenses = [];
+        $defaultCurrency = $this->getDefaultCurrency();
+
+
+        if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
+
+            foreach ($months as $month) {
+                $income = Income::whereMonth('income_date', date('m', strtotime($month)))
+                    ->whereYear('income_date', date('Y', strtotime($month)))
+                    ->where('user_id', auth()->id())
+                    ->sum('usd_amount');
+
+                $expense = Expense::whereMonth('expense_date', date('m', strtotime($month)))
+                    ->whereYear('expense_date', date('Y', strtotime($month)))
+                    ->where('user_id', auth()->id())
+                    ->sum('usd_amount');
+
+                $incomes[] = $income * $defaultCurrency->exchange_rate;
+                $expenses[] = $expense * $defaultCurrency->exchange_rate;
+            }
+        } else {
+            return [
+                'months' => $months->toArray(),
+                'incomes' => ['No valid exchange rate'],
+                'expenses' => ['No valid exchange rate'],
+            ];
+        }
+
+        return [
+            'months' => $months->toArray(),
+            'incomes' => $incomes,
+            'expenses' => $expenses,
+        ];
+    }
+
+
 }
