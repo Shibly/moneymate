@@ -11,7 +11,7 @@ class StoreExpenseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,29 @@ class StoreExpenseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'account_id' => 'required',
+            'currency_id' => 'required',
+            'amount' => 'required|numeric',
+            'category_id' => 'required',
+            'description' => 'nullable|string',
+            'attachment' => 'nullable|file',
+            'note' => 'nullable',
+            'reference' => 'nullable',
+            'expense_date' => 'required',
+        ];
+    }
+
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'account_id.required' => 'Please select a bank account',
+            'currency_id.required' => 'Please select currency',
+            'amount.required' => 'Please add your expense amount',
+            'category_id.required' => 'Please select an income category',
         ];
     }
 }

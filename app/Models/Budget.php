@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $budget_name
@@ -41,4 +44,53 @@ class Budget extends Model
 {
     /** @use HasFactory<\Database\Factories\BudgetFactory> */
     use HasFactory;
+
+    protected $primaryKey = 'id';
+    protected $table = 'budgets';
+    protected $guarded = [];
+
+    protected $with = ['categories'];
+
+    /**
+     * @return BelongsTo
+     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class, 'account_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'budget_category', 'budget_id', 'category_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
+
+
+    /**
+     * @return HasMany
+     */
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(BudgetExpense::class);
+    }
+
 }

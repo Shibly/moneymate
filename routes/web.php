@@ -10,6 +10,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
@@ -107,8 +108,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'expense'], function () {
         Route::get('/', [ExpenseController::class, 'index'])->name('expense.index');
-        Route::post('/store-income', [ExpenseController::class, 'store'])->name('expense.store');
-        Route::post('/destroy/{income}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
+        Route::post('store', [ExpenseController::class, 'store'])->name('expense.store');
+        Route::get('destroy/{id}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
+    });
+
+    Route::group(['prefix' => 'budget'], function () {
+        Route::get('/', [BudgetController::class, 'index'])->name('budget.index');
+        Route::post('store', [BudgetController::class, 'store'])->name('budget.store');
+        Route::get('destroy/{id}', [BudgetController::class, 'destroy'])->name('budget.destroy');
     });
 
 

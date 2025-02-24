@@ -126,8 +126,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item @if($activeMenu == 'budgets') active-state @endif">
-                    <a class="nav-link" href="{{route('currencies.index')}}">
+                <li class="nav-item @if($activeMenu == 'budget') active-state @endif">
+                    <a class="nav-link" href="{{route('budget.index')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
                     <x-tabler-calendar-dollar/>
                 </span>
