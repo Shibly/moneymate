@@ -13,7 +13,7 @@
                         <a href="{{ route('accounts.store') }}" class="btn btn-primary btn-5 d-none d-sm-inline-block"
                            data-bs-toggle="modal" data-bs-target="#modal-report">
                             <x-tabler-building-bank/>
-                            Add New
+                            {{get_translation('add_new')}}
                         </a>
                     </div>
                     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
@@ -30,46 +30,51 @@
 
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Account Holders Name</label>
+                                            <label
+                                                class="form-label">{{get_translation('account_holders_name')}}</label>
                                             <input type="text" class="form-control" name="account_name"
                                                    placeholder="Account Name" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Account Number</label>
+                                            <label class="form-label">{{get_translation('account_number')}}</label>
                                             <input type="text" class="form-control" name="account_number"
-                                                   placeholder="Account Number" required>
+                                                   placeholder="{{get_translation('account_number')}}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Select Bank</label>
+                                            <label class="form-label">{{get_translation('select_bank')}}</label>
                                             <select class="form-control" name="bank_name_id" required>
                                                 @foreach($banks as $bank)
                                                     <option value="{{ $bank->id }}">{{ $bank->bank_name }}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="invalid-feedback">Please select a bank.</div>
+                                            <div
+                                                class="invalid-feedback">{{get_translation('please_select_a_bank')}}</div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Select Currency</label>
+                                            <label class="form-label">{{get_translation('select_currency')}}</label>
                                             <select class="form-control" name="currency_id" required>
                                                 @foreach($currencies as $currency)
                                                     <option value="{{ $currency->id }}">{{ $currency->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="invalid-feedback">Please select a currency.</div>
+                                            <div
+                                                class="invalid-feedback">{{get_translation('please_select_a_currency')}}</div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Initial Balance</label>
+                                            <label class="form-label">{{get_translation('initial_balance')}}</label>
                                             <input type="number" class="form-control" name="balance"
-                                                   placeholder="Initial Balance" step="0.01" required>
+                                                   placeholder="{{get_translation('initial_balance')}}" step="0.01"
+                                                   required>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             <x-tabler-building-bank/>
-                                            Add New Bank Account
+                                            {{get_translation('add_new')}}
                                         </button>
                                     </div>
                                 </form>
@@ -82,7 +87,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Edit Bank Account</h5>
+                                    <h5 class="modal-title">{{get_translation('edit_bank_account')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -92,48 +97,54 @@
                                     @csrf
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Account Holders Name</label>
+                                            <label class="form-label">{{get_translation('account_holder_name')}}</label>
                                             <input type="text" class="form-control" name="account_name"
-                                                   id="edit-account-name" placeholder="Account Name" required>
+                                                   id="edit-account-name"
+                                                   placeholder="{{get_translation('account_holder_name')}}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Account Number</label>
+                                            <label class="form-label">{{get_translation('account_number')}}</label>
                                             <input type="text" class="form-control" name="account_number"
-                                                   id="edit-account-number" placeholder="Account Number" required>
+                                                   id="edit-account-number"
+                                                   placeholder="{{get_translation('account_number')}}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Select Bank</label>
+                                            <label class="form-label">{{get_translation('select_bank')}}</label>
                                             <select class="form-control" name="bank_name_id" id="edit-bank-name"
                                                     required>
                                                 @foreach($banks as $bank)
                                                     <option value="{{ $bank->id }}">{{ $bank->bank_name }}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="invalid-feedback">Please select a bank.</div>
+                                            <div
+                                                class="invalid-feedback">{{get_translation('please_select_a_bank')}}</div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Select Currency</label>
+                                            <label class="form-label">{{get_translation('select_currency')}}</label>
                                             <select class="form-control" name="currency_id" id="edit-currency-id"
                                                     required>
                                                 @foreach($currencies as $currency)
                                                     <option value="{{ $currency->id }}">{{ $currency->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="invalid-feedback">Please select a currency.</div>
+                                            <div
+                                                class="invalid-feedback">{{get_translation('please_select_a_currency')}}</div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Initial Balance</label>
+                                            <label class="form-label">{{get_translation('initial_balance')}}</label>
                                             <input type="number" class="form-control" name="balance" id="edit-balance"
-                                                   placeholder="Initial Balance" step="0.01" required>
+                                                   placeholder="{{get_translation('initial_balance')}}" step="0.01"
+                                                   required>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             <x-tabler-building-bank/>
-                                            Update Bank Account
+                                            {{get_translation('update_bank_account')}}
                                         </button>
                                     </div>
                                 </form>
@@ -145,7 +156,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <h5 class="modal-title">{{get_translation('conform_deletion')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body text-center">
@@ -157,13 +168,16 @@
                                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this account?</h3>
-                                    <div class="text-secondary">This action cannot be undone.</div>
+                                    <h3>{{get_translation('are_you_sure_you_want_to_delete_this')}}</h3>
+                                    <div
+                                        class="text-secondary">{{get_translation('this_action_can_not_be_undone')}}</div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">{{get_translation('cancel')}}
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="confirm-delete">Yes, Delete
+                                    <button type="button" class="btn btn-danger"
+                                            id="confirm-delete">{{get_translation('yes_delete')}}
                                     </button>
                                 </div>
                             </div>
@@ -178,9 +192,9 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="alert alert-info">
-                <span class="badge bg-blue-lt">Tip:</span>
-                Before creating a bank account, please ensure your bank details are already set up.
-                <a href="{{route('banks.index')}}" class="alert-link">Click here to add banks</a>.
+                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                {{get_translation('before_creating_a_bank_account_please_ensure_your_bank_details_are_already_set_up')}}
+                <a href="{{route('banks.index')}}" class="alert-link">{{get_translation('click_here_to_add_banks')}}</a>
             </div>
             <div class="card">
                 <div class="card-body p-0">
@@ -188,11 +202,11 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Account Holders Name</th>
-                                <th class="text-center">Bank Name</th>
-                                <th class="text-center">Account Number</th>
-                                <th class="text-center">Available balance</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center">{{get_translation('account_holders_name')}}</th>
+                                <th class="text-center">{{get_translation('bank_name')}}</th>
+                                <th class="text-center">{{get_translation('account_number')}}</th>
+                                <th class="text-center">{{get_translation('available_balance')}}</th>
+                                <th class="text-center">{{get_translation('action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -206,11 +220,11 @@
                                         <button class="btn btn-info edit-account-btn"
                                                 data-account-id="{{ $account->id }}">
                                             <x-tabler-edit/>
-                                            Edit
+                                            {{get_translation('edit')}}
                                         </button>
                                         <button class="btn btn-danger delete-btn" data-id="{{ $account->id }}">
                                             <x-tabler-trash/>
-                                            Delete
+                                            {{get_translation('delete')}}
                                         </button>
                                     </td>
                                 </tr>
@@ -274,7 +288,7 @@
                         }
                     },
                     error: function (xhr) {
-                        console.log("Error fetching account details:", xhr);
+                        //console.log("Error fetching account details:", xhr);
                         alert("Error fetching account details.");
                     }
                 });

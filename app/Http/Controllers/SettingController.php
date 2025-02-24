@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOptionRequest;
 use App\Models\Option;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,7 @@ class SettingController extends Controller
     public function index()
     {
         $activeMenu = "application-settings";
-        $title = "Application Settings";
+        $title = get_translation('application_settings');
         return view('admin.application-settings.settings', compact('activeMenu', 'title'));
     }
 
@@ -51,12 +50,5 @@ class SettingController extends Controller
         notyf()->success('Application Settings has been updated');
         return redirect()->route('settings.index');
     }
-
-
-    public function store(StoreOptionRequest $request)
-    {
-        //
-    }
-
 
 }

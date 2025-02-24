@@ -25,7 +25,7 @@ class BankNameController extends Controller
 
 
         $activeMenu = 'banks';
-        $title = 'Banks List';
+        $title = get_translation('list_of_banks');
         $banks = $this->bankService->getAll();
         return view('admin.banks.index', compact('activeMenu', 'banks','title'));
 
@@ -85,7 +85,7 @@ class BankNameController extends Controller
 
         // Update bank record
         $this->bankService->updateBank($bank, $validatedData);
-        notyf()->info('Bank name updated successfully');
+        notyf()->info(get_translation('bank_name_update_successfully'));
         return redirect()
             ->route('banks.index');
     }

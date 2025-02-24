@@ -25,79 +25,88 @@
                                     <div class="row g-3">
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Application Name</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('application_name')}}</label>
                                             <input type="text" value="{{ get_option('application_name') }}"
                                                    name="application_name" class="form-control"
-                                                   placeholder="Application Name">
+                                                   placeholder="{{get_translation('application_name')}}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Enter the official name that will be displayed across your site.
+                                                    {{get_translation('official_name_of_the_application')}}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Company Name</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('company_name')}}</label>
                                             <input type="text" value="{{ get_option('company_name') }}"
                                                    name="company_name" class="form-control"
-                                                   placeholder="Company Name">
+                                                   placeholder="{{get_translation('company_name')}}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Provide your legal or registered company name.
+                                                    {{get_translation('provide_legal_registered_company_name')}}
                                                 </small>
                                             </div>
                                         </div>
 
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Company Phone</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('company_phone')}}</label>
                                             <input type="text" value="{{ get_option('phone') }}" name="phone"
-                                                   class="form-control" placeholder="Phone">
+                                                   class="form-control"
+                                                   placeholder="{{get_translation('company_phone')}}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Enter a valid contact number including the country code.
+                                                    {{get_translation('provide_valid_contact_number_including_country_code')}}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Website</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('company_website')}}</label>
                                             <input type="text" value="{{ get_option('web_site') }}" name="web_site"
-                                                   class="form-control" placeholder="Web Site">
+                                                   class="form-control"
+                                                   placeholder="{{get_translation('company_website')}}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Provide your company's website URL (e.g., https://example.com).
+                                                    {{get_translation('provide_company_website_url')}}
                                                 </small>
                                             </div>
                                         </div>
 
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Address</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('company_address')}}</label>
                                             <input type="text" value="{{ get_option('address') }}" name="address"
-                                                   class="form-control" placeholder="Address">
+                                                   class="form-control"
+                                                   placeholder="{{get_translation('company_address')}}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Provide the complete address for official correspondence.
+                                                    {{get_translation('company_official_address')}}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Number of Data per Page</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('number_of_data_per_page')}}</label>
                                             <input value="{{ get_option('num_data_per_page') }}"
                                                    name="num_data_per_page"
                                                    type="number" class="form-control"
-                                                   placeholder="Number of data per page">
+                                                   placeholder="{{get_translation('number_of_data_per_page')}}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Define the number of records to display on each page.
+                                                    {{get_translation('number_of_records_to_display_per_page')}}
                                                 </small>
                                             </div>
                                         </div>
@@ -107,7 +116,8 @@
                                     <div class="row g-3 mt-3">
                                         <!-- Application Logo -->
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Application Logo</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('application_logo')}}</label>
                                             <input type="file" name="app_logo" class="form-control">
                                             @if(get_option('app_logo'))
                                                 <div class="mt-3">
@@ -123,16 +133,17 @@
                                                 </div>
                                             @endif
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Upload a high-quality logo image (recommended size: 100x100px).
+                                                    {{get_translation('upload_high_quality_logo')}}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <!-- Favicon -->
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">Favicon</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('upload_quality_favicon_image')}}</label>
                                             <input type="file" name="favicon" class="form-control">
                                             @if(get_option('favicon'))
                                                 <div class="mt-3">
@@ -148,9 +159,9 @@
                                                 </div>
                                             @endif
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">Tip:</span>
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    Upload a favicon image (recommended size: 64x64px).
+                                                    {{get_translation('upload_quality_favicon_image')}}
                                                 </small>
                                             </div>
                                         </div>
@@ -161,7 +172,7 @@
                                     <div class="btn-list justify-content-end">
                                         <button type="submit" value="Save Settings" class="btn btn-primary">
                                             <x-tabler-adjustments-check/>
-                                            Save Settings
+                                            {{get_option('save_settings')}}
                                         </button>
                                     </div>
                                 </div>

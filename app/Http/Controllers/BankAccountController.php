@@ -30,7 +30,7 @@ class BankAccountController extends Controller
     {
         $bankAccounts = $this->bankAccountService->getByUserId(auth()->user()->id);
         $activeMenu = 'bank-accounts';
-        $title = 'Bank Accounts';
+        $title = get_translation('bank_accounts');
         $currencies = $this->currencyService->getAll();
         $banks = $this->bankService->getAll();
 
@@ -45,7 +45,7 @@ class BankAccountController extends Controller
     public function store(StoreBankAccountRequest $request)
     {
         $this->bankAccountService->store($request);
-        notyf()->success('Bank Account has been created');
+        notyf()->success(get_translation('bank_account_added_successfully'));
         return redirect()->route('accounts.index');
     }
 
@@ -78,7 +78,7 @@ class BankAccountController extends Controller
     public function update(UpdateBankAccountRequest $request, $bankAccountId)
     {
         $this->bankAccountService->update($bankAccountId, $request);
-        notyf()->success('Bank Account has benn updated');
+        notyf()->success(get_translation('bank_account_updated_successfully'));
         return redirect()->route('accounts.index');
 
     }

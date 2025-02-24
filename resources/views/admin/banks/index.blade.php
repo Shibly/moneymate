@@ -13,14 +13,14 @@
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#modal-report">
                             <x-tabler-building-bank/>
-                            Add New
+                            {{get_translation('add_new')}}
                         </a>
                     </div>
                     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Add New Bank</h5>
+                                    <h5 class="modal-title">{{get_translation('add_new_bank')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -31,20 +31,20 @@
 
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Bank Name</label>
+                                            <label class="form-label">{{get_translation('bank_name')}}</label>
                                             <input type="text" class="form-control" name="bank_name"
-                                                   placeholder="Bank Name" required>
+                                                   placeholder="{{get_translation('bank_name')}}" required>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">
-                                            Cancel
+                                            {{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             <x-tabler-building-bank/>
-                                            Add New Bank
+                                            {{get_translation('add_new_bank')}}
                                         </button>
                                     </div>
                                 </form>
@@ -55,7 +55,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Edit Bank Name</h5>
+                                    <h5 class="modal-title">{{get_translation('edit_bank_name')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
 
@@ -65,7 +65,7 @@
 
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Bank Name</label>
+                                            <label class="form-label">{{get_translation('bank_name')}}</label>
                                             <input type="text" class="form-control" name="bank_name" id="edit-bank-name"
                                                    required>
                                         </div>
@@ -73,11 +73,12 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             <x-tabler-building-bank/>
-                                            Update Bank
+                                            {{get_translation('update')}}
                                         </button>
                                     </div>
                                 </form>
@@ -90,7 +91,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <h5 class="modal-title">{{get_translation('conform_deletion')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body text-center">
@@ -103,14 +104,16 @@
                                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this bank ?</h3>
-                                    <div class="text-secondary"> This action can not be undone.
+                                    <h3>{{get_translation('are_you_sure_to_delete_this')}}</h3>
+                                    <div class="text-secondary"> {{get_translation('this_action_can_not_be_undone')}}
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">{{get_translation('cancel')}}
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="confirm-delete">Yes, Delete
+                                    <button type="button" class="btn btn-danger"
+                                            id="confirm-delete">{{get_translation('yes_delete')}}
                                     </button>
                                 </div>
                             </div>
