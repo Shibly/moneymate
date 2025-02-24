@@ -228,10 +228,6 @@
                                     </td>
                                     <td class="text-center">{{$income->income_date}}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-info edit-btn" data-id="{{ $income->id }}">
-                                            <x-tabler-edit/>
-                                            Edit
-                                        </button>
                                         <button class="btn btn-danger delete-btn" data-id="{{ $income->id }}">
                                             <x-tabler-trash/>
                                             Delete

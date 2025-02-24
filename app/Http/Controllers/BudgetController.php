@@ -5,15 +5,33 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
+use App\Services\CategoryService;
+use App\Services\CurrencyService;
 
 class BudgetController extends Controller
 {
+
+
+    private CurrencyService $currencyService;
+
+    protected CategoryService $categoryService;
+
+    public function __construct(CurrencyService $currencyService, CategoryService $categoryService)
+    {
+        $this->currencyService = $currencyService;
+        $this->categoryService = $categoryService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data['title'] = 'Budgets';
+        $data['activeMenu'] = 'budget';
+        $data['currencies'] = $this->currencyService->getAll();
+        $data['categories'] = $this->categoryService->getCategoryByType('expense');
+        return view('admin.budget.index', $data);
     }
 
     /**

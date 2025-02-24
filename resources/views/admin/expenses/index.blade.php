@@ -30,19 +30,50 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">User Name</th>
                                 <th class="text-center">Bank Account Number</th>
                                 <th class="text-center">Category</th>
                                 <th class="text-center">From Amount</th>
                                 <th class="text-center">To Amount</th>
-                                <th class="text-center">Attached</th>
                                 <th class="text-center">Description</th>
+                                <th class="text-center">Reference</th>
+                                <th class="text-center">Note</th>
                                 <th class="text-center">Date</th>
+                                <th class="text-center">Attached</th>
                                 <th class="text-center" width="25%">Action</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
+                            @foreach($expenses as $expense)
+                                @php
+                                    $exchange_currency = $expense->bankAccount && $expense->bankAccount->currency ? $expense->bankAccount->currency->name : '';
+                                @endphp
 
+                                <tr>
+                                    <td>{{$expense->bankAccount ? $expense->bankAccount->account_number : ''}}</td>
+                                    <td>{{$expense->category ? $expense->category->name : '' }}</td>
+                                    <td>{{$expense->currency ? $expense->currency->name : ''}} {{number_format($expense->amount, 0)}}</td>
+                                    <td>{{$exchange_currency}} {{number_format($expense->exchange_amount, 0)}}</td>
+                                    <td>{{$expense->description}}</td>
+                                    <td>{{$expense->reference}}</td>
+                                    <td>{{$expense->note}}</td>
+                                    <td>{{\Carbon\Carbon::parse($expense->expense_date)->format("d/m/Y")}}</td>
+                                    <td class="text-center">
+                                        @if($expense->attachment)
+                                            <a href="{{ route('private.files', ['filename' => $expense->attachment]) }}" download="">
+                                                <x-tabler-download/>
+                                            </a>
+                                        @else
+                                            No Attachment
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-danger delete-btn" data-id="{{ $expense->id }}">
+                                            <x-tabler-trash/>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -60,13 +91,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="#" method="POST" id="addExpense" enctype="multipart/form-data">
+                <form action="{{route('expense.store')}}" method="POST" id="addExpense" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <!-- Left Column -->
                             <div class="col-md-6">
-                                <div class="mb-3">
+                                <div>
                                     <label class="form-label">Select Expense Category: <span
                                                 class="text-danger">*</span></label>
                                     <select name="category_id" class="form-control">
@@ -115,7 +146,8 @@
 
                             <!-- Right Column -->
                             <div class="col-md-6">
-                                <div class="mb-3">
+
+                                <div>
                                     <label class="form-label">Reference:</label>
                                     <input type="text" class="form-control" name="reference" placeholder="Reference">
                                     <div class="text-danger pt-2 reference"></div>
@@ -125,13 +157,13 @@
                                     <label class="form-label">Description:</label>
                                     <input type="text" class="form-control" name="description"
                                            placeholder="Description">
-                                    <div class="text-danger pt-2 description"></div>
+                                    <div class="text-danger description"></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Note:</label>
                                     <input type="text" class="form-control" name="note" placeholder="Note">
-                                    <div class="text-danger pt-2 note"></div>
+                                    <div class="text-danger note"></div>
                                 </div>
 
                                 <div class="mb-3">
@@ -178,7 +210,7 @@
                                 d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Are you sure to delete this debt?</h3>
+                    <h3>Are you sure to delete this expense?</h3>
                     <div class="text-secondary">This action cannot be undone.</div>
                 </div>
                 <div class="modal-footer">
@@ -198,17 +230,20 @@
         "use strict";
 
         $(document).ready(function () {
-            $('#addDebt').submit(function (e) {
+
+            $('#addExpense').submit(function (e) {
                 e.preventDefault();
 
-                $("#addDebtModal .logical-error").addClass('d-none');
+                $("#addExpenseModal .logical-error").addClass('d-none');
 
                 var form = $(this);
                 var url = form.attr('action');
+                const formData = new FormData(form[0]);
+
                 $.ajax({
                     url: url,
                     type: "POST",
-                    data: form.serialize(),
+                    data: formData,
                     success: function (response) {
                         location.reload();
                     },
@@ -216,15 +251,18 @@
                         if (xhr.status === 422) {
                             var err_response = JSON.parse(xhr.responseText);
                             $.each(err_response.errors, function (key, value) {
-                                $("#addDebtModal ." + key).text(value);
+                                $("#addExpenseModal ." + key).text(value);
                             });
                         } else if (xhr.status === 400) {
                             var err_response = JSON.parse(xhr.responseText);
-                            $("#addDebtModal .logical-error").removeClass('d-none').show().text(err_response.message);
+                            $("#addExpenseModal .logical-error").removeClass('d-none').show().text(err_response.message);
                         } else {
                             alert("Something went wrong. Please try again.");
                         }
-                    }
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
                 });
             });
 
@@ -237,23 +275,15 @@
 
             $('#confirm-delete').click(function () {
                 $.ajax({
-                    url: "{{ url('debts/destroy') }}/" + deletedId,
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
+                    url: "{{ url('expense/destroy') }}/" + deletedId,
+                    type: "GET",
                     success: function (response) {
                         $('#modal-delete').modal('hide');
                         $('#row-' + deletedId).remove();
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Debt has been deleted",
-                            icon: "success",
-                            confirmButtonText: "OK"
-                        });
+                        location.reload();
                     },
                     error: function (xhr) {
-                        console.log("Error deleting category:", xhr);
+                        console.log("Error deleting expense:", xhr);
                     }
                 });
             });

@@ -20,16 +20,10 @@ interface ExpenseInterface
 
     /**
      * @param array $data
-     * @return Expense
+     * @return mixed
      */
-    public function create(array $data): Expense;
+    public function store(array $data): mixed;
 
-    /**
-     * @param array $data
-     * @param int $id
-     * @return Expense
-     */
-    public function update(array $data, int $id): Expense;
 
     /**
      * @param int $id

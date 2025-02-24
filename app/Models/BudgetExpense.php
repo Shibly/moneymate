@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -39,4 +40,26 @@ class BudgetExpense extends Model
 {
     /** @use HasFactory<\Database\Factories\BudgetExpenseFactory> */
     use HasFactory;
+
+    protected $primaryKey = 'id';
+    protected $table = 'budget_expenses';
+    protected $guarded = [];
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id', 'id');
+    }
+
 }
