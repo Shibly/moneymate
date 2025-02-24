@@ -128,6 +128,21 @@
                         <button type="submit" class="btn btn-primary">Submit Budget</button>
                     </div>
                 </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="editBudgetModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Budget</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+               <div class="edit-form"></div>
+
             </div>
         </div>
     </div>
