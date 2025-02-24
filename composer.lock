@@ -1411,16 +1411,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.0",
+            "version": "v11.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "70760d976486310b11d8e487e873077db069e77a"
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/70760d976486310b11d8e487e873077db069e77a",
-                "reference": "70760d976486310b11d8e487e873077db069e77a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
                 "shasum": ""
             },
             "require": {
@@ -1622,7 +1622,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-18T15:37:56+00:00"
+            "time": "2025-02-24T13:08:54+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2466,16 +2466,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.8.5",
+            "version": "3.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "b1a53a27898639579a67de42e8ced5d5386aa9a4"
+                "reference": "ff2f20cf83bd4d503720632ce8a426dc747bf7fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/b1a53a27898639579a67de42e8ced5d5386aa9a4",
-                "reference": "b1a53a27898639579a67de42e8ced5d5386aa9a4",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/ff2f20cf83bd4d503720632ce8a426dc747bf7fd",
+                "reference": "ff2f20cf83bd4d503720632ce8a426dc747bf7fd",
                 "shasum": ""
             },
             "require": {
@@ -2568,7 +2568,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-11T16:28:45+00:00"
+            "time": "2025-02-20T17:33:38+00:00"
         },
         {
             "name": "nette/schema",
@@ -2925,29 +2925,22 @@
         },
         {
             "name": "php-flasher/flasher",
-            "version": "v2.1.3",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher.git",
-                "reference": "01feeba12d6140746a800b124631b4b3eb1b7d11"
+                "reference": "054a209515d2eb1bb72467023d8614a29b5d2e60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/01feeba12d6140746a800b124631b4b3eb1b7d11",
-                "reference": "01feeba12d6140746a800b124631b4b3eb1b7d11",
+                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/054a209515d2eb1bb72467023d8614a29b5d2e60",
+                "reference": "054a209515d2eb1bb72467023d8614a29b5d2e60",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
             },
             "type": "library",
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "extension.neon"
-                    ]
-                }
-            },
             "autoload": {
                 "files": [
                     "functions.php",
@@ -2993,26 +2986,26 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-18T10:26:31+00:00"
+            "time": "2025-02-21T20:05:00+00:00"
         },
         {
             "name": "php-flasher/flasher-laravel",
-            "version": "v2.1.3",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher-laravel.git",
-                "reference": "9d20241f4c93e2c52dd9f850e6ec56886fe84830"
+                "reference": "7097ab207d602db59b241206048c9884aadc5c06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-laravel/zipball/9d20241f4c93e2c52dd9f850e6ec56886fe84830",
-                "reference": "9d20241f4c93e2c52dd9f850e6ec56886fe84830",
+                "url": "https://api.github.com/repos/php-flasher/flasher-laravel/zipball/7097ab207d602db59b241206048c9884aadc5c06",
+                "reference": "7097ab207d602db59b241206048c9884aadc5c06",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^11.0",
+                "illuminate/support": "^11.0|^12.0",
                 "php": ">=8.2",
-                "php-flasher/flasher": "^2.1.2"
+                "php-flasher/flasher": "^2.1.6"
             },
             "type": "library",
             "extra": {
@@ -3071,25 +3064,25 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-18T10:26:31+00:00"
+            "time": "2025-02-21T20:05:00+00:00"
         },
         {
             "name": "php-flasher/flasher-notyf",
-            "version": "v2.1.3",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher-notyf.git",
-                "reference": "ebd996517fca5f293bf5902084dd7c8cadf4ada8"
+                "reference": "16790007fec9a641b4d82ae8493843b85660b56a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-notyf/zipball/ebd996517fca5f293bf5902084dd7c8cadf4ada8",
-                "reference": "ebd996517fca5f293bf5902084dd7c8cadf4ada8",
+                "url": "https://api.github.com/repos/php-flasher/flasher-notyf/zipball/16790007fec9a641b4d82ae8493843b85660b56a",
+                "reference": "16790007fec9a641b4d82ae8493843b85660b56a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "php-flasher/flasher": "^2.1.2"
+                "php-flasher/flasher": "^2.1.6"
             },
             "type": "library",
             "autoload": {
@@ -3142,26 +3135,26 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-18T10:26:31+00:00"
+            "time": "2025-02-21T20:05:00+00:00"
         },
         {
             "name": "php-flasher/flasher-notyf-laravel",
-            "version": "v2.1.3",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher-notyf-laravel.git",
-                "reference": "aec79cf02e041be6d4fb94cba67ae8204fd5c95e"
+                "reference": "751a94e92f04d733ee79aaeccd2469bdfabf6381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-notyf-laravel/zipball/aec79cf02e041be6d4fb94cba67ae8204fd5c95e",
-                "reference": "aec79cf02e041be6d4fb94cba67ae8204fd5c95e",
+                "url": "https://api.github.com/repos/php-flasher/flasher-notyf-laravel/zipball/751a94e92f04d733ee79aaeccd2469bdfabf6381",
+                "reference": "751a94e92f04d733ee79aaeccd2469bdfabf6381",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "php-flasher/flasher-laravel": "^2.1.2",
-                "php-flasher/flasher-notyf": "^2.1.2"
+                "php-flasher/flasher-laravel": "^2.1.6",
+                "php-flasher/flasher-notyf": "^2.1.6"
             },
             "type": "library",
             "extra": {
@@ -3216,7 +3209,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-18T10:26:31+00:00"
+            "time": "2025-02-21T20:05:00+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -6721,16 +6714,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.15.0",
+            "version": "v3.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "77cca4a1162d45e1fe64e7a71b4a3031656b6c86"
+                "reference": "62b222166a9505926d54fadf7663bb4a26ed9014"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/77cca4a1162d45e1fe64e7a71b4a3031656b6c86",
-                "reference": "77cca4a1162d45e1fe64e7a71b4a3031656b6c86",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/62b222166a9505926d54fadf7663bb4a26ed9014",
+                "reference": "62b222166a9505926d54fadf7663bb4a26ed9014",
                 "shasum": ""
             },
             "require": {
@@ -6740,6 +6733,9 @@
                 "php": "^8.1",
                 "php-debugbar/php-debugbar": "~2.1.1",
                 "symfony/finder": "^6|^7"
+            },
+            "conflict": {
+                "maximebf/debugbar": "*"
             },
             "require-dev": {
                 "mockery/mockery": "^1.3.3",
@@ -6790,7 +6786,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.15.0"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.15.1"
             },
             "funding": [
                 {
@@ -6802,40 +6798,40 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-21T15:00:44+00:00"
+            "time": "2025-02-24T10:48:28+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "v3.5.4",
+            "version": "v3.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "980a87e250fc2a7558bc46e07f61c7594500ea53"
+                "reference": "8d441ec99f8612b942b55f5183151d91591b618a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/980a87e250fc2a7558bc46e07f61c7594500ea53",
-                "reference": "980a87e250fc2a7558bc46e07f61c7594500ea53",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/8d441ec99f8612b942b55f5183151d91591b618a",
+                "reference": "8d441ec99f8612b942b55f5183151d91591b618a",
                 "shasum": ""
             },
             "require": {
                 "barryvdh/reflection-docblock": "^2.3",
                 "composer/class-map-generator": "^1.0",
                 "ext-json": "*",
-                "illuminate/console": "^11.15",
-                "illuminate/database": "^11.15",
-                "illuminate/filesystem": "^11.15",
-                "illuminate/support": "^11.15",
+                "illuminate/console": "^11.15 || ^12",
+                "illuminate/database": "^11.15 || ^12",
+                "illuminate/filesystem": "^11.15 || ^12",
+                "illuminate/support": "^11.15 || ^12",
                 "php": "^8.2"
             },
             "require-dev": {
                 "ext-pdo_sqlite": "*",
                 "friendsofphp/php-cs-fixer": "^3",
-                "illuminate/config": "^11.15",
-                "illuminate/view": "^11.15",
+                "illuminate/config": "^11.15 || ^12",
+                "illuminate/view": "^11.15 || ^12",
                 "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^9.2",
-                "phpunit/phpunit": "^10.5",
+                "orchestra/testbench": "^9.2 || ^10",
+                "phpunit/phpunit": "^10.5 || ^11.5.3",
                 "spatie/phpunit-snapshot-assertions": "^4 || ^5",
                 "vimeo/psalm": "^5.4",
                 "vlucas/phpdotenv": "^5"
@@ -6884,7 +6880,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-ide-helper/issues",
-                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v3.5.4"
+                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v3.5.5"
             },
             "funding": [
                 {
@@ -6896,7 +6892,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-14T09:07:00+00:00"
+            "time": "2025-02-11T13:59:46+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -8511,16 +8507,16 @@
         },
         {
             "name": "php-debugbar/php-debugbar",
-            "version": "v2.1.5",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-debugbar/php-debugbar.git",
-                "reference": "3f589bbbaed53039d9699702c2908148647c27a1"
+                "reference": "16fa68da5617220594aa5e33fa9de415f94784a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/3f589bbbaed53039d9699702c2908148647c27a1",
-                "reference": "3f589bbbaed53039d9699702c2908148647c27a1",
+                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/16fa68da5617220594aa5e33fa9de415f94784a0",
+                "reference": "16fa68da5617220594aa5e33fa9de415f94784a0",
                 "shasum": ""
             },
             "require": {
@@ -8575,9 +8571,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-debugbar/php-debugbar/issues",
-                "source": "https://github.com/php-debugbar/php-debugbar/tree/v2.1.5"
+                "source": "https://github.com/php-debugbar/php-debugbar/tree/v2.1.6"
             },
-            "time": "2025-02-21T13:02:05+00:00"
+            "time": "2025-02-21T17:47:03+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -8756,16 +8752,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "51087f87dcce2663e1fed4dfd4e56eccd580297e"
+                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/51087f87dcce2663e1fed4dfd4e56eccd580297e",
-                "reference": "51087f87dcce2663e1fed4dfd4e56eccd580297e",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
+                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
                 "shasum": ""
             },
             "require": {
@@ -8797,9 +8793,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.0.2"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.1.0"
             },
-            "time": "2025-02-17T20:25:51+00:00"
+            "time": "2025-02-19T13:28:12+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
