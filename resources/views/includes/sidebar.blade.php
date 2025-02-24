@@ -18,7 +18,7 @@
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
                     <x-tabler-home/>
                 </span>
-                        <span class="nav-link-title">Home</span>
+                        <span class="nav-link-title">{{get_translation('home')}}</span>
                     </a>
                 </li>
 
@@ -28,7 +28,7 @@
                     <x-tabler-category/>
                 </span>
                         <span class="nav-link-title">
-					Categories
+					{{get_translation('categories')}}
 				</span>
                     </a>
                 </li>
@@ -39,7 +39,7 @@
                     <x-tabler-currency-dollar/>
                 </span>
                         <span class="nav-link-title">
-					Currencies
+					{{get_translation('currencies')}}
 				</span>
                     </a>
                 </li>
@@ -55,7 +55,7 @@
                             d="M20 10l0 11"/><path d="M8 14l0 3"/><path d="M12 14l0 3"/><path d="M16 14l0 3"/></svg>
                 </span>
                         <span class="nav-link-title">
-					Banks
+					{{get_translation('banks')}}
 				</span>
                     </a>
                 </li>
@@ -73,7 +73,7 @@
                             d="M19 21v1m0 -8v1"/></svg>
                 </span>
                         <span class="nav-link-title">
-					Bank Accounts
+					{{get_translation('bank_accounts')}}
 				</span>
                     </a>
                 </li>
@@ -89,7 +89,7 @@
                             d="M20 10h-16l5.5 -6"/><path d="M4 14h16l-5.5 6"/></svg>
                 </span>
                         <span class="nav-link-title">
-					Balance Transfer
+					{{get_translation('balance_transfer')}}
 				</span>
                     </a>
                 </li>
@@ -100,7 +100,7 @@
                     <x-tabler-loader-3/>
                 </span>
                         <span class="nav-link-title">
-					Lend/Borrow
+					{{get_translation('lend_borrow')}}
 				</span>
                     </a>
                 </li>
@@ -111,7 +111,7 @@
                     <x-tabler-copy-plus/>
                 </span>
                         <span class="nav-link-title">
-					Incomes
+					{{get_translation('incomes')}}
 				</span>
                     </a>
                 </li>
@@ -121,7 +121,7 @@
                     <x-tabler-receipt-dollar/>
                 </span>
                         <span class="nav-link-title">
-					Expenses
+					{{get_translation('expenses')}}
 				</span>
                     </a>
                 </li>
@@ -132,14 +132,14 @@
                     <x-tabler-calendar-dollar/>
                 </span>
                         <span class="nav-link-title">
-					Budgets
+					{{get_translation('budgets')}}
 				</span>
                     </a>
                 </li>
                 <li class="nav-item @if($activeMenu == 'income-report') active-state @endif">
                     <a class="nav-link" href="{{route('currencies.index')}}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><x-tabler-report/></span>
-                        <span class="nav-link-title">Income Report</span>
+                        <span class="nav-link-title">{{get_translation('income_report')}}</span>
                     </a>
                 </li>
                 <li class="nav-item @if($activeMenu == 'expense-report') active-state @endif">
@@ -148,7 +148,7 @@
                     <x-tabler-report/>
                 </span>
                         <span class="nav-link-title">
-					Expense Report
+					{{get_translation('expense_report')}}
 				</span>
                     </a>
                 </li>
@@ -159,7 +159,7 @@
                     <x-tabler-calendar/>
                 </span>
                         <span class="nav-link-title">
-					Calendar
+					{{get_translation('calendar')}}
 				</span>
                     </a>
                 </li>
@@ -169,7 +169,7 @@
                     <a class="nav-link" href="{{route('languages.index')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
                     {{ svg('clarity-language-solid') }}
-                </span><span class="nav-link-title">Languages</span>
+                </span><span class="nav-link-title">{{get_translation('languages')}}</span>
                     </a>
                 </li>
 
@@ -180,7 +180,7 @@
                     <x-tabler-settings/>
                 </span>
                         <span class="nav-link-title">
-					Application Settings
+					{{get_translation('application_settings')}}
 				</span>
                     </a>
                 </li>

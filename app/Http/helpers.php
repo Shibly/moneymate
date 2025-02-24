@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Currency;
+use App\Models\Language;
+use App\Models\Translation;
 
 
 if (!function_exists('get_option')) {
@@ -45,3 +47,36 @@ if (!function_exists('convert_to_exchange_amount')) {
         }
     }
 }
+
+
+// app/Helpers/helpers.php
+
+if (!function_exists('get_translation')) {
+    /**
+     * Get translation value based on key. Automatically uses the default language code.
+     * Falls back to English ('en') if no translation is found for the default code.
+     *
+     * @param string $key
+     * @return string|null
+     */
+    function get_translation($key): ?string
+    {
+        // Get the default language code
+        $defaultCode = Language::where('is_default', 1)
+            ->value('code');
+
+        if ($defaultCode) {
+            $translation = Translation::where('key', $key)
+                ->where('code', strtolower($defaultCode))
+                ->value('value');
+            if (!$translation) {
+                $translation = Translation::where('key', $key)
+                    ->where('code', 'en')
+                    ->value('value');
+            }
+            return $translation;
+        }
+        return null;
+    }
+}
+

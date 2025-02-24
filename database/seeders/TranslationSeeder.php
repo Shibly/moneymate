@@ -155,6 +155,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'total_lend_amount', 'value' => 'Total Lend Amount', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'income_vs_expense_summary_last_six_months', 'value' => 'Incomes vs Expense Summary - Last 6 Months', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'budget_distributed_among_categories', 'value' => 'Budget distributed among categories', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'languages', 'value' => 'Languages', 'created_at' => $now, 'updated_at' => $now],
         ];
 
 
