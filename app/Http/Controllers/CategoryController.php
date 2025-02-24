@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
         $categories = $this->categoryService->all();
         $activeMenu = 'categories';
-        $title = 'List of income and expense categories';
+        $title = get_translation('income_and_expense_categories');
         return view('admin.categories.index', compact('categories', 'activeMenu', 'title'));
     }
 
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
         $this->categoryService->create($request);
-        notyf()->success('New Category has been created.');
+        notyf()->success(get_translation('new_category_added_successfully'));
         return redirect()->route('categories.index');
     }
 
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, int $categoryId): RedirectResponse
     {
         $this->categoryService->update($request, $categoryId);
-        notyf()->info('Category has been updated.');
+        notyf()->info(get_translation('category_updated_successfully'));
         return redirect()->route('categories.index');
     }
 

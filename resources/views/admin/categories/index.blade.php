@@ -13,7 +13,7 @@
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#modal-report">
                             <x-tabler-category/>
-                            Add New
+                            {{get_translation('add_new')}}
                         </a>
                     </div>
                     <!-- Add New Category Modal -->
@@ -21,7 +21,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Add New Category</h5>
+                                    <h5 class="modal-title">{{get_translation('add_new_category')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -29,14 +29,15 @@
                                     @csrf
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Category Name</label>
+                                            <label class="form-label">{{get_translation('category_name')}}</label>
                                             <input type="text" class="form-control" name="name"
-                                                   placeholder="Category Name" required>
+                                                   placeholder="{{get_translation('category_name')}}" required>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Category Type</label>
+                                                    <label
+                                                        class="form-label">{{get_translation('category_type')}}</label>
                                                     <select name="type" class="form-select" required>
                                                         <option value="income" selected>Income</option>
                                                         <option value="expense">Expense</option>
@@ -48,11 +49,11 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">
-                                            Cancel
+                                            {{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             <x-tabler-category/>
-                                            Add New Category
+                                            {{get_translation('add_new')}}
                                         </button>
                                     </div>
                                 </form>
@@ -64,7 +65,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Edit Category</h5>
+                                    <h5 class="modal-title">{{get_translation('edit_category')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <form id="edit-category-form">
@@ -72,12 +73,12 @@
                                     <input type="hidden" name="id" id="edit-category-id">
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Category Name</label>
+                                            <label class="form-label">{{get_translation('category_name')}}</label>
                                             <input type="text" class="form-control" name="name" id="edit-category-name"
                                                    required>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Category Type</label>
+                                            <label class="form-label">{{get_translation('category_type')}}</label>
                                             <select name="type" class="form-select" id="edit-category-type" required>
                                                 <option value="income">Income</option>
                                                 <option value="expense">Expense</option>
@@ -85,9 +86,11 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Update Category</button>
+                                        <button type="submit"
+                                                class="btn btn-primary">{{get_translation('update')}}</button>
                                     </div>
                                 </form>
                             </div>
@@ -98,7 +101,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <h5 class="modal-title">{{get_translation('confirm_deletion')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body text-center">
@@ -114,9 +117,11 @@
                                     <div class="text-secondary">This action cannot be undone.</div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">{{get_translation('cancel')}}
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="confirm-delete">Yes, Delete
+                                    <button type="button" class="btn btn-danger"
+                                            id="confirm-delete">{{get_translation('yes_delete')}}
                                     </button>
                                 </div>
                             </div>
@@ -134,18 +139,16 @@
                 <div class="card-body">
 
                     <div class="alert alert-info">
-                        <span class="badge bg-blue-lt">Tip:</span>
-                        Categories can be classified as either <strong>Income</strong> or <strong>Expense</strong>. When
-                        recording your income or expense transactions,
-                        you can select the appropriate category to ensure accurate financial reporting and analysis.
+                        <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                        {{get_translation('categories_can_be_classified_as_either_income_or_expense_when_recording_your_income_or_expense_transactions_you_can_select_the_appropriate_category_to_ensure_accurate_financial_reporting_and_analysis')}}
                     </div>
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Category Name</th>
-                                <th class="text-center">Category Type</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center">{{get_translation('category_name')}}</th>
+                                <th class="text-center">{{get_translation('category_type')}}</th>
+                                <th class="text-center">{{get_translation('action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -250,7 +253,7 @@
                 $('#modal-delete').modal('show');
             });
 
-            $('#confirm-delete').click(function () {
+            $('#confirm-delete').on("click",function () {
                 $.ajax({
                     url: "{{ url('categories/destroy') }}/" + deleteCategoryId,
                     type: "POST",
@@ -262,7 +265,7 @@
                         $('#row-' + deleteCategoryId).remove();
                         Swal.fire({
                             title: "Deleted!",
-                            text: "Category has been deleted",
+                            text: "{{get_translation('category_has_been_deleted')}}",
                             icon: "success",
                             confirmButtonText: "OK"
                         });
