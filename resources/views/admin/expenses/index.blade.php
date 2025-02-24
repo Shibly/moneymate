@@ -59,7 +59,8 @@
                                     <td>{{\Carbon\Carbon::parse($expense->expense_date)->format("d/m/Y")}}</td>
                                     <td class="text-center">
                                         @if($expense->attachment)
-                                            <a href="{{ route('private.files', ['filename' => $expense->attachment]) }}" download="">
+                                            <a href="{{ route('private.files', ['filename' => $expense->attachment]) }}"
+                                               download="">
                                                 <x-tabler-download/>
                                             </a>
                                         @else
@@ -99,7 +100,7 @@
                             <div class="col-md-6">
                                 <div>
                                     <label class="form-label">Select Expense Category: <span
-                                                class="text-danger">*</span></label>
+                                            class="text-danger">*</span></label>
                                     <select name="category_id" class="form-control">
                                         <option value="">Select Category</option>
                                         @foreach($categories as $category)
@@ -111,7 +112,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Select Bank Account: <span
-                                                class="text-danger">*</span></label>
+                                            class="text-danger">*</span></label>
                                     <select name="account_id" class="form-control">
                                         <option value="">Select a Bank Account</option>
                                         @foreach($bankAccounts as $bankAccount)
@@ -127,7 +128,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Select Currency: <span
-                                                class="text-danger">*</span></label>
+                                            class="text-danger">*</span></label>
                                     <select name="currency_id" class="form-control">
                                         <option value="">Select Currency</option>
                                         @foreach($currencies as $currency)
@@ -168,8 +169,13 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Expense Date: <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="expense_date"
-                                           placeholder="Expense Date">
+                                    <div class="input-icon mb-2">
+                                        <input class="form-control" name="expense_date"
+                                               placeholder="Expense Date"
+                                               id="datepicker" value="" required/>
+                                        <span class="input-icon-addon"><x-tabler-calendar/></span>
+                                    </div>
+
                                     <div class="text-danger pt-2 expense_date"></div>
                                 </div>
 
@@ -207,7 +213,7 @@
                          stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
                         <path d="M12 9v4"></path>
                         <path
-                                d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                         <path d="M12 16h.01"></path>
                     </svg>
                     <h3>Are you sure to delete this expense?</h3>

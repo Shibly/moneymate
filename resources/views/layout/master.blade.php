@@ -64,6 +64,7 @@
 <script src="{{asset('public/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
 <script src="{{asset('public/libs/jsvectormap/dist/jsvectormap.min.js')}}"></script>
 <script src="{{asset('public/libs/jsvectormap/dist/maps/world.js')}}"></script>
+<script src="{{asset('public/libs/litepicker/dist/litepicker.js')}}" defer></script>
 <script src="{{asset('public/js/tabler.min.js')}}"></script>
 <script src="{{asset('public/js/demo.min.js')}}"></script>
 <script src="{{ asset('public/libs/datatable/datatable.js') }}"></script>

@@ -106,7 +106,13 @@
                                             <!-- Date (Second Column) -->
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Date</label>
-                                                <input type="date" class="form-control" name="income_date" required>
+                                                <div class="input-icon mb-2">
+                                                    <input class="form-control" name="income_date"
+                                                           placeholder="Select a date"
+                                                           id="datepicker" value="" required/>
+                                                    <span class="input-icon-addon"><x-tabler-calendar/></span>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +178,7 @@
                                          stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
                                         <path d="M12 9v4"></path>
                                         <path
-                                                d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+                                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
                                     <h3>Are you sure to delete this income ?</h3>
