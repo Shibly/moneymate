@@ -157,6 +157,10 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'budget_distributed_among_categories', 'value' => 'Budget distributed among categories', 'created_at' => $now, 'updated_at' => $now],
         ];
 
+
+        // Flush the data first
+        DB::table('translations')->truncate();
+
         // Insert the translations into the database
         DB::table('translations')->insert($translations);
     }
