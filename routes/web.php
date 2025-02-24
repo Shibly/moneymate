@@ -115,6 +115,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'budget'], function () {
         Route::get('/', [BudgetController::class, 'index'])->name('budget.index');
         Route::post('store', [BudgetController::class, 'store'])->name('budget.store');
+        Route::post('update/{id}', [BudgetController::class, 'update'])->name('budget.update');
         Route::get('destroy/{id}', [BudgetController::class, 'destroy'])->name('budget.destroy');
     });
 

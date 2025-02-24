@@ -1,0 +1,74 @@
+
+<form action="{{route('budget.update', [$budget->id])}}" method="POST" id="editBudget">
+    @csrf
+    <div class="modal-body">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-6">
+                <div>
+                    <label class="form-label">Budget Name: <span
+                            class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="budget_name" value="{{$budget->budget_name}}" placeholder="Budget Name">
+                    <div class="text-danger pt-2 budget_name"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select Currency: <span
+                            class="text-danger">*</span></label>
+                    <select name="currency_id" class="form-control">
+                        <option value="">Select Currency</option>
+                        @foreach($currencies as $currency)
+                            <option value="{{$currency->id}}" {{$budget->currency_id == $currency->id ? 'selected' : ''}} >{{$currency->name}}</option>
+                        @endforeach
+                    </select>
+                    <div class="text-danger mt-2 currency_id"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Budget Amount: <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" name="amount" value="{{$budget->amount}}" placeholder="Budget Amount">
+                    <div class="text-danger pt-2 amount"></div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6">
+
+                <div>
+                    <label class="form-label">Expense Category: <span
+                            class="text-danger">*</span></label>
+                    <select name="category_id[]" class="form-control" multiple>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                    <div class="text-danger mt-2 category_id"></div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Start Date: <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" name="start_date"
+                           value="{{$budget->start_date}}"
+                           placeholder="Start Date">
+                    <div class="text-danger pt-2 start_date"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">End Date: <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" name="end_date"
+                           value="{{$budget->end_date}}"
+                           placeholder="End Date">
+                    <div class="text-danger pt-2 end_date"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="logical-error d-none alert alert-danger"></div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Update Budget</button>
+    </div>
+</form>
