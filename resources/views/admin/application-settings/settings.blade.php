@@ -172,7 +172,7 @@
                                     <div class="btn-list justify-content-end">
                                         <button type="submit" value="Save Settings" class="btn btn-primary">
                                             <x-tabler-adjustments-check/>
-                                            {{get_option('save_settings')}}
+                                            {{get_translation('save_settings')}}
                                         </button>
                                     </div>
                                 </div>

@@ -42,7 +42,7 @@ class TranslationController extends Controller
         // If not found, create a new one
         if (!$translation) {
             $translation = new Translation();
-            $translation->code = $code;
+            $translation->code = strtolower($code);
             $translation->key = $key;
         }
 
@@ -76,19 +76,22 @@ class TranslationController extends Controller
         $activeMenu = 'edit-translation';
         $languages = Language::all();
         $translations = Translation::where('code', $code)->get();
+        $englishTranslations = Translation::where('code', 'en')->get();
         $allKeys = Translation::select('key')->distinct()->pluck('key')->toArray();
         $existingTranslations = $translations->keyBy('key');
+        $englishTranslations = $englishTranslations->keyBy('key');
         foreach ($allKeys as $key) {
+
             if (!$existingTranslations->has($key)) {
                 $translations->push((object)[
                     'key' => $key,
-                    'value' => '',
+                    'value' => isset($englishTranslations[$key]) ? $englishTranslations[$key]->value : '',
                     'code' => $code,
                 ]);
             }
         }
         $translations = $translations->sortBy('key');
-        return view('admin.translations.edit', compact('translations', 'languages', 'code', 'activeMenu'));
+        return view('admin.translations.edit', compact('translations', 'languages', 'code', 'activeMenu', 'englishTranslations'));
     }
 
 

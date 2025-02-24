@@ -61,22 +61,28 @@ if (!function_exists('get_translation')) {
      */
     function get_translation($key): ?string
     {
-        // Get the default language code
-        $defaultCode = Language::where('is_default', 1)
-            ->value('code');
 
-        if ($defaultCode) {
-            $translation = Translation::where('key', $key)
-                ->where('code', strtolower($defaultCode))
-                ->value('value');
-            if (!$translation) {
-                $translation = Translation::where('key', $key)
-                    ->where('code', 'en')
-                    ->value('value');
-            }
-            return $translation;
+        $defaultCode = Language::where('is_default', 1)->value('code');
+
+
+        if (!$defaultCode) {
+            $defaultCode = 'en';
         }
-        return null;
+
+        $translation = Translation::where('key', $key)
+            ->where('code', strtolower($defaultCode)) // Ensure the code is lowercase
+            ->value('value');
+
+
+        if (!$translation) {
+            $translation = Translation::where('key', $key)
+                ->where('code', 'en')
+                ->value('value');
+        }
+
+        return $translation;
     }
+
+
 }
 
