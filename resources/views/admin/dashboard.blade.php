@@ -15,7 +15,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                Income This Month
+                                                {{get_translation('income_this_month')}}
                                             </div>
                                             <div class="text-secondary">
                                                 {{$totalMonthlyIncome}}
@@ -36,10 +36,10 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                Expenses this month
+                                                {{get_translation('expense_this_month')}}
                                             </div>
                                             <div class="text-secondary">
-                                                32 shipped
+                                                {{$totalMonthlyExpense}}
                                             </div>
                                         </div>
                                     </div>

@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Models\BankAccount;
 use App\Models\Currency;
 use App\Models\Debt;
+use App\Models\Expense;
 use App\Models\Income;
 
 trait DashboardWidgets
@@ -56,10 +57,31 @@ trait DashboardWidgets
         return 'No default currency set or invalid exchange rate.';
     }
 
-    public function getMonthlyExpenses()
+    public function getMonthlyExpenses(): string
     {
-        // Your logic for monthly expenses, if needed
+        $expenses = Expense::whereMonth('expense_date', date('m'))
+            ->whereYear('expense_date', date('Y'))
+            ->where('user_id', auth()->id())
+            ->with('currency')
+            ->select('id', 'currency_id', 'usd_amount')
+            ->get();
+
+        $expenseOfThisMonth = 0;
+        $defaultCurrency = $this->getDefaultCurrency();
+
+        // Only calculate if a default currency is found and has a valid exchange rate
+        if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
+            foreach ($expenses as $expense) {
+                $expenseOfThisMonth += $expense->usd_amount * $defaultCurrency->exchange_rate;
+            }
+
+            return number_format($expenseOfThisMonth, 0) . ' ' . $defaultCurrency->name;
+        }
+
+        // Fallback in case there is no default currency or exchange rate is invalid
+        return 'No default currency set or invalid exchange rate.';
     }
+
 
     /**
      * Get the total account balance across all user bank accounts,
