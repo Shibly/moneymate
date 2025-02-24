@@ -62,7 +62,7 @@ if (!function_exists('get_translation')) {
     function get_translation($key): ?string
     {
 
-        $defaultCode = Language::where('is_default', 1)->value('code');
+        $defaultCode = Language::where('is_default', '1')->value('code');
 
 
         if (!$defaultCode) {

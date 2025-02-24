@@ -116,7 +116,7 @@
                                 <tr>
                                     <td class="text-center">{{ $language->name }}</td>
                                     <td class="text-center">{{ $language->code }}</td>
-                                    <td class="text-center">{{ $language->status ? 'Active' : 'Inactive' }}</td>
+                                    <td class="text-center">{{ $language->is_default ? 'Active' : 'Inactive' }}</td>
                                     <td class="text-center">
 
                                         <div class="d-flex justify-content-center">
