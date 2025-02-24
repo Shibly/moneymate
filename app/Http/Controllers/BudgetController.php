@@ -55,10 +55,6 @@ class BudgetController extends Controller
     }
 
 
-    /**
-     * @param StoreBudgetRequest $request
-     * @return RedirectResponse
-     */
     public function store(StoreBudgetRequest $request)
     {
         $data = $request->validated();
@@ -82,12 +78,11 @@ class BudgetController extends Controller
     /**
      * @param UpdateBudgetRequest $request
      * @param int $id
-     * @return RedirectResponse
      */
-    public function update(UpdateBudgetRequest $request, int $id): RedirectResponse
+    public function update(UpdateBudgetRequest $request, int $id)
     {
         $data = $request->validated();
-        $this->budgetService->update($id, $data);
+        $this->budgetService->update($data, $id);
         notyf()->success('Budget has been updated');
         return redirect()->back();
     }

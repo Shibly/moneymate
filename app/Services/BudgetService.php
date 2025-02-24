@@ -13,9 +13,6 @@ class BudgetService
      */
     protected BudgetInterface $budgetInterface;
 
-    /**
-     * @param BudgetInterface $budgetInterface
-     */
     public function __construct(BudgetInterface $budgetInterface)
     {
         $this->budgetInterface = $budgetInterface;
@@ -29,11 +26,7 @@ class BudgetService
       return $this->budgetInterface->all();
     }
 
-    /**
-     * @param array $data
-     * @return Collection
-     */
-    public function store(array $data): Collection
+    public function store(array $data)
     {
         return $this->budgetInterface->store($data);
     }
@@ -51,12 +44,11 @@ class BudgetService
     /**
      * @param int $id
      * @param array $data
-     * @return Collection
      */
 
-    public function update(int $id, array $data): Collection
+    public function update(array $data, int $id)
     {
-        return $this->budgetInterface->update($id, $data);
+        return $this->budgetInterface->update($data, $id);
     }
 
     /**

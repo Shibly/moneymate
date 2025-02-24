@@ -185,7 +185,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit Expense</button>
+                        <button type="submit" class="btn btn-primary action-button">Submit Expense</button>
                     </div>
                 </form>
             </div>
@@ -235,6 +235,7 @@
                 e.preventDefault();
 
                 $("#addExpenseModal .logical-error").addClass('d-none');
+                $("#addExpenseModal .action-button").attr('disabled', true);
 
                 var form = $(this);
                 var url = form.attr('action');
@@ -259,6 +260,8 @@
                         } else {
                             alert("Something went wrong. Please try again.");
                         }
+
+                        $("#addExpenseModal .action-button").attr('disabled', false);
                     },
                     cache: false,
                     contentType: false,

@@ -11,7 +11,7 @@ class UpdateBudgetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,23 @@ class UpdateBudgetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'budget_name' => 'required|string',
+            'currency_id' => 'required',
+            'amount' => 'required|numeric',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'currency_id.required' => 'Please select currency',
         ];
     }
 }

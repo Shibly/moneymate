@@ -1,5 +1,5 @@
 
-<form action="{{route('budget.update', [$budget->id])}}" method="POST" id="editBudget">
+<form action="{{route('budget.update', [$budget->id])}}" method="POST" id="updateBudget">
     @csrf
     <div class="modal-body">
         <div class="row">
@@ -34,15 +34,23 @@
             <!-- Right Column -->
             <div class="col-md-6">
 
+                @php
+                    $selectedCategoryIds = [];
+                    foreach ($budget->categories as $selectedCategory)
+                        {
+                            $selectedCategoryIds[] = $selectedCategory->id;
+                        }
+                @endphp
+
                 <div>
                     <label class="form-label">Expense Category: <span
                             class="text-danger">*</span></label>
-                    <select name="category_id[]" class="form-control" multiple>
+                    <select name="categories[]" class="form-control" multiple>
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{$category->id}}" @if(in_array($category->id, $selectedCategoryIds)) selected @endif >{{$category->name}}</option>
                         @endforeach
                     </select>
-                    <div class="text-danger mt-2 category_id"></div>
+                    <div class="text-danger mt-2 categories"></div>
                 </div>
 
 
@@ -69,6 +77,6 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Update Budget</button>
+        <button type="submit" class="btn btn-primary action-button">Update Budget</button>
     </div>
 </form>

@@ -39,7 +39,25 @@
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
-
+                            @foreach($budgets as $budget)
+                            <tr>
+                                <td>{{$budget->budget_name}}</td>
+                                <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->amount}}</td>
+                                <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->updated_amount}}</td>
+                                <td>{{\Carbon\Carbon::parse($budget->start_date)->format("d/m/Y")}}</td>
+                                <td>{{\Carbon\Carbon::parse($budget->end_date)->format("d/m/Y")}}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-info edit-btn" data-id="{{ $budget->id }}">
+                                        <x-tabler-edit/>
+                                        Edit
+                                    </button>
+                                    <button class="btn btn-danger delete-btn" data-id="{{ $budget->id }}">
+                                        <x-tabler-trash/>
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -95,12 +113,12 @@
                                 <div>
                                     <label class="form-label">Expense Category: <span
                                             class="text-danger">*</span></label>
-                                    <select name="category_id[]" class="form-control" multiple>
+                                    <select name="categories[]" class="form-control" multiple>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>
-                                    <div class="text-danger mt-2 category_id"></div>
+                                    <div class="text-danger mt-2 categories"></div>
                                 </div>
 
 
@@ -125,7 +143,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit Budget</button>
+                        <button type="submit" class="btn btn-primary action-button">Submit Budget</button>
                     </div>
                 </form>
 
@@ -190,6 +208,8 @@
                 e.preventDefault();
 
                 $("#addBudgetModal .logical-error").addClass('d-none');
+                $("#addBudgetModal .action-button").attr('disabled', true);
+
 
                 var form = $(this);
                 var url = form.attr('action');
@@ -208,18 +228,74 @@
                             $.each(err_response.errors, function (key, value) {
                                 $("#addBudgetModal ." + key).text(value);
                             });
-                        } else if (xhr.status === 400) {
+                        }  else {
                             var err_response = JSON.parse(xhr.responseText);
                             $("#addBudgetModal .logical-error").removeClass('d-none').show().text(err_response.message);
-                        } else {
-                            alert("Something went wrong. Please try again.");
                         }
+
+                        $("#addBudgetModal .action-button").attr('disabled', false);
                     },
                     cache: false,
                     contentType: false,
                     processData: false
                 });
             });
+
+            $(document).on('click', '.edit-btn', function () {
+                let budgetId = $(this).data('id');
+
+                $.ajax({
+                    url: "{{ url('budget/edit') }}/" + budgetId,
+                    type: "GET",
+                    success: function (data) {
+                        $('#editBudgetModal .edit-form').html(data);
+                        $('#editBudgetModal').modal('show');
+                    },
+                    error: function (xhr) {
+                        console.log("Error fetching bank data:", xhr);
+                    }
+                });
+            });
+
+
+            $(document).on('submit', '#updateBudget', function (e) {
+                e.preventDefault();
+
+                $("#editBudgetModal .logical-error").addClass('d-none');
+                $("#editBudgetModal .action-button").attr('disabled', true);
+
+                var form = $(this);
+                var url = form.attr('action');
+                const formData = new FormData(form[0]);
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    success: function (response) {
+                        location.reload();
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 422) {
+                            var err_response = JSON.parse(xhr.responseText);
+                            $.each(err_response.errors, function (key, value) {
+                                $("#editBudgetModal ." + key).text(value);
+                            });
+                        } else {
+                            var err_response = JSON.parse(xhr.responseText);
+                            $("#editBudgetModal .logical-error")
+                                .removeClass('d-none')
+                                .show()
+                                .text(err_response.message);
+                        }
+                        $("#editBudgetModal .action-button").attr('disabled', false);
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+
 
 
             let deletedId;

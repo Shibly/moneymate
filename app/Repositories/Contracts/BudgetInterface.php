@@ -14,9 +14,9 @@ interface BudgetInterface
 
     /**
      * @param array $data
-     * @return Collection
+     * @return mixed
      */
-    public function store(array $data): Collection;
+    public function store(array $data): mixed;
 
     /**
      * @param int $id
@@ -28,9 +28,9 @@ interface BudgetInterface
     /**
      * @param $id
      * @param array $data
-     * @return Collection
+     * @return mixed
      */
-    public function update($id, array $data): Collection;
+    public function update(array $data, int $id): mixed;
 
     /**
      * @param int $id
