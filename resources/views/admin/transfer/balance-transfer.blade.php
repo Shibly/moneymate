@@ -125,8 +125,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">Transfer Date: <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="transfer_date"
-                                   placeholder="Transfer Date">
+                            <div class="input-icon mb-2">
+                                <input class="form-control" name="transfer_date"
+                                       placeholder="Select a date"
+                                       id="datepicker" value=""/>
+                                <span class="input-icon-addon"><x-tabler-calendar/></span>
+                            </div>
                             <div class="text-danger pt-2 transfer_date"></div>
                         </div>
 

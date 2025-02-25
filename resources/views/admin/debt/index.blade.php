@@ -80,91 +80,115 @@
         </div>
     </div>
 
-    <!-- Balance Transfer Modal -->
+
     <div class="modal modal-blur fade" id="addDebtModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <h5 class="modal-title">Add Lend/Borrow</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
 
+
                 <form action="{{ route('debts.store') }}" method="POST" id="addDebt">
                     @csrf
                     <div class="modal-body">
 
-                        <div class="mb-3">
-                            <label class="form-label">Select Bank Account: <span class="text-danger">*</span></label>
-                            <select name="account_id" class="form-control">
-                                <option value="">Select a Bank Account</option>
-                                @foreach($bankAccounts as $bankAccount)
-                                    <option value="{{$bankAccount->id}}">
-                                        {{$bankAccount->bank->bank_name}} - {{$bankAccount->account_number}} - Balance
-                                        ({{$bankAccount->currency->name ?? ''}} {{$bankAccount->balance}})
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="text-danger mt-2 account_id"></div>
-                        </div>
+                        <div class="row g-3">
 
-                        <div class="mb-3">
-                            <label class="form-label">Select Currency: <span class="text-danger">*</span></label>
-                            <select name="currency_id" class="form-control">
-                                <option value="">Select Currency</option>
-                                @foreach($currencies as $currency)
-                                    <option value="{{$currency->id}}">
-                                        {{$currency->name}}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="text-danger mt-2 currency_id"></div>
-                        </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Select Bank Account: <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="account_id" class="form-control">
+                                        <option value="">Select a Bank Account</option>
+                                        @foreach($bankAccounts as $bankAccount)
+                                            <option value="{{$bankAccount->id}}">
+                                                {{$bankAccount->bank->bank_name}}
+                                                - {{$bankAccount->account_number}}
+                                                - Balance ({{$bankAccount->currency->name ?? ''}} {{$bankAccount->balance}})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger mt-2 account_id"></div>
+                                </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Amount: <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="amount"
-                                   placeholder="Amount">
-                            <div class="text-danger pt-2 amount"></div>
-                        </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Select Currency: <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="currency_id" class="form-control">
+                                        <option value="">Select Currency</option>
+                                        @foreach($currencies as $currency)
+                                            <option value="{{$currency->id}}">
+                                                {{$currency->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger mt-2 currency_id"></div>
+                                </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Type: <span class="text-danger">*</span></label>
-                            <select name="type" class="form-control">
-                                <option value="">Select Type</option>
-                                <option value="lend">Lend</option>
-                                <option value="borrow">Borrow</option>
-                            </select>
-                            <div class="text-danger mt-2 type"></div>
-                        </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Amount: <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" class="form-control" name="amount" placeholder="Amount">
+                                    <div class="text-danger pt-2 amount"></div>
+                                </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Person: <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="person"
-                                   placeholder="Person">
-                            <div class="text-danger pt-2 person"></div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Date: <span class="text-danger">*</span></label>
-                            <div class="input-icon mb-2">
-                                <input class="form-control" name="date"
-                                       placeholder="Select a date"
-                                       id="datepicker" value="" required/>
-                                <span class="input-icon-addon"><x-tabler-calendar/></span>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Type: <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="type" class="form-control">
+                                        <option value="">Select Type</option>
+                                        <option value="lend">Lend</option>
+                                        <option value="borrow">Borrow</option>
+                                    </select>
+                                    <div class="text-danger mt-2 type"></div>
+                                </div>
                             </div>
-                            <div class="text-danger pt-2 date"></div>
+                            <div class="col-sm-6">
+                                <div class="mb-2">
+                                    <label class="form-label">
+                                        Person: <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="person"
+                                           placeholder="Person">
+                                    <div class="text-danger pt-2 person"></div>
+                                </div>
+
+                                <div class="class-date">
+                                    <label class="form-label">
+                                        Date: <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-icon mb-2">
+                                        <input class="form-control" name="date" placeholder="Select a date"
+                                               id="datepicker" value="" />
+                                        <span class="input-icon-addon">
+                                        <x-tabler-calendar/>
+                                    </span>
+                                    </div>
+                                    <div class="text-danger pt-2 date"></div>
+                                </div>
+
+                                <div class="class-note">
+                                    <label class="form-label">Note:</label>
+                                    <input type="text" class="form-control" name="note"
+                                           placeholder="Note">
+                                    <div class="text-danger pt-2 note"></div>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Note:</label>
-                            <input type="text" class="form-control" name="note"
-                                   placeholder="Note">
-                            <div class="text-danger pt-2 note"></div>
-                        </div>
 
                         <div class="logical-error d-none alert alert-danger"></div>
                     </div>
+
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
@@ -176,9 +200,12 @@
                         </button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
+
+
 
 
     <div class="modal fade modal-blur" id="modal-delete" tabindex="-1" role="dialog">

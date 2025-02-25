@@ -215,7 +215,7 @@
                                     <td class="text-center">{{ $account->account_name }}</td>
                                     <td class="text-center">{{ $account->bank->bank_name }}</td>
                                     <td class="text-center">{{ $account->account_number }}</td>
-                                    <td class="text-center">{{ $account->balance }}</td>
+                                    <td class="text-center">{{ $account->balance }} {{$account->currency->name}}</td>
                                     <td class="text-center">
                                         <button class="btn btn-info edit-account-btn"
                                                 data-account-id="{{ $account->id }}">
