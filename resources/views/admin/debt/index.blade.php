@@ -167,8 +167,7 @@
                                         Date: <span class="text-danger">*</span>
                                     </label>
                                     <div class="input-icon mb-2">
-                                        <input class="form-control" name="date" placeholder="Select a date"
-                                               id="datepicker" value=""/>
+                                        <input class="form-control datepicker" name="date" placeholder="Select a date" value=""/>
                                         <span class="input-icon-addon">
                                         <x-tabler-calendar/>
                                     </span>

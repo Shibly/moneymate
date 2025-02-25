@@ -10,6 +10,7 @@ use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\DebtLoanRepositoryInterface;
 use App\Repositories\Contracts\ExpenseInterface;
+use App\Repositories\Contracts\IncomeReportRepositoryInterface;
 use App\Repositories\Contracts\IncomeRepositoryInterface;
 use App\Repositories\Eloquent\AccountTransferRepository;
 use App\Repositories\Eloquent\BankAccountRepository;
@@ -19,6 +20,7 @@ use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\CurrencyRepository;
 use App\Repositories\Eloquent\DebtLoanRepository;
 use App\Repositories\Eloquent\ExpenseRepository;
+use App\Repositories\Eloquent\IncomeReportRepository;
 use App\Repositories\Eloquent\IncomeRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -40,6 +42,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(DebtLoanRepositoryInterface::class, DebtLoanRepository::class);
         $this->app->bind(ExpenseInterface::class, ExpenseRepository::class);
         $this->app->bind(BudgetInterface::class, BudgetRepository::class);
+        $this->app->bind(IncomeReportRepositoryInterface::class, IncomeReportRepository::class);
     }
 
 }

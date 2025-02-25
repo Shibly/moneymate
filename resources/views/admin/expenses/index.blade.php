@@ -172,9 +172,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Expense Date: <span class="text-danger">*</span></label>
                                     <div class="input-icon mb-2">
-                                        <input class="form-control" name="expense_date"
+                                        <input class="form-control datepicker" name="expense_date"
                                                placeholder="Expense Date"
-                                               id="datepicker" value="" required/>
+                                               value="" required/>
                                         <span class="input-icon-addon"><x-tabler-calendar/></span>
                                     </div>
 

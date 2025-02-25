@@ -137,7 +137,7 @@
                     </a>
                 </li>
                 <li class="nav-item @if($activeMenu == 'income-report') active-state @endif">
-                    <a class="nav-link" href="{{route('currencies.index')}}">
+                    <a class="nav-link" href="{{route('income.report.index')}}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><x-tabler-report/></span>
                         <span class="nav-link-title">{{get_translation('income_report')}}</span>
                     </a>

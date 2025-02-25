@@ -40,23 +40,23 @@
                             </thead>
                             <tbody class="table-tbody">
                             @foreach($budgets as $budget)
-                            <tr>
-                                <td>{{$budget->budget_name}}</td>
-                                <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->amount}}</td>
-                                <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->updated_amount}}</td>
-                                <td>{{\Carbon\Carbon::parse($budget->start_date)->format("d/m/Y")}}</td>
-                                <td>{{\Carbon\Carbon::parse($budget->end_date)->format("d/m/Y")}}</td>
-                                <td class="text-center">
-                                    <button class="btn btn-info edit-btn" data-id="{{ $budget->id }}">
-                                        <x-tabler-edit/>
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-danger delete-btn" data-id="{{ $budget->id }}">
-                                        <x-tabler-trash/>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{$budget->budget_name}}</td>
+                                    <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->amount}}</td>
+                                    <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->updated_amount}}</td>
+                                    <td>{{\Carbon\Carbon::parse($budget->start_date)->format("d/m/Y")}}</td>
+                                    <td>{{\Carbon\Carbon::parse($budget->end_date)->format("d/m/Y")}}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-info edit-btn" data-id="{{ $budget->id }}">
+                                            <x-tabler-edit/>
+                                            Edit
+                                        </button>
+                                        <button class="btn btn-danger delete-btn" data-id="{{ $budget->id }}">
+                                            <x-tabler-trash/>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -84,7 +84,8 @@
                                 <div>
                                     <label class="form-label">Budget Name: <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="budget_name" placeholder="Budget Name">
+                                    <input type="text" class="form-control" name="budget_name"
+                                           placeholder="Budget Name">
                                     <div class="text-danger pt-2 budget_name"></div>
                                 </div>
 
@@ -124,15 +125,24 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Start Date: <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="start_date"
-                                           placeholder="Start Date">
+
+                                    <div class="input-icon mb-2">
+                                        <input class="form-control datepicker" name="start_date"
+                                               placeholder="Start Date"
+                                               value=""/>
+                                        <span class="input-icon-addon"><x-tabler-calendar/></span>
+                                    </div>
                                     <div class="text-danger pt-2 start_date"></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">End Date: <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="end_date"
-                                           placeholder="End Date">
+                                    <div class="input-icon mb-2">
+                                        <input class="form-control datepicker" name="end_date"
+                                               placeholder="End Date"
+                                               value=""/>
+                                        <span class="input-icon-addon"><x-tabler-calendar/></span>
+                                    </div>
                                     <div class="text-danger pt-2 end_date"></div>
                                 </div>
 
@@ -159,7 +169,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-               <div class="edit-form"></div>
+                <div class="edit-form"></div>
 
             </div>
         </div>
@@ -199,6 +209,7 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('public/js/calendar.js') }}"></script>
     <script>
         "use strict";
 
@@ -228,7 +239,7 @@
                             $.each(err_response.errors, function (key, value) {
                                 $("#addBudgetModal ." + key).text(value);
                             });
-                        }  else {
+                        } else {
                             var err_response = JSON.parse(xhr.responseText);
                             $("#addBudgetModal .logical-error").removeClass('d-none').show().text(err_response.message);
                         }
@@ -295,7 +306,6 @@
                     processData: false
                 });
             });
-
 
 
             let deletedId;

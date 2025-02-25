@@ -107,9 +107,9 @@
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Date</label>
                                                 <div class="input-icon mb-2">
-                                                    <input class="form-control" name="income_date"
+                                                    <input class="form-control datepicker" name="income_date"
                                                            placeholder="Select a date"
-                                                           id="datepicker" value="" required/>
+                                                           value="" required/>
                                                     <span class="input-icon-addon"><x-tabler-calendar/></span>
                                                 </div>
 
@@ -227,7 +227,10 @@
                                     <td class="text-center">{{ $income->description }}</td>
                                     <td class="text-center">
                                         @if($income->attachment)
-                                            <x-tabler-download/>
+                                            <a class="badge bg-blue text-blue-fg"
+                                               href="{{route('download.attachment',$income->attachment)}}">
+                                                <x-tabler-download/>
+                                                Download Attachment</a>
                                         @else
                                             No Attachment
                                         @endif

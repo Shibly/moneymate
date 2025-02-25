@@ -5,17 +5,18 @@ use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BankNameController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\DebtController;
 use App\Http\Controllers\ExpenseController;
-use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\IncomeReportController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TranslationController;
-use App\Http\Controllers\DebtController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -82,7 +83,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
     Route::group(['prefix' => 'banks'], function () {
         Route::get('/', [BankNameController::class, 'index'])->name('banks.index');
         Route::post('/store-bank', [BankNameController::class, 'store'])->name('banks.store');
@@ -121,7 +121,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/update', [SettingController::class, 'update'])->name('settings.update');
@@ -130,5 +129,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/manage-profile', [ProfileController::class, 'manageProfile'])->name('profile.manage-profile');
         Route::post('/update-profile', [ProfileController::class, 'updateProfile'])->name('profile.update-profile');
     });
+
+
+    Route::get('reports/income', [IncomeReportController::class, 'index'])
+        ->name('income.report.index');
+
+
+    Route::get('reports/income/export', [IncomeReportController::class, 'exportExcel'])
+        ->name('income.report.export');
 
 });
