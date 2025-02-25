@@ -19,6 +19,10 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function create(array $data): Category
     {
         $data['user_id'] = auth()->id();
+        if (empty($data['category_color']) || $data['category_color'] === '#000000') {
+            $data['category_color'] = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+        }
+
         return Category::create($data);
     }
 

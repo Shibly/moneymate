@@ -54,7 +54,7 @@
                                                         class="form-label">{{get_translation('pick_a_color')}}</label>
                                                     <input name="category_color" type="color"
                                                            class="form-control form-control-color"
-                                                           value="#066fd1" title="Choose your color">
+                                                           value="" title="Choose your color">
                                                 </div>
                                             </div>
                                         </div>
@@ -204,6 +204,10 @@
 
             $('#add-category-form').submit(function (e) {
                 e.preventDefault();
+
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
                 $.ajax({
                     url: "{{ route('categories.store') }}",
                     type: "POST",
@@ -222,9 +226,13 @@
                             $('select[name="type"]').after('<div class="alert alert-danger d-block mt-2">' + errors.type[0] + '</div>');
                         }
                         console.log("Error adding category:", xhr);
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('Add Category'); // Re-enable button and restore text
                     }
                 });
             });
+
 
             $(document).on('click', '.edit-btn', function () {
                 let categoryId = $(this).data('id');
@@ -247,6 +255,9 @@
 
             $('#edit-category-form').submit(function (e) {
                 e.preventDefault();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
                 let categoryId = $('#edit-category-id').val();
                 $('.invalid-feedback').remove();
                 $.ajax({
@@ -265,6 +276,9 @@
                             $('select[name="type"]').after('<div class="alert alert-danger invalid-feedback d-block mt-2">' + errors.type[0] + '</div>');
                         }
                         console.log("Error updating category:", xhr);
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('Add Category'); // Re-enable button and restore text
                     }
                 });
             });
