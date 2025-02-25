@@ -33,6 +33,7 @@ class UpdateCategoryRequest extends FormRequest
                     ->ignore($category?->id),
             ],
             'type' => 'sometimes|in:income,expense',
+            'category_color' => 'nullable|string|max:10',
         ];
     }
 }

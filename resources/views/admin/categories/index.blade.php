@@ -11,13 +11,14 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
-                           data-bs-target="#modal-report">
+                           data-bs-target="#modal-category">
                             <x-tabler-category/>
                             {{get_translation('add_new')}}
                         </a>
                     </div>
                     <!-- Add New Category Modal -->
-                    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal modal-blur fade" id="modal-category" tabindex="-1" role="dialog"
+                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -42,6 +43,18 @@
                                                         <option value="income" selected>Income</option>
                                                         <option value="expense">Expense</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label
+                                                        class="form-label">{{get_translation('pick_a_color')}}</label>
+                                                    <input name="category_color" type="color"
+                                                           class="form-control form-control-color"
+                                                           value="#066fd1" title="Choose your color">
                                                 </div>
                                             </div>
                                         </div>
@@ -83,6 +96,13 @@
                                                 <option value="income">Income</option>
                                                 <option value="expense">Expense</option>
                                             </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">{{get_translation('category_type')}}</label>
+                                            <input name="category_color" type="color"
+                                                   class="form-control form-control-color" id="edit-category-color"
+                                                   value="" title="Choose your color">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -212,9 +232,11 @@
                     url: "{{ url('categories/edit') }}/" + categoryId,
                     type: "GET",
                     success: function (data) {
+                        console.log(data);
                         $('#edit-category-id').val(data.id);
                         $('#edit-category-name').val(data.name);
                         $('#edit-category-type').val(data.type);
+                        $('#edit-category-color').val(data.category_color);
                         $('#modal-edit').modal('show');
                     },
                     error: function (xhr) {
@@ -253,7 +275,7 @@
                 $('#modal-delete').modal('show');
             });
 
-            $('#confirm-delete').on("click",function () {
+            $('#confirm-delete').on("click", function () {
                 $.ajax({
                     url: "{{ url('categories/destroy') }}/" + deleteCategoryId,
                     type: "POST",

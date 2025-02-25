@@ -169,6 +169,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'provide_valid_contact_number_including_country_code', 'value' => 'Enter a valid contact number including the country code.', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'update', 'value' => 'Update', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'confirm_deletion', 'value' => 'Conform Deletion', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'pick_a_color', 'value' => 'Select a color', 'created_at' => $now, 'updated_at' => $now],
         ];
 
 

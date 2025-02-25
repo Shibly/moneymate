@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->enum('type', ['income', 'expense']);
+            $table->string('category_color', 10)->nullable();
             $table->timestamps();
         });
     }
