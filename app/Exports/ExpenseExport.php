@@ -7,21 +7,21 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class IncomeExport implements FromCollection, WithHeadings, WithMapping
+class ExpenseExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
      * @var Collection
      */
-    protected Collection $incomes;
+    protected Collection $expense;
 
     /**
      * IncomeExport constructor.
      *
-     * @param Collection $incomes
+     * @param Collection $expense
      */
-    public function __construct(Collection $incomes)
+    public function __construct(Collection $expense)
     {
-        $this->incomes = $incomes;
+        $this->expense = $expense;
     }
 
     /**
@@ -31,7 +31,7 @@ class IncomeExport implements FromCollection, WithHeadings, WithMapping
      */
     public function collection(): Collection
     {
-        return $this->incomes;
+        return $this->expense;
     }
 
     /**
@@ -63,29 +63,29 @@ class IncomeExport implements FromCollection, WithHeadings, WithMapping
     /**
      * Map data for each row in the Excel sheet.
      *
-     * @param mixed $income
+     * @param mixed $expense
      * @return array
      */
-    public function map($income): array
+    public function map($expense): array
     {
-        $exchangeCurrency = optional($income->bankAccount->currency)->name;
+        $exchangeCurrency = optional($expense->bankAccount->currency)->name;
 
         return [
-            $income->id,
-            $income->user_id,
-            $income->account_id,
-            optional($income->category)->name,
-            optional($income->currency)->name,
+            $expense->id,
+            $expense->user_id,
+            $expense->account_id,
+            optional($expense->category)->name,
+            optional($expense->currency)->name,
             $exchangeCurrency,
-            number_format($income->amount, 2),
-            number_format($income->exchange_amount, 2),
-            $income->reference,
-            $income->income_date,
-            $income->description,
-            $income->note,
-            $income->attachment,
-            $income->created_at,
-            $income->updated_at,
+            number_format($expense->amount, 2),
+            number_format($expense->exchange_amount, 2),
+            $expense->reference,
+            $expense->income_date,
+            $expense->description,
+            $expense->note,
+            $expense->attachment,
+            $expense->created_at,
+            $expense->updated_at,
         ];
     }
 }

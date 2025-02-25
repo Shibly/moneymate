@@ -25,7 +25,7 @@
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="start_date"
                                        placeholder="Start Date"
-                                        value="{{ request('start_date') }}"/>
+                                       value="{{ request('start_date') }}"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
 
@@ -36,19 +36,25 @@
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="end_date"
                                        placeholder="End Date"
-                                        value="{{ request('end_date') }}"/>
+                                       value="{{ request('end_date') }}"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
                         </div>
 
 
                         <div class="col-auto ms-auto">
+
+                            <a href="{{route('income.report.index')}}" class="btn btn-instagram">
+                                <x-tabler-restore/>
+                                Reset</a>
                             <button type="submit" class="btn btn-primary">
+                                <x-tabler-filter/>
                                 Filter
                             </button>
 
                             <a href="{{ route('income.report.export', ['start_date' => request('start_date'),'end_date' => request('end_date')]) }}"
                                class="btn btn-success">
+                                <x-tabler-file-type-xls/>
                                 Download Excel
                             </a>
                         </div>
@@ -69,7 +75,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($incomes as $income)
+                            @foreach($incomes as $income)
                                 <tr>
                                     <td class="text-center">{{ $income->bankAccount->account_number }}</td>
                                     <td class="text-center">{{ optional($income->category)->name }}</td>
@@ -77,13 +83,7 @@
                                     <td class="text-center">{{ $income->income_date }}</td>
                                     <td class="text-center">{{ $income->description }}</td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6">
-                                        No incomes found.
-                                    </td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
