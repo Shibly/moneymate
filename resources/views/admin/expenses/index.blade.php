@@ -13,7 +13,7 @@
                         <a href="javascript:void(0);" class="btn btn-primary btn-5 d-none d-sm-inline-block"
                            data-bs-toggle="modal"
                            data-bs-target="#addExpenseModal">
-                            <x-tabler-plus/>
+                            <x-tabler-calendar-dollar/>
                             Add Expense
                         </a>
                     </div>
@@ -156,14 +156,16 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Description:</label>
-                                    <input type="text" class="form-control" name="description"
-                                           placeholder="Description">
+                                    <textarea class="form-control" name="description" rows="3"
+                                              placeholder="Description"></textarea>
+
                                     <div class="text-danger description"></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Note:</label>
-                                    <input type="text" class="form-control" name="note" placeholder="Note">
+                                    <textarea class="form-control" name="note" rows="3"
+                                              placeholder="Additional Note"></textarea>
                                     <div class="text-danger note"></div>
                                 </div>
 
@@ -191,7 +193,10 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary action-button">Submit Expense</button>
+                        <button type="submit" class="btn btn-primary action-button">
+                            <x-tabler-calendar-dollar/>
+                            Submit
+                        </button>
                     </div>
                 </form>
             </div>
@@ -232,6 +237,7 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('public/js/calendar.js') }}"></script>
     <script>
         "use strict";
 

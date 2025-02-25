@@ -69,41 +69,41 @@
                                                 </select>
                                             </div>
 
-                                            <!-- Amount (Second Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Amount</label>
                                                 <input type="number" class="form-control" name="amount"
                                                        placeholder="Amount" required>
                                             </div>
 
-                                            <!-- Reference (First Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Reference</label>
                                                 <input type="text" class="form-control" name="reference"
                                                        placeholder="Income Reference">
                                             </div>
 
-                                            <!-- Description (Second Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Description</label>
                                                 <textarea class="form-control" name="description" rows="3"
                                                           placeholder="Description"></textarea>
                                             </div>
 
-                                            <!-- Note (First Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Note</label>
                                                 <textarea class="form-control" name="note" rows="3"
                                                           placeholder="Additional Note"></textarea>
                                             </div>
 
-                                            <!-- Attachment (Second Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Add Attachment</label>
                                                 <input type="file" class="form-control" name="attachment">
                                             </div>
 
-                                            <!-- Date (Second Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Date</label>
                                                 <div class="input-icon mb-2">
@@ -123,7 +123,7 @@
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             <x-tabler-octagon-plus/>
-                                            Add New Income
+                                            Submit
                                         </button>
                                     </div>
                                 </form>
@@ -251,6 +251,7 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('public/js/calendar.js') }}"></script>
     <script>
         "use strict";
         let deleteIncomeId;

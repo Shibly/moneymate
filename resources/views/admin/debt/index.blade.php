@@ -109,7 +109,8 @@
                                             <option value="{{$bankAccount->id}}">
                                                 {{$bankAccount->bank->bank_name}}
                                                 - {{$bankAccount->account_number}}
-                                                - Balance ({{$bankAccount->currency->name ?? ''}} {{$bankAccount->balance}})
+                                                - Balance
+                                                ({{$bankAccount->currency->name ?? ''}} {{$bankAccount->balance}})
                                             </option>
                                         @endforeach
                                     </select>
@@ -167,7 +168,7 @@
                                     </label>
                                     <div class="input-icon mb-2">
                                         <input class="form-control" name="date" placeholder="Select a date"
-                                               id="datepicker" value="" />
+                                               id="datepicker" value=""/>
                                         <span class="input-icon-addon">
                                         <x-tabler-calendar/>
                                     </span>
@@ -240,6 +241,7 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('public/js/calendar.js') }}"></script>
     <script>
         "use strict";
 
