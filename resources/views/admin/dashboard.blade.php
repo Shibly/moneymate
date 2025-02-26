@@ -100,39 +100,52 @@
                             <div class="card">
                                 <div class="card-body">
                                     <p class="mb-3">Budget distributed among categories</p>
+
                                     <div class="progress progress-separated mb-3">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 44%"
-                                             aria-label="Regular"></div>
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 19%"
-                                             aria-label="System"></div>
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 9%"
-                                             aria-label="Shared"></div>
+                                        @foreach($budgetData['distribution'] as $dist)
+                                            <div
+                                                class="progress-bar"
+                                                role="progressbar"
+                                                style="background-color: {{ $dist['color'] }}; width: {{ number_format($dist['percentage'], 2) }}%"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="bottom"
+                                                title="{{ $dist['name'] }} - {{ number_format($dist['spent'], 2) }} ({{ number_format($dist['percentage'], 2) }}%)"
+                                                aria-label="{{ $dist['name'] }}">
+                                            </div>
+                                        @endforeach
+
+                                        @if($budgetData['freePercentage'] > 0)
+                                            <div
+                                                class="progress-bar bg-secondary"
+                                                role="progressbar"
+                                                style="width: {{ number_format($budgetData['freePercentage'], 2) }}%"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="bottom"
+                                                title="Free - {{ number_format($budgetData['freeAmount'], 2) }} ({{ number_format($budgetData['freePercentage'], 2) }}%)"
+                                                aria-label="Free">
+                                            </div>
+                                        @endif
                                     </div>
+
                                     <div class="row">
-                                        <div class="col-auto d-flex align-items-center pe-2">
-                                            <span class="legend me-2 bg-primary"></span>
-                                            <span>Regular</span>
-                                            <span
-                                                class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">915MB</span>
-                                        </div>
-                                        <div class="col-auto d-flex align-items-center px-2">
-                                            <span class="legend me-2 bg-info"></span>
-                                            <span>System</span>
-                                            <span
-                                                class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">415MB</span>
-                                        </div>
-                                        <div class="col-auto d-flex align-items-center px-2">
-                                            <span class="legend me-2 bg-success"></span>
-                                            <span>Shared</span>
-                                            <span
-                                                class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">201MB</span>
-                                        </div>
-                                        <div class="col-auto d-flex align-items-center ps-2">
-                                            <span class="legend me-2"></span>
-                                            <span>Free</span>
-                                            <span
-                                                class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">612MB</span>
-                                        </div>
+                                        @foreach($budgetData['distribution'] as $dist)
+                                            <div class="col-auto d-flex align-items-center px-2">
+                                                <span class="legend me-2"
+                                                      style="background-color: {{ $dist['color'] }}"></span>
+                                                <span>{{ $dist['name'] }}</span>
+                                                <span
+                                                    class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">{{ number_format($dist['spent'], 2) }}</span>
+                                            </div>
+                                        @endforeach
+
+                                        @if($budgetData['freeAmount'] > 0)
+                                            <div class="col-auto d-flex align-items-center px-2">
+                                                <span class="legend me-2 bg-secondary"></span>
+                                                <span>Free</span>
+                                                <span
+                                                    class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">{{ number_format($budgetData['freeAmount'], 2) }}</span>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

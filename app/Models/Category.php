@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  *
@@ -35,4 +36,14 @@ class Category extends Model
     protected $table = 'categories';
     protected $primaryKey = 'id';
     protected $guarded = [];
+
+
+    /**
+     * @return BelongsToMany
+     */
+    public function budgets(): BelongsToMany
+    {
+        return $this->belongsToMany(Budget::class, 'budget_category', 'category_id', 'budget_id');
+    }
+
 }

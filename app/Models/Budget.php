@@ -93,4 +93,13 @@ class Budget extends Model
         return $this->hasMany(BudgetExpense::class);
     }
 
+    /**
+     * @return HasMany
+     */
+
+    public function budgetExpenses(): HasMany
+    {
+        return $this->hasMany(BudgetExpense::class);
+    }
+
 }

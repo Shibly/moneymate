@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\BudgetExpenseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\TFactory|null $use_factory
- * @method static \Database\Factories\BudgetExpenseFactory factory($count = null, $state = [])
+ * @method static BudgetExpenseFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BudgetExpense newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BudgetExpense newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BudgetExpense query()
@@ -38,7 +39,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class BudgetExpense extends Model
 {
-    /** @use HasFactory<\Database\Factories\BudgetExpenseFactory> */
+    /** @use HasFactory<BudgetExpenseFactory> */
     use HasFactory;
 
     protected $primaryKey = 'id';
@@ -52,6 +53,14 @@ class BudgetExpense extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function budget(): BelongsTo
+    {
+        return $this->belongsTo(Budget::class);
     }
 
     /**
