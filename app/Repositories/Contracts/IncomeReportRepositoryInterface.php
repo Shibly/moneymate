@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 interface IncomeReportRepositoryInterface
 {
@@ -20,7 +21,7 @@ interface IncomeReportRepositoryInterface
      * Export incomes (already filtered) to Excel.
      *
      * @param Collection $incomes
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
     public function exportToExcel(Collection $incomes);
 }

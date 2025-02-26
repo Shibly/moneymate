@@ -71,6 +71,7 @@
                                 <th class="text-center">Category</th>
                                 <th class="text-center">Amount</th>
                                 <th class="text-center">Income Date</th>
+                                <th class="text-center">Reference</th>
                                 <th class="text-center">Description</th>
                             </tr>
                             </thead>
@@ -81,6 +82,7 @@
                                     <td class="text-center">{{ optional($income->category)->name }}</td>
                                     <td class="text-center">{{ number_format($income->amount, 2) }} {{$income->currency->name}}</td>
                                     <td class="text-center">{{ $income->income_date }}</td>
+                                    <td class="text-center">{{ $income->reference }}</td>
                                     <td class="text-center">{{ $income->description }}</td>
                                 </tr>
                             @endforeach

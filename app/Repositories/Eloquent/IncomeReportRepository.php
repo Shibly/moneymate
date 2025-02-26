@@ -8,6 +8,7 @@ use App\Repositories\Contracts\IncomeReportRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class IncomeReportRepository implements IncomeReportRepositoryInterface
 {
@@ -41,11 +42,10 @@ class IncomeReportRepository implements IncomeReportRepositoryInterface
      * Export the given incomes to Excel.
      *
      * @param Collection $incomes
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
     public function exportToExcel(Collection $incomes)
     {
-        // We'll use a custom export class (IncomeExport).
         return Excel::download(new IncomeExport($incomes), 'income_report.xlsx');
     }
 }

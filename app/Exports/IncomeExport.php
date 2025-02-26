@@ -42,21 +42,12 @@ class IncomeExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'ID',
-            'User ID',
-            'Account ID',
+            'Account Number',
             'Category',
-            'Original Currency',
-            'Exchange Currency',
             'Amount',
-            'Exchange Amount',
-            'Reference',
             'Income Date',
+            'Reference',
             'Description',
-            'Note',
-            'Attachment',
-            'Created At',
-            'Updated At',
         ];
     }
 
@@ -71,21 +62,13 @@ class IncomeExport implements FromCollection, WithHeadings, WithMapping
         $exchangeCurrency = optional($income->bankAccount->currency)->name;
 
         return [
-            $income->id,
-            $income->user_id,
-            $income->account_id,
-            optional($income->category)->name,
-            optional($income->currency)->name,
-            $exchangeCurrency,
-            number_format($income->amount, 2),
-            number_format($income->exchange_amount, 2),
-            $income->reference,
+            $income->bankAccount->account_number,
+            $income->category->name,
+            number_format($income->amount, 2) . ' ' . $exchangeCurrency,
             $income->income_date,
+            $income->reference,
             $income->description,
-            $income->note,
-            $income->attachment,
-            $income->created_at,
-            $income->updated_at,
+
         ];
     }
 }

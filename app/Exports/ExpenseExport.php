@@ -42,21 +42,12 @@ class ExpenseExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'ID',
-            'User ID',
-            'Account ID',
+            'Account Number',
             'Category',
-            'Original Currency',
-            'Exchange Currency',
             'Amount',
-            'Exchange Amount',
+            'Expense Date',
             'Reference',
-            'Income Date',
             'Description',
-            'Note',
-            'Attachment',
-            'Created At',
-            'Updated At',
         ];
     }
 
@@ -71,21 +62,12 @@ class ExpenseExport implements FromCollection, WithHeadings, WithMapping
         $exchangeCurrency = optional($expense->bankAccount->currency)->name;
 
         return [
-            $expense->id,
-            $expense->user_id,
-            $expense->account_id,
-            optional($expense->category)->name,
-            optional($expense->currency)->name,
-            $exchangeCurrency,
-            number_format($expense->amount, 2),
-            number_format($expense->exchange_amount, 2),
+            $expense->bankAccount->account_number,
+            $expense->category->name,
+            number_format($expense->amount, 2) . ' ' . $exchangeCurrency,
+            $expense->expense_date,
             $expense->reference,
-            $expense->income_date,
             $expense->description,
-            $expense->note,
-            $expense->attachment,
-            $expense->created_at,
-            $expense->updated_at,
         ];
     }
 }

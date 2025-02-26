@@ -11,6 +11,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ExpenseReportController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\IncomeReportController;
 use App\Http\Controllers\LanguageController;
@@ -137,5 +138,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('reports/income/export', [IncomeReportController::class, 'exportExcel'])
         ->name('income.report.export');
+
+
+    Route::get('reports/expense', [ExpenseReportController::class, 'index'])
+        ->name('expense.report.index');
+
+
+    Route::get('reports/expense/export', [ExpenseReportController::class, 'exportExcel'])
+        ->name('expense.report.export');
 
 });

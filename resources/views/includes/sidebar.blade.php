@@ -143,7 +143,7 @@
                     </a>
                 </li>
                 <li class="nav-item @if($activeMenu == 'expense-report') active-state @endif">
-                    <a class="nav-link" href="{{route('currencies.index')}}">
+                    <a class="nav-link" href="{{route('expense.report.index')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
                     <x-tabler-report/>
                 </span>
