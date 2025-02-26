@@ -161,7 +161,7 @@
         $(document).ready(function () {
             let select = new TomSelect(".select2", {
                 create: false,
-                placeholder: "",
+                placeholder: "Select A Language",
                 onChange: function () {
                     this.blur();
                 }
