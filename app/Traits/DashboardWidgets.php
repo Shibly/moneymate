@@ -25,7 +25,7 @@ trait DashboardWidgets
     {
         return Currency::where('is_default', 'yes')
             ->orderBy('id', 'DESC')
-            ->select('name', 'exchange_rate')
+            ->select('id', 'name', 'exchange_rate')
             ->first();
     }
 
@@ -199,6 +199,9 @@ trait DashboardWidgets
             ->whereMonth('start_date', $currentMonth)
             ->first();
 
+        $defaultCurrency = $this->getDefaultCurrency();
+
+
         if (!$budget) {
             return view('budget.distribution', [
                 'distribution' => [],
@@ -209,10 +212,10 @@ trait DashboardWidgets
         }
 
 
-        $totalBudget = $budget->amount;
+        $totalBudget = $budget->usd_amount;
 
         $categorySums = $budget->budgetExpenses()
-            ->selectRaw('category_id, SUM(amount) as totalSpent')
+            ->selectRaw('category_id, SUM(usd_amount) as totalSpent')
             ->groupBy('category_id')
             ->pluck('totalSpent', 'category_id');
 
@@ -224,6 +227,7 @@ trait DashboardWidgets
             $spent = $categorySums[$category->id] ?? 0;
             $usedAmount += $spent;
 
+            $exchangedSpent = convert_to_exchange_amount($defaultCurrency->id, $spent);
 
             $percentage = ($totalBudget > 0)
                 ? ($spent / $totalBudget) * 100
@@ -232,24 +236,27 @@ trait DashboardWidgets
             $distribution[] = [
                 'name' => $category->name,
                 'color' => $category->category_color,
-                'spent' => $spent,
+                'spent' => $exchangedSpent,
                 'percentage' => $percentage
             ];
         }
 
-        
-        $freeAmount = $totalBudget - $usedAmount;
+        $exchangedTotalBudget =  convert_to_exchange_amount($defaultCurrency->id, $totalBudget);
+        $exchangedUsedAmount =  convert_to_exchange_amount($defaultCurrency->id, $usedAmount);
+        $freeAmount = $exchangedTotalBudget - $exchangedUsedAmount;
         $freeAmount = ($freeAmount < 0) ? 0 : $freeAmount;
-        $freePercentage = ($totalBudget > 0)
-            ? ($freeAmount / $totalBudget) * 100
+        $freePercentage = ($exchangedTotalBudget > 0)
+            ? ($freeAmount / $exchangedTotalBudget) * 100
             : 0;
+
 
         $data = [
             'distribution' => $distribution,
             'freePercentage' => $freePercentage,
             'freeAmount' => $freeAmount,
-            'totalBudget' => $totalBudget,
+            'totalBudget' => $exchangedTotalBudget,
         ];
+
 
         return $data;
     }
