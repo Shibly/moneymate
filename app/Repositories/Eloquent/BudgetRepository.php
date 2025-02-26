@@ -5,10 +5,10 @@ namespace App\Repositories\Eloquent;
 use App\Models\Budget;
 use App\Repositories\Contracts\BudgetInterface;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Exception;
 
 class BudgetRepository implements BudgetInterface
 {
@@ -40,7 +40,7 @@ class BudgetRepository implements BudgetInterface
                 ($newEndDate >= $existingStartDate && $newEndDate <= $existingEndDate) ||
                 ($newStartDate <= $existingStartDate && $newEndDate >= $existingEndDate)
             ) {
-                throw new Exception("The new budget overlaps with an existing budget.");
+                throw new Exception("The new budget overlaps with an existing budget. Please select a different date range");
             }
         }
 
@@ -65,8 +65,7 @@ class BudgetRepository implements BudgetInterface
 
             return $budget;
 
-        } catch (Exception $exception)
-        {
+        } catch (Exception $exception) {
             DB::rollBack();
             throw new Exception($exception->getMessage());
         }
@@ -106,7 +105,7 @@ class BudgetRepository implements BudgetInterface
 
     public function findById(int $id): Budget
     {
-       return Budget::findOrFail($id);
+        return Budget::findOrFail($id);
     }
 
     /**
