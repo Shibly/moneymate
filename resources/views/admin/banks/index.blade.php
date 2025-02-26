@@ -11,12 +11,12 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
-                           data-bs-target="#modal-report">
+                           data-bs-target="#modal-bank">
                             <x-tabler-building-bank/>
                             {{get_translation('add_new')}}
                         </a>
                     </div>
-                    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal modal-blur fade" id="modal-bank" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -61,7 +61,7 @@
 
                                 <form id="edit-bank-name-form">
                                     @csrf
-                                    <input type="hidden" name="id" id="edit-category-id">
+                                    <input type="hidden" name="id" id="edit-bank-id">
 
                                     <div class="modal-body">
                                         <div class="mb-3">
@@ -173,6 +173,9 @@
             // Add Bank - form submission
             $('#add-bank-form').submit(function (e) {
                 e.preventDefault();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
                 $.ajax({
                     url: "{{ route('banks.store') }}",
                     type: "POST",
@@ -191,7 +194,7 @@
                             }
 
                             // Show errors in the modal
-                            $('#modal-report .modal-body').prepend(errorHtml);
+                            $('#modal-bank .modal-body').prepend(errorHtml);
                         } else {
                             console.log("Error adding bank:", xhr);
                             toastr.error("Something went wrong. Please try again.");
@@ -202,13 +205,13 @@
 
 
             $(document).on('click', '.edit-btn', function () {
-                let categoryId = $(this).data('id');
+                let bankId = $(this).data('id');
 
                 $.ajax({
-                    url: "{{ url('banks/edit') }}/" + categoryId,
+                    url: "{{ url('banks/edit') }}/" + bankId,
                     type: "GET",
                     success: function (data) {
-                        $('#edit-category-id').val(data.id);
+                        $('#edit-bank-id').val(data.id);
                         $('#edit-bank-name').val(data.bank_name);
                         $('#modal-edit').modal('show');
                     },
@@ -221,10 +224,13 @@
 
             $('#edit-bank-name-form').submit(function (e) {
                 e.preventDefault();
-                let categoryId = $('#edit-category-id').val();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
+                let bankId = $('#edit-bank-id').val();
 
                 $.ajax({
-                    url: "{{ url('banks/update') }}/" + categoryId,
+                    url: "{{ url('banks/update') }}/" + bankId,
                     type: "POST",
                     data: $(this).serialize(),
                     success: function (response) {
@@ -244,7 +250,6 @@
                             $('#edit-form-errors').html(errorHtml).removeClass('d-none'); // Show errors
                         } else {
                             console.log("Error updating bank:", xhr);
-                            toastr.error("Something went wrong. Please try again.");
                         }
                     }
                 });

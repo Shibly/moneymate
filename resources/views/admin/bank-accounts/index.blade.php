@@ -11,12 +11,13 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <a href="{{ route('accounts.store') }}" class="btn btn-primary btn-5 d-none d-sm-inline-block"
-                           data-bs-toggle="modal" data-bs-target="#modal-report">
+                           data-bs-toggle="modal" data-bs-target="#modal-bank-account">
                             <x-tabler-building-bank/>
                             {{get_translation('add_new')}}
                         </a>
                     </div>
-                    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal modal-blur fade" id="modal-bank-account" tabindex="-1" role="dialog"
+                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -245,6 +246,9 @@
 
             $('#add-bank-account-form').submit(function (e) {
                 e.preventDefault();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
                 let form = $(this);
                 $.ajax({
                     url: "{{ route('accounts.store') }}",
@@ -296,6 +300,9 @@
 
             $('#edit-bank-account-form').submit(function (e) {
                 e.preventDefault();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
                 let form = $(this);
                 let formAction = form.attr('action');
 

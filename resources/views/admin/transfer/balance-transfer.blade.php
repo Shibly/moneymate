@@ -150,8 +150,7 @@
                             Cancel
                         </button>
                         <button type="submit" class="btn btn-primary">
-                            <x-tabler-transfer/>
-                            Make a Transfer
+                            Submit
                         </button>
                     </div>
                 </form>
@@ -170,6 +169,8 @@
         $(document).ready(function () {
             $('#balanceTransfer').submit(function (e) {
                 e.preventDefault();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
 
                 $("#balanceTransferModal .logical-error").addClass('d-none');
 
@@ -194,6 +195,9 @@
                         } else {
                             alert("Something went wrong. Please try again.");
                         }
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('Submit');
                     }
                 });
             });

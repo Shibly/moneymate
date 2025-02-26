@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreExpenseRequest;
-use App\Http\Requests\UpdateExpenseRequest;
-use App\Models\Expense;
 use App\Services\BankAccountService;
 use App\Services\CategoryService;
 use App\Services\CurrencyService;
@@ -35,7 +33,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $data['title'] = 'Expenses';
+        $data['title'] = 'Expense Histories';
         $data['activeMenu'] = 'expenses';
         $data['bankAccounts'] = $this->bankAccountService->getByUserId(auth()->user()->id);
         $data['currencies'] = $this->currencyService->getAll();
@@ -54,7 +52,6 @@ class ExpenseController extends Controller
         notyf()->success('New expense information has been added');
         return redirect()->back();
     }
-
 
 
     /**

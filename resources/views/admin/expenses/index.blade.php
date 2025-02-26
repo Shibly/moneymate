@@ -30,33 +30,23 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Bank Account Number</th>
+                                <th class="text-center">Amount</th>
+                                <th class="text-center">From Account</th>
                                 <th class="text-center">Category</th>
-                                <th class="text-center">From Amount</th>
-                                <th class="text-center">To Amount</th>
                                 <th class="text-center">Description</th>
+                                <th class="text-center">Attachment</th>
+                                <th class="text-center">Expense Date</th>
                                 <th class="text-center">Reference</th>
-                                <th class="text-center">Note</th>
-                                <th class="text-center">Date</th>
-                                <th class="text-center">Attached</th>
-                                <th class="text-center" width="25%">Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
                             @foreach($expenses as $expense)
-                                @php
-                                    $exchange_currency = $expense->bankAccount && $expense->bankAccount->currency ? $expense->bankAccount->currency->name : '';
-                                @endphp
-
                                 <tr>
-                                    <td>{{$expense->bankAccount ? $expense->bankAccount->account_number : ''}}</td>
-                                    <td>{{$expense->category ? $expense->category->name : '' }}</td>
-                                    <td>{{$expense->currency ? $expense->currency->name : ''}} {{number_format($expense->amount, 0)}}</td>
-                                    <td>{{$exchange_currency}} {{number_format($expense->exchange_amount, 0)}}</td>
-                                    <td>{{$expense->description}}</td>
-                                    <td>{{$expense->reference}}</td>
-                                    <td>{{$expense->note}}</td>
-                                    <td>{{\Carbon\Carbon::parse($expense->expense_date)->format("d/m/Y")}}</td>
+                                    <td class="text-center">{{number_format($expense->amount, 0)}} {{$expense->currency ? $expense->currency->name : ''}}</td>
+                                    <td class="text-center">{{$expense->bankAccount ? $expense->bankAccount->account_number : ''}}</td>
+                                    <td class="text-center">{{$expense->category ? $expense->category->name : '' }}</td>
+                                    <td class="text-center">{{$expense->description}}</td>
                                     <td class="text-center">
                                         @if($expense->attachment)
                                             <a href="{{ route('private.files', ['filename' => $expense->attachment]) }}"
@@ -67,6 +57,8 @@
                                             No Attachment
                                         @endif
                                     </td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($expense->expense_date)->format("d/m/Y")}}</td>
+                                    <td class="text-center">{{$expense->reference}}</td>
                                     <td class="text-center">
                                         <button class="btn btn-danger delete-btn" data-id="{{ $expense->id }}">
                                             <x-tabler-trash/>

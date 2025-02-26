@@ -214,6 +214,7 @@
                                 <th class="text-center">Description</th>
                                 <th class="text-center">Attachment</th>
                                 <th class="text-center">Income Date</th>
+                                <th class="text-center">Reference</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -227,15 +228,16 @@
                                     <td class="text-center">{{ $income->description }}</td>
                                     <td class="text-center">
                                         @if($income->attachment)
-                                            <a class="badge bg-blue text-blue-fg"
+                                            <a class=""
                                                href="{{route('download.attachment',$income->attachment)}}">
                                                 <x-tabler-download/>
-                                                Download Attachment</a>
+                                            </a>
                                         @else
                                             No Attachment
                                         @endif
                                     </td>
                                     <td class="text-center">{{$income->income_date}}</td>
+                                    <td class="text-center">{{$income->reference}}</td>
                                     <td class="text-center">
                                         <button class="btn btn-danger delete-btn" data-id="{{ $income->id }}">
                                             <x-tabler-trash/>

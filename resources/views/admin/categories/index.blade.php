@@ -228,7 +228,7 @@
                         console.log("Error adding category:", xhr);
                     },
                     complete: function () {
-                        submitButton.prop('disabled', false).text('Add Category'); // Re-enable button and restore text
+                        // submitButton.prop('disabled', false).text('Add Category');
                     }
                 });
             });
@@ -278,7 +278,7 @@
                         console.log("Error updating category:", xhr);
                     },
                     complete: function () {
-                        submitButton.prop('disabled', false).text('Add Category'); // Re-enable button and restore text
+                        // submitButton.prop('disabled', false).text('Add Category');
                     }
                 });
             });
