@@ -189,7 +189,7 @@ trait DashboardWidgets
 
     public function showCurrentMonthBudgetDistribution()
     {
-        
+
         $userId = auth()->id();
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
@@ -200,7 +200,6 @@ trait DashboardWidgets
             ->first();
 
         if (!$budget) {
-            // You could return an empty view or redirect, etc.
             return view('budget.distribution', [
                 'distribution' => [],
                 'freePercentage' => 0,
@@ -225,7 +224,7 @@ trait DashboardWidgets
             $spent = $categorySums[$category->id] ?? 0;
             $usedAmount += $spent;
 
-            // Calculate percentage used from total budget
+
             $percentage = ($totalBudget > 0)
                 ? ($spent / $totalBudget) * 100
                 : 0;
@@ -238,7 +237,7 @@ trait DashboardWidgets
             ];
         }
 
-        // Calculate what's left from the budget
+        
         $freeAmount = $totalBudget - $usedAmount;
         $freeAmount = ($freeAmount < 0) ? 0 : $freeAmount;
         $freePercentage = ($totalBudget > 0)
