@@ -11,13 +11,14 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
-                           data-bs-target="#modal-report">
+                           data-bs-target="#modal-add-language">
                             <x-tabler-language/>
                             Add New Language
                         </a>
                     </div>
 
-                    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal modal-blur fade" id="modal-add-language" tabindex="-1" role="dialog"
+                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -153,4 +154,18 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        "use strict";
+        $(document).ready(function () {
+            let select = new TomSelect(".select2", {
+                create: false,
+                placeholder: "",
+                onChange: function () {
+                    this.blur();
+                }
+            });
+        });
+    </script>
 @endsection

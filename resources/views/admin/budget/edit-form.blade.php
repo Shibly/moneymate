@@ -45,9 +45,9 @@
                 @endphp
 
                 <div>
-                    <label class="form-label">Expense Category: <span
+                    <label class="form-label">Expense Categories: <span
                             class="text-danger">*</span></label>
-                    <select name="categories[]" class="form-control" multiple>
+                    <select name="categories[]" class="form-control select2" multiple>
                         @foreach($categories as $category)
                             <option value="{{$category->id}}"
                                     @if(in_array($category->id, $selectedCategoryIds)) selected @endif >{{$category->name}}</option>

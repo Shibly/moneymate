@@ -112,9 +112,9 @@
                             <div class="col-md-6">
 
                                 <div>
-                                    <label class="form-label">Expense Category: <span
+                                    <label class="form-label">Expense Categories: <span
                                             class="text-danger">*</span></label>
-                                    <select name="categories[]" class="form-control" multiple>
+                                    <select name="categories[]" class="form-control select2" multiple>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
@@ -214,6 +214,14 @@
         "use strict";
 
         $(document).ready(function () {
+            let select = new TomSelect(".select2", {
+                create: false,
+                placeholder: "",
+                onChange: function () {
+                    this.blur();
+                }
+            });
+
 
             $('#addBudget').submit(function (e) {
                 e.preventDefault();
