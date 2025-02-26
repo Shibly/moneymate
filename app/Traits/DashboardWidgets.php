@@ -8,7 +8,6 @@ use App\Models\Currency;
 use App\Models\Debt;
 use App\Models\Expense;
 use App\Models\Income;
-use Carbon\Carbon;
 
 trait DashboardWidgets
 {
@@ -189,76 +188,96 @@ trait DashboardWidgets
 
     public function showCurrentMonthBudgetDistribution()
     {
-
         $userId = auth()->id();
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
+        $currentMonth = now()->month;
+        $currentYear = now()->year;
+
 
         $budget = Budget::where('user_id', $userId)
             ->whereYear('start_date', $currentYear)
             ->whereMonth('start_date', $currentMonth)
             ->first();
 
-        $defaultCurrency = $this->getDefaultCurrency();
-
 
         if (!$budget) {
-            return view('budget.distribution', [
+            return [
                 'distribution' => [],
                 'freePercentage' => 0,
                 'freeAmount' => 0,
                 'totalBudget' => 0,
-            ]);
-        }
-
-
-        $totalBudget = $budget->usd_amount;
-
-        $categorySums = $budget->budgetExpenses()
-            ->selectRaw('category_id, SUM(usd_amount) as totalSpent')
-            ->groupBy('category_id')
-            ->pluck('totalSpent', 'category_id');
-
-
-        $distribution = [];
-        $usedAmount = 0;
-
-        foreach ($budget->categories as $category) {
-            $spent = $categorySums[$category->id] ?? 0;
-            $usedAmount += $spent;
-
-            $exchangedSpent = convert_to_exchange_amount($defaultCurrency->id, $spent);
-
-            $percentage = ($totalBudget > 0)
-                ? ($spent / $totalBudget) * 100
-                : 0;
-
-            $distribution[] = [
-                'name' => $category->name,
-                'color' => $category->category_color,
-                'spent' => $exchangedSpent,
-                'percentage' => $percentage
             ];
         }
 
-        $exchangedTotalBudget =  convert_to_exchange_amount($defaultCurrency->id, $totalBudget);
-        $exchangedUsedAmount =  convert_to_exchange_amount($defaultCurrency->id, $usedAmount);
-        $freeAmount = $exchangedTotalBudget - $exchangedUsedAmount;
-        $freeAmount = ($freeAmount < 0) ? 0 : $freeAmount;
-        $freePercentage = ($exchangedTotalBudget > 0)
-            ? ($freeAmount / $exchangedTotalBudget) * 100
+
+        $defaultCurrency = $this->getDefaultCurrency();
+        if (!$defaultCurrency || $defaultCurrency->exchange_rate <= 0) {
+            return [
+                'distribution' => [],
+                'freePercentage' => 0,
+                'freeAmount' => 0,
+                'totalBudget' => 0,
+                'error' => 'No valid default currency or exchange rate.',
+            ];
+        }
+        $exchangeRate = $defaultCurrency->exchange_rate;
+
+        $categorySumsUsd = $budget->budgetExpenses()
+            ->selectRaw('category_id, SUM(usd_amount) as totalSpentUsd')
+            ->groupBy('category_id')
+            ->pluck('totalSpentUsd', 'category_id');
+
+
+        $freeUsd = $budget->usd_amount;
+
+
+        $usedAmountUsd = 0;
+        foreach ($categorySumsUsd as $usdSpent) {
+            $usedAmountUsd += $usdSpent;
+        }
+
+
+        $totalBudgetUsd = $usedAmountUsd + $freeUsd;
+        $totalBudget = $totalBudgetUsd * $exchangeRate;
+
+        $distribution = [];
+        foreach ($budget->categories as $category) {
+            $spentUsd = $categorySumsUsd[$category->id] ?? 0;
+            $distribution[] = [
+                'name' => $category->name,
+                'color' => $category->category_color,
+                'spentUsd' => $spentUsd,
+            ];
+        }
+
+        $usedAmount = 0;
+        foreach ($distribution as &$dist) {
+            $spent = $dist['spentUsd'] * $exchangeRate;
+            $dist['spent'] = $spent;
+            $dist['percentage'] = ($totalBudget > 0)
+                ? ($spent / $totalBudget) * 100
+                : 0;
+
+            $usedAmount += $spent;
+            unset($dist['spentUsd']);
+        }
+        unset($dist);
+
+        $freeAmount = $freeUsd * $exchangeRate;
+        if ($freeAmount < 0) {
+            $freeAmount = 0;
+        }
+
+        $freePercentage = ($totalBudget > 0)
+            ? ($freeAmount / $totalBudget) * 100
             : 0;
 
-
-        $data = [
+        return [
             'distribution' => $distribution,
             'freePercentage' => $freePercentage,
             'freeAmount' => $freeAmount,
-            'totalBudget' => $exchangedTotalBudget,
+            'totalBudget' => $totalBudget,
+            'currencyCode' => $defaultCurrency->name,
         ];
-
-
-        return $data;
     }
 
 
