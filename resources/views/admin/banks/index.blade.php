@@ -197,8 +197,10 @@
                             $('#modal-bank .modal-body').prepend(errorHtml);
                         } else {
                             console.log("Error adding bank:", xhr);
-                            toastr.error("Something went wrong. Please try again.");
                         }
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('Submit');
                     }
                 });
             });

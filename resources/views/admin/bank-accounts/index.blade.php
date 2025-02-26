@@ -74,8 +74,7 @@
                                                 data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <x-tabler-building-bank/>
-                                            {{get_translation('add_new')}}
+                                            {{get_translation('submit')}}
                                         </button>
                                     </div>
                                 </form>
@@ -144,8 +143,7 @@
                                                 data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <x-tabler-building-bank/>
-                                            {{get_translation('update_bank_account')}}
+                                            {{get_translation('submit')}}
                                         </button>
                                     </div>
                                 </form>
@@ -268,6 +266,8 @@
                             $('select[name="currency_id"]').next('.invalid-feedback').text(errors.currency_id[0]).show();
                         }
                         console.log("Error adding account:", xhr);
+                    }, complete: function () {
+                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
                     }
                 });
             });
@@ -333,6 +333,9 @@
                             $('input[name="balance"]').next('.invalid-feedback').text(errors.balance[0]).show();
                         }
                         console.log("Error updating account:", xhr);
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('Submitting...');
                     }
                 });
             });

@@ -153,7 +153,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary action-button">Submit Budget</button>
+                        <button type="submit" class="btn btn-primary action-button">Submit</button>
                     </div>
                 </form>
 
@@ -219,7 +219,8 @@
                 e.preventDefault();
 
                 $("#addBudgetModal .logical-error").addClass('d-none');
-                $("#addBudgetModal .action-button").attr('disabled', true);
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
 
 
                 var form = $(this);
@@ -245,6 +246,9 @@
                         }
 
                         $("#addBudgetModal .action-button").attr('disabled', false);
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('Submit');
                     },
                     cache: false,
                     contentType: false,
