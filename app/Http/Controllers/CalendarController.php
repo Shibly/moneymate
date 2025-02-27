@@ -34,10 +34,10 @@ class CalendarController extends Controller
             ->get()
             ->map(function ($income) {
                 return [
-                    'id' => 'income-' . $income->id, // Unique ID for income
+                    'id' => 'income-' . $income->id,
                     'title' => 'Income - ' . $income->category->name,
                     'start' => $income->income_date,
-                    'color' => $income->category->category_color ?? '#206bc4', // Default Blue for Incomes
+                    'color' => $income->category->category_color ?? '#206bc4',
                     'description' => $income->description,
                     'amount' => $income->amount . ' ' . optional($income->currency)->name,
                     'currency' => optional($income->currency)->name ?? 'N/A',
