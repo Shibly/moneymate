@@ -175,7 +175,17 @@
                             @foreach($categories as $category)
                                 <tr id="row-{{$category->id}}">
                                     <td class="text-center">{{ $category->name }}</td>
-                                    <td class="text-center">{{ $category->type }}</td>
+                                    <td class="text-center">
+                                        @if ($category->type === 'expense')
+                                            <span
+                                                class="badge bg-red-lt">{{ ucfirst($category->type) }}</span>
+                                        @elseif ($category->type === 'income')
+                                            <span
+                                                class="badge bg-green-lt">{{ ucfirst($category->type) }}</span>
+                                        @else
+                                            {{ ucfirst($category->type) }}
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <button class="btn btn-info edit-btn" data-id="{{ $category->id }}">
                                             <x-tabler-edit/>

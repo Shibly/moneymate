@@ -99,30 +99,30 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="mb-3">Budget distributed among categories</p>
+                                    <p class="mb-3">Budget distributed among categories - Current Month</p>
 
                                     <div class="progress progress-separated mb-3">
                                         @foreach($budgetData['distribution'] as $dist)
                                             <div
-                                                    class="progress-bar"
-                                                    role="progressbar"
-                                                    style="background-color: {{ $dist['color'] }}; width: {{ number_format($dist['percentage'], 2) }}%"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="bottom"
-                                                    title="{{ $dist['name'] }} - {{$budgetData['currencyCode']}} {{ number_format($dist['spent'], 2) }} ({{ number_format($dist['percentage'], 2) }}%)"
-                                                    aria-label="{{ $dist['name'] }}">
+                                                class="progress-bar"
+                                                role="progressbar"
+                                                style="background-color: {{ $dist['color'] }}; width: {{ number_format($dist['percentage'], 2) }}%"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="bottom"
+                                                title="{{ $dist['name'] }} - {{$budgetData['currencyCode']}} {{ number_format($dist['spent'], 2) }} ({{ number_format($dist['percentage'], 2) }}%)"
+                                                aria-label="{{ $dist['name'] }}">
                                             </div>
                                         @endforeach
 
                                         @if($budgetData['freePercentage'] > 0)
                                             <div
-                                                    class="progress-bar bg-secondary"
-                                                    role="progressbar"
-                                                    style="width: {{ number_format($budgetData['freePercentage'], 2) }}%"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="bottom"
-                                                    title="Free - {{ number_format($budgetData['freeAmount'], 2) }} {{$budgetData['currencyCode']}} ({{ number_format($budgetData['freePercentage'], 2) }}%)"
-                                                    aria-label="Free">
+                                                class="progress-bar bg-secondary"
+                                                role="progressbar"
+                                                style="width: {{ number_format($budgetData['freePercentage'], 2) }}%"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="bottom"
+                                                title="Free - {{ number_format($budgetData['freeAmount'], 2) }} {{$budgetData['currencyCode']}} ({{ number_format($budgetData['freePercentage'], 2) }}%)"
+                                                aria-label="Free">
                                             </div>
                                         @endif
                                     </div>
@@ -133,7 +133,8 @@
                                                 <span class="legend me-2"
                                                       style="background-color: {{ $dist['color'] }}"></span>
                                                 <span>{{ $dist['name'] }}</span>
-                                                <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">{{$budgetData['currencyCode']}} {{ number_format($dist['spent'], 2) }}</span>
+                                                <span
+                                                    class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">{{$budgetData['currencyCode']}} {{ number_format($dist['spent'], 2) }}</span>
                                             </div>
                                         @endforeach
 
@@ -141,7 +142,8 @@
                                             <div class="col-auto d-flex align-items-center px-2">
                                                 <span class="legend me-2 bg-secondary"></span>
                                                 <span>Free</span>
-                                                <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">{{$budgetData['currencyCode']}} {{ number_format($budgetData['freeAmount'], 2) }}</span>
+                                                <span
+                                                    class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-secondary">{{$budgetData['currencyCode']}} {{ number_format($budgetData['freeAmount'], 2) }}</span>
                                             </div>
                                         @endif
                                     </div>
