@@ -27,10 +27,10 @@ class CalendarController extends Controller
     /**
      * @return JsonResponse
      */
+
     public function getData(): JsonResponse
     {
-
-        $incomes = Income::with(['bankAccount', 'category', 'currency'])
+        $incomes = collect(Income::with(['bankAccount', 'category', 'currency'])
             ->get()
             ->map(function ($income) {
                 return [
@@ -47,10 +47,9 @@ class CalendarController extends Controller
                     'attachment' => $income->attachment,
                     'type' => 'income'
                 ];
-            });
-
-
-        $expenses = Expense::with(['bankAccount', 'category', 'currency'])
+            })
+        );
+        $expenses = collect(Expense::with(['bankAccount', 'category', 'currency'])
             ->get()
             ->map(function ($expense) {
                 return [
@@ -67,10 +66,18 @@ class CalendarController extends Controller
                     'attachment' => $expense->attachment,
                     'type' => 'expense'
                 ];
-            });
+            })
+        );
+        if ($incomes->isEmpty() && $expenses->isEmpty()) {
+            return response()->json([]);
+        }
         $data = $incomes->merge($expenses);
+        if ($incomes->isEmpty()) {
+            $data = $expenses;
+        }
+        if ($expenses->isEmpty()) {
+            $data = $incomes;
+        }
         return response()->json($data);
     }
-
-
 }

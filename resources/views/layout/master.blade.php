@@ -5,7 +5,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>{{get_option('application_name')}} @if(isset($title)) :: {{$title}} @endif </title>
+    <title>{{get_option('application_name')}} @if(isset($title))
+            :: {{$title}}
+        @endif </title>
     <!-- CSS files -->
     <link href="{{asset('/libs/select2/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('/css/tabler.css')}}" rel="stylesheet">
@@ -17,18 +19,18 @@
     <style>
         @import url('https://rsms.me/inter/inter.css');
     </style>
-
-
     @if(get_option('favicon'))
         <link rel="icon" type="image/x-icon" href="{{ route('private.files', ['filename' => get_option('favicon')]) }}">
     @endif
+
+    <script>
+        let num_data_per_page = '{{get_option('num_data_per_page')}}';
+        console.log(num_data_per_page);
+    </script>
 </head>
-<body class=" layout-fluid">
 
-<script>
-    let num_data_per_page = '{{get_option('num_data_per_page')}}';
+<body class="layout-fluid">
 
-</script>
 <script src="{{asset('/js/demo-theme.js')}}"></script>
 
 <div class="page">
@@ -36,12 +38,9 @@
     @include('includes.sidebar')
 
     <div class="page-wrapper">
-
-
         @include('includes.topbar')
 
-        {{--        Display global form validation error during the development time--}}
-
+        {{-- Display global form validation error during the development time --}}
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -57,15 +56,16 @@
     </div>
 </div>
 
+<!-- JavaScript files loaded at the end of the body -->
 <script src="{{asset('/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
 <script src="{{asset('/libs/litepicker/dist/litepicker.js')}}" defer></script>
 <script src="{{asset('/libs/tom-select/dist/js/tom-select.base.min.js')}}" defer></script>
+<script src="{{asset('/libs/datatable/datatable.js')}}"></script>
+<script src="{{asset('/libs/select2/select2.min.js')}}"></script>
+<script src="{{asset('/libs/sweetalert/sweetalert2.js')}}"></script>
 <script src="{{asset('/js/tabler.min.js')}}"></script>
-<script src="{{asset('/js/demo.min.js')}}"></script>
-<script src="{{ asset('/libs/datatable/datatable.js') }}"></script>
-<script src="{{ asset('/libs/select2/select2.min.js') }}"></script>
-<script src="{{ asset('/libs/sweetalert/sweetalert2.js') }}"></script>
-<script src="{{ asset('/js/main.js') }}"></script>
+{{--<script src="{{asset('/js/demo.min.js')}}"></script>--}}
+<script src="{{asset('/js/main.js')}}" defer></script> <!-- main.js should be placed here -->
 
 @yield('js')
 </body>

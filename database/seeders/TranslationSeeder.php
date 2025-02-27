@@ -137,6 +137,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'official_name_of_the_application', 'value' => 'Official name of the application', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'valid_phone_number', 'value' => 'Valid phone number', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'company_website', 'value' => 'Valid company website', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'company_address', 'value' => 'Company Address', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'company_official_address', 'value' => 'Company official address', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'number_of_records_to_display_per_page', 'value' => 'Number of records to display per page', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'upload_high_quality_logo', 'value' => 'Upload a high-quality logo image (recommended size: 100x100px)', 'created_at' => $now, 'updated_at' => $now],

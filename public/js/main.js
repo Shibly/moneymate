@@ -6,8 +6,11 @@ $(document).ready(function () {
         "searching": true,
         "ordering": true,
         "info": true,
-        "pageLength": num_data_per_page
+        "pageLength": 15,
+        "lengthMenu": [10, 25, 30, 50, 100, 15],
     });
 });
+
+
 
 
