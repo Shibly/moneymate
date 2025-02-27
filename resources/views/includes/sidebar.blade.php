@@ -168,7 +168,7 @@
                 <li class="nav-item @if($activeMenu == 'languages') active-state @endif">
                     <a class="nav-link" href="{{route('languages.index')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
-                    {{ svg('clarity-language-solid') }}
+                    <x-tabler-language/>
                 </span><span class="nav-link-title">{{get_translation('languages')}}</span>
                     </a>
                 </li>
