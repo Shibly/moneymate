@@ -99,7 +99,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="mb-3">Budget distributed among categories - Current Month</p>
+                                    <p class="mb-3">Budget distributed among expense categories - Current Month</p>
 
                                     <div class="progress progress-separated mb-3">
                                         @foreach($budgetData['distribution'] as $dist)
