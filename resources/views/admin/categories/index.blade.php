@@ -177,11 +177,9 @@
                                     <td class="text-center">{{ $category->name }}</td>
                                     <td class="text-center">
                                         @if ($category->type === 'expense')
-                                            <span
-                                                class="badge bg-red-lt">{{ ucfirst($category->type) }}</span>
+                                            <span class="badge bg-red text-red-fg">{{ ucfirst($category->type) }}</span>
                                         @elseif ($category->type === 'income')
-                                            <span
-                                                class="badge bg-green-lt">{{ ucfirst($category->type) }}</span>
+                                            <span class="badge bg-teal text-teal-fg">{{ ucfirst($category->type) }}</span>
                                         @else
                                             {{ ucfirst($category->type) }}
                                         @endif
