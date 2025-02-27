@@ -278,7 +278,7 @@
                         console.log("Error updating category:", xhr);
                     },
                     complete: function () {
-                        // submitButton.prop('disabled', false).text('Add Category');
+                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
                     }
                 });
             });
