@@ -56,31 +56,23 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 # Set working directory
 WORKDIR /var/www
 
-## Copy composer.lock and composer.json
-COPY ../composer.json ../composer.lock /var/www/
-
+# Copy the entire application first to ensure all files are available
+COPY . /var/www
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Ensure proper permissions for Composer
+RUN chmod +x /usr/local/bin/composer
 
 # Install dependencies
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
 
-# Dump the autoloader
-RUN composer dump-autoload
-
-# Run composer update to ensure everything is up to date
-RUN composer update
-
-# Copy the rest of the application code
-COPY . /var/www
+# Dump the autoloader again (ensures all files are loaded)
+RUN composer dump-autoload -o
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Define work directory
-#WORKDIR /var/www
 
 # Expose ports
 EXPOSE 9000

@@ -8,17 +8,17 @@
     <title>Moneymate - Personal finance manager</title>
     <!-- CSS files -->
 
-    <link href="{{asset('public/css/tabler.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-flags.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-socials.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-payments.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-vendors.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-marketing.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/demo.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-flags.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-socials.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-payments.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-vendors.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-marketing.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/demo.min.css')}}" rel="stylesheet">
 
 
     <style>
-        @import url('https://rsms.me/inter/inter.css');
+        /*@import url('https://rsms.me/inter/inter.css');*/
     </style>
 </head>
 <body class=" d-flex flex-column">
@@ -70,7 +70,7 @@
 </div>
 </div>
 
-<script src="{{asset('public/js/tabler.min.js')}}"></script>
-<script src="{{asset('public/js/demo.min.js')}}"></script>
+<script src="{{asset('/js/tabler.min.js')}}"></script>
+<script src="{{asset('/js/demo.min.js')}}"></script>
 </body>
 </html>

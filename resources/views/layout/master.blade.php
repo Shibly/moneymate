@@ -7,19 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{get_option('application_name')}} @if(isset($title)) :: {{$title}} @endif </title>
     <!-- CSS files -->
-    <link href="{{asset('public/libs/select2/select2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-flags.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-socials.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-payments.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-vendors.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/tabler-marketing.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/demo.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/libs/datatable/datatable.css')}}" rel="stylesheet">
+    <link href="{{asset('/libs/select2/select2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-flags.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-socials.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-payments.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-vendors.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/tabler-marketing.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/demo.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/libs/datatable/datatable.css')}}" rel="stylesheet">
 
     @yield('css')
     <style>
-        @import url('https://rsms.me/inter/inter.css');
+        /*@import url('https://rsms.me/inter/inter.css');*/
     </style>
 
 
@@ -61,17 +61,17 @@
     </div>
 </div>
 
-<script src="{{asset('public/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
-<script src="{{asset('public/libs/jsvectormap/dist/jsvectormap.min.js')}}"></script>
-<script src="{{asset('public/libs/jsvectormap/dist/maps/world.js')}}"></script>
-<script src="{{asset('public/libs/litepicker/dist/litepicker.js')}}" defer></script>
-<script src="{{asset('public/libs/tom-select/dist/js/tom-select.base.min.js')}}" defer></script>
-<script src="{{asset('public/js/tabler.min.js')}}"></script>
-<script src="{{asset('public/js/demo.min.js')}}"></script>
-<script src="{{ asset('public/libs/datatable/datatable.js') }}"></script>
-<script src="{{ asset('public/libs/select2/select2.min.js') }}"></script>
-<script src="{{ asset('public/libs/sweetalert/sweetalert2.js') }}"></script>
-<script src="{{ asset('public/js/main.js') }}"></script>
+<script src="{{asset('/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
+<script src="{{asset('/libs/jsvectormap/dist/jsvectormap.min.js')}}"></script>
+<script src="{{asset('/libs/jsvectormap/dist/maps/world.js')}}"></script>
+<script src="{{asset('/libs/litepicker/dist/litepicker.js')}}" defer></script>
+<script src="{{asset('/libs/tom-select/dist/js/tom-select.base.min.js')}}" defer></script>
+<script src="{{asset('/js/tabler.min.js')}}"></script>
+<script src="{{asset('/js/demo.min.js')}}"></script>
+<script src="{{ asset('/libs/datatable/datatable.js') }}"></script>
+<script src="{{ asset('/libs/select2/select2.min.js') }}"></script>
+<script src="{{ asset('/libs/sweetalert/sweetalert2.js') }}"></script>
+<script src="{{ asset('/js/main.js') }}"></script>
 
 @yield('js')
 </body>
