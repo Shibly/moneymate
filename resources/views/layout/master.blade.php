@@ -10,11 +10,12 @@
     <link href="{{asset('/libs/select2/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('/css/tabler.css')}}" rel="stylesheet">
     <link href="{{asset('/css/tabler-vendors.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/demo.min.css')}}" rel="stylesheet">
     <link href="{{asset('/libs/datatable/datatable.css')}}" rel="stylesheet">
 
     @yield('css')
     <style>
-        /*@import url('https://rsms.me/inter/inter.css');*/
+        @import url('https://rsms.me/inter/inter.css');
     </style>
 
 
@@ -28,7 +29,7 @@
     let num_data_per_page = '{{get_option('num_data_per_page')}}';
 
 </script>
-<script src="{{asset('public/js/demo-theme.js')}}"></script>
+<script src="{{asset('/js/demo-theme.js')}}"></script>
 
 <div class="page">
     <!-- Sidebar -->
@@ -60,6 +61,7 @@
 <script src="{{asset('/libs/litepicker/dist/litepicker.js')}}" defer></script>
 <script src="{{asset('/libs/tom-select/dist/js/tom-select.base.min.js')}}" defer></script>
 <script src="{{asset('/js/tabler.min.js')}}"></script>
+<script src="{{asset('/js/demo.min.js')}}"></script>
 <script src="{{ asset('/libs/datatable/datatable.js') }}"></script>
 <script src="{{ asset('/libs/select2/select2.min.js') }}"></script>
 <script src="{{ asset('/libs/sweetalert/sweetalert2.js') }}"></script>

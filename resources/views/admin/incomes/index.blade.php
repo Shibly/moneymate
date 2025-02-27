@@ -256,7 +256,7 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('public/js/calendar.js') }}"></script>
+    <script src="{{ asset('/js/calendar.js') }}"></script>
     <script>
         "use strict";
         let deleteIncomeId;
