@@ -1,0 +1,73 @@
+#version: '3.8'
+services:
+    moneymate-app:
+        build:
+            context: . # Set the context as the root directory.
+            dockerfile: ./docker/php/Dockerfile
+        #user: "${UID}:${GID}"
+        container_name: moneymate_app
+        volumes:
+            - ./:/var/www
+        networks:
+            - moneymate-network
+
+    moneymate-nginx:
+        build:
+            context: ./docker/nginx
+        container_name: moneymate_nginx
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - moneymate-app
+        networks:
+            - moneymate-network
+
+    moneymate-database:
+        build:
+            context: .
+            dockerfile: docker/mysql/Dockerfile
+        container_name: moneymate_mysql
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql-data-money-mate:/var/lib/mysql
+        networks:
+            - moneymate-network
+
+#    composer:
+#        image: composer:latest
+#        container_name: doctor-in-time-composer
+#        working_dir: /var/www
+#        volumes:
+#            - .:/var/www
+#        entrypoint: [ "composer" ]
+#        networks:
+#            - moneymate-network
+
+#    composer:
+#        image: composer:latest
+#        container_name: composer_container
+#        volumes:
+#            - ./:/var/www
+#        working_dir: /var/www
+#        depends_on:
+#            - php
+
+#    artisan:
+#        build:
+#            context: ./docker/php
+#        container_name: artisan_container
+#        volumes:
+#            - ./:/var/www
+#        working_dir: /var/www
+#        depends_on:
+#            - database
+
+networks:
+    moneymate-network:
+        driver: bridge
+
+volumes:
+    mysql-data-money-mate:

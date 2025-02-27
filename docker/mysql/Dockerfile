@@ -1,0 +1,9 @@
+# docker/mysql/Dockerfile
+FROM mysql:8
+
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=moneymate
+ENV MYSQL_USER=moneymate
+ENV MYSQL_PASSWORD=1234
+
+EXPOSE 3306
