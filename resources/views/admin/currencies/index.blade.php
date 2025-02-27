@@ -11,12 +11,13 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
-                           data-bs-target="#modal-report">
+                           data-bs-target="#modal-create-currency">
                             <x-tabler-currency-dollar/>
                             Add New
                         </a>
                     </div>
-                    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal modal-blur fade" id="modal-create-currency" tabindex="-1" role="dialog"
+                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -25,7 +26,7 @@
                                             aria-label="Close"></button>
                                 </div>
 
-                                <form action="{{ route('currencies.store') }}" method="POST">
+                                <form id="create-currency" action="" method="POST">
                                     @csrf
 
                                     <div class="modal-body">
@@ -56,8 +57,7 @@
                                             Cancel
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <x-tabler-currency-dollar/>
-                                            Add New Currency
+                                            {{get_translation('submit')}}
                                         </button>
                                     </div>
                                 </form>
@@ -102,8 +102,7 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <x-tabler-currency-dollar/>
-                                            Update Currency
+                                            {{get_translation('submit')}}
                                         </button>
                                     </div>
                                 </form>
@@ -203,6 +202,40 @@
     <script>
         "use strict";
         $(document).ready(function () {
+
+            $('#create-currency').on('submit', function (e) {
+                e.preventDefault();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
+                $('.text-danger').remove();
+                $.ajax({
+                    url: "{{ route('currencies.store') }}",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $('#create-currency')[0].reset();
+                        $('#modal-create').modal('hide');
+                        location.reload();
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            for (let key in errors) {
+                                let inputField = $('[name="' + key + '"]');
+                                inputField.after('<div class="text-danger pt-2">' + errors[key][0] + '</div>');
+                            }
+                        } else {
+                            console.log("Error creating currency:", xhr);
+                        }
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
+                    }
+                });
+            });
+
+
             // Handle edit button click
             $(document).on('click', '.edit-btn', function () {
                 let currencyId = $(this).data('id'); // Get currency ID from button
@@ -227,11 +260,14 @@
             // Handle edit form submission
             $('#edit-currency-form').on('submit', function (e) {
                 e.preventDefault();
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Submitting...');
+
                 let currencyId = $('#edit-currency-id').val();
 
                 $.ajax({
                     url: "{{ url('currencies/update') }}/" + currencyId,
-                    type: "POST", // Use PUT method for updates
+                    type: "POST",
                     data: $(this).serialize(),
                     success: function (response) {
                         $('#modal-edit').modal('hide');
@@ -239,6 +275,9 @@
                     },
                     error: function (xhr) {
                         console.log("Error updating currency:", xhr);
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
                     }
                 });
             });
@@ -249,7 +288,7 @@
 
             $(document).on('click', '.delete-btn', function () {
                 deleteCurrencyId = $(this).data('id'); // Get currency ID from button
-                console.log("Delete button clicked. Currency ID:", deleteCurrencyId); // Debugging
+                //console.log("Delete button clicked. Currency ID:", deleteCurrencyId); // Debugging
 
                 if (!deleteCurrencyId) {
                     console.error("No currency ID found!");

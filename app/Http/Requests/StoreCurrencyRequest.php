@@ -41,7 +41,7 @@ class StoreCurrencyRequest extends FormRequest
             'name.required' => 'The currency name is required.',
             'name.string' => 'The currency name must be a string.',
             'name.max' => 'The currency name must not exceed 120 characters.',
-            'name.unique' => 'The currency name must be unique.',
+            'name.unique' => 'The currency name already exists. Use a different name.',
             'exchange_rate.required' => 'The exchange rate is required.',
             'exchange_rate.numeric' => 'The exchange rate must be a numeric value.',
             'exchange_rate.min' => 'The exchange rate must be at least 0.',
