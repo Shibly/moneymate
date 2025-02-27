@@ -154,13 +154,13 @@
                 </li>
 
                 <li class="nav-item @if($activeMenu == 'calendar') active-state @endif">
-                    <a class="nav-link" href="{{route('currencies.index')}}">
+                    <a class="nav-link" href="{{route('calendar.index')}}">
 				<span class="nav-link-icon d-md-none d-lg-inline-block">
                     <x-tabler-calendar/>
                 </span>
                         <span class="nav-link-title">
-					{{get_translation('calendar')}}
-				</span>
+					        {{get_translation('calendar')}}
+				        </span>
                     </a>
                 </li>
 

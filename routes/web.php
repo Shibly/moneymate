@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BankNameController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
@@ -146,5 +147,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('reports/expense/export', [ExpenseReportController::class, 'exportExcel'])
         ->name('expense.report.export');
+
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
+    Route::get('/calendar/get-data', [CalendarController::class, 'getData'])->name('calendar.data');
 
 });

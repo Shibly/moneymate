@@ -222,7 +222,7 @@
                             @foreach($incomes as $income)
 
                                 <tr id="row-{{$income->id}}">
-                                    <td class="text-center">{{ $income->amount }}</td>
+                                    <td class="text-center">{{ $income->amount }} {{$income->currency ? $income->currency->name : ''}}</td>
                                     <td class="text-center">{{ $income->bankAccount->account_number }}</td>
                                     <td class="text-center">{{ $income->category->name }}</td>
                                     <td class="text-center">{{ $income->description }}</td>

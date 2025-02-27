@@ -72,6 +72,7 @@
 <script src="{{ asset('public/libs/select2/select2.min.js') }}"></script>
 <script src="{{ asset('public/libs/sweetalert/sweetalert2.js') }}"></script>
 <script src="{{ asset('public/js/main.js') }}"></script>
+
 @yield('js')
 </body>
 </html>
