@@ -223,6 +223,12 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'please_note_that_usd_serves_as_the_base_currency_you_may_add_additional_currencies_as_needed_but_ensure_that_you_provide_the_exchange_rate_relative_to_usd', 'value' => 'Please note that USD serves as the base currency. You may add additional currencies as needed, but ensure that you provide the exchange rate relative to USD', 'created_at' => $now, 'updated_at' => $now],
 
 
+
+            ['code' => 'en', 'key' => 'balance_transfer', 'value' => 'Balance Transfer', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'make_a_transfer', 'value' => 'Make a transfer', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'you_can_transfer_funds_from_your_source_account_to_your_destination_account_if_the_accounts_use_different_currencies_the_system_will_automatically_convert_the_transferred_amount_into_the_destination_accounts_currency', 'value' => 'You can transfer funds from your source account to your destination account. If the accounts use different currencies, the system will automatically convert the transferred amount into the destination account’s currency', 'created_at' => $now, 'updated_at' => $now],
+
+
         ];
 
 

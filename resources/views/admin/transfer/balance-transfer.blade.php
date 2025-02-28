@@ -14,7 +14,7 @@
                            data-bs-toggle="modal"
                            data-bs-target="#balanceTransferModal">
                             <x-tabler-transfer/>
-                            Make a Transfer
+                            {{get_translation('make_a_transfer')}}
                         </a>
                     </div>
                 </div>
@@ -30,12 +30,12 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">From Account</th>
-                                <th class="text-center">To Account</th>
-                                <th class="text-center">From Amount</th>
-                                <th class="text-center">To Amount</th>
-                                <th class="text-center">Transfer Date</th>
-                                <th class="text-center">Note</th>
+                                <th class="text-center">{{get_translation('from_account')}}</th>
+                                <th class="text-center">{{get_translation('to_account')}}</th>
+                                <th class="text-center">{{get_translation('from_amount')}}</th>
+                                <th class="text-center">{{get_translation('to_amount')}}</th>
+                                <th class="text-center">{{get_translation('transfer_date')}}</th>
+                                <th class="text-center">{{get_translation('note')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -72,7 +72,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Make a Transfer</h5>
+                    <h5 class="modal-title">{{get_translation('make_a_transfer')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
@@ -82,16 +82,15 @@
                     <div class="modal-body">
                         <!-- Professional Tip Message -->
                         <div class="alert alert-info mb-3">
-                            <span class="badge bg-blue-lt">Tip:</span>
-                            You can transfer funds from your source account to your destination account. If the accounts
-                            use different currencies, the system will automatically convert the transferred amount into
-                            the destination account’s currency.
+                            <span class="badge bg-blue-lt">{{get_translation('tips')}}:</span>
+                            {{get_translation('you_can_transfer_funds_from_your_source_account_to_your_destination_account_if_the_accounts_use_different_currencies_the_system_will_automatically_convert_the_transferred_amount_into_the_destination_accounts_currency')}}
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">From Account: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('from_account')}}: <span
+                                    class="text-danger">*</span></label>
                             <select name="from_account_id" class="form-control">
-                                <option value="">Select a Bank Account</option>
+                                <option value="">{{get_translation('select_a_bank_account')}}</option>
                                 @foreach($bankAccounts as $bankAccount)
                                     <option value="{{$bankAccount->id}}">
                                         {{$bankAccount->bank->bank_name}} - {{$bankAccount->account_number}} - Balance
@@ -103,9 +102,10 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">To Account: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('to_account')}}: <span
+                                    class="text-danger">*</span></label>
                             <select name="to_account_id" class="form-control">
-                                <option value="">Select a Bank Account</option>
+                                <option value="">{{get_translation('select_a_bank_account')}}</option>
                                 @foreach($bankAccounts as $bankAccount)
                                     <option value="{{$bankAccount->id}}">
                                         {{$bankAccount->bank->bank_name}} - {{$bankAccount->account_number}} - Balance
@@ -117,14 +117,15 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Amount: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('amount')}}: <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" name="amount"
                                    placeholder="Amount">
                             <div class="text-danger pt-2 amount"></div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Transfer Date: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('transfer_date')}}: <span
+                                    class="text-danger">*</span></label>
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="transfer_date"
                                        placeholder="Select a date"
@@ -135,7 +136,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Note:</label>
+                            <label class="form-label">{{get_translation('note')}}:</label>
                             <input type="text" class="form-control" name="note"
                                    placeholder="Note">
                             <div class="text-danger pt-2 note"></div>
@@ -147,10 +148,10 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">
-                            Cancel
+                            {{get_translation('cancel')}}
                         </button>
                         <button type="submit" class="btn btn-primary">
-                            Submit
+                            {{get_translation('submit')}}
                         </button>
                     </div>
                 </form>
@@ -170,7 +171,7 @@
             $('#balanceTransfer').submit(function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('submitting');
+                submitButton.prop('disabled', true).text('{{get_translation('submitting')}}');
 
                 $("#balanceTransferModal .logical-error").addClass('d-none');
 
@@ -197,7 +198,7 @@
                         }
                     },
                     complete: function () {
-                        submitButton.prop('disabled', false).text('Submit');
+                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
                     }
                 });
             });
