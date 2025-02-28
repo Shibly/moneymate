@@ -251,7 +251,7 @@
                         $('#edit-currency-id').val(data.id);
                         $('#edit-currency-name').val(data.name);
                         $('#edit-currency-exchange-rate').val(data.exchange_rate);
-                        $('#edit-currency-is-base').val(data.is_base); // Ensure correct value is selected
+                        $('#edit-currency-is-base').val(data.is_default); // Ensure correct value is selected
 
                         $('#modal-edit').modal('show');
                     },
