@@ -6,13 +6,12 @@ use App\Models\BankAccount;
 use App\Models\Budget;
 use App\Models\BudgetCategory;
 use App\Models\BudgetExpense;
-use App\Models\Category;
 use App\Models\Expense;
 use App\Repositories\Contracts\ExpenseInterface;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,7 +44,7 @@ class ExpenseRepository implements ExpenseInterface
             $budget = Budget::find($budgetCategory->budget_id);
             $exchange_budge_amount = convert_to_exchange_amount($budget->currency_id, $usd_amount);
             if ($budget && ($exchange_budge_amount > $budget->updated_amount)) {
-                throw new Exception('There is no sufficient budget for this category.');
+                throw new Exception(get_translation('you_do_not_have_enough_budget_to_spend'));
             }
         }
 
@@ -105,10 +104,9 @@ class ExpenseRepository implements ExpenseInterface
             $bankAccount->save();
             DB::commit();
             return $expense;
-        } catch (Exception $exception)
-        {
+        } catch (Exception $exception) {
             DB::rollBack();
-            throw new Exception( $exception->getMessage());
+            throw new Exception($exception->getMessage());
         }
 
     }

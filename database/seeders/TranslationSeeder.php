@@ -155,6 +155,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'new_password', 'value' => 'New Password', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'confirm_password', 'value' => 'Confirm Password', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'budgets', 'value' => 'Budgets', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'you_do_not_have_enough_budget_to_spend', 'value' => 'You don\'t have enough budget to spent', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'incomes', 'value' => 'Incomes', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'expenses', 'value' => 'Expenses', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'income_report', 'value' => 'Income Report', 'created_at' => $now, 'updated_at' => $now],

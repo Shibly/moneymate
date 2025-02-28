@@ -231,8 +231,9 @@
 @section('js')
     <script src="{{ asset('/js/calendar.js') }}"></script>
     <script>
-        "use strict";
 
+
+        "use strict";
         $(document).ready(function () {
 
             function initializeTomSelect() {
@@ -268,18 +269,30 @@
                         location.reload();
                     },
                     error: function (xhr) {
+                        var err_response;
+                        try {
+                            err_response = JSON.parse(xhr.responseText);
+                        } catch (e) {
+                            //console.log("Error parsing response:", e);
+                            alert("An unexpected error occurred.");
+                            return;
+                        }
+
                         if (xhr.status === 422) {
-                            var err_response = JSON.parse(xhr.responseText);
                             $.each(err_response.errors, function (key, value) {
                                 $("#addExpenseModal ." + key).text(value);
                             });
-                        } else if (xhr.status === 400) {
-                            var err_response = JSON.parse(xhr.responseText);
-                            $("#addExpenseModal .logical-error").removeClass('d-none').show().text(err_response.message);
-                        } else {
-                            alert("Something went wrong. Please try again.");
-                        }
 
+                        } else if (xhr.status === 400 || xhr.status === 500) {
+                            if (err_response.message) {
+                                $("#addExpenseModal .logical-error").removeClass('d-none').show().text(err_response.message);
+                            } else {
+                                $("#addExpenseModal .logical-error").removeClass('d-none').show().text("An unexpected error occurred.");
+                            }
+                        } else {
+                            var errorMessage = err_response.message || "Something went wrong. Please try again.";
+                            alert(errorMessage);
+                        }
                         $("#addExpenseModal .action-button").attr('disabled', false);
                     },
                     cache: false,
