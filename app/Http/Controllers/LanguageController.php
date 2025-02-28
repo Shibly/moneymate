@@ -14,7 +14,7 @@ class LanguageController extends Controller
         $countriesJson = file_get_contents(resource_path('country_code/countries.json'));
         $countries = json_decode($countriesJson, true);
         $activeMenu = "languages";
-        $title = "Available Languages";
+        $title = get_translation('available_languages');
         return view('admin.languages.index', compact('languages', 'activeMenu', 'countries', 'title'));
     }
 
@@ -36,13 +36,13 @@ class LanguageController extends Controller
             $name = trim($parts[0]);
             $code = trim($parts[1]);
         } else {
-            notyf()->error('Invalid name format. Please use "Name - Code" format.');
+            notyf()->error(get_translation('invalid_name_format_please_use_name_code_format'));
             return redirect()->back();
         }
 
         // Check if a language with the same name already exists.
         if (Language::where('name', $name)->exists()) {
-            notyf()->error('Language name already exists.');
+            notyf()->error(get_translation('language_name_already_exists'));
             return redirect()->back();
         }
 
@@ -54,7 +54,7 @@ class LanguageController extends Controller
         ];
 
         Language::create($data);
-        notyf()->success('New language created successfully.');
+        notyf()->success(get_translation('new_language_added_successfully'));
         return redirect()->route('languages.index');
     }
 
@@ -73,7 +73,7 @@ class LanguageController extends Controller
         Language::query()->update(['is_default' => '0']);
         $language = Language::where('code', $code)->firstOrFail();
         $language->update(['is_default' => '1']);
-        notyf()->success('Default language updated successfully.');
+        notyf()->success(get_translation('default_language_updated_successfully'));
         return redirect()->back();
     }
 

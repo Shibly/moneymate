@@ -13,7 +13,7 @@
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#modal-add-language">
                             <x-tabler-language/>
-                            Add New Language
+                            {{get_translation('add_new_language')}}
                         </a>
                     </div>
 
@@ -97,25 +97,24 @@
             <div class="card">
                 <div class="card-body">
                     <div class="alert alert-info">
-                        <span class="badge bg-blue-lt">Tip:</span>
-                        You can add multiple languages to translate your application. Once you add a language, please
-                        click the
-                        <strong>Edit</strong> button next to it to provide your own translations.
+                        <span class="badge bg-blue-lt">{{get_translation('tips')}}:</span>
+                        {{get_translation('you_can_add_multiple_languages_to_translate_your_application_once_you_add_a_language_please_click_the_edit_button_next_to_it_to_provide_your_own_translations')}}
                     </div>
                     <div class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Code</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center">{{get_translation('name')}}</th>
+                                <th class="text-center">{{get_translation('code')}}</th>
+                                <th class="text-center">{{get_translation('status')}}</th>
+                                <th class="text-center">{{get_translation('action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($languages as $language)
                                 <tr>
-                                    <td class="text-center">{{ $language->name }}</td>
+                                    <td class="text-center"><img src="{{asset('img/flags/'.$language->code).'.svg'}}"
+                                                                 alt=""> {{ $language->name }}</td>
                                     <td class="text-center">{{ $language->code }}</td>
                                     <td class="text-center">{{ $language->is_default ? 'Active' : 'Inactive' }}</td>
                                     <td class="text-center">
@@ -124,12 +123,12 @@
                                             <a href="{{route('language.setDefault',$language->code)}}"
                                                class="btn btn-success me-2 {{ $language->is_default ? 'disabled' : '' }}">
                                                 <x-tabler-zoom-reset/>
-                                                Set Default
+                                                {{get_translation('set_default')}}
                                             </a>
                                             <a class="btn btn-primary me-2"
                                                href="{{ route('translations.edit', $language->code) }}">
                                                 <x-tabler-language/>
-                                                Edit
+                                                {{get_translation('edit')}}
                                             </a>
                                             @if($language->id != 1)
                                                 <form action="{{ route('languages.destroy', $language->id) }}"
@@ -138,7 +137,7 @@
                                                     @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">
                                                         <x-tabler-trash/>
-                                                        Delete
+                                                        {{get_translation('delete')}}
                                                     </button>
                                                 </form>
                                             @endif
@@ -161,7 +160,7 @@
         $(document).ready(function () {
             let select = new TomSelect(".select2", {
                 create: false,
-                placeholder: "Select A Language",
+                placeholder: "{{get_translation('select_a_language')}}",
                 onChange: function () {
                     this.blur();
                 }

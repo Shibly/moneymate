@@ -13,7 +13,7 @@
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#modal-create-currency">
                             <x-tabler-currency-dollar/>
-                            Add New
+                            {{get_translation('add_new')}}
                         </a>
                     </div>
                     <div class="modal modal-blur fade" id="modal-create-currency" tabindex="-1" role="dialog"
@@ -21,7 +21,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Add New Currency</h5>
+                                    <h5 class="modal-title">{{get_translation('add_new_currency')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -31,19 +31,21 @@
 
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Currency Name or Symbol</label>
+                                            <label
+                                                class="form-label">{{get_translation('currency_name_or_symbol')}}</label>
                                             <input type="text" class="form-control" name="name"
-                                                   placeholder="Currency Name" required>
+                                                   placeholder="{{get_translation('currency_name')}}" required>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label">Exchange Rate</label>
+                                            <label class="form-label">{{get_translation('exchange_rate')}}</label>
                                             <input type="number" class="form-control" name="exchange_rate"
-                                                   placeholder="Exchange Rate" step="0.01" required>
+                                                   placeholder="{{get_translation('exchange_rate')}}" step="0.01"
+                                                   required>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label">Is Default</label>
+                                            <label class="form-label">{{get_translation('is_default')}}</label>
                                             <select name="is_default" class="form-select" required>
                                                 <option value="yes">Yes</option>
                                                 <option value="no" selected>No</option>
@@ -54,7 +56,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">
-                                            Cancel
+                                            {{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             {{get_translation('submit')}}
@@ -69,7 +71,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Edit Currency</h5>
+                                    <h5 class="modal-title">{{get_translation('edit_currency')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <form id="edit-currency-form">
@@ -77,20 +79,21 @@
                                     <input type="hidden" name="id" id="edit-currency-id">
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label class="form-label">Currency Name or Symbol</label>
+                                            <label
+                                                class="form-label">{{get_translation('currency_name_or_symbol')}}</label>
                                             <input type="text" class="form-control" name="name" id="edit-currency-name"
                                                    required>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label">Exchange Rate</label>
+                                            <label class="form-label">{{get_translation('exchange_rate')}}</label>
                                             <input type="number" class="form-control" name="exchange_rate"
                                                    id="edit-currency-exchange-rate"
                                                    step="0.01" required>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label">Is Default</label>
+                                            <label class="form-label">{{get_translation('is_default')}}</label>
                                             <select name="is_default" class="form-select" id="edit-currency-is-base"
                                                     required>
                                                 <option value="yes">Yes</option>
@@ -99,7 +102,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             {{get_translation('update')}}
@@ -115,7 +119,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <h5 class="modal-title">{{get_translation('confirm_deletion')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body text-center">
@@ -128,15 +132,16 @@
                                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this currency ?</h3>
-                                    <div class="text-secondary">Do you really want to delete the currency ? This action
-                                        can not be undone.
-                                    </div>
+                                    <h3>{{get_translation('are_you_sure_you_want_to_delete_this')}}</h3>
+                                    <div
+                                        class="text-secondary">{{get_translation('this_action_can_not_be_undone')}}</div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">{{get_translation('cancel')}}
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="confirm-delete">Yes, Delete
+                                    <button type="button" class="btn btn-danger"
+                                            id="confirm-delete">{{get_translation('yes_delete')}}
                                     </button>
                                 </div>
                             </div>
@@ -151,9 +156,8 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="alert alert-info">
-                <span class="badge bg-blue-lt">Tip:</span>
-                Please note that USD serves as the base currency. You may add additional currencies as
-                needed, but ensure that you provide the exchange rate relative to USD.
+                <span class="badge bg-blue-lt">{{get_translation('tips')}}:</span>
+                {{get_translation('please_note_that_usd_serves_as_the_base_currency_you_may_add_additional_currencies_as_needed_but_ensure_that_you_provide_the_exchange_rate_relative_to_usd')}}
             </div>
             <div class="card">
                 <div class="card-body p-0">
@@ -161,10 +165,10 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Currency</th>
-                                <th class="text-center">Exchange Rate</th>
-                                <th class="text-center">Is Default</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center">{{get_translation('currency')}}</th>
+                                <th class="text-center">{{get_translation('exchange_rate')}}</th>
+                                <th class="text-center">{{get_translation('is_default')}}</th>
+                                <th class="text-center">{{get_translation('action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -176,12 +180,12 @@
                                     <td class="text-center">
                                         <button class="btn btn-info edit-btn" data-id="{{ $currency->id }}">
                                             <x-tabler-edit/>
-                                            Edit
+                                            {{get_translation('edit')}}
                                         </button>
-                                        @if($currency->id != 3)
+                                        @if($currency->name != 'USD')
                                             <button class="btn btn-danger delete-btn" data-id="{{ $currency->id }}">
                                                 <x-tabler-trash/>
-                                                Delete
+                                                {{get_translation('delete')}}
                                             </button>
                                         @endif
                                     </td>
@@ -277,7 +281,7 @@
                         console.log("Error updating currency:", xhr);
                     },
                     complete: function () {
-                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
+                        submitButton.prop('disabled', false).text('{{get_translation('update')}}');
                     }
                 });
             });
@@ -311,7 +315,7 @@
                         $('#row-' + deleteCurrencyId).remove();
                         Swal.fire({
                             title: "Deleted!",
-                            text: "Currency has been deleted",
+                            text: "{{get_translation('currency_has_been_deleted')}}",
                             icon: "success",
                             confirmButtonText: "OK"
                         });

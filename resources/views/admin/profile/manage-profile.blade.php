@@ -5,7 +5,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        Update Profile
+                        {{get_translation('update_profile')}}
                     </h2>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                                     <div class="row g-3">
 
                                         <div class="col-md-12">
-                                            <label class="form-label fw-bold">Name</label>
+                                            <label class="form-label fw-bold">{{get_translation('name')}}</label>
                                             <input type="text" name="name" class="form-control"
                                                    placeholder="Enter your name" value="{{ auth()->user()->name }}">
                                             @error('name')
@@ -37,7 +37,7 @@
 
 
                                         <div class="col-md-12">
-                                            <label class="form-label fw-bold">Email</label>
+                                            <label class="form-label fw-bold">{{get_translation('email')}}</label>
                                             <input type="email" name="email" class="form-control"
                                                    placeholder="Enter your email" value="{{ auth()->user()->email }}">
                                             @error('email')
@@ -47,7 +47,8 @@
 
 
                                         <div class="col-md-12">
-                                            <label class="form-label fw-bold">Profile Picture</label>
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('profile_picture')}}</label>
                                             <input type="file" name="profile_picture" class="form-control">
                                             @error('profile_picture')
                                             <div class="text-danger pt-2">{{ $message }}</div>
@@ -58,14 +59,12 @@
 
                                 <div class="card-footer bg-transparent mt-auto">
                                     <div class="btn-list justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                                        <button type="submit"
+                                                class="btn btn-primary">{{get_translation('update')}}</button>
                                     </div>
                                 </div>
                             </form>
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -73,7 +72,3 @@
     </div>
 @endsection
 
-@section('js')
-
-
-@endsection

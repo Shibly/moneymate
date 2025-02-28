@@ -170,7 +170,6 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'total_account_balance', 'value' => 'Total Account Balance', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'total_lend_amount', 'value' => 'Total Lend Amount', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'income_vs_expense_summary_last_six_months_in_default_currency', 'value' => 'Incomes vs Expense Summary - Last 6 Months Shows in Default Currency', 'created_at' => $now, 'updated_at' => $now],
-            ['code' => 'en', 'key' => 'budget_distributed_among_categories', 'value' => 'Budget distributed among categories', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'languages', 'value' => 'Languages', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'provide_company_website_url', 'value' => 'Provide company website url', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'provide_legal_registered_company_name', 'value' => 'Provide your legal or registered company name', 'created_at' => $now, 'updated_at' => $now],
@@ -190,6 +189,40 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'edit_budget', 'value' => 'Edit budget', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'select_category', 'value' => 'Select Category', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'expense_categories', 'value' => 'Expense Categories', 'created_at' => $now, 'updated_at' => $now],
+
+
+            ['code' => 'en', 'key' => 'available_languages', 'value' => 'Available languages', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'invalid_name_format_please_use_name_code_format', 'value' => 'Invalid name format. Please use "Name - Code" format', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'language_name_already_exists', 'value' => 'Language name already exists', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'new_language_added_successfully', 'value' => 'New language added successfully', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'default_language_updated_successfully', 'value' => 'Default language updated successfully', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'select_a_language', 'value' => 'Select a language', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'you_can_add_multiple_languages_to_translate_your_application_once_you_add_a_language_please_click_the_edit_button_next_to_it_to_provide_your_own_translations', 'value' => 'You can add multiple languages to translate your application. Once you add a language, please click the Edit button next to it to provide your own translations', 'created_at' => $now, 'updated_at' => $now],
+
+
+            ['code' => 'en', 'key' => 'manage_profile', 'value' => 'Manage Profile', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'change_password', 'value' => 'Change Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'log_out', 'value' => 'Logout', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'update_profile', 'value' => 'Update Profile', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'profile_picture', 'value' => 'Profile Picture', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'email', 'value' => 'Email', 'created_at' => $now, 'updated_at' => $now],
+
+
+            ['code' => 'en', 'key' => 'change_password', 'value' => 'Change Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'current_password', 'value' => 'Current Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'new_password', 'value' => 'New Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'confirm_password', 'value' => 'Confirm Password', 'created_at' => $now, 'updated_at' => $now],
+
+
+            ['code' => 'en', 'key' => 'add_new_currency', 'value' => 'Add New Currency', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'currency_name_or_symbol', 'value' => 'Currency Name Or Symbol', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'currency_name', 'value' => 'Currency Name', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'exchange_rate', 'value' => 'Exchange Rate', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'is_default', 'value' => 'Is Default', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'currency_has_been_deleted', 'value' => 'Currency has been deleted', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'please_note_that_usd_serves_as_the_base_currency_you_may_add_additional_currencies_as_needed_but_ensure_that_you_provide_the_exchange_rate_relative_to_usd', 'value' => 'Please note that USD serves as the base currency. You may add additional currencies as needed, but ensure that you provide the exchange rate relative to USD', 'created_at' => $now, 'updated_at' => $now],
+
+
         ];
 
 

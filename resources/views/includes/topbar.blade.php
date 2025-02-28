@@ -35,15 +35,15 @@
 
                     <div class="d-none d-xl-block ps-2">
                         <div>{{auth()->user()->name}}</div>
-                        <div class="mt-1 small text-secondary">System Admin</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="{{route('profile.manage-profile')}}" class="dropdown-item">Manage Profile</a>
-                    <a href="{{route('profile.change-password')}}" class="dropdown-item">Change Password</a>
+                    <a href="{{route('profile.manage-profile')}}"
+                       class="dropdown-item">{{get_translation('manage_profile')}}</a>
+                    <a href="{{route('profile.change-password')}}"
+                       class="dropdown-item">{{get_translation('change_password')}}</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">View Activity Log</a>
-                    <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
+                    <a href="{{route('logout')}}" class="dropdown-item">{{get_translation('log_out')}}</a>
                 </div>
             </div>
         </div>
