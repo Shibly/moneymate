@@ -14,7 +14,7 @@
                            data-bs-toggle="modal"
                            data-bs-target="#addBudgetModal">
                             <x-tabler-plus/>
-                            Add New Budget
+                            {{get_translation('add_new_budget')}}
                         </a>
                     </div>
                 </div>
@@ -30,12 +30,12 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Budget Name</th>
-                                <th class="text-center">Proposed Amount</th>
-                                <th class="text-center">Updated Budget Amount</th>
-                                <th class="text-center">Budget Start Date</th>
-                                <th class="text-center">Budget End Date</th>
-                                <th class="text-center" width="25%">Action</th>
+                                <th class="text-center">{{get_translation('budget_name')}}</th>
+                                <th class="text-center">{{get_translation('budget_amount')}}</th>
+                                <th class="text-center">{{get_translation('updated_budget_amount')}}</th>
+                                <th class="text-center">{{get_translation('budget_start_date')}}</th>
+                                <th class="text-center">{{get_translation('budget_end_date')}}</th>
+                                <th class="text-center" width="25%">{{get_translation('action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -71,7 +71,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Budget</h5>
+                    <h5 class="modal-title">{{get_translation('add_budget')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -82,7 +82,7 @@
                             <!-- Left Column -->
                             <div class="col-md-6">
                                 <div>
-                                    <label class="form-label">Budget Name: <span
+                                    <label class="form-label">{{get_translation('budget_name')}}: <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="budget_name"
                                            placeholder="Budget Name">
@@ -90,10 +90,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Select Currency: <span
+                                    <label class="form-label">{{get_translation('select_category')}}: <span
                                             class="text-danger">*</span></label>
                                     <select name="currency_id" class="form-control">
-                                        <option value="">Select Currency</option>
+                                        <option value="">{{get_translation('select_currency')}}</option>
                                         @foreach($currencies as $currency)
                                             <option value="{{$currency->id}}">{{$currency->name}}</option>
                                         @endforeach
@@ -102,8 +102,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Budget Amount: <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="amount" placeholder="Budget Amount">
+                                    <label class="form-label">{{get_translation('budget_amount')}}: <span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="amount"
+                                           placeholder="{{get_translation('budget_amount')}}">
                                     <div class="text-danger pt-2 amount"></div>
                                 </div>
                             </div>
@@ -112,7 +114,7 @@
                             <div class="col-md-6">
 
                                 <div>
-                                    <label class="form-label">Expense Categories: <span
+                                    <label class="form-label">{{get_translation('expense_categories')}}: <span
                                             class="text-danger">*</span></label>
                                     <select name="categories[]" class="form-control select2" multiple>
                                         @foreach($categories as $category)
@@ -124,11 +126,12 @@
 
 
                                 <div class="mb-3">
-                                    <label class="form-label">Start Date: <span class="text-danger">*</span></label>
+                                    <label class="form-label">{{get_translation('start_date')}}: <span
+                                            class="text-danger">*</span></label>
 
                                     <div class="input-icon mb-2">
                                         <input class="form-control datepicker" name="start_date"
-                                               placeholder="Start Date"
+                                               placeholder="{{get_translation('start_date')}}"
                                                value=""/>
                                         <span class="input-icon-addon"><x-tabler-calendar/></span>
                                     </div>
@@ -136,10 +139,11 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">End Date: <span class="text-danger">*</span></label>
+                                    <label class="form-label">{{get_translation('end_date')}}: <span
+                                            class="text-danger">*</span></label>
                                     <div class="input-icon mb-2">
                                         <input class="form-control datepicker" name="end_date"
-                                               placeholder="End Date"
+                                               placeholder="{{get_translation('end_date')}}"
                                                value=""/>
                                         <span class="input-icon-addon"><x-tabler-calendar/></span>
                                     </div>
@@ -152,8 +156,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary action-button">Submit</button>
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">{{get_translation('cancel')}}</button>
+                        <button type="submit"
+                                class="btn btn-primary action-button">{{get_translation('submit')}}</button>
                     </div>
                 </form>
 
@@ -165,7 +171,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Budget</h5>
+                    <h5 class="modal-title">{{get_translation('edit_budget')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -181,7 +187,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Confirm Deletion</h5>
+                    <h5 class="modal-title">{{get_translation('confirm_deletion')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-center">
@@ -193,13 +199,14 @@
                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Are you sure to delete this budget?</h3>
-                    <div class="text-secondary">This action cannot be undone.</div>
+                    <h3>{{get_translation('are_you_sure_you_want_to_delete_this')}}</h3>
+                    <div class="text-secondary">{{get_translation('ths_action_can_not_be_undone')}}</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{get_translation('cancel')}}
                     </button>
-                    <button type="button" class="btn btn-danger" id="confirm-delete">Yes, Delete
+                    <button type="button" class="btn btn-danger" id="confirm-delete">{{get_translation('yes_delete')}}
                     </button>
                 </div>
             </div>
@@ -228,7 +235,7 @@
 
                 $("#addBudgetModal .logical-error").addClass('d-none');
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('{{get_translation('submitting')}}');
 
 
                 var form = $(this);
@@ -256,7 +263,7 @@
                         $("#addBudgetModal .action-button").attr('disabled', false);
                     },
                     complete: function () {
-                        submitButton.prop('disabled', false).text('Submit');
+                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
                     },
                     cache: false,
                     contentType: false,
@@ -266,7 +273,6 @@
 
             $(document).on('click', '.edit-btn', function () {
                 let budgetId = $(this).data('id');
-
                 $.ajax({
                     url: "{{ url('budget/edit') }}/" + budgetId,
                     type: "GET",
@@ -283,7 +289,8 @@
 
             $(document).on('submit', '#updateBudget', function (e) {
                 e.preventDefault();
-
+                let submitButton = $('button[type="submit"]');
+                submitButton.prop('disabled', true).text('{{get_translation('updating')}}');
                 $("#editBudgetModal .logical-error").addClass('d-none');
                 $("#editBudgetModal .action-button").attr('disabled', true);
 
@@ -312,6 +319,9 @@
                                 .text(err_response.message);
                         }
                         $("#editBudgetModal .action-button").attr('disabled', false);
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('{{get_translation('update')}}');
                     },
                     cache: false,
                     contentType: false,

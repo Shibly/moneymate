@@ -60,13 +60,11 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                             {{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <x-tabler-category/>
-                                            {{get_translation('add_new')}}
+                                            {{get_translation('submit')}}
                                         </button>
                                     </div>
                                 </form>
@@ -179,7 +177,8 @@
                                         @if ($category->type === 'expense')
                                             <span class="badge bg-red text-red-fg">{{ ucfirst($category->type) }}</span>
                                         @elseif ($category->type === 'income')
-                                            <span class="badge bg-teal text-teal-fg">{{ ucfirst($category->type) }}</span>
+                                            <span
+                                                class="badge bg-teal text-teal-fg">{{ ucfirst($category->type) }}</span>
                                         @else
                                             {{ ucfirst($category->type) }}
                                         @endif
@@ -187,11 +186,11 @@
                                     <td class="text-center">
                                         <button class="btn btn-info edit-btn" data-id="{{ $category->id }}">
                                             <x-tabler-edit/>
-                                            Edit
+                                            {{get_translation('edit')}}
                                         </button>
                                         <button class="btn btn-danger delete-btn" data-id="{{ $category->id }}">
                                             <x-tabler-trash/>
-                                            Delete
+                                            {{get_translation('delete')}}
                                         </button>
                                     </td>
                                 </tr>
@@ -214,7 +213,7 @@
                 e.preventDefault();
 
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('submitting');
 
                 $.ajax({
                     url: "{{ route('categories.store') }}",
@@ -264,7 +263,7 @@
             $('#edit-category-form').submit(function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('{{get_translation('updating')}}');
 
                 let categoryId = $('#edit-category-id').val();
                 $('.invalid-feedback').remove();
@@ -286,7 +285,7 @@
                         console.log("Error updating category:", xhr);
                     },
                     complete: function () {
-                        submitButton.prop('disabled', false).text('{{get_translation('submit')}}');
+                        submitButton.prop('disabled', false).text('{{get_translation('Update')}}');
                     }
                 });
             });

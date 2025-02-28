@@ -77,7 +77,6 @@
                                                 data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            <x-tabler-building-bank/>
                                             {{get_translation('update')}}
                                         </button>
                                     </div>
@@ -174,7 +173,7 @@
             $('#add-bank-form').submit(function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('submitting');
 
                 $.ajax({
                     url: "{{ route('banks.store') }}",
@@ -227,7 +226,7 @@
             $('#edit-bank-name-form').submit(function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('{{get_translation('updating')}}');
 
                 let bankId = $('#edit-bank-id').val();
 
@@ -253,7 +252,11 @@
                         } else {
                             console.log("Error updating bank:", xhr);
                         }
+                    },
+                    complete: function () {
+                        submitButton.prop('disabled', false).text('{{get_translation('update')}}');
                     }
+
                 });
             });
 

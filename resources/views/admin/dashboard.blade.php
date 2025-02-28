@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                Total Account Balance
+                                                {{get_translation('total_account_balance')}}
                                             </div>
                                             <div class="text-secondary">
                                                 {{$totalAccountBalances}}
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                Total Lend Amount
+                                                {{get_translation('total_lend_amount')}}
                                             </div>
                                             <div class="text-secondary">
                                                 {{$totalLends}}
@@ -99,7 +99,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="mb-3">Budget distributed among expense categories - Current Month</p>
+                                    <p class="mb-3">{{get_translation('budget_distribution_among_expense_categories_current_month')}}</p>
 
                                     <div class="progress progress-separated mb-3">
                                         @foreach($budgetData['distribution'] as $dist)

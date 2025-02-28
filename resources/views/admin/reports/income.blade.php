@@ -21,10 +21,10 @@
                     <form method="GET" action="{{ route('income.report.index') }}" class="row g-2 align-items-end">
                         <div class="col-auto">
 
-                            <label for="start_date" class="form-label">Start Date</label>
+                            <label for="start_date" class="form-label">{{get_translation('start_date')}}</label>
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="start_date"
-                                       placeholder="Start Date"
+                                       placeholder="{{get_translation('start_date')}}"
                                        value="{{ request('start_date') }}"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
@@ -32,10 +32,10 @@
                         </div>
 
                         <div class="col-auto">
-                            <label for="end_date" class="form-label">End Date</label>
+                            <label for="end_date" class="form-label">{{get_translation('end_date')}}</label>
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="end_date"
-                                       placeholder="End Date"
+                                       placeholder="{{get_translation('end_date')}}"
                                        value="{{ request('end_date') }}"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
@@ -46,16 +46,16 @@
 
                             <a href="{{route('income.report.index')}}" class="btn btn-instagram">
                                 <x-tabler-restore/>
-                                Reset</a>
+                                {{get_translation('reset')}}</a>
                             <button type="submit" class="btn btn-primary">
                                 <x-tabler-filter/>
-                                Filter
+                                {{get_translation('filter')}}
                             </button>
 
                             <a href="{{ route('income.report.export', ['start_date' => request('start_date'),'end_date' => request('end_date')]) }}"
                                class="btn btn-success">
                                 <x-tabler-file-type-xls/>
-                                Download Excel
+                                {{get_translation('download_excel')}}
                             </a>
                         </div>
                     </form>
@@ -67,12 +67,12 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Account</th>
-                                <th class="text-center">Category</th>
-                                <th class="text-center">Amount</th>
-                                <th class="text-center">Income Date</th>
-                                <th class="text-center">Reference</th>
-                                <th class="text-center">Description</th>
+                                <th class="text-center">{{get_translation('account_number')}}</th>
+                                <th class="text-center">{{get_translation('category')}}</th>
+                                <th class="text-center">{{get_translation('amount')}}</th>
+                                <th class="text-center">{{get_translation('income_date')}}</th>
+                                <th class="text-center">{{get_translation('reference')}}</th>
+                                <th class="text-center">{{get_translation('description')}}</th>
                             </tr>
                             </thead>
                             <tbody>

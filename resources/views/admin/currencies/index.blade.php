@@ -102,7 +102,7 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            {{get_translation('submit')}}
+                                            {{get_translation('update')}}
                                         </button>
                                     </div>
                                 </form>
@@ -206,7 +206,7 @@
             $('#create-currency').on('submit', function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('{{get_translation('submitting')}}');
 
                 $('.text-danger').remove();
                 $.ajax({
@@ -261,7 +261,7 @@
             $('#edit-currency-form').on('submit', function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('{{get_translation('updating')}}');
 
                 let currencyId = $('#edit-currency-id').val();
 

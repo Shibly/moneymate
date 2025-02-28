@@ -170,7 +170,7 @@
             $('#balanceTransfer').submit(function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('submitting');
 
                 $("#balanceTransferModal .logical-error").addClass('d-none');
 

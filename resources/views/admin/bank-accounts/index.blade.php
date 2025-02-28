@@ -143,7 +143,7 @@
                                                 data-bs-dismiss="modal">{{get_translation('cancel')}}
                                         </button>
                                         <button type="submit" class="btn btn-primary">
-                                            {{get_translation('submit')}}
+                                            {{get_translation('update')}}
                                         </button>
                                     </div>
                                 </form>
@@ -245,7 +245,7 @@
             $('#add-bank-account-form').submit(function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('{{get_translation('submitting')}}');
 
                 let form = $(this);
                 $.ajax({
@@ -301,7 +301,7 @@
             $('#edit-bank-account-form').submit(function (e) {
                 e.preventDefault();
                 let submitButton = $('button[type="submit"]');
-                submitButton.prop('disabled', true).text('Submitting...');
+                submitButton.prop('disabled', true).text('{{get_translation('updating')}}');
 
                 let form = $(this);
                 let formAction = form.attr('action');
@@ -335,7 +335,7 @@
                         console.log("Error updating account:", xhr);
                     },
                     complete: function () {
-                        submitButton.prop('disabled', false).text('Submitting...');
+                        submitButton.prop('disabled', false).text('{{get_translation('update')}}');
                     }
                 });
             });
