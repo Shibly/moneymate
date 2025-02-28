@@ -109,7 +109,9 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'receiving_account_number', 'value' => 'Receiving Account Number', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'category', 'value' => 'Category', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'attachment', 'value' => 'Attachment', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'no_attachment', 'value' => 'No Attachment', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'income_date', 'value' => 'Income Date', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'the_income_record_has_been_deleted_successfully', 'value' => 'The income record has been successfully deleted', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'income_category', 'value' => 'Income Category', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'add_attachment', 'value' => 'Add Attachment', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'description', 'value' => 'Description', 'created_at' => $now, 'updated_at' => $now],
@@ -233,6 +235,14 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'account_holder', 'value' => 'Account Holder', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'from_here_you_can_track_the_money_you_have_lent_to_others_or_borrowed_from_them_both_lending_and_borrowing_transactions_are_directly_associated_with_the_bank_account_you_select_when_creating_a_record', 'value' => 'From here you can track the money you have lent to others or borrowed from them. Both lending and borrowing transactions are directly associated with the bank account you select when creating a record', 'created_at' => $now, 'updated_at' => $now],
 
+
+            ['code' => 'en', 'key' => 'select_a_bank_account', 'value' => 'Select a bank account', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'repay', 'value' => 'Repay', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'add_lend_borrow', 'value' => 'Add Lend/Borrow', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'manage', 'value' => 'Manage', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'debt_has_been_deleted', 'value' => 'Debt has been deleted', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'lend_collection', 'value' => 'Lend Collection', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'select_an_option', 'value' => 'Select an Option', 'created_at' => $now, 'updated_at' => $now],
 
         ];
 

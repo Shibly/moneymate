@@ -13,7 +13,7 @@
                         <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#add-new-income">
                             <x-tabler-octagon-plus/>
-                            Add New
+                            {{get_translation('add_new')}}
                         </a>
                     </div>
                     <div class="modal modal-blur fade" id="add-new-income" tabindex="-1" role="dialog"
@@ -21,7 +21,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Add New Income</h5>
+                                    <h5 class="modal-title">{{get_translation('add_new_income')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -35,9 +35,9 @@
                                         <div class="row">
                                             <!-- Income Category (First Column) -->
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Income Category</label>
+                                                <label class="form-label">{{get_translation('income_category')}}</label>
                                                 <select class="form-control select2" name="category_id" required>
-                                                    <option value="">Select an option</option>
+                                                    <option value="">{{get_translation('select_an_option')}}</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                                     @endforeach
@@ -46,9 +46,10 @@
 
 
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Select Bank Account</label>
+                                                <label
+                                                    class="form-label">{{get_translation('select_bank_account')}}</label>
                                                 <select class="form-control select2" name="account_id" required>
-                                                    <option value="">Select an option</option>
+                                                    <option value="">{{get_translation('select_an_option')}}</option>
                                                     @foreach($bankAccounts as $bankAccount)
                                                         <option value="{{$bankAccount->id}}">
                                                             {{$bankAccount->bank->bank_name}}
@@ -63,9 +64,9 @@
 
 
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Currency</label>
+                                                <label class="form-label">{{get_translation('currency')}}</label>
                                                 <select class="form-control select2" name="currency_id" required>
-                                                    <option value="">Select a currency</option>
+                                                    <option value="">{{get_translation('select_an_option')}}</option>
                                                     @foreach($currencies as $currency)
                                                         <option value="{{$currency->id}}">{{$currency->name}}</option>
                                                     @endforeach
@@ -74,35 +75,35 @@
 
 
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Amount</label>
+                                                <label class="form-label">{{get_translation('amount')}}</label>
                                                 <input type="number" class="form-control" name="amount"
-                                                       placeholder="Amount" required>
+                                                       placeholder="{{get_translation('amount')}}" required>
                                             </div>
 
 
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Reference</label>
+                                                <label class="form-label">{{get_translation('reference')}}</label>
                                                 <input type="text" class="form-control" name="reference"
-                                                       placeholder="Income Reference">
+                                                       placeholder="{{get_translation('reference')}}">
                                             </div>
 
 
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">{{get_translation('description')}}</label>
                                                 <textarea class="form-control" name="description" rows="3"
-                                                          placeholder="Description"></textarea>
+                                                          placeholder="{{get_translation('description')}}"></textarea>
                                             </div>
 
 
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Note</label>
+                                                <label class="form-label">{{get_translation('note')}}</label>
                                                 <textarea class="form-control" name="note" rows="3"
-                                                          placeholder="Additional Note"></textarea>
+                                                          placeholder="{{get_translation('note')}}"></textarea>
                                             </div>
 
 
                                             <div class="col-md-6 mb-3">
-                                                <label class="form-label">Add Attachment</label>
+                                                <label class="form-label">{{get_translation('add_attachment')}}</label>
                                                 <input type="file" class="form-control" name="attachment">
                                             </div>
 
@@ -122,12 +123,10 @@
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                            Cancel
+                                            {{get_translation('cancel')}}
                                         </button>
-                                        <button type="submit" class="btn btn-primary">
-                                            <x-tabler-octagon-plus/>
-                                            Submit
-                                        </button>
+                                        <button type="submit"
+                                                class="btn btn-primary">{{get_translation('submit')}}</button>
                                     </div>
                                 </form>
                             </div>
@@ -138,7 +137,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <h5 class="modal-title">{{get_translation('confirm_deletion')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body text-center">
@@ -151,8 +150,8 @@
                                             d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
                                         <path d="M12 16h.01"></path>
                                     </svg>
-                                    <h3>Are you sure to delete this income ?</h3>
-                                    <div class="text-secondary"> This action can not be undone.
+                                    <h3>{{get_translation('are_you_sure_to_delete_this')}}</h3>
+                                    <div class="text-secondary"> {{get_translation('this_action_can_not_be_undone')}}
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -178,14 +177,14 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">Amount</th>
-                                <th class="text-center">Receiving Account Number</th>
-                                <th class="text-center">Category</th>
-                                <th class="text-center">Description</th>
-                                <th class="text-center">Attachment</th>
-                                <th class="text-center">Income Date</th>
-                                <th class="text-center">Reference</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center">{{get_translation('amount')}}</th>
+                                <th class="text-center">{{get_translation('account_number')}}</th>
+                                <th class="text-center">{{get_translation('category')}}</th>
+                                <th class="text-center">{{get_translation('description')}}</th>
+                                <th class="text-center">{{get_translation('attachment')}}</th>
+                                <th class="text-center">{{get_translation('income_date')}}</th>
+                                <th class="text-center">{{get_translation('reference')}}</th>
+                                <th class="text-center">{{get_translation('action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -203,7 +202,7 @@
                                                 <x-tabler-download/>
                                             </a>
                                         @else
-                                            No Attachment
+                                            {{get_translation('no_attachment')}}
                                         @endif
                                     </td>
                                     <td class="text-center">{{$income->income_date}}</td>
@@ -211,7 +210,7 @@
                                     <td class="text-center">
                                         <button class="btn btn-danger delete-btn" data-id="{{ $income->id }}">
                                             <x-tabler-trash/>
-                                            Delete
+                                            {{get_translation('delete')}}
                                         </button>
                                     </td>
                                 </tr>
@@ -273,13 +272,13 @@
                         $('#row-' + deleteIncomeId).remove();
                         Swal.fire({
                             title: "Deleted!",
-                            text: "The income record has been successfully deleted.",
+                            text: "{{get_translation('the_income_record_has_been_deleted_successfully')}}",
                             icon: "success",
                             confirmButtonText: "OK"
                         });
                     },
                     error: function (xhr) {
-                        console.log("Error deleting category:", xhr);
+                        console.log("Error deleting Income:", xhr);
                         Swal.fire({
                             title: "Error!",
                             text: "Something went wrong. Please try again.",

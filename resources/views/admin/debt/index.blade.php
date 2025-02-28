@@ -14,7 +14,7 @@
                            data-bs-toggle="modal"
                            data-bs-target="#addDebtModal">
                             <x-tabler-plus/>
-                            Add Lend/Borrow
+                            {{get_translation('add_lend_borrow')}}
                         </a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                                 <th class="text-center">{{get_translation('person')}}</th>
                                 <th class="text-center">{{get_translation('date')}}</th>
                                 <th class="text-center">{{get_translation('note')}}</th>
-                                <th class="text-center" width="20%">Actions</th>
+                                <th class="text-center" width="20%">{{get_translation('action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -60,11 +60,11 @@
                                     <td class="text-center">
                                         <a href="{{route('debts.show', [$debt->id])}}" class="btn btn-info edit-btn">
                                             <x-tabler-edit/>
-                                            Manage
+                                            {{get_translation('manage')}}
                                         </a>
                                         <button class="btn btn-danger delete-btn" data-id="{{ $debt->id }}">
                                             <x-tabler-trash/>
-                                            Delete
+                                            {{get_translation('delete')}}
                                         </button>
                                     </td>
                                 </tr>
@@ -292,13 +292,13 @@
                         $('#row-' + deletedId).remove();
                         Swal.fire({
                             title: "Deleted!",
-                            text: "Debt has been deleted",
+                            text: "{{get_translation('debt_has_been_deleted')}}",
                             icon: "success",
                             confirmButtonText: "OK"
                         });
                     },
                     error: function (xhr) {
-                        console.log("Error deleting category:", xhr);
+                        console.log("Error deleting debt:", xhr);
                     }
                 });
             });

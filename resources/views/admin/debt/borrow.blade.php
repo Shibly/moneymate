@@ -97,7 +97,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Repay</h5>
+                    <h5 class="modal-title">{{get_translation('repay')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
@@ -107,9 +107,10 @@
                     <div class="modal-body">
 
                         <div class="mb-3">
-                            <label class="form-label">Select Bank Account: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('select_a_bank_account')}}: <span
+                                    class="text-danger">*</span></label>
                             <select name="account_id" class="form-control">
-                                <option value="">Select a Bank Account</option>
+                                <option value="">{{get_translation('select_a_bank_account')}}</option>
                                 @foreach($bankAccounts as $bankAccount)
                                     <option value="{{$bankAccount->id}}">
                                         {{$bankAccount->bank->bank_name}} - {{$bankAccount->account_number}} - Balance
@@ -121,9 +122,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Select Currency: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('select_currency')}}: <span class="text-danger">*</span></label>
                             <select name="currency_id" class="form-control">
-                                <option value="">Select Currency</option>
+                                <option value="">{{get_translation('select_currency')}}</option>
                                 @foreach($currencies as $currency)
                                     <option value="{{$currency->id}}">
                                         {{$currency->name}}
