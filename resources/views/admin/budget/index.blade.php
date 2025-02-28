@@ -92,7 +92,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">{{get_translation('select_category')}}: <span
                                             class="text-danger">*</span></label>
-                                    <select name="currency_id" class="form-control">
+                                    <select name="currency_id" class="form-control select2">
                                         <option value="">{{get_translation('select_currency')}}</option>
                                         @foreach($currencies as $currency)
                                             <option value="{{$currency->id}}">{{$currency->name}}</option>
@@ -117,6 +117,7 @@
                                     <label class="form-label">{{get_translation('expense_categories')}}: <span
                                             class="text-danger">*</span></label>
                                     <select name="categories[]" class="form-control select2" multiple>
+                                        <option value="">{{get_translation('expense_categories')}}</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
@@ -175,7 +176,90 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div class="edit-form"></div>
+                <form action="{{route('budget.update')}}" method="POST" id="updateBudget">
+                    @csrf
+                    <input type="hidden" name="id" id="id">
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <div>
+                                    <label class="form-label">Budget Name: <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="budget_name" name="budget_name"
+                                           placeholder="Budget Name">
+                                    <div class="text-danger pt-2 budget_name"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Select Currency: <span
+                                            class="text-danger">*</span></label>
+                                    <select name="currency_id" id="currency_id" class="form-control select3">
+                                        <option value="">Select Currency</option>
+                                        @foreach($currencies as $currency)
+                                            <option
+                                                value="{{$currency->id}}"  >{{$currency->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger mt-2 currency_id"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Budget Amount: <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="amount" id="amount"
+                                           placeholder="Budget Amount">
+                                    <div class="text-danger pt-2 amount"></div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+
+                                <div>
+                                    <label class="form-label">Expense Categories: <span
+                                            class="text-danger">*</span></label>
+                                    <select name="categories[]" class="form-control select4" multiple>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}"
+                                                    >{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger mt-2 categories"></div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date: <span class="text-danger">*</span></label>
+                                    <div class="input-icon mb-2">
+                                        <input class="form-control datepicker" name="start_date"
+                                               placeholder="Start Date" id="start_date" />
+                                        <span class="input-icon-addon"><x-tabler-calendar/></span>
+                                    </div>
+
+                                    <div class="text-danger pt-2 start_date"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">End Date: <span class="text-danger">*</span></label>
+                                    <div class="input-icon mb-2">
+                                        <input class="form-control datepicker" name="end_date"
+                                               placeholder="Start Date" id="end_date" />
+                                        <span class="input-icon-addon"><x-tabler-calendar/></span>
+                                    </div>
+
+                                    <div class="text-danger pt-2 end_date"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="logical-error d-none alert alert-danger"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary action-button">Update Budget</button>
+                    </div>
+                </form>
 
             </div>
         </div>
@@ -221,13 +305,22 @@
         "use strict";
 
         $(document).ready(function () {
-            let select = new TomSelect(".select2", {
-                create: false,
-                placeholder: "",
-                onChange: function () {
-                    this.blur();
-                }
-            });
+
+            function initializeTomSelect() {
+                $(".select2").each(function () {
+                    new TomSelect(this, {
+                        create: false,
+                        onChange: function () {
+                            this.blur();
+                        }
+                    });
+                });
+            }
+
+
+            initializeTomSelect();
+
+
 
 
             $('#addBudget').submit(function (e) {
@@ -277,14 +370,57 @@
                     url: "{{ url('budget/edit') }}/" + budgetId,
                     type: "GET",
                     success: function (data) {
-                        $('#editBudgetModal .edit-form').html(data);
-                        $('#editBudgetModal').modal('show');
+                        let modal = $('#editBudgetModal');
+
+                        // Populate form fields
+                        $("#editBudgetModal #id").val(data['budget'].id);
+                        $("#editBudgetModal #budget_name").val(data['budget'].budget_name);
+                        $("#editBudgetModal #amount").val(data['budget'].amount);
+                        $("#editBudgetModal #start_date").val(data['budget'].start_date);
+                        $("#editBudgetModal #end_date").val(data['budget'].end_date);
+
+                        // Handle Single-Select (Currency)
+                        let select3Element = modal.find('.select3')[0];
+                        if (select3Element.tomselect) {
+                            select3Element.tomselect.destroy();
+                        }
+
+                        let currencySelect = new TomSelect(select3Element, {
+                            create: false,
+                            placeholder: "",
+                            onChange: function () {
+                                this.blur();
+                            }
+                        });
+
+                        // Set selected value for currency (fixing issue)
+                        currencySelect.setValue(data['budget'].currency_id);
+
+                        // Handle Multi-Select (Categories)
+                        let select4Element = modal.find('.select4')[0];
+                        if (select4Element.tomselect) {
+                            select4Element.tomselect.destroy();
+                        }
+
+                        let categorySelect = new TomSelect(select4Element, {
+                            create: false,
+                            placeholder: "",
+                            onChange: function () {
+                                this.blur();
+                            }
+                        });
+
+                        // Set selected values for categories
+                        categorySelect.setValue(data.selectedCategoryIds);
+
+                        modal.modal('show');
                     },
                     error: function (xhr) {
                         console.log("Error fetching bank data:", xhr);
                     }
                 });
             });
+
 
 
             $(document).on('submit', '#updateBudget', function (e) {

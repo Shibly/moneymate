@@ -8,6 +8,7 @@ use App\Models\Budget;
 use App\Services\BudgetService;
 use App\Services\CategoryService;
 use App\Services\CurrencyService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -65,24 +66,31 @@ class BudgetController extends Controller
 
     /**
      * @param int $id
-     * @return string
+     * @return JsonResponse
      */
-    public function edit(int $id)
+
+    public function edit(int $id): JsonResponse
     {
-        $data['budget'] = $this->budgetService->findById($id);
-        $data['currencies'] = $this->currencyService->getAll();
-        $data['categories'] = $this->categoryService->getCategoryByType('expense');
-        return view('admin.budget.edit-form', $data)->render();
+        $budget = $this->budgetService->findById($id);
+        $selectedCategoryIds = [];
+        foreach ($budget->categories as $selectedCategory)
+        {
+            $selectedCategoryIds[] = $selectedCategory->id;
+        }
+        return response()->json([
+            'budget' => $budget,
+            'selectedCategoryIds' => $selectedCategoryIds,
+        ]);
     }
 
     /**
      * @param UpdateBudgetRequest $request
      * @param int $id
      */
-    public function update(UpdateBudgetRequest $request, int $id)
+    public function update(UpdateBudgetRequest $request)
     {
         $data = $request->validated();
-        $this->budgetService->update($data, $id);
+        $this->budgetService->update($data, $request->id);
         notyf()->success('Budget has been updated');
         return redirect()->back();
     }
