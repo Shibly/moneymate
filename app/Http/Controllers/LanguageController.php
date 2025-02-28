@@ -21,21 +21,28 @@ class LanguageController extends Controller
 
     public function store(Request $request)
     {
+        // Validate the basic inputs. Note that we don't validate 'name' as unique here because
+        // the input includes the code and needs parsing first.
         $request->validate([
             'name' => 'required|string',
             'is_default' => 'nullable|in:0,1',
             'status' => 'nullable|in:0,1',
         ]);
 
-        $name = $request->input('name');
-        $parts = explode(' - ', $name);
-
+        $nameInput = $request->input('name');
+        $parts = explode(' - ', $nameInput);
 
         if (count($parts) == 2) {
             $name = trim($parts[0]);
             $code = trim($parts[1]);
         } else {
             notyf()->error('Invalid name format. Please use "Name - Code" format.');
+            return redirect()->back();
+        }
+
+        // Check if a language with the same name already exists.
+        if (Language::where('name', $name)->exists()) {
+            notyf()->error('Language name already exists.');
             return redirect()->back();
         }
 
@@ -46,11 +53,11 @@ class LanguageController extends Controller
             'status' => '1',
         ];
 
-
         Language::create($data);
         notyf()->success('New language created successfully.');
         return redirect()->route('languages.index');
     }
+
 
     public function destroy($id)
     {
