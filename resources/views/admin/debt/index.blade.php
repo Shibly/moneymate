@@ -25,11 +25,8 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="alert alert-info">
-                <span class="badge bg-blue-lt">Tip:</span>
-                From here you can track the money you've <strong>lent</strong> to others or
-                <strong>borrowed</strong> from them. Both lending and
-                borrowing transactions are directly associated with the bank account you select when creating a
-                record.
+                <span class="badge bg-blue-lt">{{get_translation('tips')}}:</span>
+                {{get_translation('from_here_you_can_track_the_money_you_have_lent_to_others_or_borrowed_from_them_both_lending_and_borrowing_transactions_are_directly_associated_with_the_bank_account_you_select_when_creating_a_record')}}
             </div>
             <div class="card">
                 <div class="card-body p-0">
@@ -37,13 +34,13 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">From Amount</th>
-                                <th class="text-center">To Amount</th>
-                                <th class="text-center">Type</th>
-                                <th class="text-center">Account</th>
-                                <th class="text-center">Person</th>
-                                <th class="text-center">Date</th>
-                                <th class="text-center">Note</th>
+                                <th class="text-center">{{get_translation('from_amount')}}</th>
+                                <th class="text-center">{{get_translation('to_amount')}}</th>
+                                <th class="text-center">{{get_translation('type')}}</th>
+                                <th class="text-center">{{get_translation('account')}}</th>
+                                <th class="text-center">{{get_translation('person')}}</th>
+                                <th class="text-center">{{get_translation('date')}}</th>
+                                <th class="text-center">{{get_translation('note')}}</th>
                                 <th class="text-center" width="20%">Actions</th>
                             </tr>
                             </thead>
@@ -167,7 +164,8 @@
                                         Date: <span class="text-danger">*</span>
                                     </label>
                                     <div class="input-icon mb-2">
-                                        <input class="form-control datepicker" name="date" placeholder="Select a date" value=""/>
+                                        <input class="form-control datepicker" name="date" placeholder="Select a date"
+                                               value=""/>
                                         <span class="input-icon-addon">
                                         <x-tabler-calendar/>
                                     </span>

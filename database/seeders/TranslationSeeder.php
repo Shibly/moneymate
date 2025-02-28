@@ -223,10 +223,14 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'please_note_that_usd_serves_as_the_base_currency_you_may_add_additional_currencies_as_needed_but_ensure_that_you_provide_the_exchange_rate_relative_to_usd', 'value' => 'Please note that USD serves as the base currency. You may add additional currencies as needed, but ensure that you provide the exchange rate relative to USD', 'created_at' => $now, 'updated_at' => $now],
 
 
-
             ['code' => 'en', 'key' => 'balance_transfer', 'value' => 'Balance Transfer', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'make_a_transfer', 'value' => 'Make a transfer', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'you_can_transfer_funds_from_your_source_account_to_your_destination_account_if_the_accounts_use_different_currencies_the_system_will_automatically_convert_the_transferred_amount_into_the_destination_accounts_currency', 'value' => 'You can transfer funds from your source account to your destination account. If the accounts use different currencies, the system will automatically convert the transferred amount into the destination account’s currency', 'created_at' => $now, 'updated_at' => $now],
+
+
+            ['code' => 'en', 'key' => 'manage_borrow', 'value' => 'Manage Borrow', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'account_holder', 'value' => 'Account Holder', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'from_here_you_can_track_the_money_you_have_lent_to_others_or_borrowed_from_them_both_lending_and_borrowing_transactions_are_directly_associated_with_the_bank_account_you_select_when_creating_a_record', 'value' => 'From here you can track the money you have lent to others or borrowed from them. Both lending and borrowing transactions are directly associated with the bank account you select when creating a record', 'created_at' => $now, 'updated_at' => $now],
 
 
         ];

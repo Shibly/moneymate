@@ -34,7 +34,7 @@ class DebtController extends Controller
      */
     public function index(): View
     {
-        $data['title'] = 'Lend/Borrow';
+        $data['title'] = get_translation('lend_borrow');
         $data['activeMenu'] = 'debt-loan';
         $data['debts'] = $this->debtLoanService->getAll();
         $data['currencies'] = $this->currencyService->getAll();
@@ -82,7 +82,7 @@ class DebtController extends Controller
             $data['title'] = 'Manage lend';
             return view('admin.debt.lend', $data);
         } else {
-            $data['title'] = 'Manage Borrow';
+            $data['title'] = get_translation('manage_borrow');
             return view('admin.debt.borrow', $data);
         }
 

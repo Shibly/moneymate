@@ -20,13 +20,13 @@
                         <table class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">From Amount</th>
-                                <th class="text-center">To Amount</th>
-                                <th class="text-center">Type</th>
-                                <th class="text-center">Account</th>
-                                <th class="text-center">Person</th>
-                                <th class="text-center">Date</th>
-                                <th class="text-center">Note</th>
+                                <th class="text-center">{{get_translation('from_amount')}}</th>
+                                <th class="text-center">{{get_translation('to_amount')}}</th>
+                                <th class="text-center">{{get_translation('type')}}</th>
+                                <th class="text-center">{{get_translation('account')}}</th>
+                                <th class="text-center">{{get_translation('person')}}</th>
+                                <th class="text-center">{{get_translation('date')}}</th>
+                                <th class="text-center">{{get_translation('note')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -50,7 +50,8 @@
                         <a href="javascript:void(0);" class="btn btn-primary btn-5 d-none d-sm-inline-block"
                            data-bs-toggle="modal"
                            data-bs-target="#debtRepayModal">
-                            <x-tabler-minus/>  Repay
+                            <x-tabler-minus/>
+                            Repay
                         </a>
                     </div>
 
@@ -58,12 +59,12 @@
                         <table class="table datatable table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">From Amount</th>
-                                <th class="text-center">To Amount</th>
-                                <th class="text-center">Bank</th>
-                                <th class="text-center">Account Holder</th>
-                                <th class="text-center">Account Number</th>
-                                <th class="text-center">Date</th>
+                                <th class="text-center">{{get_translation('from_amount')}}</th>
+                                <th class="text-center">{{get_translation('to_amount')}}</th>
+                                <th class="text-center">{{get_translation('bank')}}</th>
+                                <th class="text-center">{{get_translation('account_holder')}}</th>
+                                <th class="text-center">{{get_translation('account_number')}}</th>
+                                <th class="text-center">{{get_translation('date')}}</th>
                             </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -133,7 +134,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Amount: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('amount')}}: <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" name="amount"
                                    placeholder="Amount">
                             <div class="text-danger pt-2 amount"></div>
@@ -141,7 +142,8 @@
 
 
                         <div class="mb-3">
-                            <label class="form-label">Date: <span class="text-danger">*</span></label>
+                            <label class="form-label">{{get_translation('date')}}: <span
+                                    class="text-danger">*</span></label>
                             <input type="date" class="form-control" name="date"
                                    placeholder="Transfer Date">
                             <div class="text-danger pt-2 date"></div>
@@ -153,10 +155,10 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">
-                            Cancel
+                            {{get_translation('cancel')}}
                         </button>
                         <button type="submit" class="btn btn-primary">
-                            Submit
+                            {{get_translation('submit')}}
                         </button>
                     </div>
                 </form>
