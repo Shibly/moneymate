@@ -166,7 +166,7 @@
                                     <div class="input-icon mb-2">
                                         <input class="form-control datepicker" name="expense_date"
                                                placeholder="Expense Date"
-                                               value="" required/>
+                                               value=""/>
                                         <span class="input-icon-addon"><x-tabler-calendar/></span>
                                     </div>
 
