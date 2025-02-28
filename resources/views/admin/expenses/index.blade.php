@@ -93,7 +93,7 @@
                                 <div>
                                     <label class="form-label">Select Expense Category: <span
                                             class="text-danger">*</span></label>
-                                    <select name="category_id" class="form-control">
+                                    <select name="category_id" class="form-control select2">
                                         <option value="">Select Category</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -105,7 +105,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Select Bank Account: <span
                                             class="text-danger">*</span></label>
-                                    <select name="account_id" class="form-control">
+                                    <select name="account_id" class="form-control select2">
                                         <option value="">Select a Bank Account</option>
                                         @foreach($bankAccounts as $bankAccount)
                                             <option value="{{$bankAccount->id}}">
@@ -121,7 +121,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Select Currency: <span
                                             class="text-danger">*</span></label>
-                                    <select name="currency_id" class="form-control">
+                                    <select name="currency_id" class="form-control select2">
                                         <option value="">Select Currency</option>
                                         @foreach($currencies as $currency)
                                             <option value="{{$currency->id}}">{{$currency->name}}</option>
@@ -234,6 +234,21 @@
         "use strict";
 
         $(document).ready(function () {
+
+            function initializeTomSelect() {
+                $(".select2").each(function () {
+                    new TomSelect(this, {
+                        create: false,
+                        onChange: function () {
+                            this.blur();
+                        }
+                    });
+                });
+            }
+
+
+            initializeTomSelect();
+
 
             $('#addExpense').submit(function (e) {
                 e.preventDefault();

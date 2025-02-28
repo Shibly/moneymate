@@ -36,17 +36,19 @@
                                             <!-- Income Category (First Column) -->
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Income Category</label>
-                                                <select class="form-control" name="category_id" required>
+                                                <select class="form-control select2" name="category_id" required>
+                                                    <option value="">Select an option</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
 
-                                            <!-- Select Bank Account (First Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Select Bank Account</label>
-                                                <select class="form-control" name="account_id" required>
+                                                <select class="form-control select2" name="account_id" required>
+                                                    <option value="">Select an option</option>
                                                     @foreach($bankAccounts as $bankAccount)
                                                         <option value="{{$bankAccount->id}}">
                                                             {{$bankAccount->bank->bank_name}}
@@ -59,10 +61,11 @@
                                                 </select>
                                             </div>
 
-                                            <!-- Currency (Second Column) -->
+
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Currency</label>
-                                                <select class="form-control" name="currency_id" required>
+                                                <select class="form-control select2" name="currency_id" required>
+                                                    <option value="">Select a currency</option>
                                                     @foreach($currencies as $currency)
                                                         <option value="{{$currency->id}}">{{$currency->name}}</option>
                                                     @endforeach
@@ -130,39 +133,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Bank Name</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-
-                                <form id="edit-bank-name-form">
-                                    @csrf
-                                    <input type="hidden" name="id" id="edit-category-id">
-
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label class="form-label">Bank Name</label>
-                                            <input type="text" class="form-control" name="bank_name" id="edit-bank-name"
-                                                   required>
-                                        </div>
-                                        <div id="edit-form-errors" class="d-none"></div>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">Update Bank</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <div class="modal fade modal-blur" id="modal-delete" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -258,43 +228,69 @@
 @section('js')
     <script src="{{ asset('/js/calendar.js') }}"></script>
     <script>
+
         "use strict";
-        let deleteIncomeId;
-
-
-        $(document).on('click', '.delete-btn', function () {
-            deleteIncomeId = $(this).data('id');
-            $('#modal-delete').modal('show');
-        });
-
-        $('#confirm-delete').on('click', function () {
-            $.ajax({
-                url: "{{ url('incomes/destroy') }}/" + deleteIncomeId,
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function (response) {
-                    $('#modal-delete').modal('hide');
-                    $('#row-' + deleteIncomeId).remove();
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "The income record has been successfully deleted.",
-                        icon: "success",
-                        confirmButtonText: "OK"
+        $(document).ready(function () {
+            function initializeTomSelect() {
+                $(".select2").each(function () {
+                    new TomSelect(this, {
+                        create: false,
+                        onChange: function () {
+                            this.blur();
+                        }
                     });
-                },
-                error: function (xhr) {
-                    console.log("Error deleting category:", xhr);
-                    Swal.fire({
-                        title: "Error!",
-                        text: "Something went wrong. Please try again.",
-                        icon: "error",
-                        confirmButtonText: "OK"
-                    });
-                }
+                });
+            }
+
+
+            initializeTomSelect();
+
+
+            $('#add-new-income').on('shown.bs.modal', function () {
+                setTimeout(function () {
+                    initializeTomSelect();
+                }, 100);
+            });
+
+            let deleteIncomeId;
+
+
+            $(document).on('click', '.delete-btn', function () {
+                deleteIncomeId = $(this).data('id');
+                $('#modal-delete').modal('show');
+            });
+
+
+            $('#confirm-delete').on('click', function () {
+                $.ajax({
+                    url: "{{ url('incomes/destroy') }}/" + deleteIncomeId,
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        $('#modal-delete').modal('hide');
+                        $('#row-' + deleteIncomeId).remove();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "The income record has been successfully deleted.",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        });
+                    },
+                    error: function (xhr) {
+                        console.log("Error deleting category:", xhr);
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Something went wrong. Please try again.",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
+                    }
+                });
             });
         });
+
 
     </script>
 
