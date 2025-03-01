@@ -24,7 +24,7 @@ class UpdateBudgetRequest extends FormRequest
         return [
             'budget_name' => 'required|string',
             'currency_id' => 'required',
-            'amount' => 'required|numeric',
+            'updated_amount' => 'required|numeric',
             'start_date' => 'required',
             'end_date' => 'required',
             'categories' => 'required|array',

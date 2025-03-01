@@ -81,11 +81,11 @@ class BudgetRepository implements BudgetInterface
         $budget = Budget::findOrFail($id);
 
 
-        $usd_amount = convert_to_usd_amount($data['currency_id'], $data['amount']);
+        $usd_amount = convert_to_usd_amount($data['currency_id'], $data['updated_amount']);
         // Update the budget
         $budget->update([
             'budget_name' => $data['budget_name'],
-            'amount' => $data['amount'],
+            'updated_amount' => $data['updated_amount'],
             'usd_amount' => $usd_amount,
             'currency_id' => $data['currency_id'],
             'start_date' => Carbon::parse($data['start_date'])->toDateString(),

@@ -69,7 +69,7 @@ class ExpenseRepository implements ExpenseInterface
                 'expense_date' => $expenseDate,
                 'attachment' => $data['attachment']
             ]);
-            // Check if expense category falls within any budget's categories
+
             $budgets = Budget::where('start_date', '<=', Carbon::now())
                 ->with('categories')
                 ->get();
@@ -90,7 +90,7 @@ class ExpenseRepository implements ExpenseInterface
                         'usd_amount' => $usd_amount,
                     ]);
 
-                    // Reduce budget amount if the date matches
+
                     if (Carbon::parse($expense['created_at'])->isSameDay(Carbon::now())) {
                         $budget->updated_amount -= $exchange_budge_amount;
                         $budget->usd_amount -= $usd_amount;
@@ -98,7 +98,7 @@ class ExpenseRepository implements ExpenseInterface
                     }
                 }
             }
-            // Update the balance of the bank account
+
             $bankAccount->balance -= $exchange_amount;
             $bankAccount->usd_balance -= $usd_amount;
             $bankAccount->save();
@@ -120,22 +120,46 @@ class ExpenseRepository implements ExpenseInterface
     {
         $expense = Expense::find($id);
 
-        /**
-         * Adjust bank account
-         */
-
-        $bankAccount = BankAccount::find($expense->account_id);
-        $bankAccount->balance += $expense->exchange_amount;
-        $bankAccount->usd_balance += $expense->usd_amount;
-        $bankAccount->save();
-
-        if (!empty($expense->attachment)) {
-            Storage::delete($expense->attachment);
+        if (!$expense) {
+            throw new Exception(get_translation('expense_not_found'));
         }
 
-        $expense->delete();
+        DB::beginTransaction();
+        try {
+            $bankAccount = BankAccount::find($expense->account_id);
+            $bankAccount->balance += $expense->exchange_amount;
+            $bankAccount->usd_balance += $expense->usd_amount;
+            $bankAccount->save();
 
-        return true;
+
+            $budgetExpenses = BudgetExpense::where('expense_id', $expense->id)->get();
+
+            foreach ($budgetExpenses as $budgetExpense) {
+                $budget = Budget::find($budgetExpense->budget_id);
+
+                if ($budget) {
+                    // Restore budget amounts if the date matches
+                    if (Carbon::parse($expense->created_at)->isSameDay(Carbon::now())) {
+                        $budget->updated_amount += $budgetExpense->amount;
+                        $budget->usd_amount += $budgetExpense->usd_amount;
+                        $budget->save();
+                    }
+                }
+                $budgetExpense->delete();
+            }
+
+            if (!empty($expense->attachment)) {
+                Storage::delete($expense->attachment);
+            }
+
+
+            $expense->delete();
+            DB::commit();
+            return true;
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw new Exception($exception->getMessage());
+        }
     }
 
 

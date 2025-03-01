@@ -198,17 +198,18 @@
                                         <option value="">Select Currency</option>
                                         @foreach($currencies as $currency)
                                             <option
-                                                value="{{$currency->id}}"  >{{$currency->name}}</option>
+                                                value="{{$currency->id}}">{{$currency->name}}</option>
                                         @endforeach
                                     </select>
                                     <div class="text-danger mt-2 currency_id"></div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Budget Amount: <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="amount" id="amount"
+                                    <label class="form-label">Available Budget Amount: <span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="updated_amount" id="updated_amount"
                                            placeholder="Budget Amount">
-                                    <div class="text-danger pt-2 amount"></div>
+                                    <div class="text-danger pt-2 updated_amount"></div>
                                 </div>
                             </div>
 
@@ -221,7 +222,7 @@
                                     <select name="categories[]" class="form-control select4" multiple>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}"
-                                                    >{{$category->name}}</option>
+                                            >{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                     <div class="text-danger mt-2 categories"></div>
@@ -232,7 +233,7 @@
                                     <label class="form-label">Start Date: <span class="text-danger">*</span></label>
                                     <div class="input-icon mb-2">
                                         <input class="form-control datepicker" name="start_date"
-                                               placeholder="Start Date" id="start_date" />
+                                               placeholder="Start Date" id="start_date"/>
                                         <span class="input-icon-addon"><x-tabler-calendar/></span>
                                     </div>
 
@@ -243,7 +244,7 @@
                                     <label class="form-label">End Date: <span class="text-danger">*</span></label>
                                     <div class="input-icon mb-2">
                                         <input class="form-control datepicker" name="end_date"
-                                               placeholder="Start Date" id="end_date" />
+                                               placeholder="Start Date" id="end_date"/>
                                         <span class="input-icon-addon"><x-tabler-calendar/></span>
                                     </div>
 
@@ -321,8 +322,6 @@
             initializeTomSelect();
 
 
-
-
             $('#addBudget').submit(function (e) {
                 e.preventDefault();
 
@@ -375,7 +374,7 @@
                         // Populate form fields
                         $("#editBudgetModal #id").val(data['budget'].id);
                         $("#editBudgetModal #budget_name").val(data['budget'].budget_name);
-                        $("#editBudgetModal #amount").val(data['budget'].amount);
+                        $("#editBudgetModal #updated_amount").val(data['budget'].updated_amount);
                         $("#editBudgetModal #start_date").val(data['budget'].start_date);
                         $("#editBudgetModal #end_date").val(data['budget'].end_date);
 
@@ -420,7 +419,6 @@
                     }
                 });
             });
-
 
 
             $(document).on('submit', '#updateBudget', function (e) {
