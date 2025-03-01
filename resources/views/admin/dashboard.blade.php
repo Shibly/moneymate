@@ -11,7 +11,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <span class="bg-primary text-white avatar"><x-tabler-currency-dollar/></span>
+                                            <span class="bg-success text-white avatar"><x-tabler-currency-dollar/></span>
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
@@ -30,9 +30,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-					<span class="bg-green text-white avatar">
-                        <x-tabler-license/>
-                    </span>
+                                            <span class="bg-danger text-white avatar"><x-tabler-license/></span>
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
@@ -70,7 +68,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <span class="bg-facebook text-white avatar"><x-tabler-minus/></span>
+                                            <span class="bg-cyan text-white avatar"><x-tabler-arrows-right/></span>
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
@@ -78,6 +76,48 @@
                                             </div>
                                             <div class="text-secondary">
                                                 {{$totalLends}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row row-cards">
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="bg-dribbble text-white avatar"><x-tabler-arrows-left/></span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{get_translation('total_borrow_amount')}}
+                                            </div>
+                                            <div class="text-secondary">
+                                                {{-- Code here--}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="bg-info text-white avatar"><x-tabler-building-bank/></span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{get_translation('number_of_bank_accounts')}}
+                                            </div>
+                                            <div class="text-secondary">
+                                                {{$numberOfBankAccounts}}
                                             </div>
                                         </div>
                                     </div>

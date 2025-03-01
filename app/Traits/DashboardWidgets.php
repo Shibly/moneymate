@@ -281,4 +281,13 @@ trait DashboardWidgets
     }
 
 
+    /**
+     * @return int
+     */
+    public function getNumberOfBankAccounts(): int
+    {
+        return BankAccount::count();
+    }
+
+
 }

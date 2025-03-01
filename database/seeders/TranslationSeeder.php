@@ -244,6 +244,10 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'lend_collection', 'value' => 'Lend Collection', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'select_an_option', 'value' => 'Select an Option', 'created_at' => $now, 'updated_at' => $now],
 
+
+            ['code' => 'en', 'key' => 'number_of_bank_accounts', 'value' => 'Number Of Bank Accounts', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'total_borrow_amount', 'value' => 'Total Borrow Amount', 'created_at' => $now, 'updated_at' => $now],
+
         ];
 
 
