@@ -279,6 +279,8 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'back_to_sign_in', 'value' => 'Back to sign in', 'created_at' => $now, 'updated_at' => $now],
 
             ['code' => 'en', 'key' => 'application_settings_has_been_updated', 'value' => 'Application Settings has been updated', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'app_timezone', 'value' => 'App Timezone', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'choose_application_timezone', 'value' => 'Choose Application TimeZone', 'created_at' => $now, 'updated_at' => $now],
 
         ];
 

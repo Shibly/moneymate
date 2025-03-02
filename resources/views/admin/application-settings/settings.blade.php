@@ -52,7 +52,6 @@
                                             </div>
                                         </div>
 
-
                                         <div class="col-md-6">
                                             <label
                                                 class="form-label fw-bold">{{get_translation('company_phone')}}</label>
@@ -81,7 +80,6 @@
                                             </div>
                                         </div>
 
-
                                         <div class="col-md-6">
                                             <label
                                                 class="form-label fw-bold">{{get_translation('company_address')}}</label>
@@ -97,8 +95,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label
-                                                class="form-label fw-bold">{{get_translation('app_url')}}</label>
+                                            <label class="form-label fw-bold">{{get_translation('app_url')}}</label>
                                             <input value="{{ get_option('app_url') }}"
                                                    name="app_url"
                                                    type="text" class="form-control"
@@ -111,7 +108,6 @@
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <div class="row g-3 mt-3">
                                         <!-- Application Logo -->
@@ -167,8 +163,30 @@
                                         </div>
                                     </div>
 
-                                    <!-- SMTP Settings Section -->
                                     <div class="row g-3 mt-3">
+
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('app_timezone')}}</label>
+                                            <select name="app_timezone" class="form-control select2">
+                                                <option value=""
+                                                        disabled>{{get_translation('select_timezone')}}</option>
+                                                @foreach(\DateTimeZone::listIdentifiers() as $timezone)
+                                                    <option value="{{ $timezone }}"
+                                                        {{ get_option('app_timezone') == $timezone ? 'selected' : '' }}>
+                                                        {{ $timezone }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <small class="text-muted">
+                                                    {{get_translation('choose_application_timezone')}}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <!-- SMTP Settings Section -->
                                         <div class="col-md-6">
                                             <label class="form-label fw-bold">{{get_translation('smtp_host')}}</label>
                                             <input type="text" value="{{ get_option('smtp_host') }}" name="smtp_host"
@@ -264,8 +282,6 @@
                                     </div>
 
                                     <!-- End SMTP Settings Section -->
-
-
                                 </div>
 
                                 <div class="card-footer bg-transparent mt-auto">
@@ -283,4 +299,27 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('/js/calendar.js') }}"></script>
+    <script>
+        "use strict";
+        $(document).ready(function () {
+            function initializeTomSelect() {
+                $(".select2").each(function () {
+                    new TomSelect(this, {
+                        create: false,
+                        onChange: function () {
+                            this.blur();
+                        }
+                    });
+                });
+            }
+
+            initializeTomSelect();
+        });
+
+
+    </script>
 @endsection

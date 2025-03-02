@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Option;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class SettingController extends Controller
 {
@@ -16,7 +17,6 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
-
         $request->validate([
             'app_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'favicon' => 'nullable|image|mimes:ico,png|max:512',
@@ -26,8 +26,8 @@ class SettingController extends Controller
             'smtp_password' => 'nullable|string|max:255',
             'smtp_encryption' => 'nullable|in:tls,ssl,none',
             'smtp_from_email' => 'nullable|email|max:255',
+            'app_timezone' => 'nullable|in:' . implode(',', \DateTimeZone::listIdentifiers()) . '|max:255',
         ]);
-
 
         $inputs = $request->except('_token', 'smtp_password');
 
@@ -64,10 +64,19 @@ class SettingController extends Controller
             ]);
         }
 
+        // Handling app timezone
+        if ($request->has('app_timezone')) {
+            $this->updateEnv([
+                'APP_TIMEZONE' => $request->input('app_timezone'),
+            ]);
+        }
+
+        Artisan::call('optimize:clear');
 
         notyf()->info(get_translation('application_settings_has_been_updated'));
         return redirect()->route('settings.index');
     }
+
 
     /**
      *
