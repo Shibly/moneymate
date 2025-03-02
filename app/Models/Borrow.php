@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $amount
@@ -34,6 +34,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Borrow whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Borrow whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Borrow whereUsdAmount($value)
+ * @property int $user_id
+ * @property-read \App\Models\BankAccount|null $account
+ * @property-read \App\Models\Currency|null $currency
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Borrow whereUserId($value)
  * @mixin \Eloquent
  */
 class Borrow extends Model

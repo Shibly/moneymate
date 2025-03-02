@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $user_id
@@ -26,6 +26,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUserId($value)
+ * @property string|null $category_color
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Budget> $budgets
+ * @property-read int|null $budgets_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereCategoryColor($value)
  * @mixin \Eloquent
  */
 class Category extends Model

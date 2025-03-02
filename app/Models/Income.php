@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $user_id
@@ -46,6 +46,10 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Income whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Income whereUsdAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Income whereUserId($value)
+ * @property-read \App\Models\BankAccount $bankAccount
+ * @property-read \App\Models\Category $category
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \App\Models\User $person
  * @mixin \Eloquent
  */
 class Income extends Model

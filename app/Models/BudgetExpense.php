@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $user_id
@@ -35,6 +35,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BudgetExpense whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BudgetExpense whereUsdAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BudgetExpense whereUserId($value)
+ * @property-read \App\Models\Budget $budget
+ * @property-read \App\Models\Category $category
+ * @property-read \App\Models\Currency|null $currency
  * @mixin \Eloquent
  */
 class BudgetExpense extends Model

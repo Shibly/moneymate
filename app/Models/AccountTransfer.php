@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $user_id
@@ -36,6 +36,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AccountTransfer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AccountTransfer whereUsdAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AccountTransfer whereUserId($value)
+ * @property-read \App\Models\BankAccount $fromAccount
+ * @property-read \App\Models\BankAccount $toAccount
+ * @property-read \App\Models\User $user
  * @mixin \Eloquent
  */
 class AccountTransfer extends Model

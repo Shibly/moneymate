@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $amount
@@ -32,6 +32,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DebtCollection whereExchangeAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DebtCollection whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DebtCollection whereUpdatedAt($value)
+ * @property string|null $usd_amount
+ * @property-read \App\Models\BankAccount $account
+ * @property-read \App\Models\Currency|null $currency
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DebtCollection whereUsdAmount($value)
  * @mixin \Eloquent
  */
 class DebtCollection extends Model

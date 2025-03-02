@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\BankAccount;
+use App\Models\Borrow;
 use App\Models\Budget;
 use App\Models\Currency;
 use App\Models\Debt;
@@ -134,8 +135,21 @@ trait DashboardWidgets
 
     }
 
-    public function getTotalBorrows()
+    public function getTotalBorrows(): string
     {
+        $lends = Borrow::where('user_id', auth()->id())->where('type', 'lend')
+            ->with('currency')
+            ->select('id', 'currency_id', 'usd_amount')->get();
+
+        $totalBorrows = 0;
+        $defaultCurrency = $this->getDefaultCurrency();
+        if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
+            foreach ($lends as $lend) {
+                $totalBorrows += $lend->usd_amount * $defaultCurrency->exchange_rate;
+            }
+            return number_format($totalBorrows, 0) . ' ' . $defaultCurrency->name;
+        }
+        return 'No default currency set or invalid exchange rate.';
     }
 
 

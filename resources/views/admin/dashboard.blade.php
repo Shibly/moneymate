@@ -98,7 +98,7 @@
                                                 {{get_translation('total_borrow_amount')}}
                                             </div>
                                             <div class="text-secondary">
-                                                {{-- Code here--}}
+                                                {{$totalBorrows}}
                                             </div>
                                         </div>
                                     </div>

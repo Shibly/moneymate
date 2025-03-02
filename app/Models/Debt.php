@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $user_id
@@ -41,6 +41,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Debt whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Debt whereUsdAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Debt whereUserId($value)
+ * @property-read \App\Models\BankAccount $accounts
+ * @property-read \App\Models\BankAccount $bankAccount
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Borrow> $borrows
+ * @property-read int|null $borrows_count
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\DebtCollection> $debtsCollections
+ * @property-read int|null $debts_collections_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lend> $lends
+ * @property-read int|null $lends_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Repayment> $repayments
+ * @property-read int|null $repayments_count
+ * @property-read \App\Models\User $user
  * @mixin \Eloquent
  */
 class Debt extends Model

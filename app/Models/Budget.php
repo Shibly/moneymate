@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $budget_name
@@ -38,6 +38,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Budget whereUsdAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Budget whereUserId($value)
+ * @property-read \App\Models\BankAccount|null $account
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BudgetExpense> $budgetExpenses
+ * @property-read int|null $budget_expenses_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Category> $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BudgetExpense> $expenses
+ * @property-read int|null $expenses_count
+ * @property-read \App\Models\User $user
  * @mixin \Eloquent
  */
 class Budget extends Model

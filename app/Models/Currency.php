@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -30,6 +30,10 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Currency whereIsDefault($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Currency whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Currency whereUpdatedAt($value)
+ * @property string $is_base yes, no
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BankAccount> $bankAccounts
+ * @property-read int|null $bank_accounts_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Currency whereIsBase($value)
  * @mixin \Eloquent
  */
 class Currency extends Model

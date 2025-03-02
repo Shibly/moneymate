@@ -21,7 +21,8 @@ class DashboardController extends Controller
         $incomeData = $this->getIncomeVsExpenseFromSixMonths();
         $budgetData = $this->showCurrentMonthBudgetDistribution();
         $numberOfBankAccounts = $this->getNumberOfBankAccounts();
+        $totalBorrows = $this->getTotalBorrows();
         return view('admin.dashboard', compact('activeMenu', 'title',
-            'totalMonthlyIncome', 'totalAccountBalances', 'totalLends', 'totalMonthlyExpense', 'incomeData', 'budgetData', 'numberOfBankAccounts'));
+            'totalMonthlyIncome', 'totalAccountBalances', 'totalLends', 'totalMonthlyExpense', 'incomeData', 'budgetData', 'numberOfBankAccounts', 'totalBorrows'));
     }
 }
