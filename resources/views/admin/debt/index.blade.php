@@ -58,10 +58,15 @@
                                     <td class="text-center">{{\Carbon\Carbon::parse($debt->date)->format('d/m/Y')}}</td>
                                     <td class="text-center">{{$debt->note}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('debts.show', [$debt->id])}}" class="btn btn-info edit-btn">
-                                            <x-tabler-edit/>
-                                            {{get_translation('manage')}}
-                                        </a>
+
+                                        @if($debt->exchange_amount != 0)
+                                            <a href="{{route('debts.show', [$debt->id])}}"
+                                               class="btn btn-info edit-btn">
+                                                <x-tabler-edit/>
+                                                {{get_translation('manage')}}
+                                            </a>
+                                        @endif
+
                                         <button class="btn btn-danger delete-btn" data-id="{{ $debt->id }}">
                                             <x-tabler-trash/>
                                             {{get_translation('delete')}}
@@ -116,10 +121,10 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">
-                                        Select Currency: <span class="text-danger">*</span>
+                                        {{get_translation('select_currency')}}: <span class="text-danger">*</span>
                                     </label>
                                     <select name="currency_id" class="form-control">
-                                        <option value="">Select Currency</option>
+                                        <option value="">{{get_translation('select_an_option')}}</option>
                                         @foreach($currencies as $currency)
                                             <option value="{{$currency->id}}">
                                                 {{$currency->name}}
@@ -131,18 +136,19 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">
-                                        Amount: <span class="text-danger">*</span>
+                                        {{get_translation('amount')}}: <span class="text-danger">*</span>
                                     </label>
-                                    <input type="number" class="form-control" name="amount" placeholder="Amount">
+                                    <input type="number" class="form-control" name="amount"
+                                           placeholder="{{get_translation('amount')}}">
                                     <div class="text-danger pt-2 amount"></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">
-                                        Type: <span class="text-danger">*</span>
+                                        {{get_translation('type')}}: <span class="text-danger">*</span>
                                     </label>
                                     <select name="type" class="form-control">
-                                        <option value="">Select Type</option>
+                                        <option value="">{{get_translation('select_type')}}</option>
                                         <option value="lend">Lend</option>
                                         <option value="borrow">Borrow</option>
                                     </select>

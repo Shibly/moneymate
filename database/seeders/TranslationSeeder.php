@@ -80,8 +80,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'balance_transfer', 'value' => 'Balance Transfer', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'from_account', 'value' => 'From Account', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'to_account', 'value' => 'To Account', 'created_at' => $now, 'updated_at' => $now],
-            ['code' => 'en', 'key' => 'from_amount', 'value' => 'From Account', 'created_at' => $now, 'updated_at' => $now],
-            ['code' => 'en', 'key' => 'to_amount', 'value' => 'To Account', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'to_amount', 'value' => 'To Amount', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'transfer_date', 'value' => 'Transfer Date', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'note', 'value' => 'Note', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'make_a_transfer', 'value' => 'Make a Transfer', 'created_at' => $now, 'updated_at' => $now],
@@ -243,6 +242,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'debt_has_been_deleted', 'value' => 'Debt has been deleted', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'lend_collection', 'value' => 'Lend Collection', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'select_an_option', 'value' => 'Select an Option', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'bank', 'value' => 'Bank', 'created_at' => $now, 'updated_at' => $now],
 
 
             ['code' => 'en', 'key' => 'number_of_bank_accounts', 'value' => 'Number Of Bank Accounts', 'created_at' => $now, 'updated_at' => $now],

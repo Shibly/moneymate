@@ -3,12 +3,12 @@
 namespace App\Traits;
 
 use App\Models\BankAccount;
-use App\Models\Borrow;
 use App\Models\Budget;
 use App\Models\Currency;
 use App\Models\Debt;
 use App\Models\Expense;
 use App\Models\Income;
+use App\Models\Lend;
 
 trait DashboardWidgets
 {
@@ -112,45 +112,37 @@ trait DashboardWidgets
     }
 
 
-    /**
-     * @return string
-     */
     public function getTotalLends(): string
     {
-
-
-        $lends = Debt::where('user_id', auth()->id())->where('type', 'lend')
-            ->with('currency')
-            ->select('id', 'currency_id', 'usd_amount')->get();
-
-        $totalLends = 0;
-        $defaultCurrency = $this->getDefaultCurrency();
-        if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
-            foreach ($lends as $lend) {
-                $totalLends += $lend->usd_amount * $defaultCurrency->exchange_rate;
-            }
-            return number_format($totalLends, 0) . ' ' . $defaultCurrency->name;
-        }
-        return 'No default currency set or invalid exchange rate.';
-
+        return $this->getTotalDebtByType('lend');
     }
 
     public function getTotalBorrows(): string
     {
-        $lends = Borrow::where('user_id', auth()->id())->where('type', 'lend')
-            ->with('currency')
-            ->select('id', 'currency_id', 'usd_amount')->get();
+        return $this->getTotalDebtByType('borrow');
+    }
 
-        $totalBorrows = 0;
+    private function getTotalDebtByType(string $type): string
+    {
+        $debts = Debt::where('user_id', auth()->id())
+            ->where('type', $type)
+            ->with('currency')
+            ->select('id', 'currency_id', 'usd_amount')
+            ->get();
+
+        $totalAmount = 0;
         $defaultCurrency = $this->getDefaultCurrency();
+
         if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
-            foreach ($lends as $lend) {
-                $totalBorrows += $lend->usd_amount * $defaultCurrency->exchange_rate;
+            foreach ($debts as $debt) {
+                $totalAmount += $debt->usd_amount * $defaultCurrency->exchange_rate;
             }
-            return number_format($totalBorrows, 0) . ' ' . $defaultCurrency->name;
+            return number_format($totalAmount, 0) . ' ' . $defaultCurrency->name;
         }
+
         return 'No default currency set or invalid exchange rate.';
     }
+
 
 
     public function getIncomeVsExpenseFromSixMonths(): array

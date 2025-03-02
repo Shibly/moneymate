@@ -23,7 +23,7 @@
                                 <th class="text-center">{{get_translation('from_amount')}}</th>
                                 <th class="text-center">{{get_translation('to_amount')}}</th>
                                 <th class="text-center">{{get_translation('type')}}</th>
-                                <th class="text-center">{{get_translation('account')}}</th>
+                                <th class="text-center">{{get_translation('bank')}}</th>
                                 <th class="text-center">{{get_translation('person')}}</th>
                                 <th class="text-center">{{get_translation('date')}}</th>
                                 <th class="text-center">{{get_translation('note')}}</th>
@@ -51,7 +51,7 @@
                            data-bs-toggle="modal"
                            data-bs-target="#debtRepayModal">
                             <x-tabler-minus/>
-                            Repay
+                            {{get_translation('repay')}}
                         </a>
                     </div>
 
@@ -145,8 +145,12 @@
                         <div class="mb-3">
                             <label class="form-label">{{get_translation('date')}}: <span
                                     class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="date"
-                                   placeholder="Transfer Date">
+                            <div class="input-icon mb-2">
+                                <input class="form-control datepicker" name="date"
+                                       placeholder="{{get_translation('date')}}"
+                                       value=""/>
+                                <span class="input-icon-addon"><x-tabler-calendar/></span>
+                            </div>
                             <div class="text-danger pt-2 date"></div>
                         </div>
 
@@ -170,6 +174,8 @@
 @endsection
 
 @section('js')
+
+    <script src="{{ asset('/js/calendar.js') }}"></script>
     <script>
         "use strict";
         $(document).ready(function () {

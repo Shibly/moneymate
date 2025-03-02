@@ -9,7 +9,6 @@ use App\Models\DebtCollection;
 use App\Models\Lend;
 use App\Models\Repayment;
 use App\Repositories\Contracts\DebtLoanRepositoryInterface;
-use Illuminate\Support\Collection;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -53,8 +52,7 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
             $debtUsdAmount = -$usd_amount;
         } else {
 
-            if ($exchange_amount > $selectedBankAccount->balance)
-            {
+            if ($exchange_amount > $selectedBankAccount->balance) {
                 throw new Exception('Insufficient balance in the selected bank account. Please use another bank account to repay.');
             }
 
@@ -80,7 +78,7 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
             ]);
 
             $bankAccount = BankAccount::find($debt->account_id);
-            // Means you are lending money to someone.
+
 
             if ($data['type'] === 'lend') {
                 Lend::create([
@@ -94,18 +92,16 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
                     'debt_id' => $debt->id
                 ]);
 
-                // Update Associated bank account by decreasing account balance
+
                 $bankAccount->balance -= $exchange_amount;
                 $bankAccount->usd_balance -= $usd_amount;
                 $bankAccount->save();
 
             }
 
-
-            // Means you are lending money form someone.
-
             if ($debt['type'] === 'borrow') {
                 Borrow::create([
+                    'user_id' => auth()->user()->id,
                     'amount' => ($debt->amount * -1),
                     'exchange_amount' => ($exchange_amount * -1),
                     'usd_amount' => ($usd_amount * -1),
@@ -127,9 +123,8 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
 
         } catch (Exception $e) {
             DB::rollBack();
-            throw new Exception( $e->getMessage());
+            throw new Exception($e->getMessage());
         }
-
 
 
     }
@@ -142,8 +137,7 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
         $usd_amount = convert_to_usd_amount($data['currency_id'], $data['amount']);
         $exchange_amount = convert_to_exchange_amount($bankAccount->currency_id, $usd_amount);
 
-        if ($exchange_amount > $bankAccount->balance)
-        {
+        if ($exchange_amount > $bankAccount->balance) {
             throw new Exception('Insufficient balance in the selected bank account. Please use another bank account to repay.');
         }
 
@@ -170,7 +164,7 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
 
         } catch (Exception $e) {
             DB::rollBack();
-            throw new Exception( $e->getMessage());
+            throw new Exception($e->getMessage());
         }
 
     }
@@ -186,7 +180,6 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
         if ($exchange_amount > $bankAccount->balance) {
             throw new Exception('Insufficient balance in the selected bank account. Please use another bank account to repay.');
         }
-
 
 
         if ($exchange_amount > ($debt->exchange_amount * -1)) {
@@ -217,11 +210,10 @@ class DebtLoanRepository implements DebtLoanRepositoryInterface
 
         } catch (Exception $e) {
             DB::rollBack();
-            throw new Exception( $e->getMessage());
+            throw new Exception($e->getMessage());
         }
 
     }
-
 
 
     /**
