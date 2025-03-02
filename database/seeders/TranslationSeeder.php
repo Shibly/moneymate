@@ -268,6 +268,16 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'smtp_from_email', 'value' => 'SMTP From Email', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'provide_email_address_to_send_from', 'value' => 'Provide email address to send from', 'created_at' => $now, 'updated_at' => $now],
 
+
+            ['code' => 'en', 'key' => 'reset_password', 'value' => 'Reset Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'enter_new_password', 'value' => 'Enter new password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'we_have_emailed_your_password_reset_link', 'value' => 'We have emailed your password reset link', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'forgot_password', 'value' => 'Forgot Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'enter_your_email_address_and_we_will_email_you_a_password_reset_link', 'value' => 'Enter your email address and we will email you a password reset link', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'email_address', 'value' => 'Email Address', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'send_me_new_password', 'value' => 'Send me new password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'back_to_sign_in', 'value' => 'Back to sign in', 'created_at' => $now, 'updated_at' => $now],
+
             ['code' => 'en', 'key' => 'application_settings_has_been_updated', 'value' => 'Application Settings has been updated', 'created_at' => $now, 'updated_at' => $now],
 
         ];

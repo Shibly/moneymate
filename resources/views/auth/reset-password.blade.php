@@ -13,7 +13,7 @@
         <form class="card card-md" action="{{ route('password.update') }}" method="POST" autocomplete="off" novalidate>
             @csrf
             <div class="card-body">
-                <h2 class="card-title text-center mb-4">Reset Password</h2>
+                <h2 class="card-title text-center mb-4">{{get_translation('reset_password')}}</h2>
 
                 {{-- Hidden inputs: token & email come from the password reset link --}}
                 <input type="hidden" name="token" value="{{ $token }}">
@@ -22,11 +22,11 @@
                 <div class="mb-3">
                     <label class="form-label">New Password</label>
                     <input
-                        type="password"
-                        name="password"
-                        class="form-control @error('password') is-invalid @enderror"
-                        placeholder="Enter new password"
-                        required
+                            type="password"
+                            name="password"
+                            class="form-control @error('password') is-invalid @enderror"
+                            placeholder="{{get_translation('enter_new_password')}}"
+                            required
                     >
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -36,26 +36,26 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Confirm Password</label>
+                    <label class="form-label">{{get_translation('confirm_password')}}</label>
                     <input
-                        type="password"
-                        name="password_confirmation"
-                        class="form-control"
-                        placeholder="Confirm new password"
-                        required
+                            type="password"
+                            name="password_confirmation"
+                            class="form-control"
+                            placeholder="{{get_translation('confirm_password')}}"
+                            required
                     >
                 </div>
 
                 <div class="form-footer">
                     <button type="submit" class="btn btn-primary w-100">
-                        Reset Password
+                        {{get_translation('reset_password')}}
                     </button>
                 </div>
             </div>
         </form>
 
         <div class="text-center text-secondary mt-3">
-            <a href="{{ route('login') }}">Back to sign in</a>
+            <a href="{{ route('login') }}">{{get_translation('back_to_sign_in')}}</a>
         </div>
     </div>
 </div>

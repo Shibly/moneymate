@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Moneymate - Personal finance manager</title>
+    <title>{{get_option('application_name')}}</title>
     <link href="{{ asset('css/tabler.min.css') }}" rel="stylesheet">
 </head>
 <body class=" d-flex flex-column">
@@ -20,19 +20,19 @@
         <form class="card card-md" action="{{ route('password.email') }}" method="POST" autocomplete="off" novalidate>
             @csrf
             <div class="card-body">
-                <h2 class="h2 text-center mb-4">Forgot Password</h2>
+                <h2 class="h2 text-center mb-4">{{get_translation('forgot_password')}}</h2>
                 <p class="text-secondary mb-4">
-                    Enter your email address and we'll email you a password reset link.
+                    {{get_translation('enter_your_email_address_and_we_will_email_you_a_password_reset_link')}}
                 </p>
 
                 {{-- Email field --}}
                 <div class="mb-3">
-                    <label class="form-label">Email address</label>
+                    <label class="form-label">{{get_translation('email_address')}}</label>
                     <input
                         type="email"
                         name="email"
                         class="form-control @error('email') is-invalid @enderror"
-                        placeholder="Enter email"
+                        placeholder="{{get_translation('email_address')}}"
                         value="{{ old('email') }}"
                         required
                     >
@@ -45,7 +45,7 @@
 
                 <div class="form-footer">
                     <button type="submit" class="btn btn-primary w-100">
-                        Send me new password
+                        {{get_translation('send_me_new_password')}}
                     </button>
                 </div>
             </div>
