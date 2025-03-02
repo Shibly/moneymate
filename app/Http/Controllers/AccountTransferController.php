@@ -57,7 +57,7 @@ class AccountTransferController extends Controller
                 $validatedData['transfer_date'],
                 $validatedData['note'] ?? null
             );
-            notyf()->success('Balance transferred successfully!');
+            notyf()->success(get_translation('balance_transferred_successfully'));
             return redirect()->route('transfer.balance');
         } catch (Exception $e) {
             return response()->json([

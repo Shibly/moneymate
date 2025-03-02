@@ -44,7 +44,7 @@
                     <div class="mb-2">
                         <label class="form-label">
                             Password
-                            <span class="form-label-description"><a href="{{route('forgot-password')}}">I forgot password</a></span>
+                            <span class="form-label-description"><a href="{{route('password.request')}}">I forgot password</a></span>
                         </label>
                         <div class="input-group input-group-flat">
                             <input name="password" type="password" class="form-control" placeholder="Your password"

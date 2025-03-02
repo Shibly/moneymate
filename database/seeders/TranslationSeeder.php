@@ -134,7 +134,8 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'company_phone', 'value' => 'Company Phone', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'company_website', 'value' => 'Company Website', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'address', 'value' => 'address', 'created_at' => $now, 'updated_at' => $now],
-            ['code' => 'en', 'key' => 'number_of_data_per_page', 'value' => 'Number Of Data Per Page', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'app_url', 'value' => 'Application URL', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'your_application_url_for_sending_password_reset_link', 'value' => 'Your application URL for sending password reset link', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'application_logo', 'value' => 'Application Logo', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'favicon', 'value' => 'favicon', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'official_name_of_the_application', 'value' => 'Official name of the application', 'created_at' => $now, 'updated_at' => $now],
@@ -227,6 +228,7 @@ class TranslationSeeder extends Seeder
 
             ['code' => 'en', 'key' => 'balance_transfer', 'value' => 'Balance Transfer', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'make_a_transfer', 'value' => 'Make a transfer', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'balance_transferred_successfully', 'value' => 'Balance transferred successfully', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'you_can_transfer_funds_from_your_source_account_to_your_destination_account_if_the_accounts_use_different_currencies_the_system_will_automatically_convert_the_transferred_amount_into_the_destination_accounts_currency', 'value' => 'You can transfer funds from your source account to your destination account. If the accounts use different currencies, the system will automatically convert the transferred amount into the destination account’s currency', 'created_at' => $now, 'updated_at' => $now],
 
 
@@ -245,8 +247,28 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'bank', 'value' => 'Bank', 'created_at' => $now, 'updated_at' => $now],
 
 
+            ['code' => 'en', 'key' => 'no_account_found_with_this_email', 'value' => 'No account found with this email', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'password_updated_successfully', 'value' => 'Password updated successfully', 'created_at' => $now, 'updated_at' => $now],
+
+
             ['code' => 'en', 'key' => 'number_of_bank_accounts', 'value' => 'Number Of Bank Accounts', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'total_borrow_amount', 'value' => 'Total Borrow Amount', 'created_at' => $now, 'updated_at' => $now],
+
+
+            ['code' => 'en', 'key' => 'smtp_host', 'value' => 'SMTP Host', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'provide_smtp_server_address', 'value' => 'Provide SMTP Server Address', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'smtp_port', 'value' => 'SMTP Port', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'provide_smtp_server_port', 'value' => 'Provide SMTP Server Port', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'smtp_username', 'value' => 'SMTP Username', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'provide_smtp_username', 'value' => 'Provide SMTP Username', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'smtp_password', 'value' => 'SMTP Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'provide_smtp_password', 'value' => 'Provide SMTP Password', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'smtp_encryption', 'value' => 'SMTP Encryption', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'choose_smtp_encryption_type', 'value' => 'Choose SMTP Encryption Type', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'smtp_from_email', 'value' => 'SMTP From Email', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'provide_email_address_to_send_from', 'value' => 'Provide email address to send from', 'created_at' => $now, 'updated_at' => $now],
+
+            ['code' => 'en', 'key' => 'application_settings_has_been_updated', 'value' => 'Application Settings has been updated', 'created_at' => $now, 'updated_at' => $now],
 
         ];
 

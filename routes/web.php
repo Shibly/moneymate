@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AccountTransferController;
 use App\Http\Controllers\AttachmentController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BankNameController;
 use App\Http\Controllers\BudgetController;
@@ -30,7 +32,17 @@ Route::get('/', function () {
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot-password');
+
+
+/**
+ * Password reset routes
+ */
+
+Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('reset-password', [ResetPasswordController::class, 'update'])->name('password.update');
+
 
 Route::middleware(['auth'])->group(function () {
 

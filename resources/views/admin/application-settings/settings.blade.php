@@ -98,15 +98,15 @@
 
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('number_of_data_per_page')}}</label>
-                                            <input value="{{ get_option('num_data_per_page') }}"
-                                                   name="num_data_per_page"
-                                                   type="number" class="form-control"
-                                                   placeholder="{{get_translation('number_of_data_per_page')}}">
+                                                class="form-label fw-bold">{{get_translation('app_url')}}</label>
+                                            <input value="{{ get_option('app_url') }}"
+                                                   name="app_url"
+                                                   type="text" class="form-control"
+                                                   placeholder="{{get_translation('app_url')}}">
                                             <div class="mt-1">
                                                 <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('number_of_records_to_display_per_page')}}
+                                                    {{get_translation('your_application_url_for_sending_password_reset_link')}}
                                                 </small>
                                             </div>
                                         </div>
@@ -166,6 +166,106 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- SMTP Settings Section -->
+                                    <div class="row g-3 mt-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold">{{get_translation('smtp_host')}}</label>
+                                            <input type="text" value="{{ get_option('smtp_host') }}" name="smtp_host"
+                                                   class="form-control"
+                                                   placeholder="{{get_translation('smtp_host')}}">
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <small class="text-muted">
+                                                    {{get_translation('provide_smtp_server_address')}}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold">{{get_translation('smtp_port')}}</label>
+                                            <input type="number" value="{{ get_option('smtp_port') }}" name="smtp_port"
+                                                   class="form-control"
+                                                   placeholder="{{get_translation('smtp_port')}}">
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <small class="text-muted">
+                                                    {{get_translation('provide_smtp_server_port')}}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('smtp_username')}}</label>
+                                            <input type="text" value="{{ get_option('smtp_username') }}"
+                                                   name="smtp_username" class="form-control"
+                                                   placeholder="{{get_translation('smtp_username')}}">
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <small class="text-muted">
+                                                    {{get_translation('provide_smtp_username')}}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('smtp_password')}}</label>
+                                            <input type="text" value="{{ get_option('smtp_password') }}"
+                                                   name="smtp_password" class="form-control"
+                                                   placeholder="{{get_translation('smtp_password')}}">
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <small class="text-muted">
+                                                    {{get_translation('provide_smtp_password')}}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('smtp_encryption')}}</label>
+                                            <select name="smtp_encryption" class="form-control">
+                                                <option
+                                                    value="tls" {{ get_option('smtp_encryption') == 'tls' ? 'selected' : '' }}>
+                                                    TLS
+                                                </option>
+                                                <option
+                                                    value="ssl" {{ get_option('smtp_encryption') == 'ssl' ? 'selected' : '' }}>
+                                                    SSL
+                                                </option>
+                                                <option
+                                                    value="none" {{ get_option('smtp_encryption') == 'none' ? 'selected' : '' }}>
+                                                    None
+                                                </option>
+                                            </select>
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <small class="text-muted">
+                                                    {{get_translation('choose_smtp_encryption_type')}}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold">{{get_translation('smtp_from_email')}}</label>
+                                            <input type="email" value="{{ get_option('smtp_from_email') }}"
+                                                   name="smtp_from_email" class="form-control"
+                                                   placeholder="{{get_translation('smtp_from_email')}}">
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <small class="text-muted">
+                                                    {{get_translation('provide_email_address_to_send_from')}}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- End SMTP Settings Section -->
+
+
                                 </div>
 
                                 <div class="card-footer bg-transparent mt-auto">

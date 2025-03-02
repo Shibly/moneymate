@@ -9,11 +9,11 @@
             :: {{$title}}
         @endif </title>
     <!-- CSS files -->
-    <link href="{{asset('/libs/select2/select2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/tabler.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/tabler-vendors.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/demo.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/libs/datatable/datatable.css')}}" rel="stylesheet">
+    <link href="{{asset('libs/select2/select2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/tabler.css')}}" rel="stylesheet">
+    <link href="{{asset('css/tabler-vendors.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/demo.min.css')}}" rel="stylesheet">
+    <link href="{{asset('libs/datatable/datatable.css')}}" rel="stylesheet">
 
     @yield('css')
     <style>
@@ -31,7 +31,7 @@
 
 <body class="layout-fluid">
 
-<script src="{{asset('/js/demo-theme.js')}}"></script>
+<script src="{{asset('js/demo-theme.js')}}"></script>
 
 <div class="page">
     <!-- Sidebar -->
