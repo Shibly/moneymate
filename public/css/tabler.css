@@ -235,6 +235,101 @@
     --tblr-form-invalid-border-color: #e68888;
 }
 
+/* Target DataTable elements when dark mode is enabled */
+[data-bs-theme="dark"] .dataTable,
+[data-bs-theme="dark"] .dataTables_wrapper {
+    background-color: var(--tblr-body-bg);
+    color: var(--tblr-body-color);
+    border: 1px solid var(--tblr-border-color);
+}
+
+[data-bs-theme="dark"] .dataTable th,
+[data-bs-theme="dark"] .dataTable td {
+    color: var(--tblr-body-color);
+    border: 1px solid var(--tblr-border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+[data-bs-theme="dark"] .dataTable th {
+    background-color: var(--tblr-secondary-bg);
+    color: var(--tblr-heading-color);
+}
+
+[data-bs-theme="dark"] .dataTable tbody tr:nth-child(odd) {
+    background-color: var(--tblr-tertiary-bg);
+}
+
+[data-bs-theme="dark"] .dataTable tbody tr:nth-child(even) {
+    background-color: var(--tblr-body-bg);
+}
+
+[data-bs-theme="dark"] .dataTable tbody tr:hover {
+    background-color: var(--tblr-secondary-bg);
+}
+
+[data-bs-theme="dark"] .dataTable .dataTables_length,
+[data-bs-theme="dark"] .dataTable .dataTables_filter {
+    color: var(--tblr-body-color);
+}
+
+[data-bs-theme="dark"] .dataTable .dataTables_info {
+    color: var(--tblr-body-color);
+}
+
+[data-bs-theme="dark"] .dataTable .dataTables_paginate {
+    color: var(--tblr-body-color);
+}
+
+[data-bs-theme="dark"] .dataTable .dataTables_paginate .paginate_button {
+    background-color: var(--tblr-secondary-bg);
+    color: var(--tblr-body-color);
+    border: 1px solid var(--tblr-border-color);
+}
+
+[data-bs-theme="dark"] .dataTable .dataTables_paginate .paginate_button:hover {
+    background-color: var(--tblr-secondary-bg);
+    color: var(--tblr-link-hover-color);
+}
+
+[data-bs-theme="dark"] .dataTable .dataTables_paginate .paginate_button.disabled {
+    background-color: var(--tblr-body-bg);
+    color: var(--tblr-dark-text-emphasis);
+    border: 1px solid var(--tblr-border-color);
+}
+
+/* Style the table links */
+[data-bs-theme="dark"] .dataTable .table-link {
+    color: var(--tblr-link-color);
+    text-decoration: none;
+}
+
+[data-bs-theme="dark"] .dataTable .table-link:hover {
+    color: var(--tblr-link-hover-color);
+}
+
+/* Validation state for inputs (if applicable) */
+[data-bs-theme="dark"] .dataTable .table-form-valid {
+    border-color: var(--tblr-form-valid-border-color);
+}
+
+[data-bs-theme="dark"] .dataTable .table-form-invalid {
+    border-color: var(--tblr-form-invalid-border-color);
+}
+
+/* For table code highlights (optional) */
+[data-bs-theme="dark"] .dataTable .table-code {
+    background-color: var(--tblr-tertiary-bg);
+    color: var(--tblr-code-color);
+}
+
+/* Highlight rows */
+[data-bs-theme="dark"] .dataTable .table-highlight {
+    background-color: var(--tblr-highlight-bg);
+    color: var(--tblr-highlight-color);
+}
+
+
 *,
 *::before,
 *::after {
