@@ -83,7 +83,7 @@ class SettingController extends Controller
      * @param array $data
      * @return void
      */
-    protected function updateEnv(array $data)
+    protected function updateEnv(array $data): void
     {
         $path = base_path('.env');
         $envContent = file_get_contents($path);
