@@ -53,8 +53,6 @@ if (!function_exists('convert_to_exchange_amount')) {
 
 if (!function_exists('get_translation')) {
     /**
-     * Get translation value based on key. Automatically uses the default language code.
-     * Falls back to English ('en') if no translation is found for the default code.
      *
      * @param string $key
      * @return string|null
