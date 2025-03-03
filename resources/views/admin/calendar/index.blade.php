@@ -42,35 +42,35 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr>
-                                <th class="text-muted w-25">Category</th>
-                                <td id="modal-category" class="fw-bold"></td>
+                                <th class="w-25">Category</th>
+                                <td id="modal-category"></td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Amount</th>
-                                <td id="modal-amount" class="fw-bold text-success"></td>
+                                <th>Amount</th>
+                                <td id="modal-amount" class="text-success"></td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Currency</th>
-                                <td id="modal-currency" class="fw-bold"></td>
+                                <th>Currency</th>
+                                <td id="modal-currency"></td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Account</th>
-                                <td id="modal-account" class="fw-bold"></td>
+                                <th>Account</th>
+                                <td id="modal-account"></td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Reference</th>
-                                <td id="modal-reference" class="fw-bold"></td>
+                                <th>Reference</th>
+                                <td id="modal-reference"></td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Note</th>
-                                <td id="modal-note" class="fw-bold text-secondary"></td>
+                                <th>Note</th>
+                                <td id="modal-note"></td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Description</th>
-                                <td id="modal-description" class="fw-bold text-secondary"></td>
+                                <th>Description</th>
+                                <td id="modal-description"></td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Attachment</th>
+                                <th>Attachment</th>
                                 <td id="modal-attachment"></td>
                             </tr>
                             </tbody>
@@ -123,7 +123,7 @@
                             Download Attachment
                         </a>`;
                     } else {
-                        document.getElementById("modal-attachment").innerHTML = '<span class="text-muted">No attachment</span>';
+                        document.getElementById("modal-attachment").innerHTML = '<span>No attachment</span>';
                     }
                     var modal = new bootstrap.Modal(document.getElementById("modal-large"));
                     modal.show();
