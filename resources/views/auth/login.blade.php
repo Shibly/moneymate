@@ -5,29 +5,14 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Moneymate - Personal finance manager</title>
-    <!-- CSS files -->
-
-    <link href="{{asset('/css/tabler.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/tabler-flags.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/tabler-socials.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/tabler-payments.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/tabler-vendors.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/tabler-marketing.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/demo.min.css')}}" rel="stylesheet">
-
-
-    <style>
-        /*@import url('https://rsms.me/inter/inter.css');*/
-    </style>
+    <title>{{get_option('application_name')}}</title>
+    <link href="{{asset('css/tabler.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/demo.min.css')}}" rel="stylesheet">
 </head>
+
 <body class=" d-flex flex-column">
-<script src="{{asset('public/js/demo-theme.min.js')}}"></script>
 <div class="page">
     <div class="container container-tight py-4">
-        <div class="text-center mb-4">
-
-        </div>
         <div class="card card-md">
             <div class="card-body">
                 <h2 class="h2 text-center mb-4">Login to your account</h2>
@@ -56,8 +41,6 @@
                     </div>
 
 
-
-
                     <div class="form-footer">
                         <button type="submit" class="btn btn-primary w-100">Sign in</button>
                     </div>
@@ -70,7 +53,8 @@
 </div>
 </div>
 
-<script src="{{asset('/js/tabler.min.js')}}"></script>
-<script src="{{asset('/js/demo.min.js')}}"></script>
+<script src="{{asset('js/tabler.min.js')}}"></script>
+<script src="{{asset('js/demo.min.js')}}"></script>
+<script src="{{asset('public/js/demo-theme.min.js')}}"></script>
 </body>
 </html>
