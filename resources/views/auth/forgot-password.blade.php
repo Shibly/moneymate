@@ -29,7 +29,6 @@
                     {{get_translation('enter_your_email_address_and_we_will_email_you_a_password_reset_link')}}
                 </p>
 
-                {{-- Email field --}}
                 <div class="mb-3">
                     <label class="form-label">{{get_translation('email_address')}}</label>
                     <input

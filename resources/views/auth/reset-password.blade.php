@@ -14,8 +14,6 @@
             @csrf
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">{{get_translation('reset_password')}}</h2>
-
-                {{-- Hidden inputs: token & email come from the password reset link --}}
                 <input type="hidden" name="token" value="{{ $token }}">
                 <input type="hidden" name="email" value="{{ request('email') }}">
 
