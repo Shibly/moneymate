@@ -29,9 +29,8 @@
     </script>
 </head>
 
-<body class="layout-fluid">
+<body class="layout-fluid" @if(get_option('theme') === 'dark') data-bs-theme="dark" @endif>
 
-<script src="{{asset('js/demo-theme.js')}}"></script>
 
 <div class="page">
     <!-- Sidebar -->
@@ -56,16 +55,15 @@
     </div>
 </div>
 
-<!-- JavaScript files loaded at the end of the body -->
-<script src="{{asset('/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
-<script src="{{asset('/libs/litepicker/dist/litepicker.js')}}" defer></script>
-<script src="{{asset('/libs/tom-select/dist/js/tom-select.base.min.js')}}" defer></script>
-<script src="{{asset('/libs/datatable/datatable.js')}}"></script>
-<script src="{{asset('/libs/select2/select2.min.js')}}"></script>
-<script src="{{asset('/libs/sweetalert/sweetalert2.js')}}"></script>
-<script src="{{asset('/js/tabler.min.js')}}"></script>
-{{--<script src="{{asset('/js/demo.min.js')}}"></script>--}}
-<script src="{{asset('/js/main.js')}}" defer></script> <!-- main.js should be placed here -->
+
+<script src="{{asset('libs/apexcharts/dist/apexcharts.min.js')}}"></script>
+<script src="{{asset('libs/litepicker/dist/litepicker.js')}}" defer></script>
+<script src="{{asset('libs/tom-select/dist/js/tom-select.base.min.js')}}" defer></script>
+<script src="{{asset('libs/datatable/datatable.js')}}"></script>
+<script src="{{asset('libs/select2/select2.min.js')}}"></script>
+<script src="{{asset('libs/sweetalert/sweetalert2.js')}}"></script>
+<script src="{{asset('js/tabler.min.js')}}"></script>
+<script src="{{asset('js/main.js')}}" defer></script>
 
 @yield('js')
 </body>

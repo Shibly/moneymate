@@ -7,7 +7,7 @@
     <title>{{get_option('application_name')}}</title>
     <link href="{{ asset('css/tabler.min.css') }}" rel="stylesheet">
 </head>
-<body class=" d-flex flex-column">
+<body class=" d-flex flex-column" @if(get_option('theme') === 'dark') data-bs-theme="dark" @endif>
 <div class="page">
     <div class="container container-tight py-4">
         <form class="card card-md" action="{{ route('password.update') }}" method="POST" autocomplete="off" novalidate>
@@ -20,11 +20,11 @@
                 <div class="mb-3">
                     <label class="form-label">New Password</label>
                     <input
-                            type="password"
-                            name="password"
-                            class="form-control @error('password') is-invalid @enderror"
-                            placeholder="{{get_translation('enter_new_password')}}"
-                            required
+                        type="password"
+                        name="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="{{get_translation('enter_new_password')}}"
+                        required
                     >
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -36,11 +36,11 @@
                 <div class="mb-3">
                     <label class="form-label">{{get_translation('confirm_password')}}</label>
                     <input
-                            type="password"
-                            name="password_confirmation"
-                            class="form-control"
-                            placeholder="{{get_translation('confirm_password')}}"
-                            required
+                        type="password"
+                        name="password_confirmation"
+                        class="form-control"
+                        placeholder="{{get_translation('confirm_password')}}"
+                        required
                     >
                 </div>
 
@@ -57,7 +57,6 @@
         </div>
     </div>
 </div>
-<script src="{{asset('public/js/demo-theme.min.js')}}"></script>
-<script src="{{ asset('public/js/demo.min.js') }}"></script>
+<script src="{{ asset('js/demo.min.js') }}"></script>
 </body>
 </html>

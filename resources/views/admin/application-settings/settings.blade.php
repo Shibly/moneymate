@@ -24,96 +24,122 @@
                                     <!-- Fields Group 1 -->
                                     <div class="row g-3">
 
+                                        <!-- Application Name -->
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('application_name')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('application_name') }}</label>
                                             <input type="text" value="{{ get_option('application_name') }}"
                                                    name="application_name" class="form-control"
-                                                   placeholder="{{get_translation('application_name')}}">
+                                                   placeholder="{{ get_translation('application_name') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('official_name_of_the_application')}}
+                                                    {{ get_translation('official_name_of_the_application') }}
                                                 </small>
                                             </div>
                                         </div>
 
+                                        <!-- Theme Dropdown (NEW) -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold">{{ get_translation('theme') }}</label>
+                                            <select name="theme" class="form-control">
+                                                <option
+                                                    value="light" {{ get_option('theme') == 'light' ? 'selected' : '' }}>
+                                                    Light
+                                                </option>
+                                                <option
+                                                    value="dark" {{ get_option('theme') == 'dark' ? 'selected' : '' }}>
+                                                    Dark
+                                                </option>
+                                            </select>
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
+                                                <small class="text-muted">
+                                                    {{ get_translation('choose_application_theme_light_or_dark') }}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Company Name -->
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('company_name')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('company_name') }}</label>
                                             <input type="text" value="{{ get_option('company_name') }}"
                                                    name="company_name" class="form-control"
-                                                   placeholder="{{get_translation('company_name')}}">
+                                                   placeholder="{{ get_translation('company_name') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_legal_registered_company_name')}}
+                                                    {{ get_translation('provide_legal_registered_company_name') }}
                                                 </small>
                                             </div>
                                         </div>
 
+                                        <!-- Company Phone -->
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('company_phone')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('company_phone') }}</label>
                                             <input type="text" value="{{ get_option('phone') }}" name="phone"
                                                    class="form-control"
-                                                   placeholder="{{get_translation('company_phone')}}">
+                                                   placeholder="{{ get_translation('company_phone') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_valid_contact_number_including_country_code')}}
+                                                    {{ get_translation('provide_valid_contact_number_including_country_code') }}
                                                 </small>
                                             </div>
                                         </div>
 
+                                        <!-- Company Website -->
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('company_website')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('company_website') }}</label>
                                             <input type="text" value="{{ get_option('web_site') }}" name="web_site"
                                                    class="form-control"
-                                                   placeholder="{{get_translation('company_website')}}">
+                                                   placeholder="{{ get_translation('company_website') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_company_website_url')}}
+                                                    {{ get_translation('provide_company_website_url') }}
                                                 </small>
                                             </div>
                                         </div>
 
+                                        <!-- Company Address -->
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('company_address')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('company_address') }}</label>
                                             <input type="text" value="{{ get_option('address') }}" name="address"
                                                    class="form-control"
-                                                   placeholder="{{get_translation('company_address')}}">
+                                                   placeholder="{{ get_translation('company_address') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('company_official_address')}}
+                                                    {{ get_translation('company_official_address') }}
                                                 </small>
                                             </div>
                                         </div>
 
+                                        <!-- Application URL -->
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">{{get_translation('app_url')}}</label>
+                                            <label class="form-label fw-bold">{{ get_translation('app_url') }}</label>
                                             <input value="{{ get_option('app_url') }}"
-                                                   name="app_url"
-                                                   type="text" class="form-control"
-                                                   placeholder="{{get_translation('app_url')}}">
+                                                   name="app_url" type="text" class="form-control"
+                                                   placeholder="{{ get_translation('app_url') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('your_application_url_for_sending_password_reset_link')}}
+                                                    {{ get_translation('your_application_url_for_sending_password_reset_link') }}
                                                 </small>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <!-- Logo and Favicon -->
                                     <div class="row g-3 mt-3">
-                                        <!-- Application Logo -->
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('application_logo')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('application_logo') }}</label>
                                             <input type="file" name="app_logo" class="form-control">
                                             @if(get_option('app_logo'))
                                                 <div class="mt-3">
@@ -129,17 +155,16 @@
                                                 </div>
                                             @endif
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('upload_high_quality_logo')}}
+                                                    {{ get_translation('upload_high_quality_logo') }}
                                                 </small>
                                             </div>
                                         </div>
 
-                                        <!-- Favicon -->
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('upload_quality_favicon_image')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('upload_quality_favicon_image') }}</label>
                                             <input type="file" name="favicon" class="form-control">
                                             @if(get_option('favicon'))
                                                 <div class="mt-3">
@@ -155,22 +180,23 @@
                                                 </div>
                                             @endif
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('upload_quality_favicon_image')}}
+                                                    {{ get_translation('upload_quality_favicon_image') }}
                                                 </small>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <!-- Timezone and SMTP -->
                                     <div class="row g-3 mt-3">
 
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('app_timezone')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('app_timezone') }}</label>
                                             <select name="app_timezone" class="form-control select2">
                                                 <option value=""
-                                                        disabled>{{get_translation('select_timezone')}}</option>
+                                                        disabled>{{ get_translation('select_timezone') }}</option>
                                                 @foreach(\DateTimeZone::listIdentifiers() as $timezone)
                                                     <option value="{{ $timezone }}"
                                                         {{ get_option('app_timezone') == $timezone ? 'selected' : '' }}>
@@ -179,71 +205,70 @@
                                                 @endforeach
                                             </select>
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('choose_application_timezone')}}
+                                                    {{ get_translation('choose_application_timezone') }}
                                                 </small>
                                             </div>
                                         </div>
 
-                                        <!-- SMTP Settings Section -->
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">{{get_translation('smtp_host')}}</label>
+                                            <label class="form-label fw-bold">{{ get_translation('smtp_host') }}</label>
                                             <input type="text" value="{{ get_option('smtp_host') }}" name="smtp_host"
                                                    class="form-control"
-                                                   placeholder="{{get_translation('smtp_host')}}">
+                                                   placeholder="{{ get_translation('smtp_host') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_smtp_server_address')}}
+                                                    {{ get_translation('provide_smtp_server_address') }}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label class="form-label fw-bold">{{get_translation('smtp_port')}}</label>
+                                            <label class="form-label fw-bold">{{ get_translation('smtp_port') }}</label>
                                             <input type="number" value="{{ get_option('smtp_port') }}" name="smtp_port"
                                                    class="form-control"
-                                                   placeholder="{{get_translation('smtp_port')}}">
+                                                   placeholder="{{ get_translation('smtp_port') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_smtp_server_port')}}
+                                                    {{ get_translation('provide_smtp_server_port') }}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('smtp_username')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('smtp_username') }}</label>
                                             <input type="text" value="{{ get_option('smtp_username') }}"
                                                    name="smtp_username" class="form-control"
-                                                   placeholder="{{get_translation('smtp_username')}}">
+                                                   placeholder="{{ get_translation('smtp_username') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_smtp_username')}}
+                                                    {{ get_translation('provide_smtp_username') }}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('smtp_password')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('smtp_password') }}</label>
                                             <input type="text" value="{{ get_option('smtp_password') }}"
                                                    name="smtp_password" class="form-control"
-                                                   placeholder="{{get_translation('smtp_password')}}">
+                                                   placeholder="{{ get_translation('smtp_password') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_smtp_password')}}
+                                                    {{ get_translation('provide_smtp_password') }}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('smtp_encryption')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('smtp_encryption') }}</label>
                                             <select name="smtp_encryption" class="form-control">
                                                 <option
                                                     value="tls" {{ get_option('smtp_encryption') == 'tls' ? 'selected' : '' }}>
@@ -259,36 +284,34 @@
                                                 </option>
                                             </select>
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('choose_smtp_encryption_type')}}
+                                                    {{ get_translation('choose_smtp_encryption_type') }}
                                                 </small>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <label
-                                                class="form-label fw-bold">{{get_translation('smtp_from_email')}}</label>
+                                                class="form-label fw-bold">{{ get_translation('smtp_from_email') }}</label>
                                             <input type="email" value="{{ get_option('smtp_from_email') }}"
                                                    name="smtp_from_email" class="form-control"
-                                                   placeholder="{{get_translation('smtp_from_email')}}">
+                                                   placeholder="{{ get_translation('smtp_from_email') }}">
                                             <div class="mt-1">
-                                                <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
                                                 <small class="text-muted">
-                                                    {{get_translation('provide_email_address_to_send_from')}}
+                                                    {{ get_translation('provide_email_address_to_send_from') }}
                                                 </small>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- End SMTP Settings Section -->
                                 </div>
 
                                 <div class="card-footer bg-transparent mt-auto">
                                     <div class="btn-list justify-content-end">
                                         <button type="submit" value="Save Settings" class="btn btn-primary">
                                             <x-tabler-adjustments-check/>
-                                            {{get_translation('save_settings')}}
+                                            {{ get_translation('save_settings') }}
                                         </button>
                                     </div>
                                 </div>
@@ -302,7 +325,6 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('/js/calendar.js') }}"></script>
     <script>
         "use strict";
         $(document).ready(function () {
@@ -319,7 +341,5 @@
 
             initializeTomSelect();
         });
-
-
     </script>
 @endsection

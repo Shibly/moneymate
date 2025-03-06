@@ -282,6 +282,9 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'app_timezone', 'value' => 'App Timezone', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'choose_application_timezone', 'value' => 'Choose Application TimeZone', 'created_at' => $now, 'updated_at' => $now],
 
+            ['code' => 'en', 'key' => 'theme', 'value' => 'Select a theme', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'choose_application_theme_light_or_dark', 'value' => 'Choose application theme light or dark', 'created_at' => $now, 'updated_at' => $now],
+
         ];
 
 

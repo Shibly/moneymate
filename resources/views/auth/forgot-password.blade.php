@@ -10,7 +10,7 @@
     <link href="{{asset('css/demo.min.css')}}" rel="stylesheet">
 </head>
 
-<body class=" d-flex flex-column">
+<body class=" d-flex flex-column" @if(get_option('theme') === 'dark') data-bs-theme="dark" @endif>
 
 <div class="page">
     <div class="container container-tight py-4">
@@ -60,7 +60,6 @@
     </div>
 </div>
 <script src="{{asset('js/tabler.min.js')}}"></script>
-<script src="{{asset('public/js/demo-theme.min.js')}}"></script>
 <script src="{{asset('js/demo.min.js')}}"></script>
 
 </body>
