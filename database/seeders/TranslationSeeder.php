@@ -74,6 +74,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'are_you_sure_you_want_to_delete_this_account', 'value' => 'Are you sure to delete this account?', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'edit_bank_account', 'value' => 'Edit Bank Account', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'select_bank', 'value' => 'Select Bank', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'select_bank_account', 'value' => 'Select Bank Account', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'select_currency', 'value' => 'Select Currency', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'please_select_a_currency', 'value' => 'Please select a currency', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'initial_balance', 'value' => 'Initial Balance', 'created_at' => $now, 'updated_at' => $now],
