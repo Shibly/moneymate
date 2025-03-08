@@ -81,22 +81,38 @@ class BudgetRepository implements BudgetInterface
         $budget = Budget::findOrFail($id);
 
 
-        $usd_amount = convert_to_usd_amount($data['currency_id'], $data['updated_amount']);
-        // Update the budget
+        $existing_updated_amount = $budget->updated_amount;
+        $existing_usd_amount = $budget->usd_amount;
+        $existing_original_amount = $budget->amount;
+
+
+        if ($data['updated_amount'] > $existing_updated_amount) {
+            $real_updated_amount = $data['updated_amount'] - $existing_updated_amount;
+        } else {
+            $real_updated_amount = 0;
+        }
+
+
+        $new_updated_amount = $existing_updated_amount + $real_updated_amount;
+        $real_usd_amount = ($real_updated_amount > 0) ? convert_to_usd_amount($data['currency_id'], $real_updated_amount) : 0;
+        $new_usd_amount = $existing_usd_amount + $real_usd_amount;
+        $new_original_amount = $existing_original_amount + $real_updated_amount;
         $budget->update([
             'budget_name' => $data['budget_name'],
-            'updated_amount' => $data['updated_amount'],
-            'usd_amount' => $usd_amount,
+            'updated_amount' => $new_updated_amount,
+            'usd_amount' => $new_usd_amount,
+            'amount' => $new_original_amount,
             'currency_id' => $data['currency_id'],
             'start_date' => Carbon::parse($data['start_date'])->toDateString(),
             'end_date' => Carbon::parse($data['end_date'])->toDateString(),
             'user_id' => Auth::id(),
         ]);
-
-        // Sync categories for the budget
         $budget->categories()->sync($data['categories']);
+
         return $budget;
     }
+
+
 
     /**
      * @param int $id

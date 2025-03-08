@@ -41,11 +41,11 @@
                             <tbody class="table-tbody">
                             @foreach($budgets as $budget)
                                 <tr>
-                                    <td>{{$budget->budget_name}}</td>
-                                    <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->amount}}</td>
-                                    <td>{{$budget->currency ? $budget->currency->name : ''}} {{$budget->updated_amount}}</td>
-                                    <td>{{\Carbon\Carbon::parse($budget->start_date)->format("d/m/Y")}}</td>
-                                    <td>{{\Carbon\Carbon::parse($budget->end_date)->format("d/m/Y")}}</td>
+                                    <td class="text-center">{{$budget->budget_name}}</td>
+                                    <td class="text-center">{{$budget->currency ? $budget->currency->name : ''}} {{$budget->amount}}</td>
+                                    <td class="text-center">{{$budget->currency ? $budget->currency->name : ''}} {{$budget->updated_amount}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($budget->start_date)->format("d/m/Y")}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($budget->end_date)->format("d/m/Y")}}</td>
                                     <td class="text-center">
                                         <button class="btn btn-info edit-btn" data-id="{{ $budget->id }}">
                                             <x-tabler-edit/>
