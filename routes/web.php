@@ -21,10 +21,24 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TranslationController;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InstallationController;
 
+
+/**
+ * Frontend
+ */
+
+Route::get('install', [InstallationController::class, 'showInstallForm'])->name('install.form');
+Route::get('databaseImport', [InstallationController::class, 'databaseImport'])->name('databaseImport');
+Route::post('install', [InstallationController::class, 'install'])->name('install');
 
 Route::get('/', function () {
+
+    if (!File::exists(storage_path('app/installed'))) {
+        return redirect(route('install.form'));
+    }
     return redirect()->route('login');
 });
 

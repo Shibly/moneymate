@@ -13,7 +13,6 @@ return new class extends Migration {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('account_id')->nullable();
             $table->decimal('amount', 65, 2);
             $table->decimal('exchange_amount', 65, 2)->default(0.00);
             $table->decimal('usd_amount', 65, 5)->default(0.00);

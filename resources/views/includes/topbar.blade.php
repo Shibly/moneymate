@@ -5,8 +5,11 @@
             <div class="nav-item dropdown ms-3">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                    aria-label="Open user menu">
+
+                    @if(auth()->user()->profile_picture)
                     <span class="avatar avatar-sm"
                           style="background-image: url('{{ route('private.files', ['filename' => auth()->user()->profile_picture]) }}');"></span>
+                    @endif
 
                     <div class="d-none d-xl-block ps-2">
                         <div>{{auth()->user()->name}}</div>
