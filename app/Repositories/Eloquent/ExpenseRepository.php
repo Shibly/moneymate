@@ -38,16 +38,20 @@ class ExpenseRepository implements ExpenseInterface
     public function store(array $data): mixed
     {
         $usd_amount = convert_to_usd_amount($data['currency_id'], $data['amount']);
-
         $budgetCategory = BudgetCategory::where('category_id', $data['category_id'])->first();
         if ($budgetCategory) {
             $budget = Budget::find($budgetCategory->budget_id);
-            $exchange_budge_amount = convert_to_exchange_amount($budget->currency_id, $usd_amount);
-            if ($budget && ($exchange_budge_amount > $budget->updated_amount)) {
-                throw new Exception(get_translation('you_do_not_have_enough_budget_to_spend'));
+            $now = Carbon::now();
+            if (
+                $budget &&
+                $now->between(Carbon::parse($budget->start_date)->startOfDay(), Carbon::parse($budget->end_date)->endOfDay())
+            ) {
+                $exchange_budget_amount = convert_to_exchange_amount($budget->currency_id, $usd_amount);
+                if ($exchange_budget_amount > $budget->updated_amount) {
+                    throw new Exception(get_translation('you_do_not_have_enough_budget_to_spend'));
+                }
             }
         }
-
 
         $bankAccount = BankAccount::find($data['account_id']);
         $exchange_amount = convert_to_exchange_amount($bankAccount->currency_id, $usd_amount);
@@ -56,7 +60,7 @@ class ExpenseRepository implements ExpenseInterface
         DB::beginTransaction();
         try {
             $expense = Expense::create([
-                'user_id' => Auth::user()->id,
+                'user_id' => Auth::id(),
                 'account_id' => $data['account_id'],
                 'currency_id' => $data['currency_id'],
                 'amount' => $data['amount'],
@@ -70,29 +74,28 @@ class ExpenseRepository implements ExpenseInterface
                 'attachment' => $data['attachment']
             ]);
 
-            $budgets = Budget::where('start_date', '<=', Carbon::now())
+            // Get budget for the current month that includes this category
+            $currentMonthBudgets = Budget::whereMonth('start_date', Carbon::now()->month)
+                ->whereYear('start_date', Carbon::now()->year)
                 ->with('categories')
                 ->get();
 
-            foreach ($budgets as $budget) {
-                if ($budget->categories->contains('id', $data['category_id']) && $this->isWithinTimeRange($budget->start_date, $budget->end_date, $expenseDate)) {
+            foreach ($currentMonthBudgets as $budget) {
+                if ($budget->categories->contains('id', $data['category_id'])) {
+                    $exchange_budget_amount = convert_to_exchange_amount($budget->currency_id, $usd_amount);
 
-                    $exchange_budge_amount = convert_to_exchange_amount($budget->currency_id, $usd_amount);
-
-                    // Add entry to the new table
                     BudgetExpense::create([
-                        'user_id' => Auth::user()->id,
+                        'user_id' => Auth::id(),
                         'budget_id' => $budget->id,
-                        'expense_id' => $expense['id'],
-                        'category_id' => $expense['category_id'],
+                        'expense_id' => $expense->id,
+                        'category_id' => $expense->category_id,
                         'currency_id' => $data['currency_id'],
-                        'amount' => $exchange_budge_amount,
+                        'amount' => $exchange_budget_amount,
                         'usd_amount' => $usd_amount,
                     ]);
 
-
-                    if (Carbon::parse($expense['created_at'])->isSameDay(Carbon::now())) {
-                        $budget->updated_amount -= $exchange_budge_amount;
+                    if (Carbon::parse($expense->created_at)->isSameDay(Carbon::now())) {
+                        $budget->updated_amount -= $exchange_budget_amount;
                         $budget->usd_amount -= $usd_amount;
                         $budget->save();
                     }
@@ -102,14 +105,15 @@ class ExpenseRepository implements ExpenseInterface
             $bankAccount->balance -= $exchange_amount;
             $bankAccount->usd_balance -= $usd_amount;
             $bankAccount->save();
+
             DB::commit();
             return $expense;
         } catch (Exception $exception) {
             DB::rollBack();
             throw new Exception($exception->getMessage());
         }
-
     }
+
 
     /**
      * @param int $id
