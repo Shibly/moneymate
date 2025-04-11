@@ -286,6 +286,10 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'theme', 'value' => 'Select a theme', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'choose_application_theme_light_or_dark', 'value' => 'Choose application theme light or dark', 'created_at' => $now, 'updated_at' => $now],
 
+
+            ['code' => 'en', 'key' => 'chat_gpt_api_key', 'value' => 'chatGPT api key', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'provide_chat_gpt_api_key', 'value' => 'Put your chatGPT api key', 'created_at' => $now, 'updated_at' => $now],
+
         ];
 
 
