@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $totalMonthlyExpense = $this->getMonthlyExpenses();
         $totalAccountBalances = $this->getTotalAccountBalance();
         $totalLends = $this->getTotalLends();
-        $incomeData = $this->getIncomeVsExpenseFromSixMonths();
+        $incomeData = $this->getIncomeVsExpenseFromCurrentYear();
         $budgetData = $this->showCurrentMonthBudgetDistribution();
         $numberOfBankAccounts = $this->getNumberOfBankAccounts();
         $totalBorrows = $this->getTotalBorrows();

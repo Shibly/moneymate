@@ -173,7 +173,7 @@ class TranslationSeeder extends Seeder
             ['code' => 'en', 'key' => 'expense_this_month', 'value' => 'Expenses This Month', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'total_account_balance', 'value' => 'Total Account Balance', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'total_lend_amount', 'value' => 'Total Lend Amount', 'created_at' => $now, 'updated_at' => $now],
-            ['code' => 'en', 'key' => 'income_vs_expense_summary_last_six_months_in_default_currency', 'value' => 'Incomes vs Expense Summary - Last 6 Months Shows in Default Currency', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'income_vs_expense_summary_current_year_in_default_currency', 'value' => 'Incomes vs Expense Summary - Current year Shows in Default Currency', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'languages', 'value' => 'Languages', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'provide_company_website_url', 'value' => 'Provide company website url', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'provide_legal_registered_company_name', 'value' => 'Provide your legal or registered company name', 'created_at' => $now, 'updated_at' => $now],
@@ -289,6 +289,10 @@ class TranslationSeeder extends Seeder
 
             ['code' => 'en', 'key' => 'chat_gpt_api_key', 'value' => 'chatGPT api key', 'created_at' => $now, 'updated_at' => $now],
             ['code' => 'en', 'key' => 'provide_chat_gpt_api_key', 'value' => 'Put your chatGPT api key', 'created_at' => $now, 'updated_at' => $now],
+
+
+            ['code' => 'en', 'key' => 'total_income_this_year', 'value' => 'Total incomes this year', 'created_at' => $now, 'updated_at' => $now],
+            ['code' => 'en', 'key' => 'total_expense_this_year', 'value' => 'Total expenses this year', 'created_at' => $now, 'updated_at' => $now],
 
         ];
 

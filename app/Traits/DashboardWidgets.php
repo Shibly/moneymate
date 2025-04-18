@@ -145,31 +145,33 @@ trait DashboardWidgets
 
 
 
-    public function getIncomeVsExpenseFromSixMonths(): array
+    public function getIncomeVsExpenseFromCurrentYear(): array
     {
-        /**
-         * For last 6 months data only including the current month
-         */
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+
         $months = collect();
-        for ($i = 5; $i >= 0; $i--) {
-            $months->push(now()->subMonths($i)->format('Y-m'));
+        for ($i = 1; $i <= $currentMonth; $i++) {
+            $monthLabel = now()->setMonth($i)->format('Y-m'); // e.g., 2025-01
+            $months->push($monthLabel);
         }
 
         $incomes = [];
         $expenses = [];
         $defaultCurrency = $this->getDefaultCurrency();
 
-
         if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
-
             foreach ($months as $month) {
-                $income = Income::whereMonth('income_date', date('m', strtotime($month)))
-                    ->whereYear('income_date', date('Y', strtotime($month)))
+                $monthNum = date('m', strtotime($month));
+                $year = $currentYear;
+
+                $income = Income::whereMonth('income_date', $monthNum)
+                    ->whereYear('income_date', $year)
                     ->where('user_id', auth()->id())
                     ->sum('usd_amount');
 
-                $expense = Expense::whereMonth('expense_date', date('m', strtotime($month)))
-                    ->whereYear('expense_date', date('Y', strtotime($month)))
+                $expense = Expense::whereMonth('expense_date', $monthNum)
+                    ->whereYear('expense_date', $year)
                     ->where('user_id', auth()->id())
                     ->sum('usd_amount');
 
@@ -190,6 +192,7 @@ trait DashboardWidgets
             'expenses' => $expenses,
         ];
     }
+
 
 
     public function showCurrentMonthBudgetDistribution()
