@@ -123,7 +123,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="col-sm-6 col-lg-3">
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
                             <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -135,7 +136,7 @@
                                                 {{get_translation('total_income_this_year')}}
                                             </div>
                                             <div class="text-secondary">
-                                                {{$numberOfBankAccounts}}
+                                                {{$totalYearlyIncome}}
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +156,7 @@
                                                 {{get_translation('total_expense_this_year')}}
                                             </div>
                                             <div class="text-secondary">
-                                                {{$numberOfBankAccounts}}
+                                                {{$totalYearlyExpense}}
                                             </div>
                                         </div>
                                     </div>
@@ -249,13 +250,24 @@
                         show: false,
                     },
                     animations: {
-                        enabled: true
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 500, // ↓ reduced from default (800)
+                        animateGradually: {
+                            enabled: true,
+                            delay: 50 // ↓ reduced from default (150)
+                        },
+                        dynamicAnimation: {
+                            enabled: true,
+                            speed: 300 // ↓ reduced from default (350)
+                        }
                     },
                     stacked: true,
                 },
                 plotOptions: {
                     bar: {
                         columnWidth: '28%',
+                        borderRadius: 6,
                     }
                 },
                 dataLabels: {
@@ -313,9 +325,13 @@
                     },
                 },
                 xaxis: {
-                    categories: @json($incomeData['months']), // Data for months
+                    categories: @json($incomeData['months']),
                     labels: {
                         padding: 0,
+                        style: {
+                            fontSize: '12px',
+                            colors: '#6c757d'
+                        }
                     },
                     tooltip: {
                         enabled: false
@@ -330,6 +346,10 @@
                         padding: 4,
                         formatter: function (value) {
                             return value.toFixed(2);
+                        },
+                        style: {
+                            fontSize: '12px',
+                            colors: '#6c757d'
                         }
                     },
                     title: {
@@ -337,12 +357,20 @@
                     },
                     tickAmount: 5
                 },
-                colors: ['#09A778', '#d6336c'],
+                colors: ['#6EC1E4', '#FF9AA2'],
                 legend: {
-                    show: false,
+                    show: true,
+                    position: 'top',
+                    horizontalAlign: 'right',
+                    labels: {
+                        colors: '#6c757d',
+                        useSeriesColors: false
+                    }
                 },
             })).render();
         });
     </script>
+
+
 
 @endsection
