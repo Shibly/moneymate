@@ -304,6 +304,19 @@
                                                 </small>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold">{{ get_translation('chat_gpt_api_key') }}</label>
+                                            <input type="text" value="{{ get_option('chat_gpt_api_key') }}"
+                                                   name="chat_gpt_api_key" class="form-control"
+                                                   placeholder="{{ get_translation('chat_gpt_api_key') }}">
+                                            <div class="mt-1">
+                                                <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
+                                                <small class="text-muted">
+                                                    {{ get_translation('provide_chat_gpt_api_key') }}
+                                                </small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 

@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-12">
                     <div class="row row-cards">
-                        <div class="col-sm-12 col-lg-6">
+                        <div class="col-sm-6 col-lg-3">
                             <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-lg-6">
+                        <div class="col-sm-6 col-lg-3">
                             <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -124,12 +124,51 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="bg-rss text-white avatar"><x-tabler-zoom-money/></span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{get_translation('total_income_this_year')}}
+                                            </div>
+                                            <div class="text-secondary">
+                                                {{$totalYearlyIncome}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="bg-instagram text-white avatar"><x-tabler-exposure/></span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{get_translation('total_expense_this_year')}}
+                                            </div>
+                                            <div class="text-secondary">
+                                                {{$totalYearlyExpense}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">{{get_translation('income_vs_expense_summary_last_six_months_in_default_currency')}}</h3>
+                            <h3 class="card-title">{{get_translation('income_vs_expense_summary_current_year_in_default_currency')}}</h3>
                             <div id="chart-mentions" class="chart-lg"></div>
                         </div>
                     </div>
@@ -211,13 +250,24 @@
                         show: false,
                     },
                     animations: {
-                        enabled: true
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 500, // ↓ reduced from default (800)
+                        animateGradually: {
+                            enabled: true,
+                            delay: 50 // ↓ reduced from default (150)
+                        },
+                        dynamicAnimation: {
+                            enabled: true,
+                            speed: 300 // ↓ reduced from default (350)
+                        }
                     },
                     stacked: true,
                 },
                 plotOptions: {
                     bar: {
                         columnWidth: '28%',
+                        borderRadius: 6,
                     }
                 },
                 dataLabels: {
@@ -275,9 +325,13 @@
                     },
                 },
                 xaxis: {
-                    categories: @json($incomeData['months']), // Data for months
+                    categories: @json($incomeData['months']),
                     labels: {
                         padding: 0,
+                        style: {
+                            fontSize: '12px',
+                            colors: '#6c757d'
+                        }
                     },
                     tooltip: {
                         enabled: false
@@ -292,6 +346,10 @@
                         padding: 4,
                         formatter: function (value) {
                             return value.toFixed(2);
+                        },
+                        style: {
+                            fontSize: '12px',
+                            colors: '#6c757d'
                         }
                     },
                     title: {
@@ -299,12 +357,20 @@
                     },
                     tickAmount: 5
                 },
-                colors: ['#09A778', '#d6336c'],
+                colors: ['#6EC1E4', '#FF9AA2'],
                 legend: {
-                    show: false,
+                    show: true,
+                    position: 'top',
+                    horizontalAlign: 'right',
+                    labels: {
+                        colors: '#6c757d',
+                        useSeriesColors: false
+                    }
                 },
             })).render();
         });
     </script>
+
+
 
 @endsection

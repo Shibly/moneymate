@@ -11,6 +11,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+
 
 class CategoryController extends Controller
 {
@@ -23,16 +26,36 @@ class CategoryController extends Controller
 
 
     /**
-     * @return Factory|View|Application
+     * @param Request $request
+     * @return View|Factory|Application|JsonResponse
+     * @throws \Exception
      */
 
-    public function index(): Factory|Application|View
+    public function index(Request $request): View|Factory|Application|JsonResponse
     {
+        if ($request->ajax()) {
+            $categories = $this->categoryService->all();
 
-        $categories = $this->categoryService->all();
+            return DataTables::of($categories)
+                ->addColumn('action', function ($category) {
+                    return view('admin.categories.partials.actions', compact('category'))->render();
+                })
+                ->editColumn('type', function ($category) {
+                    if ($category->type === 'expense') {
+                        return '<span class="badge bg-red text-red-fg">' . ucfirst($category->type) . '</span>';
+                    } elseif ($category->type === 'income') {
+                        return '<span class="badge bg-teal text-teal-fg">' . ucfirst($category->type) . '</span>';
+                    } else {
+                        return ucfirst($category->type);
+                    }
+                })
+                ->rawColumns(['type', 'action'])
+                ->make(true);
+        }
+
         $activeMenu = 'categories';
         $title = get_translation('income_and_expense_categories');
-        return view('admin.categories.index', compact('categories', 'activeMenu', 'title'));
+        return view('admin.categories.index', compact('activeMenu', 'title'));
     }
 
 

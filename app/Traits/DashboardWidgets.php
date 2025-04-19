@@ -8,7 +8,7 @@ use App\Models\Currency;
 use App\Models\Debt;
 use App\Models\Expense;
 use App\Models\Income;
-use App\Models\Lend;
+use Carbon\Carbon;
 
 trait DashboardWidgets
 {
@@ -59,6 +59,34 @@ trait DashboardWidgets
         return 'No default currency set or invalid exchange rate.';
     }
 
+    /**
+     * @return string
+     */
+    public function getYearlyIncome(): string
+    {
+        $incomes = Income::whereYear('income_date', date('Y'))
+            ->where('user_id', auth()->id())
+            ->with('currency')
+            ->select('id', 'currency_id', 'usd_amount')
+            ->get();
+
+        $incomeOfThisYear = 0;
+        $defaultCurrency = $this->getDefaultCurrency();
+
+        // Calculate if default currency exists and exchange rate is valid
+        if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
+            foreach ($incomes as $income) {
+                $incomeOfThisYear += $income->usd_amount * $defaultCurrency->exchange_rate;
+            }
+
+            return number_format($incomeOfThisYear, 0) . ' ' . $defaultCurrency->name;
+        }
+
+        // Fallback message
+        return 'No default currency set or invalid exchange rate.';
+    }
+
+
     public function getMonthlyExpenses(): string
     {
         $expenses = Expense::whereMonth('expense_date', date('m'))
@@ -83,6 +111,35 @@ trait DashboardWidgets
         // Fallback in case there is no default currency or exchange rate is invalid
         return 'No default currency set or invalid exchange rate.';
     }
+
+
+    /**
+     * @return string
+     */
+    public function getYearlyExpenses(): string
+    {
+        $expenses = Expense::whereYear('expense_date', date('Y'))
+            ->where('user_id', auth()->id())
+            ->with('currency')
+            ->select('id', 'currency_id', 'usd_amount')
+            ->get();
+
+        $expenseOfThisYear = 0;
+        $defaultCurrency = $this->getDefaultCurrency();
+
+        // Only calculate if a default currency is found and has a valid exchange rate
+        if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
+            foreach ($expenses as $expense) {
+                $expenseOfThisYear += $expense->usd_amount * $defaultCurrency->exchange_rate;
+            }
+
+            return number_format($expenseOfThisYear, 0) . ' ' . $defaultCurrency->name;
+        }
+
+        // Fallback in case there is no default currency or exchange rate is invalid
+        return 'No default currency set or invalid exchange rate.';
+    }
+
 
 
     /**
@@ -144,32 +201,30 @@ trait DashboardWidgets
     }
 
 
-
-    public function getIncomeVsExpenseFromSixMonths(): array
+    public function getIncomeVsExpenseFromCurrentYear(): array
     {
-        /**
-         * For last 6 months data only including the current month
-         */
-        $months = collect();
-        for ($i = 5; $i >= 0; $i--) {
-            $months->push(now()->subMonths($i)->format('Y-m'));
-        }
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
 
+        $months = collect();
         $incomes = [];
         $expenses = [];
+
         $defaultCurrency = $this->getDefaultCurrency();
 
-
         if ($defaultCurrency && $defaultCurrency->exchange_rate > 0) {
+            for ($i = 1; $i <= $currentMonth; $i++) {
+                // Format: January-2025
+                $monthLabel = Carbon::createFromDate($currentYear, $i, 1)->format('F-Y');
+                $months->push($monthLabel);
 
-            foreach ($months as $month) {
-                $income = Income::whereMonth('income_date', date('m', strtotime($month)))
-                    ->whereYear('income_date', date('Y', strtotime($month)))
+                $income = Income::whereMonth('income_date', $i)
+                    ->whereYear('income_date', $currentYear)
                     ->where('user_id', auth()->id())
                     ->sum('usd_amount');
 
-                $expense = Expense::whereMonth('expense_date', date('m', strtotime($month)))
-                    ->whereYear('expense_date', date('Y', strtotime($month)))
+                $expense = Expense::whereMonth('expense_date', $i)
+                    ->whereYear('expense_date', $currentYear)
                     ->where('user_id', auth()->id())
                     ->sum('usd_amount');
 
@@ -192,7 +247,8 @@ trait DashboardWidgets
     }
 
 
-    public function showCurrentMonthBudgetDistribution()
+
+    public function showCurrentMonthBudgetDistribution(): array
     {
         $userId = auth()->id();
         $currentMonth = now()->month;

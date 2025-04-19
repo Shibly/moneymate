@@ -157,47 +157,22 @@
                 <div class="card-body">
 
                     <div class="alert alert-info">
-                        <span class="badge bg-blue-lt">{{get_translation('tips')}}</span>
-                        {{get_translation('categories_can_be_classified_as_either_income_or_expense_when_recording_your_income_or_expense_transactions_you_can_select_the_appropriate_category_to_ensure_accurate_financial_reporting_and_analysis')}}
+                        <span class="badge bg-blue-lt">{{ get_translation('tips') }}</span>
+                        {{ get_translation('categories_can_be_classified_as_either_income_or_expense_when_recording_your_income_or_expense_transactions_you_can_select_the_appropriate_category_to_ensure_accurate_financial_reporting_and_analysis') }}
                     </div>
+
                     <div id="table-default" class="table-responsive">
-                        <table class="table datatable table-striped table-bordered">
+                        <table id="categories-table" class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="text-center">{{get_translation('category_name')}}</th>
-                                <th class="text-center">{{get_translation('category_type')}}</th>
-                                <th class="text-center">{{get_translation('action')}}</th>
+                                <th class="text-center">{{ get_translation('category_name') }}</th>
+                                <th class="text-center">{{ get_translation('category_type') }}</th>
+                                <th class="text-center">{{ get_translation('action') }}</th>
                             </tr>
                             </thead>
-                            <tbody class="table-tbody">
-                            @foreach($categories as $category)
-                                <tr id="row-{{$category->id}}">
-                                    <td class="text-center">{{ $category->name }}</td>
-                                    <td class="text-center">
-                                        @if ($category->type === 'expense')
-                                            <span class="badge bg-red text-red-fg">{{ ucfirst($category->type) }}</span>
-                                        @elseif ($category->type === 'income')
-                                            <span
-                                                class="badge bg-teal text-teal-fg">{{ ucfirst($category->type) }}</span>
-                                        @else
-                                            {{ ucfirst($category->type) }}
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <button class="btn btn-info edit-btn" data-id="{{ $category->id }}">
-                                            <x-tabler-edit/>
-                                            {{get_translation('edit')}}
-                                        </button>
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $category->id }}">
-                                            <x-tabler-trash/>
-                                            {{get_translation('delete')}}
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -207,7 +182,20 @@
 @section('js')
     <script>
         "use strict";
+
         $(document).ready(function () {
+
+            $('#categories-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('categories.index') }}",
+                columns: [
+                    {data: 'name', name: 'name', className: 'text-center'},
+                    {data: 'type', name: 'type', className: 'text-center'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
+                ]
+            });
+
 
             $('#add-category-form').submit(function (e) {
                 e.preventDefault();
