@@ -240,137 +240,140 @@
     <script>
         "use strict";
         document.addEventListener("DOMContentLoaded", function () {
-            window.ApexCharts && (new ApexCharts(document.getElementById('chart-mentions'), {
-                chart: {
-                    type: "bar",
-                    fontFamily: 'inherit',
-                    height: 240,
-                    parentHeightOffset: 0,
-                    toolbar: {
-                        show: false,
-                    },
-                    animations: {
-                        enabled: true,
-                        easing: 'easeinout',
-                        speed: 500, // ↓ reduced from default (800)
-                        animateGradually: {
-                            enabled: true,
-                            delay: 50 // ↓ reduced from default (150)
-                        },
-                        dynamicAnimation: {
-                            enabled: true,
-                            speed: 300 // ↓ reduced from default (350)
-                        }
-                    },
-                    stacked: true,
-                },
-                plotOptions: {
-                    bar: {
-                        columnWidth: '28%',
-                        borderRadius: 6,
-                    }
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                fill: {
-                    opacity: 1,
-                },
-                series: [{
-                    name: "Income",
-                    data: @json($incomeData['incomes'])
-                }, {
-                    name: "Expense",
-                    data: @json($incomeData['expenses'])
-                }],
-                tooltip: {
-                    theme: 'dark',
-                    marker: {
-                        show: false,
-                    },
-                    style: {
-                        fontSize: '14px',
+            if (window.ApexCharts) {
+                new ApexCharts(document.getElementById('chart-mentions'), {
+                    chart: {
+                        type: "bar",
                         fontFamily: 'inherit',
-                    },
-                    onDatasetHover: {
-                        highlightDataSeries: true,
-                    },
-                    x: {
-                        show: true,
-                    },
-                    y: {
-                        formatter: function (value) {
-                            return value.toFixed(2);
+                        height: 240,
+                        parentHeightOffset: 0,
+                        toolbar: {
+                            show: false,
                         },
+                        animations: {
+                            enabled: true,
+                            easing: 'linear',        // Faster transition
+                            speed: 200,              // Fast animation
+                            animateGradually: {
+                                enabled: true,
+                                delay: 10             // Minimal delay
+                            },
+                            dynamicAnimation: {
+                                enabled: true,
+                                speed: 200
+                            }
+                        },
+                        stacked: true,
                     },
-                    padding: {
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                        left: 10,
-                    },
-                },
-                grid: {
-                    padding: {
-                        top: -20,
-                        right: 0,
-                        left: -4,
-                        bottom: -4
-                    },
-                    strokeDashArray: 4,
-                    xaxis: {
-                        lines: {
-                            show: true
+                    plotOptions: {
+                        bar: {
+                            columnWidth: '28%',
+                            borderRadius: 0, // 👈 Removed rounded corners
                         }
                     },
-                },
-                xaxis: {
-                    categories: @json($incomeData['months']),
-                    labels: {
-                        padding: 0,
-                        style: {
-                            fontSize: '12px',
-                            colors: '#6c757d'
-                        }
+                    dataLabels: {
+                        enabled: false,
                     },
+                    fill: {
+                        opacity: 1,
+                    },
+                    series: [
+                        {
+                            name: "Income",
+                            data: @json($incomeData['incomes'])
+                        },
+                        {
+                            name: "Expense",
+                            data: @json($incomeData['expenses'])
+                        }
+                    ],
                     tooltip: {
-                        enabled: false
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                    type: 'category',
-                },
-                yaxis: {
-                    labels: {
-                        padding: 4,
-                        formatter: function (value) {
-                            return value.toFixed(2);
+                        theme: 'dark',
+                        marker: {
+                            show: false,
                         },
                         style: {
-                            fontSize: '12px',
-                            colors: '#6c757d'
+                            fontSize: '14px',
+                            fontFamily: 'inherit',
+                        },
+                        onDatasetHover: {
+                            highlightDataSeries: true,
+                        },
+                        x: {
+                            show: true,
+                        },
+                        y: {
+                            formatter: function (value) {
+                                return value.toFixed(2);
+                            },
+                        },
+                        padding: {
+                            top: 10,
+                            right: 10,
+                            bottom: 10,
+                            left: 10,
+                        },
+                    },
+                    grid: {
+                        padding: {
+                            top: -20,
+                            right: 0,
+                            left: -4,
+                            bottom: -4
+                        },
+                        strokeDashArray: 4,
+                        xaxis: {
+                            lines: {
+                                show: true
+                            }
+                        },
+                    },
+                    xaxis: {
+                        categories: @json($incomeData['months']),
+                        labels: {
+                            padding: 0,
+                            style: {
+                                fontSize: '12px',
+                                colors: '#6c757d'
+                            }
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                        type: 'category',
+                    },
+                    yaxis: {
+                        labels: {
+                            padding: 4,
+                            formatter: function (value) {
+                                return value.toFixed(2);
+                            },
+                            style: {
+                                fontSize: '12px',
+                                colors: '#6c757d'
+                            }
+                        },
+                        title: {
+                            text: ''
+                        },
+                        tickAmount: 5
+                    },
+                    colors: ['#6EC1E4', '#FF9AA2'],
+                    legend: {
+                        show: true,
+                        position: 'top',
+                        horizontalAlign: 'right',
+                        labels: {
+                            colors: '#6c757d',
+                            useSeriesColors: false
                         }
                     },
-                    title: {
-                        text: ''
-                    },
-                    tickAmount: 5
-                },
-                colors: ['#6EC1E4', '#FF9AA2'],
-                legend: {
-                    show: true,
-                    position: 'top',
-                    horizontalAlign: 'right',
-                    labels: {
-                        colors: '#6c757d',
-                        useSeriesColors: false
-                    }
-                },
-            })).render();
+                }).render();
+            }
         });
     </script>
-
-
 
 @endsection
