@@ -160,7 +160,7 @@
                 {{get_translation('please_note_that_usd_serves_as_the_base_currency_you_may_add_additional_currencies_as_needed_but_ensure_that_you_provide_the_exchange_rate_relative_to_usd')}}
             </div>
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -178,12 +178,12 @@
                                     <td class="text-center">{{ $currency->exchange_rate }}</td>
                                     <td class="text-center">{{ ucfirst($currency->is_default) }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-info edit-btn" data-id="{{ $currency->id }}">
+                                        <button class="btn btn-info btn-sm edit-btn" data-id="{{ $currency->id }}">
                                             <x-tabler-edit/>
                                             {{get_translation('edit')}}
                                         </button>
                                         @if($currency->name != 'USD')
-                                            <button class="btn btn-danger delete-btn" data-id="{{ $currency->id }}">
+                                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $currency->id }}">
                                                 <x-tabler-trash/>
                                                 {{get_translation('delete')}}
                                             </button>

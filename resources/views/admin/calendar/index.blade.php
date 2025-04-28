@@ -15,7 +15,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div class="container-xl">
                         <div class="col-12 d-flex flex-column">
                             <div class="card-body">
@@ -118,13 +118,13 @@
                     document.getElementById("modal-note").innerText = event.note || 'N/A';
                     document.getElementById("modal-description").innerText = event.description || 'N/A';
                     if (event.attachment) {
+                        const downloadUrl = "{{ url('/download/attachment') }}/" + encodeURIComponent(event.attachment);
                         document.getElementById("modal-attachment").innerHTML =
-                            `<a href="{{ route('download.attachment', '') }}/${event.attachment}" target="_blank">
-                            Download Attachment
-                        </a>`;
+                            `<a href="${downloadUrl}" target="_blank">Download Attachment</a>`;
                     } else {
                         document.getElementById("modal-attachment").innerHTML = '<span>No attachment</span>';
                     }
+
                     var modal = new bootstrap.Modal(document.getElementById("modal-large"));
                     modal.show();
                 }

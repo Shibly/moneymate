@@ -127,7 +127,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -142,11 +142,11 @@
                                 <tr id="row-{{$bank->id}}">
                                     <td class="text-center">{{ $bank->bank_name }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-info edit-btn" data-id="{{ $bank->id }}">
+                                        <button class="btn btn-info btn-sm edit-btn" data-id="{{ $bank->id }}">
                                             <x-tabler-edit/>
                                             Edit
                                         </button>
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $bank->id }}">
+                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $bank->id }}">
                                             <x-tabler-trash/>
                                             Delete
                                         </button>

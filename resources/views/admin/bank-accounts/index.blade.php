@@ -196,7 +196,7 @@
                 <a href="{{route('banks.index')}}" class="alert-link">{{get_translation('click_here_to_add_banks')}}</a>
             </div>
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -221,7 +221,7 @@
                                             <x-tabler-edit/>
                                             {{get_translation('edit')}}
                                         </button>
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $account->id }}">
+                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $account->id }}">
                                             <x-tabler-trash/>
                                             {{get_translation('delete')}}
                                         </button>
