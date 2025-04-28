@@ -42,7 +42,7 @@ class ExpenseReportController extends Controller
 
 
     /**
-     * Download the Excel for the filtered incomes.
+     * Download the Excel for the filtered expenses.
      *
      * @param Request $request
      * @return BinaryFileResponse
@@ -51,15 +51,19 @@ class ExpenseReportController extends Controller
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
+        $selectedCategories = $request->input('categories', []);
 
-        $incomes = $this->expenseReportRepository->getExpensesBetweenDates(
+
+        $expenses = $this->expenseReportRepository->getExpensesBetweenDates(
             $startDate,
             $endDate,
-            auth()->id()
+            auth()->id(),
+            $selectedCategories
         );
 
         // Export to Excel using the repository
-        return $this->expenseReportRepository->exportToExcel($incomes);
+        return $this->expenseReportRepository->exportToExcel($expenses);
     }
+
 
 }

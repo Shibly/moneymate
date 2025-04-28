@@ -9,7 +9,7 @@ interface ExpenseReportRepositoryInterface
 {
 
 
-    public function getExpensesBetweenDates(?string $startDate, ?string $endDate, int $userId, array $selectedCategories): Collection;
+    public function getExpensesBetweenDates(?string $startDate, ?string $endDate, int $userId, ?array $selectedCategories): Collection;
 
     /**
      * Export incomes (already filtered) to Excel.

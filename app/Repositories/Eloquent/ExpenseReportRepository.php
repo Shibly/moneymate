@@ -8,6 +8,7 @@ use App\Repositories\Contracts\ExpenseReportRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Exception;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExpenseReportRepository implements ExpenseReportRepositoryInterface
@@ -18,9 +19,10 @@ class ExpenseReportRepository implements ExpenseReportRepositoryInterface
      * @param string|null $startDate
      * @param string|null $endDate
      * @param int $userId
+     * @param array|null $selectedCategories
      * @return Collection
      */
-    public function getExpensesBetweenDates(?string $startDate, ?string $endDate, int $userId, array $selectedCategories): Collection
+    public function getExpensesBetweenDates(?string $startDate, ?string $endDate, int $userId, ?array $selectedCategories): Collection
     {
         if (empty($startDate)) {
             $startDate = Carbon::now()->subMonths(3)->toDateString();
@@ -35,7 +37,6 @@ class ExpenseReportRepository implements ExpenseReportRepositoryInterface
             ->whereHas('category', fn($query) => $query->where('type', 'expense'))
             ->whereBetween('expense_date', [$startDate, $endDate]);
 
-        // Filter by selected categories
         if (!empty($selectedCategories)) {
             $query->whereIn('category_id', $selectedCategories);
         }
@@ -49,6 +50,8 @@ class ExpenseReportRepository implements ExpenseReportRepositoryInterface
      *
      * @param Collection $expenses
      * @return BinaryFileResponse
+     * @throws Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function exportToExcel(Collection $expenses): BinaryFileResponse
     {

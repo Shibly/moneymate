@@ -42,7 +42,7 @@
                         </div>
 
 
-                        <div class="col-auto ms-auto">
+                        <div class="col-auto ms-auto mb-2">
 
                             <a href="{{route('income.report.index')}}" class="btn btn-instagram">
                                 <x-tabler-restore/>
