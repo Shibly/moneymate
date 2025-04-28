@@ -20,7 +20,6 @@
                 <div class="card-body">
                     <form method="GET" action="{{ route('expense.report.index') }}" class="row g-2 align-items-end">
                         <div class="col-auto">
-
                             <label for="start_date" class="form-label">{{get_translation('start_date')}}</label>
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="start_date"
@@ -28,7 +27,6 @@
                                        value="{{ request('start_date') }}"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
-
                         </div>
 
                         <div class="col-auto">
@@ -41,12 +39,23 @@
                             </div>
                         </div>
 
+                        <div class="col-auto mb-2">
+                            <label for="categories" class="form-label">{{ get_translation('category') }}</label>
+                            <select name="categories[]" class="form-control select2" multiple>
+                                @foreach($expenseCategories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ in_array($category->id, old('categories', $selectedCategories ?? [])) ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                        <div class="col-auto ms-auto">
-
+                        <div class="col-auto ms-auto mb-2">
                             <a href="{{route('expense.report.index')}}" class="btn btn-instagram">
                                 <x-tabler-restore/>
-                                {{get_translation('reset')}}</a>
+                                {{get_translation('reset')}}
+                            </a>
                             <button type="submit" class="btn btn-primary">
                                 <x-tabler-filter/>
                                 {{get_translation('filter')}}
@@ -59,6 +68,7 @@
                             </a>
                         </div>
                     </form>
+
                 </div>
 
 
@@ -97,4 +107,23 @@
 @endsection
 @section('js')
     <script src="{{ asset('/js/calendar.js') }}"></script>
+
+    <script>
+        "use strict";
+        $(document).ready(function () {
+            function initializeTomSelect() {
+                $(".select2").each(function () {
+                    new TomSelect(this, {
+                        create: false,
+                        onChange: function () {
+                            this.blur();
+                        }
+                    });
+                });
+            }
+
+            initializeTomSelect();
+
+        });
+    </script>
 @endsection

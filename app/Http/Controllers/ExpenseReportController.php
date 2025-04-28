@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\ExpenseReportRepositoryInterface;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExpenseReportController extends Controller
 {
     protected ExpenseReportRepositoryInterface $expenseReportRepository;
+    protected CategoryService $categoryService;
 
-    public function __construct(ExpenseReportRepositoryInterface $expenseReportRepository)
+    public function __construct(ExpenseReportRepositoryInterface $expenseReportRepository, CategoryService $categoryService)
     {
         $this->expenseReportRepository = $expenseReportRepository;
+        $this->categoryService = $categoryService;
     }
 
 
@@ -22,10 +25,19 @@ class ExpenseReportController extends Controller
         $title = 'Expense Report';
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
+        $selectedCategories = $request->input('categories', []);
 
 
-        $expenses = $this->expenseReportRepository->getExpensesBetweenDates($startDate, $endDate, auth()->user()->id);
-        return view('admin.reports.expense', compact('expenses', 'startDate', 'endDate', 'activeMenu', 'title'));
+        $expenseCategories = $this->categoryService->getCategoryByType('expense');
+
+
+        $expenses = $this->expenseReportRepository->getExpensesBetweenDates(
+            $startDate,
+            $endDate,
+            auth()->user()->id,
+            $selectedCategories
+        );
+        return view('admin.reports.expense', compact('expenses', 'startDate', 'endDate', 'activeMenu', 'title', 'expenseCategories', 'selectedCategories'));
     }
 
 

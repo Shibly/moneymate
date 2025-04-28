@@ -20,9 +20,8 @@ class ExpenseReportRepository implements ExpenseReportRepositoryInterface
      * @param int $userId
      * @return Collection
      */
-    public function getExpensesBetweenDates(?string $startDate, ?string $endDate, int $userId): Collection
+    public function getExpensesBetweenDates(?string $startDate, ?string $endDate, int $userId, array $selectedCategories): Collection
     {
-
         if (empty($startDate)) {
             $startDate = Carbon::now()->subMonths(3)->toDateString();
         }
@@ -31,12 +30,19 @@ class ExpenseReportRepository implements ExpenseReportRepositoryInterface
             $endDate = Carbon::now()->toDateString();
         }
 
-        return Expense::with('currency')->where('user_id', $userId)
+        $query = Expense::with('currency')
+            ->where('user_id', $userId)
             ->whereHas('category', fn($query) => $query->where('type', 'expense'))
-            ->whereBetween('expense_date', [$startDate, $endDate])
-            ->orderBy('expense_date', 'desc')
-            ->get();
+            ->whereBetween('expense_date', [$startDate, $endDate]);
+
+        // Filter by selected categories
+        if (!empty($selectedCategories)) {
+            $query->whereIn('category_id', $selectedCategories);
+        }
+
+        return $query->orderBy('expense_date', 'desc')->get();
     }
+
 
     /**
      * Export the given incomes to Excel.
