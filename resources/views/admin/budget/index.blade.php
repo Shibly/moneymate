@@ -25,7 +25,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -47,11 +47,11 @@
                                     <td class="text-center">{{\Carbon\Carbon::parse($budget->start_date)->format("d/m/Y")}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($budget->end_date)->format("d/m/Y")}}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-info edit-btn" data-id="{{ $budget->id }}">
+                                        <button class="btn btn-info btn-sm edit-btn" data-id="{{ $budget->id }}">
                                             <x-tabler-edit/>
                                             Edit
                                         </button>
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $budget->id }}">
+                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $budget->id }}">
                                             <x-tabler-trash/>
                                             Delete
                                         </button>

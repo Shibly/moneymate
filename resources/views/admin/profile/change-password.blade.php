@@ -15,7 +15,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div class="container-xl">
 
                         <div class="col-12 d-flex flex-column">

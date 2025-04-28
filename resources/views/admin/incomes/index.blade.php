@@ -172,7 +172,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -208,7 +208,7 @@
                                     <td class="text-center">{{$income->income_date}}</td>
                                     <td class="text-center">{{$income->reference}}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $income->id }}">
+                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $income->id }}">
                                             <x-tabler-trash/>
                                             {{get_translation('delete')}}
                                         </button>

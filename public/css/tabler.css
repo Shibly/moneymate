@@ -28899,7 +28899,7 @@ table.dataTable tbody td {
 /* Buttons */
 table.dataTable tbody td .btn {
     padding: 6px 12px;
-    border-radius: 6px;
+    border-radius: 3px;
     font-size: 14px;
 }
 
@@ -28963,6 +28963,7 @@ table.dataTable tbody td .btn {
 .select2-container .select2-selection--single {
     height: 36px; /* Adjust the height to make it look better */
 }
+
 /* Optional: Adjust Select2 dropdown z-index */
 .select2-container--default .select2-dropdown {
     z-index: 9999 !important; /* Ensure dropdown stays above modal */

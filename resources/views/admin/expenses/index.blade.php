@@ -25,7 +25,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -60,7 +60,7 @@
                                     <td class="text-center">{{\Carbon\Carbon::parse($expense->expense_date)->format("d/m/Y")}}</td>
                                     <td class="text-center">{{$expense->reference}}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $expense->id }}">
+                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $expense->id }}">
                                             <x-tabler-trash/>
                                             Delete
                                         </button>

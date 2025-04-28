@@ -25,7 +25,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>

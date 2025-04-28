@@ -27,7 +27,7 @@
                         Translation Strings ({{ strtoupper($code) }})
                     </h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div class="table-responsive">
                         <table class="table datatable table-bordered card-table table-vcenter table-striped">
                             <thead>

@@ -29,7 +29,7 @@
                 {{get_translation('from_here_you_can_track_the_money_you_have_lent_to_others_or_borrowed_from_them_both_lending_and_borrowing_transactions_are_directly_associated_with_the_bank_account_you_select_when_creating_a_record')}}
             </div>
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div id="table-default" class="table-responsive">
                         <table class="table datatable table-striped table-bordered">
                             <thead>
@@ -61,13 +61,13 @@
 
                                         @if($debt->exchange_amount != 0)
                                             <a href="{{route('debts.show', [$debt->id])}}"
-                                               class="btn btn-info edit-btn">
+                                               class="btn btn-info btn-sm edit-btn">
                                                 <x-tabler-edit/>
                                                 {{get_translation('manage')}}
                                             </a>
                                         @endif
 
-                                        <button class="btn btn-danger delete-btn" data-id="{{ $debt->id }}">
+                                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $debt->id }}">
                                             <x-tabler-trash/>
                                             {{get_translation('delete')}}
                                         </button>
