@@ -61,12 +61,6 @@
                                 {{get_translation('filter')}}
                             </button>
 
-{{--                            <a href="{{ route('expense.report.export', ['start_date' => request('start_date'),'end_date' => request('end_date')]) }}"--}}
-{{--                               class="btn btn-success">--}}
-{{--                                <x-tabler-file-type-xls/>--}}
-{{--                                {{get_translation('download_excel')}}--}}
-{{--                            </a>--}}
-
                             <button type="submit" name="action_type" value="export" class="btn btn-success">
                                 <x-tabler-file-type-xls/>
                                 {{get_translation('download_excel')}}

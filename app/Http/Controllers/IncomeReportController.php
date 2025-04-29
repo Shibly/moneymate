@@ -8,7 +8,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class IncomeReportController extends Controller
 {
@@ -50,34 +49,12 @@ class IncomeReportController extends Controller
             $selectedCategories
         );
 
-        if ($request->action_type == 'export')
-        {
+        if ($request->action_type == 'export') {
             return $this->incomeReportRepository->exportToExcel($incomes);
         } else {
             return view('admin.reports.income', compact('incomes', 'startDate', 'endDate', 'incomeCategories', 'selectedCategories', 'activeMenu', 'title'));
         }
 
 
-    }
-
-    /**
-     * Download the Excel for the filtered incomes.
-     *
-     * @param Request $request
-     * @return BinaryFileResponse
-     */
-    public function exportExcel(Request $request): BinaryFileResponse
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $incomes = $this->incomeReportRepository->getIncomesBetweenDates(
-            $startDate,
-            $endDate,
-            auth()->id()
-        );
-
-        // Export to Excel using the repository
-        return $this->incomeReportRepository->exportToExcel($incomes);
     }
 }

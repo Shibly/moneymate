@@ -163,16 +163,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('income.report.index');
 
 
-    Route::get('reports/income/export', [IncomeReportController::class, 'exportExcel'])
-        ->name('income.report.export');
-
-
     Route::get('reports/expense', [ExpenseReportController::class, 'index'])
         ->name('expense.report.index');
 
 
-//    Route::get('reports/expense/export', [ExpenseReportController::class, 'exportExcel'])
-//        ->name('expense.report.export');
+
 
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
     Route::get('/calendar/get-data', [CalendarController::class, 'getData'])->name('calendar.data');
