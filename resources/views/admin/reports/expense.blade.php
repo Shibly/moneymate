@@ -24,7 +24,7 @@
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="start_date"
                                        placeholder="{{get_translation('start_date')}}"
-                                       value="{{ request('start_date') }}"/>
+                                       value="{{ request('start_date') }}" autocomplete="off"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="end_date"
                                        placeholder="{{get_translation('end_date')}}"
-                                       value="{{ request('end_date') }}"/>
+                                       value="{{ request('end_date') }}" autocomplete="off" />
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
                         </div>
@@ -56,16 +56,22 @@
                                 <x-tabler-restore/>
                                 {{get_translation('reset')}}
                             </a>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" name="action_type" value="filter" class="btn btn-primary">
                                 <x-tabler-filter/>
                                 {{get_translation('filter')}}
                             </button>
 
-                            <a href="{{ route('expense.report.export', ['start_date' => request('start_date'),'end_date' => request('end_date')]) }}"
-                               class="btn btn-success">
+{{--                            <a href="{{ route('expense.report.export', ['start_date' => request('start_date'),'end_date' => request('end_date')]) }}"--}}
+{{--                               class="btn btn-success">--}}
+{{--                                <x-tabler-file-type-xls/>--}}
+{{--                                {{get_translation('download_excel')}}--}}
+{{--                            </a>--}}
+
+                            <button type="submit" name="action_type" value="export" class="btn btn-success">
                                 <x-tabler-file-type-xls/>
                                 {{get_translation('download_excel')}}
-                            </a>
+                            </button>
+
                         </div>
                     </form>
 

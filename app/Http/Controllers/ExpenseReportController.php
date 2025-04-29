@@ -30,14 +30,21 @@ class ExpenseReportController extends Controller
 
         $expenseCategories = $this->categoryService->getCategoryByType('expense');
 
-
         $expenses = $this->expenseReportRepository->getExpensesBetweenDates(
             $startDate,
             $endDate,
             auth()->user()->id,
             $selectedCategories
         );
-        return view('admin.reports.expense', compact('expenses', 'startDate', 'endDate', 'activeMenu', 'title', 'expenseCategories', 'selectedCategories'));
+
+        if ($request->action_type == 'export')
+        {
+            return $this->expenseReportRepository->exportToExcel($expenses);
+        } else {
+            return view('admin.reports.expense', compact('expenses', 'startDate', 'endDate', 'activeMenu', 'title', 'expenseCategories', 'selectedCategories'));
+        }
+
+
     }
 
 
@@ -47,23 +54,23 @@ class ExpenseReportController extends Controller
      * @param Request $request
      * @return BinaryFileResponse
      */
-    public function exportExcel(Request $request): BinaryFileResponse
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $selectedCategories = $request->input('categories', []);
-
-
-        $expenses = $this->expenseReportRepository->getExpensesBetweenDates(
-            $startDate,
-            $endDate,
-            auth()->id(),
-            $selectedCategories
-        );
-
-        // Export to Excel using the repository
-        return $this->expenseReportRepository->exportToExcel($expenses);
-    }
+//    public function exportExcel(Request $request): BinaryFileResponse
+//    {
+//        $startDate = $request->input('start_date');
+//        $endDate = $request->input('end_date');
+//        $selectedCategories = $request->input('categories', []);
+//
+//
+//        $expenses = $this->expenseReportRepository->getExpensesBetweenDates(
+//            $startDate,
+//            $endDate,
+//            auth()->id(),
+//            $selectedCategories
+//        );
+//
+//        // Export to Excel using the repository
+//        return $this->expenseReportRepository->exportToExcel($expenses);
+//    }
 
 
 }

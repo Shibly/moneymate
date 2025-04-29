@@ -171,8 +171,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('expense.report.index');
 
 
-    Route::get('reports/expense/export', [ExpenseReportController::class, 'exportExcel'])
-        ->name('expense.report.export');
+//    Route::get('reports/expense/export', [ExpenseReportController::class, 'exportExcel'])
+//        ->name('expense.report.export');
 
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
     Route::get('/calendar/get-data', [CalendarController::class, 'getData'])->name('calendar.data');
