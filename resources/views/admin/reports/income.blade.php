@@ -25,7 +25,7 @@
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="start_date"
                                        placeholder="{{get_translation('start_date')}}"
-                                       value="{{ request('start_date') }}"/>
+                                       value="{{ request('start_date') }}" autocomplete="off"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
 
@@ -36,9 +36,21 @@
                             <div class="input-icon mb-2">
                                 <input class="form-control datepicker" name="end_date"
                                        placeholder="{{get_translation('end_date')}}"
-                                       value="{{ request('end_date') }}"/>
+                                       value="{{ request('end_date') }}" autocomplete="off"/>
                                 <span class="input-icon-addon"><x-tabler-calendar/></span>
                             </div>
+                        </div>
+
+                        <div class="col-auto mb-2">
+                            <label for="categories" class="form-label">{{ get_translation('category') }}</label>
+                            <select name="categories[]" class="form-control select2" multiple>
+                                @foreach($incomeCategories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ in_array($category->id, old('categories', $selectedCategories ?? [])) ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
 
@@ -47,16 +59,21 @@
                             <a href="{{route('income.report.index')}}" class="btn btn-instagram">
                                 <x-tabler-restore/>
                                 {{get_translation('reset')}}</a>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" name="action_type" value="filter" class="btn btn-primary">
                                 <x-tabler-filter/>
                                 {{get_translation('filter')}}
                             </button>
 
-                            <a href="{{ route('income.report.export', ['start_date' => request('start_date'),'end_date' => request('end_date')]) }}"
-                               class="btn btn-success">
+                            <button type="submit" name="action_type" value="export" class="btn btn-success">
                                 <x-tabler-file-type-xls/>
                                 {{get_translation('download_excel')}}
-                            </a>
+                            </button>
+
+{{--                            <a href="{{ route('income.report.export', ['start_date' => request('start_date'),'end_date' => request('end_date')]) }}"--}}
+{{--                               class="btn btn-success">--}}
+{{--                                <x-tabler-file-type-xls/>--}}
+{{--                                {{get_translation('download_excel')}}--}}
+{{--                            </a>--}}
                         </div>
                     </form>
                 </div>
@@ -97,4 +114,24 @@
 @endsection
 @section('js')
     <script src="{{ asset('/js/calendar.js') }}"></script>
+
+    <script>
+        "use strict";
+        $(document).ready(function () {
+            function initializeTomSelect() {
+                $(".select2").each(function () {
+                    new TomSelect(this, {
+                        create: false,
+                        onChange: function () {
+                            this.blur();
+                        }
+                    });
+                });
+            }
+
+            initializeTomSelect();
+
+        });
+    </script>
+
 @endsection

@@ -15,7 +15,7 @@ interface IncomeReportRepositoryInterface
      * @param int $userId
      * @return Collection
      */
-    public function getIncomesBetweenDates(?string $startDate, ?string $endDate, int $userId): Collection;
+    public function getIncomesBetweenDates(?string $startDate, ?string $endDate, int $userId, ?array $selectedCategories): Collection;
 
     /**
      * Export incomes (already filtered) to Excel.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\IncomeReportRepositoryInterface;
+use App\Services\CategoryService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -16,12 +17,15 @@ class IncomeReportController extends Controller
      */
     protected IncomeReportRepositoryInterface $incomeReportRepository;
 
+    protected CategoryService $categoryService;
+
     /**
      * Constructor with dependency injection.
      */
-    public function __construct(IncomeReportRepositoryInterface $incomeReportRepository)
+    public function __construct(IncomeReportRepositoryInterface $incomeReportRepository, CategoryService $categoryService)
     {
         $this->incomeReportRepository = $incomeReportRepository;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -36,13 +40,24 @@ class IncomeReportController extends Controller
         $title = 'Income Report';
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
+        $selectedCategories = $request->input('categories', []);
+        $incomeCategories = $this->categoryService->getCategoryByType('income');
 
         $incomes = $this->incomeReportRepository->getIncomesBetweenDates(
             $startDate,
             $endDate,
-            auth()->id()
+            auth()->id(),
+            $selectedCategories
         );
-        return view('admin.reports.income', compact('incomes', 'startDate', 'endDate', 'activeMenu', 'title'));
+
+        if ($request->action_type == 'export')
+        {
+            return $this->incomeReportRepository->exportToExcel($incomes);
+        } else {
+            return view('admin.reports.income', compact('incomes', 'startDate', 'endDate', 'incomeCategories', 'selectedCategories', 'activeMenu', 'title'));
+        }
+
+
     }
 
     /**

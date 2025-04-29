@@ -20,7 +20,7 @@ class IncomeReportRepository implements IncomeReportRepositoryInterface
      * @param int $userId
      * @return Collection
      */
-    public function getIncomesBetweenDates(?string $startDate, ?string $endDate, int $userId): Collection
+    public function getIncomesBetweenDates(?string $startDate, ?string $endDate, int $userId, ?array $selectedCategories): Collection
     {
         // Default date range (last 3 months)
         if (empty($startDate)) {
@@ -31,11 +31,16 @@ class IncomeReportRepository implements IncomeReportRepositoryInterface
             $endDate = Carbon::now()->toDateString();
         }
 
-        return Income::with('currency')->where('user_id', $userId)
+        $query = Income::with('currency')->where('user_id', $userId)
             ->whereHas('category', fn($query) => $query->where('type', 'income'))
-            ->whereBetween('income_date', [$startDate, $endDate])
-            ->orderBy('income_date', 'desc')
-            ->get();
+            ->whereBetween('income_date', [$startDate, $endDate]);
+
+        if (!empty($selectedCategories)) {
+            $query->whereIn('category_id', $selectedCategories);
+        }
+
+        return $query->orderBy('income_date', 'desc')->get();
+
     }
 
     /**
