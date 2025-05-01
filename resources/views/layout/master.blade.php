@@ -13,7 +13,7 @@
     <link href="{{asset('css/tabler.css')}}" rel="stylesheet">
     <link href="{{asset('css/tabler-vendors.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/demo.min.css')}}" rel="stylesheet">
-    <link href="{{asset('libs/datatable/datatable.css')}}" rel="stylesheet">
+    <link href="{{asset('libs/datatable/datatables.css')}}" rel="stylesheet">
 
     @yield('css')
     <style>
@@ -59,7 +59,7 @@
 <script src="{{asset('libs/apexcharts/dist/apexcharts.min.js')}}"></script>
 <script src="{{asset('libs/litepicker/dist/litepicker.js')}}" defer></script>
 <script src="{{asset('libs/tom-select/dist/js/tom-select.base.min.js')}}" defer></script>
-<script src="{{asset('libs/datatable/datatable.js')}}"></script>
+<script src="{{asset('libs/datatable/datatables.js')}}"></script>
 <script src="{{asset('libs/select2/select2.min.js')}}"></script>
 <script src="{{asset('libs/sweetalert/sweetalert2.js')}}"></script>
 <script src="{{asset('js/tabler.min.js')}}"></script>
