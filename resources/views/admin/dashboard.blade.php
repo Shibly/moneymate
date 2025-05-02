@@ -245,7 +245,7 @@
                     chart: {
                         type: "bar",
                         fontFamily: 'inherit',
-                        height: 240,
+                        height: 450,
                         parentHeightOffset: 0,
                         toolbar: {
                             show: false,
