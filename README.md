@@ -1,8 +1,6 @@
 ````markdown
 # 💰 MoneyMate – Personal Finance Tracker
 
-![MoneyMate Screenshot](moneymate.png)
-
 **MoneyMate** is a modern, open-source financial tracker built with Laravel 12. It empowers you to manage your personal finances efficiently by tracking incomes, expenses, budgets, and more—all from a beautiful, user-friendly interface.
 
 ---
